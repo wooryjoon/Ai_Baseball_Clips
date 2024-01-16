@@ -11,10 +11,10 @@
 # 0116
 
 ###요구사항 명세서 수정
-![0116_요구사항명세](./images/요구사항명세.png)
+![0116_요구사항명세](./images/요구사항명세.png)
 
 ### Front-End 기능 명세서 작성
-![0116_Front기능명세](./images/Front_기능명세.png)
+![0116_Front기능명세](./images/Front_기능명세.png)
 
 ### JIRA 컨벤션 작성
 ![0116_JIRA컨벤션](./images/JIRA_Convention.png)
