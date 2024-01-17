@@ -8,6 +8,6 @@
 
 ###240117
 
-피그마 최종 작업 했습니다.
+피그마 최종 작업 및 디자인 디테일 설계 완료했습니다!
 
 ![캡처2](https://github.com/wooryjoon/algorithms/assets/106508216/08bc3e67-62c7-414c-a1e2-847d53bd0780)
