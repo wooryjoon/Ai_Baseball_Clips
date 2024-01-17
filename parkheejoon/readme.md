@@ -4,3 +4,10 @@
 와이어 프레임 제작
 
 ![캡처](https://github.com/muuuumbi/springStudy/assets/106508216/06d0b069-93af-44c6-b7c8-d73f8856f5ad)
+
+
+###240117
+
+피그마 최종 작업 했습니다.
+
+![캡처2](https://github.com/wooryjoon/algorithms/assets/106508216/08bc3e67-62c7-414c-a1e2-847d53bd0780)
