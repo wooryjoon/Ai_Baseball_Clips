@@ -1,1 +1,7 @@
-@import './scss/style.scss';
+@import 'style';
+
+#section {
+    min-width: 100vw;
+    min-height: 100vh;
+    background-color: black;
+}

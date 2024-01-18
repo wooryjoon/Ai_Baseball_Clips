@@ -1,0 +1,43 @@
+@import '../../styles/style.scss';
+
+// Header
+header {
+    width: 100%;
+    height: 70px;
+    border-bottom: 1px solid gray;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    padding: 30px;
+    .logo-container {
+        font-weight: bold;
+    }
+    .profile-container {
+        width: 40px;
+        height: 40px;
+        position: relative;
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            border-radius: 55%;
+            cursor: pointer;
+        }
+    }
+}
+// Logo
+
+// ProfileDialog
+dialog {
+    width: 200px;
+    height: 300px;
+    position: absolute;
+    left: -160px;
+    top: 55px;
+    border-radius: 10px;
+    background: #fff;
+    padding: 15px;
+    color: black;
+    font-weight: bold;
+}
