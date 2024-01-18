@@ -39,6 +39,5 @@
 ### Front-End 개발 환경 세팅
 ![Front Setting](./images/frontsetting.PNG)
 
-### 프로젝트 관련 개인 공부
-간단한 Tic-Tac-Toe 게임을 구현하며 React 구조를 이해
+### 간단한 Tic-Tac-Toe 게임을 구현하며 React 구조 공부
 ![Tic Tac Toe](./images/tictaxtoe.PNG)
