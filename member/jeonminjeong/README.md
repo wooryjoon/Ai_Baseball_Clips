@@ -31,3 +31,13 @@
 
 ### 와이어프레임_회원정보 컴포넌트
 ![마이프로필](./images/mypage.PNG)
+
+---
+
+# 0118
+
+### Front-End 개발 환경 세팅
+![Front Setting](./images/frontsetting.PNG)
+
+### 간단한 Tic-Tac-Toe 게임을 구현하며 React 구조 공부
+![Tic Tac Toe](./images/tictaxtoe.PNG)
