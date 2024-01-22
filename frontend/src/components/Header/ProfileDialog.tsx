@@ -22,9 +22,7 @@ export default function ProfileDialog({ dialogRef }: Props) {
             </div>
             <div className="user-profile-container">
                 <img src="" alt="" />
-                <p className="name-container">
-                    <p>NAME</p>
-                </p>
+                <p className="name-container">NAME</p>
             </div>
             <div className="user-option-container">
                 <button>정보수정</button>
