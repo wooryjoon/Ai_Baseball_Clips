@@ -41,3 +41,9 @@
 
 ### 간단한 Tic-Tac-Toe 게임을 구현하며 React 구조 공부
 ![Tic Tac Toe](./images/tictaxtoe.PNG)
+
+---
+
+# 0122
+
+### 오늘은 몸이 좋지 않아 오전에 간단한 회의를 하고, 오후에 병원에 다녀왔습니다.
