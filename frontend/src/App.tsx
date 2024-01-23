@@ -1,9 +1,8 @@
 import '@/styles/App.scss';
-
 function App() {
     return (
         <>
-            <section id="section"></section>
+            <section className="App"></section>
         </>
     );
 }
