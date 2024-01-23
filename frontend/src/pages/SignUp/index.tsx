@@ -1,3 +1,10 @@
+import './SignUp.scss';
+import SignUpForm from './SignUpForm';
+
 export default function SignUp() {
-    return <div>SignUp</div>;
+    return (
+        <div className="signup-container">
+            <SignUpForm />
+        </div>
+    );
 }
