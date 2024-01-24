@@ -3,11 +3,9 @@ import TextField from '@/components/TextField';
 import { ChangeEvent, useCallback, useState } from 'react';
 import { SignUpFormValues } from './type';
 import { passwordCheck } from '@/utils/signUpValidCheck';
-import PasswordInfo from './PasswordInfo';
 
 export default function SignUpForm() {
-    //TODO 이메일 형식에 따라 hasError 상태 전환
-
+    //TODO PasswordInfo 컴포넌트 삭제 후, 에러 메시지 조정 (스타일 상 더 나아보임)
     const [signUpFormValues, setSignUpFormValues] = useState<SignUpFormValues>({
         email: '',
         password: '',
@@ -36,7 +34,6 @@ export default function SignUpForm() {
                 placeholder={'비밀번호를 입력해주세요.'}
                 onChange={handleSignUpFormValues}
             />
-            <PasswordInfo isCorrect={isValidPassword && signUpFormValues.password.length > 0} />
 
             <Button styleType={'continue'}>계속</Button>
             <div className="login-navigate-message">

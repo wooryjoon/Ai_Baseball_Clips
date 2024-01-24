@@ -1,6 +1,5 @@
 import '@/styles/App.scss';
-import Test from './pages/Test';
-import Header from '@/components/Header';
+import SignUp from './pages/SignUp';
 function App() {
     let vh = window.innerHeight * 0.01;
 
@@ -8,8 +7,7 @@ function App() {
     return (
         <>
             <section className="App">
-                <Header />
-                <Test />
+                <SignUp />
             </section>
         </>
     );
