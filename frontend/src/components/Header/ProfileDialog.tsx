@@ -9,7 +9,7 @@ import openDialog from '@/utils/openDialog';
 
 export default function ProfileDialog({ dialogRef }: Props) {
     return (
-        <dialog ref={dialogRef}>
+        <dialog className="profile-dialog" ref={dialogRef}>
             <div className="dialog-topbar">
                 <p>내 정보</p>
                 <FontAwesomeIcon
@@ -22,7 +22,7 @@ export default function ProfileDialog({ dialogRef }: Props) {
             </div>
             <div className="user-profile-container">
                 <img src="" alt="" />
-                <p className="name-container">NAME</p>
+                <p className="name-container">민돌멩</p>
             </div>
             <div className="user-option-container">
                 <button>정보수정</button>
