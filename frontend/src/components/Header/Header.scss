@@ -9,11 +9,15 @@ header {
     justify-content: space-between;
     align-items: center;
     color: white;
-    padding: 30px;
+    padding: 15px;
+    border-bottom: 1px solid lightgray;
 }
 // Logo
 .logo-container {
-    // font-weight: bold;
+    color: $kbo_darkblue;
+}
+.upper {
+    font-weight: 700;
 }
 //ProfileWidget
 .profile-container {
@@ -23,67 +27,72 @@ header {
     .profile-img {
         width: 100%;
         height: 100%;
-        background-color: white;
+        background-color: black;
         border-radius: 55%;
         cursor: pointer;
     }
 }
 
 // ProfileDialog
-dialog {
-    width: 200px;
-    height: 300px;
+.profile-dialog {
+    width: 150px;
+    height: auto;
     position: absolute;
-    left: -160px;
+    left: -100px;
     top: 55px;
     border-radius: 10px;
     background: #fff;
     padding: 15px;
+    border: 1px solid lightgray;
     color: black;
+
     .dialog-topbar {
         display: flex;
         justify-content: space-between;
-        font-weight: bold;
+        font-weight: 500;
+        color: $kbo_skyblue;
+    }
+
+    .user-profile-container {
+        width: 100px;
+        height: 130px;
+        margin: auto;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        img {
+            width: 70px;
+            height: 70px;
+            border: 1px solid black;
+            border-radius: 40px;
+        }
+        .name {
+            display: flex;
+            align-items: center;
+            .profile-modify {
+                cursor: pointer;
+                font-size: 14px;
+                color: gray;
+                margin-left: 5px;
+            }
+        }
+    }
+
+    .user-option-container {
+        margin: 0 auto;
+        width: 100px;
+        height: 100px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        font-weight: 300;
     }
 }
 .profile-xmark {
     color: gray;
     cursor: pointer;
-}
-.user-profile-container {
-    width: 130px;
-    height: 130px;
-
-    margin: 0 auto;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    img {
-        width: 80px;
-        height: 80px;
-        border: 1px solid black;
-        border-radius: 40px;
-    }
-    .name {
-        display: flex;
-        align-items: center;
-        .profile-modify {
-            cursor: pointer;
-            font-size: 14px;
-            color: gray;
-            margin-left: 5px;
-        }
-    }
-}
-.user-option-container {
-    margin: 0 auto;
-    width: 100px;
-    height: 110px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
 }
