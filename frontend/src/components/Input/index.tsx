@@ -33,6 +33,7 @@ export default function Input({
             onBlur={onBlur}
             name={name}
             onChange={onChange}
+            type={name === 'password' ? 'password' : 'text'}
         ></input>
     );
 }

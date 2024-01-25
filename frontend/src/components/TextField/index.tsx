@@ -10,7 +10,15 @@ interface TextField {
     lengths: number;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
-
+/**
+ *
+ * @param name : input 이름
+ * @param hasError : 입력값이 유효하지 않은지 여부
+ * @param label : label의 텍스트
+ * @param placeholder : input의 placeholder
+ * @param onChange : input change event 핸들러
+ * @param lengths : 입력 값의 길이
+ */
 export default function TextField({
     name,
     hasError,
