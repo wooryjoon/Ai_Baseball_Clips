@@ -1,0 +1,17 @@
+@import '../../styles/style.scss';
+.test {
+    margin: auto auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: $kbo_darkblue;
+}
+.label {
+    cursor: pointer;
+    margin-bottom: 20px;
+    color: $kbo_skyblue;
+}
+video {
+    width: 200px;
+    height: 200px;
+}

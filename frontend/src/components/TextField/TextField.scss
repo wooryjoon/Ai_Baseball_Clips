@@ -1,11 +1,15 @@
+@import '../../styles/style.scss';
 .textfield {
     font-size: 12px;
     font-weight: 300;
     display: block;
     margin: 0 0 10px 0;
 }
-.textfield-message-error {
+.textfield-message {
     font-size: 11px;
+    color: $kbo_skyblue;
+}
+.textfield-message.error {
     color: red;
 }
 .textfield-name {

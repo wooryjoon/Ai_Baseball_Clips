@@ -1,5 +1,5 @@
 import '@/styles/App.scss';
-import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import SignUp from './pages/SignUp';
 import LandingPage from './pages/LandingPage';
 import Video from './pages/Video';

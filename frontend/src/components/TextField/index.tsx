@@ -7,11 +7,26 @@ interface TextField {
     hasError?: boolean;
     label: string;
     placeholder: string;
+    lengths: number;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
-
-export default function TextField({ name, hasError, label, placeholder, onChange }: TextField) {
-    //TODO input에 타자를 입력하는 순간 validCheck 발동
+/**
+ *
+ * @param name : input 이름
+ * @param hasError : 입력값이 유효하지 않은지 여부
+ * @param label : label의 텍스트
+ * @param placeholder : input의 placeholder
+ * @param onChange : input change event 핸들러
+ * @param lengths : 입력 값의 길이
+ */
+export default function TextField({
+    name,
+    hasError,
+    label,
+    placeholder,
+    onChange,
+    lengths,
+}: TextField) {
     const onFocusHandler: FocusEventHandler<HTMLInputElement> = () => {
         setFocused(true);
     };
@@ -21,8 +36,6 @@ export default function TextField({ name, hasError, label, placeholder, onChange
     const [focused, setFocused] = useState(false);
     const textFieldColor = hasError ? 'red' : focused ? '#0FB3F0' : 'grey';
     return (
-        //TODO focus 시 label,input, errorMessage 컬러 변경
-        //TODO hasError 시 label, input, errorMessage 컬러 변경
         <>
             <label className="textfield">
                 <span
@@ -41,8 +54,13 @@ export default function TextField({ name, hasError, label, placeholder, onChange
                     name={name}
                     onChange={onChange}
                 />
-                {focused && hasError && (
-                    <b className="textfield-message-error">올바르지 않은 형식입니다.</b>
+                {name === 'password' && focused && hasError && (
+                    <b className="textfield-message error">
+                        숫자와 문자를 조합한 8자리 이상 20자리 이하
+                    </b>
+                )}
+                {name === 'password' && focused && !hasError && lengths > 0 && (
+                    <b className="textfield-message">올바른 형식입니다.</b>
                 )}
             </label>
         </>
