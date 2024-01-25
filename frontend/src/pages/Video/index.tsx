@@ -10,10 +10,8 @@ export default function Video(){
         <div>
             <Header/>
             <div id="animation-box"></div>
-
-            {/* <MakeVideo/> */}
-            {/* <InputPlayer/> */}
-            <UploadVideo/>
+            <MakeVideo/>
+            {/* <UploadVideo/> */}
         </div> 
     ); 
 }
