@@ -26,6 +26,7 @@ export default function SignUpForm() {
                 label={'이메일'}
                 placeholder={'이메일을 입력해주세요.'}
                 onChange={handleSignUpFormValues}
+                lengths={signUpFormValues.email.length}
             />
             <TextField
                 name={'password'}
@@ -33,6 +34,7 @@ export default function SignUpForm() {
                 label={'비밀번호'}
                 placeholder={'비밀번호를 입력해주세요.'}
                 onChange={handleSignUpFormValues}
+                lengths={signUpFormValues.password.length}
             />
 
             <Button styleType={'continue'}>계속</Button>

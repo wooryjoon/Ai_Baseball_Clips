@@ -7,10 +7,18 @@ interface TextField {
     hasError?: boolean;
     label: string;
     placeholder: string;
+    lengths: number;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export default function TextField({ name, hasError, label, placeholder, onChange }: TextField) {
+export default function TextField({
+    name,
+    hasError,
+    label,
+    placeholder,
+    onChange,
+    lengths,
+}: TextField) {
     const onFocusHandler: FocusEventHandler<HTMLInputElement> = () => {
         setFocused(true);
     };
@@ -38,12 +46,12 @@ export default function TextField({ name, hasError, label, placeholder, onChange
                     name={name}
                     onChange={onChange}
                 />
-                {focused && hasError && (
+                {name === 'password' && focused && hasError && (
                     <b className="textfield-message error">
                         숫자와 문자를 조합한 8자리 이상 20자리 이하
                     </b>
                 )}
-                {!focused && !hasError && name === 'password' && (
+                {name === 'password' && focused && !hasError && lengths > 0 && (
                     <b className="textfield-message">올바른 형식입니다.</b>
                 )}
             </label>
