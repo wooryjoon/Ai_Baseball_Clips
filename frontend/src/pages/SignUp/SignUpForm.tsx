@@ -3,6 +3,7 @@ import TextField from '@/components/TextField';
 import { ChangeEvent, useCallback, useState } from 'react';
 import { SignUpFormValues } from './type';
 import { passwordCheck } from '@/utils/signUpValidCheck';
+import NavigateMessage from '@/components/NavigateMessage';
 
 export default function SignUpForm() {
     //TODO PasswordInfo 컴포넌트 삭제 후, 에러 메시지 조정 (스타일 상 더 나아보임)
@@ -38,9 +39,7 @@ export default function SignUpForm() {
             />
 
             <Button styleType={'continue'}>계속</Button>
-            <div className="login-navigate-message">
-                이미 계정이 있으신가요? <button>로그인</button>
-            </div>
+            <NavigateMessage textMessage="이미 계정이 있으신가요?" linkMessage="로그인" />
         </div>
     );
 }
