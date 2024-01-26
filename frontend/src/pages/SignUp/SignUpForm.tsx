@@ -3,7 +3,7 @@ import TextField from '@/components/TextField';
 import { emailCheck, passwordCheck } from '@/utils/signUpValidCheck';
 import NavigateMessage from '@/components/NavigateMessage';
 
-import useSignUpInput from '@/hooks/useSignUpinput';
+import useSignUpInput from '@/hooks/useSignUpInput';
 import requestSignUp from '@/api/requestSignUp';
 //TODO 버튼 클릭 시 axios.POST 요청
 export default function SignUpForm() {
