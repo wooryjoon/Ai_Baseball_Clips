@@ -4,9 +4,9 @@ import { ChangeEvent, useCallback, useState } from 'react';
 import { SignUpFormValues } from './type';
 import { passwordCheck } from '@/utils/signUpValidCheck';
 import NavigateMessage from '@/components/NavigateMessage';
-
+import { axiosInstance } from '@/api';
+//TODO 버튼 클릭 시 axios.POST 요청
 export default function SignUpForm() {
-    //TODO PasswordInfo 컴포넌트 삭제 후, 에러 메시지 조정 (스타일 상 더 나아보임)
     const [signUpFormValues, setSignUpFormValues] = useState<SignUpFormValues>({
         email: '',
         password: '',
@@ -16,7 +16,16 @@ export default function SignUpForm() {
             return { ...prev, [e.target.name]: e.target.value };
         });
     }, []);
-    const isValidPassword = passwordCheck(signUpFormValues.password);
+
+    // 버튼 클릭 시 signUpFormValues를 body에 담아 회원 가입 요청
+    const requestSignUp = (userData: SignUpFormValues) => {
+        axiosInstance
+            .post('member/join', userData)
+            .then
+            // TODO 리덕스로 로그인 상태 관리
+            ()
+            .catch();
+    };
 
     return (
         <div className="signupform-container">
@@ -31,15 +40,29 @@ export default function SignUpForm() {
             />
             <TextField
                 name={'password'}
-                hasError={!isValidPassword && signUpFormValues.password.length > 0}
+                hasError={
+                    !passwordCheck(signUpFormValues.password) &&
+                    signUpFormValues.password.length > 0
+                }
                 label={'비밀번호'}
                 placeholder={'비밀번호를 입력해주세요.'}
                 onChange={handleSignUpFormValues}
                 lengths={signUpFormValues.password.length}
             />
 
-            <Button styleType={'continue'}>계속</Button>
-            <NavigateMessage textMessage="이미 계정이 있으신가요?" linkMessage="로그인" />
+            <Button
+                styleType={'continue'}
+                onClick={() => {
+                    requestSignUp(signUpFormValues);
+                }}
+            >
+                계속
+            </Button>
+            <NavigateMessage
+                textMessage="이미 계정이 있으신가요?"
+                linkMessage="로그인"
+                type="login"
+            />
         </div>
     );
 }

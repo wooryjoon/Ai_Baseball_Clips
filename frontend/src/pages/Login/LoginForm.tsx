@@ -10,7 +10,11 @@ export default function LoginForm() {
             <TextField name="password" label="비밀번호" placeholder="비밀번호를 입력해주세요." />
             <button className="forgot-password">비밀번호를 잊어버리셨나요?</button>
             <Button styleType="login-form">로그인</Button>
-            <NavigateMessage textMessage="계정이 없으신가요?" linkMessage="가입하기" />
+            <NavigateMessage
+                textMessage="계정이 없으신가요?"
+                linkMessage="가입하기"
+                type={'signup'}
+            />
         </div>
     );
 }
