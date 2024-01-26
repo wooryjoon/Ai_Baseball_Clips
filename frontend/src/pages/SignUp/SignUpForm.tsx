@@ -2,9 +2,10 @@ import Button from '@/components/Button';
 import TextField from '@/components/TextField';
 import { ChangeEvent, useCallback, useState } from 'react';
 import { SignUpFormValues } from './type';
-import { passwordCheck } from '@/utils/signUpValidCheck';
+import { emailCheck, passwordCheck } from '@/utils/signUpValidCheck';
 import NavigateMessage from '@/components/NavigateMessage';
 import { axiosInstance } from '@/api';
+
 //TODO 버튼 클릭 시 axios.POST 요청
 export default function SignUpForm() {
     const [signUpFormValues, setSignUpFormValues] = useState<SignUpFormValues>({
@@ -36,18 +37,16 @@ export default function SignUpForm() {
                 label={'이메일'}
                 placeholder={'이메일을 입력해주세요.'}
                 onChange={handleSignUpFormValues}
-                lengths={signUpFormValues.email.length}
+                length={signUpFormValues.email.length}
+                hasError={!emailCheck(signUpFormValues.email)}
             />
             <TextField
                 name={'password'}
-                hasError={
-                    !passwordCheck(signUpFormValues.password) &&
-                    signUpFormValues.password.length > 0
-                }
+                hasError={!passwordCheck(signUpFormValues.password)}
                 label={'비밀번호'}
                 placeholder={'비밀번호를 입력해주세요.'}
                 onChange={handleSignUpFormValues}
-                lengths={signUpFormValues.password.length}
+                length={signUpFormValues.password.length}
             />
 
             <Button
