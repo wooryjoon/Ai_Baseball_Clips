@@ -1,4 +1,4 @@
-import LoginForm from './LoginForm.1';
+import LoginForm from './LoginForm';
 
 export default function Login() {
     return (

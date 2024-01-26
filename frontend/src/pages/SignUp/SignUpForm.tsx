@@ -1,32 +1,16 @@
 import Button from '@/components/Button';
 import TextField from '@/components/TextField';
-import { ChangeEvent, useCallback, useState } from 'react';
-import { SignUpFormValues } from './type';
 import { emailCheck, passwordCheck } from '@/utils/signUpValidCheck';
 import NavigateMessage from '@/components/NavigateMessage';
-import { axiosInstance } from '@/api';
 
+import useSignUpInput from '@/hooks/useSignUpinput';
+import requestSignUp from '@/api/requestSignUp';
 //TODO 버튼 클릭 시 axios.POST 요청
 export default function SignUpForm() {
-    const [signUpFormValues, setSignUpFormValues] = useState<SignUpFormValues>({
+    const { signUpFormValues, handleSignUpFormValues } = useSignUpInput({
         email: '',
         password: '',
     });
-    const handleSignUpFormValues = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-        setSignUpFormValues((prev: SignUpFormValues) => {
-            return { ...prev, [e.target.name]: e.target.value };
-        });
-    }, []);
-
-    // 버튼 클릭 시 signUpFormValues를 body에 담아 회원 가입 요청
-    const requestSignUp = (userData: SignUpFormValues) => {
-        axiosInstance
-            .post('member/join', userData)
-            .then
-            // TODO 리덕스로 로그인 상태 관리
-            ()
-            .catch();
-    };
 
     return (
         <div className="signupform-container">
