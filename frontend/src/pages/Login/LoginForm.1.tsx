@@ -1,21 +1,28 @@
 import TextField from '@/components/TextField';
-import './Login.scss';
 import Button from '@/components/Button';
 import NavigateMessage from '@/components/NavigateMessage';
 import { ChangeEvent, useState } from 'react';
 import { LoginFormValues } from './type';
 import { emailCheck, passwordCheck } from '@/utils/signUpValidCheck';
-
+import './Login.scss';
+import { axiosInstance } from '@/api';
 export default function LoginForm() {
-    const [loginFormValues, setLoginFormValues] = useState({
+    const [loginFormValues, setLoginFormValues] = useState<LoginFormValues>({
         email: '',
         password: '',
     });
-    console.log(loginFormValues);
     const handleLoginFormValues = (e: ChangeEvent<HTMLInputElement>) => {
         setLoginFormValues((prev: LoginFormValues) => {
             return { ...prev, [e.target.name]: e.target.value };
         });
+    };
+    const requestLogin = (userData: LoginFormValues) => {
+        axiosInstance
+            .post('member/login', userData)
+            .then
+            // TODO 리덕스로 로그인 상태 관리
+            ()
+            .catch();
     };
     return (
         <div className="loginform-container">
@@ -37,7 +44,14 @@ export default function LoginForm() {
                 hasError={!passwordCheck(loginFormValues.password)}
             />
             <button className="forgot-password">비밀번호를 잊어버리셨나요?</button>
-            <Button styleType="login-form">로그인</Button>
+            <Button
+                styleType="login-form"
+                onClick={() => {
+                    requestLogin(loginFormValues);
+                }}
+            >
+                로그인
+            </Button>
             <NavigateMessage
                 textMessage="계정이 없으신가요?"
                 linkMessage="가입하기"
