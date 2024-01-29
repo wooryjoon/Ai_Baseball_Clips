@@ -6,7 +6,7 @@ import AWS from "aws-sdk";
 export default function UploadVideo(){
     const navigate = useNavigate();
 
-    const [showAlert, setShowAlert] = useState(false);
+    // const [showAlert, setShowAlert] = useState(false);
     const [progress, setProgress] = useState(0);
     const [selectedFile, setSelectedFile] = useState(File);
     const [myBucket, setMyBucket] = useState({});
@@ -15,16 +15,18 @@ export default function UploadVideo(){
     useEffect(() => {
         // 1. AWS 키 설정
         AWS.config.update({
-            accessKeyId: "AKIA2UC3E76VLWQAMVAE",
-            secretAccessKey: "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",
+            accessKeyId: import.meta.env.VITE_TEST_S3_ACCESSKEY,
+            secretAccessKey: import.meta.env.VITE_TEST_S3_SECRETACCESSKEY,
         })
 
         // 2. AWS S3 객체 생성
         const myBucket = new AWS.S3({
-            params: {Bucket: "testoree"},
+            params: {Bucket: import.meta.env.VITE_TEST_BUCKETNAME},
             region: "ap-northeast-2" // 서울 지역 코드
 
         })
+
+        setMyBucket(myBucket);
     })
 
     // 로컬에 있는 파일 가져오기
@@ -52,13 +54,14 @@ export default function UploadVideo(){
 
         myBucket
             .putObject(param)
-            .on("httpUploadProgress", (e: any) => { // loading percentage 확인
-                setProgress(Math.round((e.loaded / e.total) * 100))
-                setShowAlert(true);
-                setTimeout(()=>{
-                    setShowAlert(false);
-                    setSelectedFile();
-                }, 3000)
+
+            // .on("httpUploadProgress", (e: any) => { // loading percentage 확인
+            //     setProgress(Math.round((e.loaded / e.total) * 100))
+            //     setShowAlert(true);
+            //     setTimeout(()=>{
+            //         setShowAlert(false);
+            //         setSelectedFile(null);
+            //     }, 3000)
 
             //     // const percentProgress = Math.round((progress.loded / progress.total) * 100);
             //     // console.log("percentProgress: ", percentProgress);
