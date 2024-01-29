@@ -43,7 +43,7 @@ export default function LoginForm() {
             <NavigateMessage
                 textMessage="계정이 없으신가요?"
                 linkMessage="가입하기"
-                type={'signup'}
+                type="signup"
             />
         </div>
     );
