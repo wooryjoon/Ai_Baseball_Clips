@@ -2,7 +2,7 @@ import './Input.scss';
 
 type Input = {
     placeholder: string;
-    invalid?: boolean;
+    invalid: boolean | undefined;
     onFocus: any;
     onBlur: any;
     name: string;
