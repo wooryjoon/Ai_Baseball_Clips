@@ -5,7 +5,7 @@ import NavigateMessage from '@/components/NavigateMessage';
 
 import useSignUpInput from '@/hooks/useSignUpInput';
 import requestSignUp from '@/api/requestSignUp';
-//TODO 버튼 클릭 시 axios.POST 요청
+//TODO 버튼 클릭 시 axios.POST요청
 export default function SignUpForm() {
     const { signUpFormValues, handleSignUpFormValues } = useSignUpInput({
         email: '',
