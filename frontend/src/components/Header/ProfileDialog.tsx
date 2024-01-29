@@ -4,7 +4,7 @@ type Props = {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import '../Header/Header.scss';
-import { faPen, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import openDialog from '@/utils/openDialog';
 
 export default function ProfileDialog({ dialogRef }: Props) {
