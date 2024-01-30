@@ -1,47 +1,9 @@
 import PlayerVideoCard from './PlayerVideoCard';
-
+import { VIDEO_DUMMY } from '@/mock/dummydata.ts';
 export default function PlayerHighlights() {
-    const DUMMY_DATA = [
-        {
-            name: '손현조',
-            url: ['', '', '', '', '', '', ''],
-        },
-        {
-            name: '우창진',
-            url: ['', '', '', '', '', '', ''],
-        },
-        {
-            name: '함승찬',
-            url: ['', '', '', '', '', '', ''],
-        },
-        {
-            name: '손현조',
-            url: ['', '', '', '', '', '', ''],
-        },
-        {
-            name: '우창진',
-            url: ['', '', '', '', '', '', ''],
-        },
-        {
-            name: '함승찬',
-            url: ['', '', '', '', '', '', ''],
-        },
-        {
-            name: '손현조',
-            url: ['', '', '', '', '', '', ''],
-        },
-        {
-            name: '우창진',
-            url: ['', '', '', '', '', '', ''],
-        },
-        {
-            name: '함승찬',
-            url: ['', '', '', '', '', '', ''],
-        },
-    ];
     return (
         <>
-            {DUMMY_DATA.map((player_data) => {
+            {VIDEO_DUMMY.map((player_data) => {
                 return <PlayerVideoCard playerData={player_data} />;
             })}
         </>

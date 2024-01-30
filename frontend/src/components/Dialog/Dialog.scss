@@ -1,0 +1,17 @@
+form {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+dialog {
+    width: 100%;
+    max-width: 360px;
+    height: 50%;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    border: none;
+}
