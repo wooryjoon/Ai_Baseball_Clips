@@ -13,11 +13,14 @@ const VideoModal = forwardRef<HTMLDialogElement, VideoModalProps>(
         return (
             <Dialog onClick={onClick} ref={ref}>
                 {isReadyToLoadVideo && (
-                    <Video
-                        poster="https://source.unsplash.com/random/?programming"
-                        src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-                        source_type="mp4"
-                    />
+                    <div className="video-container">
+                        <div className="videoModal-title">영상 제목</div>
+                        <Video
+                            poster="https://source.unsplash.com/random/?programming"
+                            src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+                            source_type="mp4"
+                        />
+                    </div>
                 )}
             </Dialog>
         );

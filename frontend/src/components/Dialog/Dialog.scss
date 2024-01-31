@@ -1,10 +1,10 @@
 form {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 3px;
+    right: 10px;
 }
 dialog {
-    width: 100%;
+    width: 90%;
     max-width: 360px;
     height: 50%;
     position: fixed;
@@ -14,4 +14,5 @@ dialog {
     right: 0;
     margin: auto;
     border: none;
+    border-radius: 10px;
 }

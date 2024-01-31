@@ -15,7 +15,7 @@ export default function Content({ url }: Content) {
         setIsReadyToLoadVideo(!isReadyToLoadVideo);
     };
     return (
-        <div className="video-container">
+        <div className="content-container">
             <button
                 className="thumbnail"
                 onClick={() => {
