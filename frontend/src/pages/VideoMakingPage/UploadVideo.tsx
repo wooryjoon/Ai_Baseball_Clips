@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "@/components/Button";
-import { requestPresignedUrl } from "@/api/uploadVideoApis";
+import { UploadFiletoS3, requestPresignedUrl } from "@/api/uploadVideoApis";
 import { FileInfoType } from "./type";
 
 const UploadVideo = () => {
@@ -20,10 +20,10 @@ const UploadVideo = () => {
             });
 
             if(inputFile){
-                console.log(inputFile.url);
+                console.log(inputFile.file.name);
                 formData.append("video", inputFile.file);
             }
-            
+
         } else{
             alert("유효하지 않은 형식입니다.");
         }
@@ -31,7 +31,8 @@ const UploadVideo = () => {
 
     const uploadFile = () => {
         if(!inputFile || !formData) return;
-        requestPresignedUrl(inputFile.file, formData);
+        // requestPresignedUrl(inputFile.file, formData);
+        UploadFiletoS3("https://a305-project-bucket.s3.ap-northeast-2.amazonaws.com/null/1/null?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20240131T063619Z&X-Amz-SignedHeaders=host&X-Amz-Expires=59999&X-Amz-Credential=AKIA3FLDXCWKWW5EG2CJ%2F20240131%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Signature=ee270d11c0a6836165adfbdb4bb2838d3e81e69453c4f0a6164d9f00ac4273dd", inputFile.file);
     }
 
     return (
@@ -42,7 +43,6 @@ const UploadVideo = () => {
                 <input type="file" onChange={onChangeFile}></input>
                 <Button styleType="previous" onClick={() => navigate(-1)}>이전으로</Button>
                 <Button styleType="uploadvideo" onClick={uploadFile}> 완료</Button>
-
             </div>
         </div>
     );
