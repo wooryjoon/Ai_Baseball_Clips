@@ -24,10 +24,4 @@ public class BaseResponse {
         SuccessResponse response = new SuccessResponse(true, msg, data);
         return ResponseEntity.status(status.value()).body(response);
     }
-
-    public static ResponseEntity<?> fail(String msg, HttpStatus status) {
-        FailResponse response = new FailResponse(false, msg, status);
-        return ResponseEntity.status(status).body(response);
-    }
-
 }

@@ -1,5 +1,6 @@
 package com.private_lbs.taskmaster.global.util;
 
+import com.private_lbs.taskmaster.member.data.vo.JwtToken;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -38,6 +39,10 @@ public class JWTUtil {
         return key;
     }
 
+    public JwtToken createToken(String email) {
+        return JwtToken.of(createAccessToken(email), createRefreshToken(email));
+    }
+
     public String createAccessToken(String email) {
         return create(email, "access-token", accessTokenExpireTime);
     }
@@ -71,7 +76,7 @@ public class JWTUtil {
         return jwt;
     }
 
-//  전달 받은 토큰이 제대로 생성된것인지 확인
+    //  전달 받은 토큰이 제대로 생성된것인지 확인
     public boolean checkToken(String token) {
         System.out.println(token);
         try {
