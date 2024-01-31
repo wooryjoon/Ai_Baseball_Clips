@@ -1,4 +1,8 @@
 import axios from 'axios';
-export const axiosInstance = axios.create({
-    baseURL: 'http://i10a305.p.ssafy.io:8081/',
+import { Axios } from 'axios';
+const instance: Axios = axios.create({
+    baseURL: import.meta.env.VITE_API_BASE_URL,
+    withCredentials: true,
 });
+
+export { instance };

@@ -4,7 +4,7 @@ import { emailCheck, passwordCheck } from '@/utils/signUpValidCheck';
 import NavigateMessage from '@/components/NavigateMessage';
 
 import useSignUpInput from '@/hooks/useSignUpInput';
-import requestSignUp from '@/api/requestSignUp';
+import { requestSignUp } from '@/api/SignUp';
 //TODO 버튼 클릭 시 axios.POST요청
 export default function SignUpForm() {
     const { signUpFormValues, handleSignUpFormValues } = useSignUpInput({
