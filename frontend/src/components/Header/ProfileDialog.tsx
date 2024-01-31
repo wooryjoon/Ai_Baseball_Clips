@@ -11,7 +11,7 @@ export default function ProfileDialog({ dialogRef }: Props) {
     return (
         <dialog className="profile-dialog" ref={dialogRef}>
             <div className="dialog-topbar">
-                <p>내 정보</p>
+                s<p>내 정보</p>
                 <FontAwesomeIcon
                     icon={faXmark}
                     className="profile-xmark"
