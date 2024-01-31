@@ -1,13 +1,8 @@
 spring:
   profiles:
     default: secret
-
   datasource:
-    url: jdbc:h2:tcp://localhost/~/testDB
-    username: sa
-    password:
-    driver-class-name: org.h2.Driver
-
+    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
       ddl-auto: create
@@ -15,6 +10,7 @@ spring:
       hibernate:
         #show_sql: true
         format_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
 
 logging.level:
   org.hibernate.SQL: debug
