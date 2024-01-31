@@ -40,8 +40,14 @@ dependencies {
 //	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+// aws 관련
+	implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
+	implementation 'com.amazonaws:aws-java-sdk:1.12.641'
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+compileJava {
+	options.compilerArgs.add('-parameters')
 }
