@@ -1,10 +1,16 @@
 package com.private_lbs.taskmaster.member.service;
 
 import com.private_lbs.taskmaster.global.response.MemberResponse;
-import com.private_lbs.taskmaster.member.dto.JoinMemberRequest;
-import com.private_lbs.taskmaster.member.dto.LoginRequest;
+import com.private_lbs.taskmaster.global.util.JWTUtil;
+import com.private_lbs.taskmaster.member.data.dto.request.JoinMemberRequest;
+import com.private_lbs.taskmaster.member.data.dto.request.LoginRequest;
+import com.private_lbs.taskmaster.member.data.dto.request.MemberLogoutRequest;
+import com.private_lbs.taskmaster.member.data.dto.response.MemberLoginResponse;
+import com.private_lbs.taskmaster.member.data.vo.JwtToken;
 import com.private_lbs.taskmaster.member.entity.Member;
 import com.private_lbs.taskmaster.member.entity.RefreshToken;
+import com.private_lbs.taskmaster.member.exception.MemberErrorCode;
+import com.private_lbs.taskmaster.member.exception.MemberException;
 import com.private_lbs.taskmaster.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,31 +23,50 @@ import java.util.Optional;
 public class MemberService {
 
     private final MemberRepository memberRepository;
+    private final JWTUtil jwtUtil;
 
-    public Member getMemberOrThrow(Long id) {
-        Member member = memberRepository.findById(id);
-        if (member == null) {
-            throw new IllegalArgumentException("id가 일치하는 회원이 없습니다");
-        }
-        return member;
-    }
 
     @Transactional
     public MemberResponse join(JoinMemberRequest joinMemberRequest) {
-        // joinMemberRequest -> Member
-        Member member = new Member(joinMemberRequest.getEmail(), joinMemberRequest.getPassword());
+        Member member = joinMemberRequest.toMember();
+        checkEmailExists(member.getEmail());
+
+        // password 암호화 작업 추가
+
         memberRepository.save(member);
         return MemberResponse.toResponse(member);
     }
 
-    public boolean isEmailAvailable(String email) {
-        Optional<Member> optionalMember = memberRepository.findByEmail(email);
-        return optionalMember.isEmpty();
+    public void checkEmailExists(String email) {
+        memberRepository.findByEmail(email).ifPresent(member -> {
+            throw new MemberException(MemberErrorCode.EMAIL_ALREADY_EXISTS);
+        });
     }
 
-    public Optional<Member> isMember(LoginRequest loginRequest) {
-        return memberRepository.findByEmailAndPassword(loginRequest);
+    public void checkIdExists(Long id) {
+        memberRepository.findById(id).ifPresent(member -> {
+            throw new MemberException(MemberErrorCode.EMAIL_ALREADY_EXISTS);
+        });
     }
+
+    @Transactional
+    public MemberLoginResponse login(LoginRequest loginRequest) {
+        Member requestMember = loginRequest.toMember();
+        Member member = memberRepository.findByEmail(requestMember.getEmail())
+                .orElseThrow(() -> new MemberException(MemberErrorCode.MEMBER_DOES_NOT_EXISTS));
+
+        // 복호화 작업
+
+        if (!requestMember.getPassword().equals(member.getPassword())) {
+            throw new MemberException(MemberErrorCode.LOGIN_FAILED);
+        }
+
+        JwtToken token = jwtUtil.createToken(member.getEmail());
+        saveRefreshToken(member, token.getRefreshToken());
+
+        return MemberLoginResponse.of(member, token);
+    }
+
 
     public void saveRefreshToken(Member member, String refreshToken) {
         memberRepository.saveRefreshToken(member, refreshToken);
@@ -52,7 +77,13 @@ public class MemberService {
         return findRefreshToken.map(token -> token.getRefreshToken().equals(refreshToken)).orElse(false);
     }
 
-    public void deleteRefreshToken(Member loginMember) {
-        memberRepository.deleteRefreshToken(loginMember);
+    @Transactional
+    public void logout(MemberLogoutRequest request) {
+
+        Member requestMember = request.toMember();
+        Member member = memberRepository.findById(requestMember.getId())
+                .orElseThrow(() -> new MemberException(MemberErrorCode.MEMBER_DOES_NOT_EXISTS));
+        // delete 예외처리 X
+        memberRepository.deleteRefreshToken(member);
     }
 }
