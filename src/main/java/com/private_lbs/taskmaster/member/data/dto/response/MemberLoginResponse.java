@@ -1,7 +1,7 @@
 package com.private_lbs.taskmaster.member.data.dto.response;
 
 import com.private_lbs.taskmaster.member.data.vo.JwtToken;
-import com.private_lbs.taskmaster.member.entity.Member;
+import com.private_lbs.taskmaster.member.domain.Member;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

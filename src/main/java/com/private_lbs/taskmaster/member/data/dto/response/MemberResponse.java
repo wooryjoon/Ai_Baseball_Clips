@@ -1,6 +1,6 @@
 package com.private_lbs.taskmaster.member.data.dto.response;
 
-import com.private_lbs.taskmaster.member.entity.Member;
+import com.private_lbs.taskmaster.member.domain.Member;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

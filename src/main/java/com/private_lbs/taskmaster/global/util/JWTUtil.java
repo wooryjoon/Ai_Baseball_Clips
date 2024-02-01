@@ -1,7 +1,7 @@
 package com.private_lbs.taskmaster.global.util;
 
 import com.private_lbs.taskmaster.member.data.vo.JwtToken;
-import com.private_lbs.taskmaster.member.entity.Member;
+import com.private_lbs.taskmaster.member.domain.Member;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

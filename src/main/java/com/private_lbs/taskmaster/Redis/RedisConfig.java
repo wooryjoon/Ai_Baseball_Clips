@@ -1,7 +1,7 @@
 package com.private_lbs.taskmaster.Redis;
 
-import com.private_lbs.taskmaster.Redis.Model.RedisPubData;
-import com.private_lbs.taskmaster.Redis.Service.RedisSubServiceTest;
+import com.private_lbs.taskmaster.Redis.domain.RedisPubData;
+import com.private_lbs.taskmaster.Redis.service.RedisSubServiceTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
