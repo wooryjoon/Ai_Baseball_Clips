@@ -36,6 +36,7 @@ public class MemberController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
+    @Auth(role = Role.USER)
     @PostMapping("/logout")
     public ResponseEntity<Void> logout(@Valid @RequestBody MemberLogoutRequest request) {
         memberService.logout(request);
