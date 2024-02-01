@@ -9,10 +9,12 @@ import UploadVideo from './pages/VideoMakingPage/UploadVideo';
 import Percentage from './pages/VideoMakingPage/Percentage';
 import InningsHighlights from './pages/VideoResultPage/InningsHighlights';
 import PlayerHighlights from './pages/VideoResultPage/PlayerHighLights';
+import initMockAPI from './mock';
+
+initMockAPI();
 
 function App() {
     let vh = window.innerHeight * 0.01;
-
     document.documentElement.style.setProperty('--vh', `${vh}px`);
     return (
         <>
@@ -24,7 +26,7 @@ function App() {
                         <Route path="/signup" element={<SignUp />} />
                         <Route path="/makingvideo" element={<MakingVideo />} />
                         <Route path="/uploadvideo" element={<UploadVideo />} />
-                        <Route path="/percentage" element={<Percentage/>} />
+                        <Route path="/percentage" element={<Percentage />} />
                         <Route path="/result" element={<VideoResultPage />}>
                             <Route path="players" element={<PlayerHighlights />} />
                             <Route path="innings" element={<InningsHighlights />} />
