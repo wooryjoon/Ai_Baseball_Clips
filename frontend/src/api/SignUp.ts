@@ -13,5 +13,16 @@ const requestSignUp = async (userData: SignUpFormValues) => {
         }
     }
 };
+const requestEmailCheck = async (email: string) => {
+    try {
+        console.log(import.meta.env.VITE_API_EMAIL_CHECK_URL + '/' + email);
+        await instance.get(import.meta.env.VITE_API_EMAIL_CHECK_URL + '/' + email);
+        alert('올바른 이메일입니다.');
+    } catch (error) {
+        if (isAxiosError<FailResponse>(error)) {
+            alert(error.response?.data.message);
+        }
+    }
+};
 
-export { requestSignUp };
+export { requestSignUp, requestEmailCheck };
