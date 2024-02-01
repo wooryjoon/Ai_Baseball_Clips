@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import './test.scss';
 
 export default function MenuBar() {
@@ -11,6 +11,9 @@ export default function MenuBar() {
                 <Link to="/myPage">나의 정보</Link>
                 <Link to="/makingvideo">동영상 제작</Link>
             </nav>
+            <section>
+                <Outlet></Outlet>
+            </section>
         </div>
     );
 }
