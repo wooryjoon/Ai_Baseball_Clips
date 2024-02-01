@@ -9,7 +9,6 @@ import './Button.scss';
  */
 
 export default function Button({ styleType, disabled, onClick, children }: any) {
-    console.log(disabled);
     let className = 'button';
     if (styleType) className = className + ` ${styleType}`;
     if (disabled) className = className + ' disabled';
