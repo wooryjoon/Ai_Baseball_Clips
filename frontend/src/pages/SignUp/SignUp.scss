@@ -56,7 +56,21 @@
         }
         margin-bottom: 10px;
     }
-    .password-info.correct {
-        // border: 1px solid $kbo_skyblue;
+    .emailCheck {
+        // border: 1px solid black;
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+    }
+    .emailCheck-button {
+        font-size: 12px;
+        padding: 10px;
+        font-weight: 300;
+        background-color: $kbo_darkblue;
+        color: white;
+        border-radius: 5px;
+    }
+    .emailCheck-button:hover {
+        color: $kbo_skyblue;
     }
 }

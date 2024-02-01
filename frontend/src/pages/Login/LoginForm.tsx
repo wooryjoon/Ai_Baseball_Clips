@@ -4,7 +4,7 @@ import Button from '@/components/Button';
 import NavigateMessage from '@/components/NavigateMessage';
 import useLoginInput from '@/hooks/useLoginInput';
 import { emailCheck, passwordCheck } from '@/utils/signUpValidCheck';
-import requestLogin from '@/api/requestLogin';
+import { requestLogin } from '@/api/Login';
 
 export default function LoginForm() {
     const { loginFormValues, handleLoginFormValues } = useLoginInput({
