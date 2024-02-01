@@ -22,7 +22,7 @@ public class AuthenticationFilter extends OncePerRequestFilter {
     private final AuthenticationTokenResolver tokenResolver;
 
     // 필터가 적용하지 않을 url
-    private final String[] whiteList = {"/member/check-email", "/member/login"};
+    private final String[] whiteList = {"/member/check-email/*", "/member/login", "/member/join"};
 
     // 필터가 적용하지 않을 url 일 경우 필터 적용 x
     @Override
