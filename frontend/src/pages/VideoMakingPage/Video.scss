@@ -54,17 +54,50 @@
     height: 100%;
     text-align: center;
 
-    .button.uploadvideo{
+    .buttons {
+        margin : 100px 20px 5px 20px;
+        display: flex;
+        justify-content: space-between;
+        
+        .button.uploadvideo{
+            border-radius: 5px;
+            background-color: $kbo-darkblue;
+            color: $kbo-lightgray;
+        }
+        
+        .button.previous{
+            border-radius: 5px;
+            background-color: $gray;
+            color: white;
+        }
+    }
+
+
+    #input-video-box{
+        margin-top: 30px;
+        margin-bottom: 20px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .input-tag-label{
+        padding: 6px 25px;
+        border-radius: 4px;
+        color: $kbo-darkblue;
+        font-size: medium;
+        cursor: pointer;
+    }
+}
+
+#percentage {
+    margin-top: 200px;
+    text-align: center;
+
+    .button.goHighlight{
         border-radius: 5px;
         margin : 30px 5px 5px 5px;
         background-color: $kbo-darkblue;
         color: $kbo-lightgray;
-    }
-
-    .button.previous{
-        border-radius: 5px;
-        margin : 30px 5px 5px 5px;
-        background-color: $gray;
-        color: white;
     }
 }

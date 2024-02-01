@@ -1,8 +1,8 @@
-import { axiosInstance } from ".";
+import { instance } from ".";
 import axios from "axios";
 
 export function requestPresignedUrl(uploadFile: File){
-    axiosInstance.post('presigned-url', {filename : uploadFile.name})
+    instance.post('presigned-url', {filename : uploadFile.name})
     .then(response => {
         const presignedUrl = response.data;
         console.log(presignedUrl);

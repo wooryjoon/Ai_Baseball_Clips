@@ -24,7 +24,6 @@ function App() {
                         <Route path="/signup" element={<SignUp />} />
                         <Route path="/makingvideo" element={<MakingVideo />} />
                         <Route path="/uploadvideo" element={<UploadVideo />} />
-                        <Route path="/result" element={<VideoResultPage />} />
                         <Route path="/percentage" element={<Percentage/>} />
                         <Route path="/result" element={<VideoResultPage />}>
                             <Route path="players" element={<PlayerHighlights />} />
