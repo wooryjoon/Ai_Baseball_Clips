@@ -6,6 +6,7 @@ import MakingVideo from './pages/VideoMakingPage';
 import Login from './pages/Login';
 import VideoResultPage from './pages/VideoResultPage';
 import UploadVideo from './pages/VideoMakingPage/UploadVideo';
+import Percentage from './pages/VideoMakingPage/Percentage';
 function App() {
     let vh = window.innerHeight * 0.01;
 
@@ -21,6 +22,7 @@ function App() {
                         <Route path="/makingvideo" element={<MakingVideo />} />
                         <Route path="/uploadvideo" element={<UploadVideo />} />
                         <Route path="/result" element={<VideoResultPage />} />
+                        <Route path="/percentage" element={<Percentage/>} />
                     </Routes>
                 </BrowserRouter>
             </section>

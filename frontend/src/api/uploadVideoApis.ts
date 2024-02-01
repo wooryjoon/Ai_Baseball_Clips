@@ -1,12 +1,8 @@
+import { axiosInstance } from ".";
 import axios from "axios";
 
-export function requestPresignedUrl(uploadFile: File, formData: FormData){
-    axios.post('/presigned-url', formData, {
-        headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: localStorage.getItem("accessToken"),
-        },
-    })
+export function requestPresignedUrl(uploadFile: File){
+    axiosInstance.post('presigned-url', {filename : uploadFile.name})
     .then(response => {
         const presignedUrl = response.data;
         console.log(presignedUrl);
