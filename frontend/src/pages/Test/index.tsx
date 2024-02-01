@@ -11,7 +11,6 @@ export default function Test() {
         const file = event.target.files[0];
         setSelectedFile(file);
         setSelectedUrl(URL.createObjectURL(event.target.files[0]));
-        console.log(123);
     };
 
     const handleUpload = async () => {
@@ -51,7 +50,7 @@ export default function Test() {
                 경기 영상 업로드
             </label>
             <Button onClick={handleUpload}>영상 추출하기</Button>
-            <video src={selectedUrl} />
+            <video src={selectedUrl} controls />
         </div>
     );
 }
