@@ -22,9 +22,9 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
+	// RESTful
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.boot:spring-boot-starter-web-services'
 
 	// jwt 사용
 	implementation 'io.jsonwebtoken:jjwt:0.9.1'
@@ -38,15 +38,22 @@ dependencies {
 
 	// validation
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+	// db
 	runtimeOnly 'com.mysql:mysql-connector-j'
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
+	// spring data jpa
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	compileOnly 'org.projectlombok:lombok'
+
+	// lombok
 	annotationProcessor 'org.projectlombok:lombok'
+	compileOnly 'org.projectlombok:lombok'
+
+	// test
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
-	// aws 관련
-	//implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
-	//implementation 'com.amazonaws:aws-java-sdk:1.12.641'
+	// aws S3
 	implementation 'com.amazonaws:aws-java-sdk-lambda:1.12.641'
 	implementation 'com.amazonaws:aws-java-sdk-core:1.12.641'
 	implementation 'com.amazonaws:aws-java-sdk-s3:1.12.641'
