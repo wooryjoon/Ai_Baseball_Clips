@@ -236,3 +236,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+### application-secret
+application-secret.yml
