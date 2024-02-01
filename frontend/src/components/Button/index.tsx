@@ -9,11 +9,12 @@ import './Button.scss';
  */
 
 export default function Button({ styleType, disabled, onClick, children }: any) {
+    console.log(disabled);
     let className = 'button';
     if (styleType) className = className + ` ${styleType}`;
-    if (disabled) className = className + ` ${disabled}`;
+    if (disabled) className = className + ' disabled';
     return (
-        <button className={className} disabled={disabled} onClick={onClick}>
+        <button className={className} onClick={onClick}>
             {children}
         </button>
     );
