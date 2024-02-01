@@ -1,9 +1,11 @@
 package com.private_lbs.taskmaster.member.controller;
 
+import com.private_lbs.taskmaster.global.auth.Auth;
 import com.private_lbs.taskmaster.member.data.dto.request.JoinMemberRequest;
 import com.private_lbs.taskmaster.member.data.dto.request.LoginRequest;
 import com.private_lbs.taskmaster.member.data.dto.request.MemberLogoutRequest;
 import com.private_lbs.taskmaster.member.data.dto.response.MemberLoginResponse;
+import com.private_lbs.taskmaster.member.entity.Role;
 import com.private_lbs.taskmaster.member.service.MemberService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
