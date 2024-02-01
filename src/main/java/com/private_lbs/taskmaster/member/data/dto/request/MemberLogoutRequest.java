@@ -1,6 +1,6 @@
 package com.private_lbs.taskmaster.member.data.dto.request;
 
-import com.private_lbs.taskmaster.member.entity.Member;
+import com.private_lbs.taskmaster.member.domain.Member;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

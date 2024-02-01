@@ -1,6 +1,6 @@
-package com.private_lbs.taskmaster.S3.Service;
+package com.private_lbs.taskmaster.S3.service;
 
-import com.private_lbs.taskmaster.S3.Model.UserData;
+import com.private_lbs.taskmaster.S3.domain.UserData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

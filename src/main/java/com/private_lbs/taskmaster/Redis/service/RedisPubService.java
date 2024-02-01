@@ -1,6 +1,6 @@
-package com.private_lbs.taskmaster.Redis.Service;
+package com.private_lbs.taskmaster.Redis.service;
 
-import com.private_lbs.taskmaster.Redis.Model.RedisPubData;
+import com.private_lbs.taskmaster.Redis.domain.RedisPubData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;

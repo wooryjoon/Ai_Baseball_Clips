@@ -1,4 +1,4 @@
-package com.private_lbs.taskmaster.member.entity;
+package com.private_lbs.taskmaster.member.domain;
 
 import jakarta.persistence.*;
 import lombok.*;

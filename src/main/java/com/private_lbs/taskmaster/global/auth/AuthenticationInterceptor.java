@@ -1,6 +1,6 @@
 package com.private_lbs.taskmaster.global.auth;
 
-import com.private_lbs.taskmaster.member.entity.Role;
+import com.private_lbs.taskmaster.member.domain.Role;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;

@@ -1,4 +1,4 @@
-package com.private_lbs.taskmaster.S3.Model;
+package com.private_lbs.taskmaster.S3.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

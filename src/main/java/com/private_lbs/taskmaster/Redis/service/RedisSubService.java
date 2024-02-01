@@ -1,7 +1,7 @@
-package com.private_lbs.taskmaster.Redis.Service;
+package com.private_lbs.taskmaster.Redis.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.private_lbs.taskmaster.Redis.Model.RedisSubData;
+import com.private_lbs.taskmaster.Redis.domain.RedisSubData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.connection.Message;
 import org.springframework.data.redis.connection.MessageListener;

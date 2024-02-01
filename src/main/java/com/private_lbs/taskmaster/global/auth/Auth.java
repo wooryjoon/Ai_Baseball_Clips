@@ -1,6 +1,6 @@
 package com.private_lbs.taskmaster.global.auth;
 
-import com.private_lbs.taskmaster.member.entity.Role;
+import com.private_lbs.taskmaster.member.domain.Role;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

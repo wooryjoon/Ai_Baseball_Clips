@@ -1,4 +1,4 @@
-package com.private_lbs.taskmaster.Redis.Model;
+package com.private_lbs.taskmaster.Redis.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

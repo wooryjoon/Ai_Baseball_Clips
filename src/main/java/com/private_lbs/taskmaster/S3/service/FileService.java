@@ -1,4 +1,4 @@
-package com.private_lbs.taskmaster.S3.Service;
+package com.private_lbs.taskmaster.S3.service;
 
 import com.amazonaws.HttpMethod;
 import com.amazonaws.services.s3.AmazonS3Client;

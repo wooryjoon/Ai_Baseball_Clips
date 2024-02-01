@@ -1,7 +1,7 @@
-package com.private_lbs.taskmaster.member.repository;
+package com.private_lbs.taskmaster.member.domain.repository;
 
-import com.private_lbs.taskmaster.member.entity.Member;
-import com.private_lbs.taskmaster.member.entity.RefreshToken;
+import com.private_lbs.taskmaster.member.domain.Member;
+import com.private_lbs.taskmaster.member.domain.RefreshToken;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;

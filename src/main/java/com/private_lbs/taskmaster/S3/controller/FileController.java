@@ -1,11 +1,11 @@
-package com.private_lbs.taskmaster.S3.Controller;
+package com.private_lbs.taskmaster.S3.controller;
 
-import com.private_lbs.taskmaster.Redis.Model.RedisPubData;
-import com.private_lbs.taskmaster.Redis.Service.RedisPubService;
-import com.private_lbs.taskmaster.S3.Model.S3EventNotification;
-import com.private_lbs.taskmaster.S3.Model.UserData;
-import com.private_lbs.taskmaster.S3.Service.FileService;
-import com.private_lbs.taskmaster.S3.Service.UserDataService;
+import com.private_lbs.taskmaster.Redis.domain.RedisPubData;
+import com.private_lbs.taskmaster.Redis.service.RedisPubService;
+import com.private_lbs.taskmaster.S3.domain.S3EventNotification;
+import com.private_lbs.taskmaster.S3.domain.UserData;
+import com.private_lbs.taskmaster.S3.service.FileService;
+import com.private_lbs.taskmaster.S3.service.UserDataService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
