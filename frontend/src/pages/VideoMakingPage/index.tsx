@@ -2,7 +2,7 @@ import Header from '@/components/Header';
 import MakeVideo from './MakeVideo';
 import './Video.scss';
 
-export default function Video() {
+export default function MakingVideo() {
     return (
         <div>
             <Header />
