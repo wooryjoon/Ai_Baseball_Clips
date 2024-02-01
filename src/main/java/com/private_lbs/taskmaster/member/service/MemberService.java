@@ -1,11 +1,13 @@
 package com.private_lbs.taskmaster.member.service;
 
-import com.private_lbs.taskmaster.global.response.MemberResponse;
+import com.private_lbs.taskmaster.global.auth.Authentication;
+import com.private_lbs.taskmaster.global.auth.AuthenticationContextHolder;
 import com.private_lbs.taskmaster.global.util.JWTUtil;
 import com.private_lbs.taskmaster.member.data.dto.request.JoinMemberRequest;
 import com.private_lbs.taskmaster.member.data.dto.request.LoginRequest;
 import com.private_lbs.taskmaster.member.data.dto.request.MemberLogoutRequest;
 import com.private_lbs.taskmaster.member.data.dto.response.MemberLoginResponse;
+import com.private_lbs.taskmaster.member.data.dto.response.MemberResponse;
 import com.private_lbs.taskmaster.member.data.vo.JwtToken;
 import com.private_lbs.taskmaster.member.entity.Member;
 import com.private_lbs.taskmaster.member.entity.RefreshToken;
@@ -61,7 +63,7 @@ public class MemberService {
             throw new MemberException(MemberErrorCode.LOGIN_FAILED);
         }
 
-        JwtToken token = jwtUtil.createToken(member.getEmail());
+        JwtToken token = jwtUtil.createToken(member);
         saveRefreshToken(member, token.getRefreshToken());
 
         return MemberLoginResponse.of(member, token);
@@ -85,5 +87,16 @@ public class MemberService {
                 .orElseThrow(() -> new MemberException(MemberErrorCode.MEMBER_DOES_NOT_EXISTS));
         // delete 예외처리 X
         memberRepository.deleteRefreshToken(member);
+    }
+
+    public Member getMember(long userId) {
+        return memberRepository.findById(userId)
+                .orElseThrow(() -> new MemberException(MemberErrorCode.MEMBER_DOES_NOT_EXISTS));
+    }
+
+    public Member getCurrentMember() {
+        Authentication authentication = AuthenticationContextHolder.getAuthentication();
+        long userId = authentication.getUserId();
+        return getMember(userId);
     }
 }

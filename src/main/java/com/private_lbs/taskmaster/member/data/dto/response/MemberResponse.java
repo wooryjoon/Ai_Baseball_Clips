@@ -1,4 +1,4 @@
-package com.private_lbs.taskmaster.global.response;
+package com.private_lbs.taskmaster.member.data.dto.response;
 
 import com.private_lbs.taskmaster.member.entity.Member;
 import lombok.AllArgsConstructor;
