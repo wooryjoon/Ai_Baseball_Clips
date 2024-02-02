@@ -13,6 +13,7 @@ const requestLogin = async (userData: LoginFormValues) => {
         addAxiosInterceptor(instance);
         sessionStorage.setItem('accessToken', response.data.accessToken);
         sessionStorage.setItem('refreshToken', response.data.refreshToken);
+        console.log('로그인 시도중');
     } catch (error) {
         if (isAxiosError<FailResponse>(error)) {
             alert(error.response?.data.message);
