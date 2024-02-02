@@ -1,23 +1,25 @@
 import { forwardRef } from 'react';
 import Video from './Video';
 import Dialog from '../Dialog';
+import { Clip } from '@/pages/VideoResultPage/type';
 
-type VideoModalProps = {
-    url: string;
+type VideoModal = {
+    clip: Clip;
     isReadyToLoadVideo: boolean;
     onClick: () => void;
 };
 
-const VideoModal = forwardRef<HTMLDialogElement, VideoModalProps>(
-    ({ url, isReadyToLoadVideo, onClick }, ref) => {
+const VideoModal = forwardRef<HTMLDialogElement, VideoModal>(
+    ({ clip, isReadyToLoadVideo, onClick }: VideoModal, ref) => {
         return (
             <Dialog onClick={onClick} ref={ref}>
                 {isReadyToLoadVideo && (
                     <div className="video-container">
                         <div className="videoModal-title">영상 제목</div>
                         <Video
-                            poster="https://source.unsplash.com/random/?programming"
-                            src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+                            poster={clip.poster}
+                            src={clip.url}
+                            title={clip.title}
                             source_type="mp4"
                         />
                     </div>
