@@ -1,8 +1,8 @@
 package com.private_lbs.taskmaster.global.util;
 
-import com.private_lbs.taskmaster.member.data.vo.JwtToken;
 import com.private_lbs.taskmaster.member.domain.Member;
-import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
@@ -39,36 +39,45 @@ public class JWTUtil {
         return key;
     }
 
-    public JwtToken createToken(Member member) {
-        return JwtToken.of(createAccessToken(member.getId()), createRefreshToken(member.getId()));
-    }
+    public String createAccessToken(Member member) {
+        Long memberId = member.getId();
 
-    public String createAccessToken(Long id) {
-        return create(id, accessTokenExpireTime);
-    }
+        Date now = new Date();
+        Date validity = new Date(now.getTime() + accessTokenExpireTime);
 
-    public String createRefreshToken(Long id) {
-        return create(id, refreshTokenExpireTime);
-    }
-
-
-    //  Token 발급
-    //  key : Claim에 셋팅될 key 값
-    //	value : Claim에 셋팅 될 data 값
-    //	subject : payload에 sub의 value로 들어갈 subject값
-    //	expire : 토큰 유효기간 설정을 위한 값
-    //	jwt 토큰의 구성 : header + payload + signature
-    private String create(Long id, long expireTime) {
-        Claims claims = Jwts.claims()
-                .setSubject(id.toString()) // 토큰 제목 설정 ex) access-token, refresh-token
-                .setIssuedAt(new Date()) // 생성일 설정
-                .setExpiration(new Date(System.currentTimeMillis() + expireTime)); // 만료일 설정 (유효 기간)
-
-        String jwt = Jwts.builder()
-                .setHeaderParam("type", "JWT").setClaims(claims)
-                .signWith(SignatureAlgorithm.HS256, this.generateKey())
+        return Jwts.builder()
+                .setSubject(memberId.toString())
+                .setIssuedAt(now)
+                .setExpiration(validity)
+                .signWith(SignatureAlgorithm.HS256, salt)
                 .compact();
+    }
 
-        return jwt;
+    public String createRefreshToken(String payload) {
+
+        Date now = new Date();
+        Date validity = new Date(now.getTime() + refreshTokenExpireTime);
+
+        return Jwts.builder()
+                .setSubject(payload)
+                .setIssuedAt(now)
+                .setExpiration(validity)
+                .signWith(SignatureAlgorithm.HS256, salt)
+                .compact();
+    }
+
+    public String getPayload(String token) {
+        try {
+            return Jwts.parser()
+                    .setSigningKey(salt)
+                    .parseClaimsJws(token)
+                    .getBody()
+                    .getSubject();
+        } catch (ExpiredJwtException e) {
+            return e.getClaims()
+                    .getSubject();
+        } catch (JwtException e) {
+            throw new IllegalArgumentException("Invalid token");
+        }
     }
 }

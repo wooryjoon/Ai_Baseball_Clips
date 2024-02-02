@@ -4,7 +4,9 @@ import com.private_lbs.taskmaster.global.auth.Auth;
 import com.private_lbs.taskmaster.member.data.dto.request.JoinMemberRequest;
 import com.private_lbs.taskmaster.member.data.dto.request.LoginRequest;
 import com.private_lbs.taskmaster.member.data.dto.request.MemberLogoutRequest;
+import com.private_lbs.taskmaster.member.data.dto.request.TokenRefreshRequest;
 import com.private_lbs.taskmaster.member.data.dto.response.MemberLoginResponse;
+import com.private_lbs.taskmaster.member.data.dto.response.TokenRefreshResponse;
 import com.private_lbs.taskmaster.member.domain.Role;
 import com.private_lbs.taskmaster.member.service.MemberService;
 import jakarta.validation.Valid;
@@ -45,23 +47,9 @@ public class MemberController {
         return ResponseEntity.ok().build();
     }
 
-    // Access 토큰 재발급
-//    @PostMapping("/refresh")
-//    public ResponseEntity<?> getTokenInfo(@PathVariable Long memberId, HttpServletRequest request) {
-//
-//        String refreshToken = request.getHeader("refresh-token");
-//        Member member = memberService.getMemberOrThrow(memberId);
-//
-//        if (jwtUtil.checkToken(refreshToken))
-//
-//        if (memberService.isRefreshToken(member, refreshToken)) {
-//
-//            String accessToken = jwtUtil.createAccessToken(member.getEmail());
-//            Map<String, String> data = new HashMap<>();
-//            data.put("access-token", accessToken);
-//            return BaseResponse.okWithData(HttpStatus.CREATED, "정상적으로 Access Token 재발급", data);
-//        }
-//    }
-//        return BaseResponse.okWithData(HttpStatus.CREATED, "정상적으로 Access Token 재발급", "good");
-//    }
+
+    @PostMapping("/refresh")
+    public ResponseEntity<TokenRefreshResponse> refresh(@RequestBody TokenRefreshRequest request) {
+        return ResponseEntity.ok().body(memberService.refresh(request));
+    }
 }
