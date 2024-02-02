@@ -10,13 +10,11 @@ import com.private_lbs.taskmaster.member.data.dto.request.LoginRequest;
 import com.private_lbs.taskmaster.member.data.dto.request.MemberLogoutRequest;
 import com.private_lbs.taskmaster.member.data.dto.request.TokenRefreshRequest;
 import com.private_lbs.taskmaster.member.data.dto.response.MemberLoginResponse;
-import com.private_lbs.taskmaster.member.data.dto.response.MemberResponse;
 import com.private_lbs.taskmaster.member.data.dto.response.TokenRefreshResponse;
 import com.private_lbs.taskmaster.member.domain.Member;
 import com.private_lbs.taskmaster.member.domain.repository.MemberRepository;
 import com.private_lbs.taskmaster.member.exception.MemberErrorCode;
 import com.private_lbs.taskmaster.member.exception.MemberException;
-import io.jsonwebtoken.JwtException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
@@ -34,24 +32,17 @@ public class MemberService {
 
 
     @Transactional
-    public MemberResponse join(JoinMemberRequest joinMemberRequest) {
+    public void join(JoinMemberRequest joinMemberRequest) {
         Member member = joinMemberRequest.toMember();
         checkEmailExists(member.getEmail());
 
         // password 암호화 작업 추가
 
         memberRepository.save(member);
-        return MemberResponse.toResponse(member);
     }
 
     public void checkEmailExists(String email) {
         memberRepository.findByEmail(email).ifPresent(member -> {
-            throw new MemberException(MemberErrorCode.EMAIL_ALREADY_EXISTS);
-        });
-    }
-
-    public void checkIdExists(Long id) {
-        memberRepository.findById(id).ifPresent(member -> {
             throw new MemberException(MemberErrorCode.EMAIL_ALREADY_EXISTS);
         });
     }
@@ -107,7 +98,6 @@ public class MemberService {
         Member member = memberRepository.findById(requestMember.getId())
                 .orElseThrow(() -> new MemberException(MemberErrorCode.MEMBER_DOES_NOT_EXISTS));
         // delete 예외처리 X
-        memberRepository.deleteRefreshToken(member);
     }
 
     public Member getMember(long userId) {
