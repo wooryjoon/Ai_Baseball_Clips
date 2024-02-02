@@ -8,7 +8,7 @@ const clipData = Array.from(Array(1000).keys()).map(
             (id): Clip => ({
                 id,
                 title: '영상' + id,
-                url: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+                url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
                 poster: 'https://source.unsplash.com/random/?programming',
             })
         ),

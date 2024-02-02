@@ -26,7 +26,6 @@ export default function PlayerHighlights() {
     useEffect(() => {
         const handleScroll = () => {
             const { scrollTop, offsetHeight } = document.documentElement;
-            console.log(123);
             if (window.innerHeight + scrollTop >= offsetHeight) {
                 setFetching(true);
             }
