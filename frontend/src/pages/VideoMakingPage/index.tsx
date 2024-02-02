@@ -5,7 +5,6 @@ import './Video.scss';
 export default function MakingVideo() {
     return (
         <div>
-            <Header />
             <div id="animation-box"></div>
             <MakeVideo />
         </div>
