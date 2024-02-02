@@ -76,10 +76,17 @@ const UploadVideo = () => {
             <Header/>
             <div id="upload-video">
                 <p className="description"> 편집을 원하는 동영상을 첨부해주세요. </p>
-                {inputFile && <video src={inputFile?.url} controls width="350px" />}
-                <input type="file" onChange={onChangeFile}></input>
-                <Button styleType="previous" onClick={() => navigate(-1)}>이전으로</Button>
-                <Link to="/percentage" onClick={nextHandler}><Button styleType="uploadvideo" onClick={inputFile && uploadFile}> 완료</Button></Link>
+                <div id="input-video-box">
+                    {inputFile && <video src={inputFile?.url} controls width="350px" />}
+                </div>
+                <div>
+                    <label className="input-tag-label" htmlFor="input-tag">파일 선택</label>
+                    <input id="input-tag" type="file" onChange={onChangeFile} style={{display: "none"}}></input>
+                </div>
+                <div className="buttons">
+                    <Button styleType="previous" onClick={() => navigate(-1)}>이전으로</Button>
+                    <Link to="/percentage" onClick={nextHandler}><Button styleType="uploadvideo" onClick={inputFile && uploadFile}>다음으로</Button></Link>
+                </div>
             </div>
         </div>
     );

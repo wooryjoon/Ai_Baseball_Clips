@@ -1,4 +1,3 @@
-import Header from '@/components/Header';
 import './VideoResultPage.scss';
 import { Link, Outlet } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
@@ -9,7 +8,6 @@ export default function VideoResultPage() {
 
     return (
         <section className="videoResult-container">
-            <Header />
             <nav className="video-navBar">
                 <Link
                     to="./players"

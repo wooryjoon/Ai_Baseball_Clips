@@ -10,6 +10,8 @@ import Percentage from './pages/VideoMakingPage/Percentage';
 import InningsHighlights from './pages/VideoResultPage/InningsHighlights';
 import PlayerHighlights from './pages/VideoResultPage/PlayerHighLights';
 import initMockAPI from './mock';
+import MyPage from './pages/MyPage';
+import MainPage from './pages/MainPage';
 
 initMockAPI();
 
@@ -24,14 +26,17 @@ function App() {
                         <Route path="/" element={<LandingPage />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/signup" element={<SignUp />} />
-                        <Route path="/makingvideo" element={<MakingVideo />} />
+                        <Route path="/main" element={<MainPage/>}>
+                            <Route path="makingvideo" element={<MakingVideo />} />
+                            <Route path="mypage" element={<MyPage/>}/>
+                            <Route path="result" element={<VideoResultPage />}>
+                                <Route path="players" element={<PlayerHighlights />} />
+                                <Route path="innings" element={<InningsHighlights />} />
+                                <Route path="teams" element={null} />
+                            </Route>
+                        </Route>
                         <Route path="/uploadvideo" element={<UploadVideo />} />
                         <Route path="/percentage" element={<Percentage />} />
-                        <Route path="/result" element={<VideoResultPage />}>
-                            <Route path="players" element={<PlayerHighlights />} />
-                            <Route path="innings" element={<InningsHighlights />} />
-                            <Route path="teams" element={null} />
-                        </Route>
                     </Routes>
                 </BrowserRouter>
             </section>
