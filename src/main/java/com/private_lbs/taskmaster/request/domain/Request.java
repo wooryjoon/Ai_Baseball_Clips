@@ -5,13 +5,17 @@ import com.private_lbs.taskmaster.member.domain.Member;
 import com.private_lbs.taskmaster.player.domain.Player;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 @Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Request extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,4 +33,16 @@ public class Request extends BaseEntity {
     private String url;
 
     private String presignedUrl;
+
+    @Builder
+    public Request(Member member, String url) {
+        addRelatedMember(member);
+        this.url = url;
+    }
+
+    private void addRelatedMember(Member member) {
+        this.member = member;
+        member.getRequests().add(this);
+    }
+
 }

@@ -33,4 +33,14 @@ public class Player extends BaseEntity {
     @Column(length = 50)
     private String name;
 
+    public Player(Request request, String name) {
+        addRelatedRequest(request);
+        this.name = name;
+    }
+
+    private void addRelatedRequest(Request request) {
+        this.request = request;
+        request.getPlayers().add(this);
+    }
+
 }
