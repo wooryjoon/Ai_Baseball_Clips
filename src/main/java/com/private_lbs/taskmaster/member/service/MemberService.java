@@ -2,29 +2,34 @@ package com.private_lbs.taskmaster.member.service;
 
 import com.private_lbs.taskmaster.global.auth.Authentication;
 import com.private_lbs.taskmaster.global.auth.AuthenticationContextHolder;
+import com.private_lbs.taskmaster.global.auth.exception.AuthenticationErrorCode;
+import com.private_lbs.taskmaster.global.auth.exception.AuthenticationException;
 import com.private_lbs.taskmaster.global.util.JWTUtil;
 import com.private_lbs.taskmaster.member.data.dto.request.JoinMemberRequest;
 import com.private_lbs.taskmaster.member.data.dto.request.LoginRequest;
 import com.private_lbs.taskmaster.member.data.dto.request.MemberLogoutRequest;
+import com.private_lbs.taskmaster.member.data.dto.request.TokenRefreshRequest;
 import com.private_lbs.taskmaster.member.data.dto.response.MemberLoginResponse;
 import com.private_lbs.taskmaster.member.data.dto.response.MemberResponse;
-import com.private_lbs.taskmaster.member.data.vo.JwtToken;
+import com.private_lbs.taskmaster.member.data.dto.response.TokenRefreshResponse;
 import com.private_lbs.taskmaster.member.domain.Member;
-import com.private_lbs.taskmaster.member.domain.RefreshToken;
+import com.private_lbs.taskmaster.member.domain.repository.MemberRepository;
 import com.private_lbs.taskmaster.member.exception.MemberErrorCode;
 import com.private_lbs.taskmaster.member.exception.MemberException;
-import com.private_lbs.taskmaster.member.domain.repository.MemberRepository;
+import io.jsonwebtoken.JwtException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 public class MemberService {
 
     private final MemberRepository memberRepository;
+    private final StringRedisTemplate redisTemplate;
     private final JWTUtil jwtUtil;
 
 
@@ -63,20 +68,36 @@ public class MemberService {
             throw new MemberException(MemberErrorCode.LOGIN_FAILED);
         }
 
-        JwtToken token = jwtUtil.createToken(member);
-        saveRefreshToken(member, token.getRefreshToken());
+        String accessToken = jwtUtil.createAccessToken(member);
 
-        return MemberLoginResponse.of(member, token);
+        UUID uuid = UUID.randomUUID();
+        String refreshToken = jwtUtil.createRefreshToken(uuid.toString());
+
+        redisTemplate.opsForValue()
+                .set(uuid.toString(), refreshToken);
+
+        return MemberLoginResponse.of(member, accessToken, refreshToken);
     }
 
 
-    public void saveRefreshToken(Member member, String refreshToken) {
-        memberRepository.saveRefreshToken(member, refreshToken);
-    }
+    public TokenRefreshResponse refresh(TokenRefreshRequest request) {
+        String refreshTokenId = jwtUtil.getPayload(request.getRefreshToken());
 
-    public boolean isRefreshToken(Member member, String refreshToken) {
-        Optional<RefreshToken> findRefreshToken = memberRepository.getRefreshToken(member);
-        return findRefreshToken.map(token -> token.getRefreshToken().equals(refreshToken)).orElse(false);
+        if (redisTemplate.opsForValue()
+                .get(refreshTokenId) == null) {
+            throw new AuthenticationException(AuthenticationErrorCode.TOKEN_IS_NOT_VALID);
+        }
+
+        long tokenUserId = Long.parseLong(jwtUtil.getPayload(request.getAccessToken()));
+
+        Member member = memberRepository.findById(tokenUserId)
+                .orElseThrow(() -> new MemberException(MemberErrorCode.MEMBER_DOES_NOT_EXISTS));
+
+        String accessToken = jwtUtil.createAccessToken(member);
+
+        return TokenRefreshResponse.builder()
+                .accessToken(accessToken)
+                .build();
     }
 
     @Transactional
