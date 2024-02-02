@@ -1,46 +1,15 @@
 import './VideoResultPage.scss';
-import { Link, Outlet } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
-import ColorPaltte from '@/styles/ColorPalette';
+import { Outlet } from 'react-router-dom';
+
 import Header from '@/components/Header';
+import VideoNavBar from './VideoNavBar';
 
 export default function VideoResultPage() {
-    const location = useLocation();
-    const current_endUrl = location.pathname.split('/').slice(-1)[0];
-
     return (
         <>
             <Header />
-
             <section className="videoResult-container">
-                <nav className="video-navBar">
-                    <Link
-                        to="./players"
-                        style={{
-                            color:
-                                current_endUrl === 'players' ? ColorPaltte.$kbo_darkblue : 'gray',
-                        }}
-                    >
-                        선수별
-                    </Link>
-                    <Link
-                        to="./innings"
-                        style={{
-                            color:
-                                current_endUrl === 'innings' ? ColorPaltte.$kbo_darkblue : 'gray',
-                        }}
-                    >
-                        회차별
-                    </Link>
-                    <Link
-                        to="./teams"
-                        style={{
-                            color: current_endUrl === 'teams' ? ColorPaltte.$kbo_darkblue : 'gray',
-                        }}
-                    >
-                        구단별
-                    </Link>
-                </nav>
+                <VideoNavBar />
                 <section className="highlight-container">
                     <Outlet></Outlet>
                 </section>

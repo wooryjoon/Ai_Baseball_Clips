@@ -3,7 +3,7 @@ type Props = {
 };
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import '../Header/Header.scss';
+import './Header.scss';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import openDialog from '@/utils/openDialog';
 
@@ -11,7 +11,7 @@ export default function ProfileDialog({ dialogRef }: Props) {
     return (
         <dialog className="profile-dialog" ref={dialogRef}>
             <div className="dialog-topbar">
-                s<p>내 정보</p>
+                <p>내 정보</p>
                 <FontAwesomeIcon
                     icon={faXmark}
                     className="profile-xmark"
