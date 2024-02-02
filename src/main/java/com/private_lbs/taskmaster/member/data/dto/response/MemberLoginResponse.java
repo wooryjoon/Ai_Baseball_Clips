@@ -1,6 +1,5 @@
 package com.private_lbs.taskmaster.member.data.dto.response;
 
-import com.private_lbs.taskmaster.member.data.vo.JwtToken;
 import com.private_lbs.taskmaster.member.domain.Member;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -15,14 +14,14 @@ public class MemberLoginResponse {
     private String accessToken;
     private String refreshToken;
 
-    private MemberLoginResponse(Member member, JwtToken jwtToken) {
+    private MemberLoginResponse(Member member, String accessToken, String refreshToken) {
         this.id = member.getId();
         this.email = member.getEmail();
-        this.accessToken = jwtToken.getAccessToken();
-        this.refreshToken = jwtToken.getRefreshToken();
+        this.accessToken = accessToken;
+        this.refreshToken = refreshToken;
     }
 
-    public static MemberLoginResponse of(Member member, JwtToken jwtToken) {
-        return new MemberLoginResponse(member, jwtToken);
+    public static MemberLoginResponse of(Member member, String accessToken, String refreshToken) {
+        return new MemberLoginResponse(member, accessToken, refreshToken);
     }
 }
