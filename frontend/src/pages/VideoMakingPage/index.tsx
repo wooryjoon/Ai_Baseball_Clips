@@ -1,4 +1,3 @@
-import Header from '@/components/Header';
 import MakeVideo from './MakeVideo';
 import './Video.scss';
 

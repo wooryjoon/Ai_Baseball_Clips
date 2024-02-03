@@ -6,7 +6,6 @@ import MakingVideo from './pages/VideoMakingPage';
 import Login from './pages/Login';
 import VideoResultPage from './pages/VideoResultPage';
 import UploadVideo from './pages/VideoMakingPage/UploadVideo';
-import Percentage from './pages/VideoMakingPage/Percentage';
 import InningsHighlights from './pages/VideoResultPage/InningsHighlights';
 import PlayerHighlights from './pages/VideoResultPage/PlayerHighLights';
 import initMockAPI from './mock';
@@ -36,7 +35,6 @@ function App() {
                             </Route>
                         </Route>
                         <Route path="/uploadvideo" element={<UploadVideo />} />
-                        <Route path="/percentage" element={<Percentage />} />
                     </Routes>
                 </BrowserRouter>
             </section>
