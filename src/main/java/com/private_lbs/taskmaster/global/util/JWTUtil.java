@@ -49,7 +49,7 @@ public class JWTUtil {
                 .setSubject(memberId.toString())
                 .setIssuedAt(now)
                 .setExpiration(validity)
-                .signWith(SignatureAlgorithm.HS256, salt)
+                .signWith(SignatureAlgorithm.HS256, generateKey())
                 .compact();
     }
 
@@ -62,7 +62,7 @@ public class JWTUtil {
                 .setSubject(payload)
                 .setIssuedAt(now)
                 .setExpiration(validity)
-                .signWith(SignatureAlgorithm.HS256, salt)
+                .signWith(SignatureAlgorithm.HS256, generateKey())
                 .compact();
     }
 

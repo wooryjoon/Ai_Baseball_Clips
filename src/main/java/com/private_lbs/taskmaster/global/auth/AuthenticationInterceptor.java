@@ -1,5 +1,7 @@
 package com.private_lbs.taskmaster.global.auth;
 
+import com.private_lbs.taskmaster.global.auth.exception.AuthenticationErrorCode;
+import com.private_lbs.taskmaster.global.auth.exception.AuthenticationException;
 import com.private_lbs.taskmaster.member.domain.Role;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -29,16 +31,11 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
             return true;
         }
 
-        // 인가 가능 여부 체크
-//        Authentication authentication = AuthenticationContextHolder.getAuthentication();
-//        Role clientRole = authentication.getRole();
-//        Role handlerRole = getMethodRole(handlerMethod);
-
-//        if (!clientRole.hasAuthority(handlerRole)) {
-//            throw new AuthenticationException(AuthenticationError.TOKEN_DIE);
-//        }
-//        AuthenticationContextHolder.setAuthentication(authentication);
-
+        Authentication authentication = AuthenticationContextHolder.getAuthentication();
+        long userId = authentication.getUserId();
+        if (userId == -1) {
+            throw new AuthenticationException(AuthenticationErrorCode.TOKEN_IS_NOT_VALID);
+        }
         return true;
     }
 
