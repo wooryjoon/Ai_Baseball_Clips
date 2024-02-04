@@ -1,22 +1,26 @@
 import Button from '@/components/Button';
 import TextField from '@/components/TextField';
-import { emailCheck, isValidUserInfo, passwordCheck } from '@/utils/signUpValidCheck';
+import {
+    emailCheck,
+    isValidUserInfo,
+    passwordCheck,
+    onClickEmailCheckHandler,
+} from '@/utils/signUpValidCheck';
 import NavigateMessage from '@/components/NavigateMessage';
 import useSignUpInput from '@/hooks/useSignUpInput';
-import { requestEmailCheck, requestSignUp } from '@/api/SignUp';
-//TODO 버튼 클릭 시 axios.POST요청
+import useSignUp from '@/hooks/useSignUp';
+import { useNavigate } from 'react-router-dom';
+
 export default function SignUpForm() {
     const { signUpFormValues, handleSignUpFormValues } = useSignUpInput({
         email: '',
         password: '',
     });
+    const navigate = useNavigate();
 
-    const onClickEmailCheckHandler = () => {
-        requestEmailCheck(signUpFormValues.email);
-    };
     return (
         <div className="signupform-container">
-            <h1>Create account</h1>
+            <h1>회원가입</h1>
             <TextField
                 name={'email'}
                 label={'이메일'}
@@ -26,7 +30,12 @@ export default function SignUpForm() {
                 hasError={!emailCheck(signUpFormValues.email)}
             />
             <div className="emailCheck">
-                <Button styleType="emailCheck-button" onClick={onClickEmailCheckHandler}>
+                <Button
+                    styleType="emailCheck-button"
+                    onClick={() => {
+                        onClickEmailCheckHandler(signUpFormValues);
+                    }}
+                >
                     이메일 중복 검사
                 </Button>
             </div>
@@ -42,7 +51,7 @@ export default function SignUpForm() {
             <Button
                 styleType={'continue'}
                 onClick={() => {
-                    requestSignUp(signUpFormValues);
+                    useSignUp(signUpFormValues, navigate);
                 }}
                 disabled={!isValidUserInfo(signUpFormValues)}
             >
