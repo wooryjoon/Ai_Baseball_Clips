@@ -1,7 +1,7 @@
-package com.private_lbs.taskmaster.Redis.service;
+package com.private_lbs.taskmaster.redis.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.private_lbs.taskmaster.Redis.domain.RedisPubData;
+import com.private_lbs.taskmaster.redis.domain.RedisPubData;
 import org.springframework.data.redis.connection.Message;
 import org.springframework.data.redis.connection.MessageListener;
 import org.springframework.stereotype.Service;
@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 @Service
 public class RedisSubServiceTest implements MessageListener {
 
@@ -17,7 +18,7 @@ public class RedisSubServiceTest implements MessageListener {
     @Override
     public void onMessage(Message message, byte[] pattern) {
         try {
-            RedisPubData redispubdata = mapper.readValue(message.getBody(),RedisPubData.class);
+            RedisPubData redispubdata = mapper.readValue(message.getBody(), RedisPubData.class);
             messageList.add(message.toString());
             System.out.println(message.toString());
 
