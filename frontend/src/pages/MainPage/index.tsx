@@ -1,8 +1,4 @@
 import Header from '@/components/Header';
-<<<<<<< HEAD
-=======
-import { useLocation } from 'react-router-dom';
->>>>>>> 7f010a1b6bdcaec59f347eea67baff8b1b681f5e
 import './MainPage.scss';
 import { Link } from 'react-router-dom';
 import Button from '@/components/Button';
