@@ -18,7 +18,7 @@ export default function MainPage() {
                     <p>영상을 저장해보세요</p>
                 </div>
                 <img src="" alt="저장 이미지" className="image-box"></img>
-                <Link to="">
+                <Link to="/makingvideo">
                     <Button styleType="highlight"> 나만의 하이라이트 만들러 가기</Button>
                 </Link>
             </div>
