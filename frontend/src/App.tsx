@@ -5,12 +5,12 @@ import LandingPage from './pages/LandingPage';
 import MakingVideo from './pages/VideoMakingPage';
 import Login from './pages/Login';
 import VideoResultPage from './pages/VideoResultPage';
-import UploadVideo from './pages/VideoMakingPage/UploadVideo';
 import InningsHighlights from './pages/VideoResultPage/InningsHighlights';
 import PlayerHighlights from './pages/VideoResultPage/PlayerHighLights';
 import initMockAPI from './mock';
 import MyPage from './pages/MyPage';
 import MainPage from './pages/MainPage';
+import PrivateRoute from './route/PrivateRoute';
 
 initMockAPI();
 
@@ -25,16 +25,18 @@ function App() {
                         <Route path="/" element={<LandingPage />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/signup" element={<SignUp />} />
-                        <Route path="/main" element={<MainPage/>}>
-                            <Route path="makingvideo" element={<MakingVideo />} />
-                            <Route path="mypage" element={<MyPage/>}/>
-                            <Route path="result" element={<VideoResultPage />}>
+                        {/* 로그인 상태에서만 진입 가능한 페이지는 따로 라우팅 */}
+                        <Route element={<PrivateRoute />}>
+                            <Route path="/main" element={<MainPage />} />
+                            <Route path="/makingvideo" element={<MakingVideo />}></Route>
+                            <Route path="/mypage" element={<MyPage />} />
+                            <Route path="/result" element={<VideoResultPage />}>
+                                <Route index element={<PlayerHighlights />} />
                                 <Route path="players" element={<PlayerHighlights />} />
                                 <Route path="innings" element={<InningsHighlights />} />
                                 <Route path="teams" element={null} />
                             </Route>
                         </Route>
-                        <Route path="/uploadvideo" element={<UploadVideo />} />
                     </Routes>
                 </BrowserRouter>
             </section>

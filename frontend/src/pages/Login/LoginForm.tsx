@@ -4,9 +4,13 @@ import Button from '@/components/Button';
 import NavigateMessage from '@/components/NavigateMessage';
 import useLoginInput from '@/hooks/useLoginInput';
 import { emailCheck, passwordCheck } from '@/utils/signUpValidCheck';
-import { requestLogin } from '@/api/Login';
+import useLogin from '@/hooks/useLogin';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 export default function LoginForm() {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { loginFormValues, handleLoginFormValues } = useLoginInput({
         email: '',
         password: '',
@@ -14,7 +18,7 @@ export default function LoginForm() {
 
     return (
         <div className="loginform-container">
-            <h1>Login</h1>
+            <h1>로그인</h1>
             <TextField
                 name="email"
                 label="이메일"
@@ -35,7 +39,7 @@ export default function LoginForm() {
             <Button
                 styleType="login-form"
                 onClick={() => {
-                    requestLogin(loginFormValues);
+                    useLogin(loginFormValues, dispatch, navigate);
                 }}
             >
                 로그인

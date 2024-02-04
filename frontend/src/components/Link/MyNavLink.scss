@@ -1,0 +1,8 @@
+@import '../../styles/style.scss';
+.navlink-container a.active {
+    font-weight: 700;
+    color: aqua;
+}
+.video-navBar a.active {
+    color: $kbo_darkblue;
+}

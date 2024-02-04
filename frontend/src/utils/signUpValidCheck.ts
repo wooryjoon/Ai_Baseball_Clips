@@ -1,3 +1,4 @@
+import { requestEmailCheck } from '@/api/SignUp';
 import { SignUpFormValues } from '@/pages/SignUp/type';
 
 const passwordRegEx = /^[A-Za-z0-9]{8,20}$/;
@@ -13,4 +14,8 @@ const isValidUserInfo = (signUpFormValues: SignUpFormValues) => {
     const isValid = emailCheck(signUpFormValues.email) && passwordCheck(signUpFormValues.password);
     return isValid;
 };
-export { passwordCheck, emailCheck, isValidUserInfo };
+
+const onClickEmailCheckHandler = (userData: SignUpFormValues) => {
+    requestEmailCheck(userData.email);
+};
+export { passwordCheck, emailCheck, isValidUserInfo, onClickEmailCheckHandler };

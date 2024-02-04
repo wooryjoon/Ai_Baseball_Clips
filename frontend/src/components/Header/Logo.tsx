@@ -1,8 +1,10 @@
+import { Link } from 'react-router-dom';
+
 type Props = {};
 
 export default function Logo({}: Props) {
     return (
-        <div className="logo-container">
+        <Link to={'/main'} className="logo-container">
             <div>
                 <span className="upper">A</span>i
             </div>
@@ -12,6 +14,6 @@ export default function Logo({}: Props) {
             <div>
                 <span className="upper">C</span>lips
             </div>
-        </div>
+        </Link>
     );
 }

@@ -3,9 +3,10 @@ import './Video.scss';
 
 export default function MakingVideo() {
     return (
-        <div>
-            <div id="animation-box"></div>
+        <>
+            <Header />
+            <div id="animation-box">애니메이션 공간</div>
             <MakeVideo />
-        </div>
+        </>
     );
 }
