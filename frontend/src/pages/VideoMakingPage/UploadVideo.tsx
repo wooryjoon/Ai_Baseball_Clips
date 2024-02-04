@@ -7,7 +7,6 @@ import fileExtensionValid, { ALLOW_FILE_EXTENTION } from '@/utils/fileExtensionV
 
 const UploadVideo = () => {
     const [inputFile, setInputFile] = useState<FileInfoType>();
-    // const formData = new FormData();
 
     // Input Form 안의 값이 바뀔 때 일어나는 이벤트
     const onChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,7 +28,6 @@ const UploadVideo = () => {
 
             if (inputFile) {
                 console.log(inputFile.file.name);
-                // formData.append("video", inputFile.file);
             }
         } else {
             alert('파일이 선택되지 않았습니다.');
