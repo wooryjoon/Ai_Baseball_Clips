@@ -21,8 +21,8 @@ export default function createStadium(
             canvasWidth / 2,
             canvasHeight - 20,
             160,
-            1.245 * Math.PI,
-            1.755 * Math.PI,
+            1.27 * Math.PI,
+            1.725 * Math.PI,
             false
         );
         context.closePath();

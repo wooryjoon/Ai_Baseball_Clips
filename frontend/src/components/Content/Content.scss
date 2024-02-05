@@ -19,19 +19,31 @@ form {
     border-radius: 10px;
 }
 
+// VideoModal
 .video-container {
-    height: 100%;
-
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     .videoModal-title {
-        height: 10%;
-        font-size: 15px;
+        width: 100%;
+        height: 40px;
+        font-size: 18px;
         font-weight: 700;
-        padding: 5px;
+        padding: 10px;
+        color: white;
+        background-color: $kbo_darkblue;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 }
 // Video
 video {
-    width: 100%;
-    height: 90%;
+    width: 90%;
+    height: 200px;
+    padding: 10px 5px;
+    border-radius: 15px;
     object-fit: cover;
 }
