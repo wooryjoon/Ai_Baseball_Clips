@@ -58,6 +58,9 @@ dependencies {
 	implementation 'com.amazonaws:aws-java-sdk-core:1.12.641'
 	implementation 'com.amazonaws:aws-java-sdk-s3:1.12.641'
 	implementation 'com.amazonaws:jmespath-java:1.12.641'
+
+	// swagger
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2'
 }
 
 tasks.named('test') {
