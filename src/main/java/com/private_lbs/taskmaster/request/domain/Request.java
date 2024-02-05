@@ -14,8 +14,6 @@ import java.util.Optional;
 
 @Getter
 @Entity
-@Builder
-@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Request extends BaseEntity {
     @Id
@@ -27,7 +25,6 @@ public class Request extends BaseEntity {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @Builder.Default
     @OneToMany(mappedBy = "request", fetch = FetchType.LAZY)
     private List<Player> players = new ArrayList<>();
 
