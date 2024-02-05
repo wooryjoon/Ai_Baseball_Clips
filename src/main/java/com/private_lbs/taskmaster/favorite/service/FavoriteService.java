@@ -1,12 +1,9 @@
 package com.private_lbs.taskmaster.favorite.service;
 
-import com.private_lbs.taskmaster.favorite.data.dto.request.FavoriteCancelRequest;
 import com.private_lbs.taskmaster.favorite.data.dto.request.FavoriteRequest;
 import com.private_lbs.taskmaster.favorite.data.dto.response.ProcessedVideoFavorite;
 import com.private_lbs.taskmaster.favorite.domain.Favorite;
 import com.private_lbs.taskmaster.favorite.domain.repository.FavoriteRepository;
-import com.private_lbs.taskmaster.favorite.exception.FavoriteErrorCode;
-import com.private_lbs.taskmaster.favorite.exception.FavoriteException;
 import com.private_lbs.taskmaster.member.domain.Member;
 import com.private_lbs.taskmaster.member.service.MemberService;
 import com.private_lbs.taskmaster.processed_video.domain.ProcessedVideo;
@@ -29,32 +26,21 @@ public class FavoriteService {
     private final ProcessedVideoRepository processedVideoRepository;
 
     @Transactional
-    public void like(FavoriteRequest likeRequest) {
+    public void updateFavoriteStatus(FavoriteRequest favoriteRequest) {
 
         Member member = memberService.getCurrentMember();
 
-        ProcessedVideo processedVideo = processedVideoRepository.findById(likeRequest.getProcessedVideoId())
+        ProcessedVideo processedVideo = processedVideoRepository.findById(favoriteRequest.getProcessedVideoId())
                 .orElseThrow(() -> new ProcessedVideoException(ProcessedVideoErrorCode.PROCESSED_VIDEO_IS_NOT_FOUNT));
 
         Favorite favorite = new Favorite(member, processedVideo);
 
         if (isLike(favorite.getMember(), favorite.getProcessedVideo())) {
-            throw new FavoriteException(FavoriteErrorCode.IS_ALREADY_FAVORITE);
+            favorite.changeFavoriteStatus();
+        } else {
+            favorite.changeFavoriteStatus();
+            favoriteRepository.save(favorite);
         }
-
-        favoriteRepository.save(favorite);
-    }
-
-    @Transactional
-    public void dislike(FavoriteCancelRequest dislikeRequest) {
-        Member member = memberService.getCurrentMember();
-        ProcessedVideo processedVideo = processedVideoRepository.findById(dislikeRequest.getProcessedVideoId())
-                .orElseThrow(() -> new ProcessedVideoException(ProcessedVideoErrorCode.PROCESSED_VIDEO_IS_NOT_FOUNT));
-
-        Favorite favorite = favoriteRepository.findLikeByMemberAndProcessedVideo(member, processedVideo)
-                .orElseThrow(() -> new ProcessedVideoException(FavoriteErrorCode.IS_ALREADY_NOT_FAVORITE));
-
-        favoriteRepository.delete(favorite);
     }
 
     public List<ProcessedVideoFavorite> getLikeList() {

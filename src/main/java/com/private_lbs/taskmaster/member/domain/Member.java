@@ -10,10 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Builder
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
 public class Member extends BaseEntity {
 
     @Id
@@ -21,7 +19,6 @@ public class Member extends BaseEntity {
     @Column(name = "member_id", nullable = false)
     private Long id;
 
-    @Builder.Default
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
     private List<Request> requests = new ArrayList<>();
 
@@ -31,7 +28,6 @@ public class Member extends BaseEntity {
     @Column(name = "password")
     private String password;
 
-    @Builder.Default
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
     List<Favorite> favorites = new ArrayList<>();
 }

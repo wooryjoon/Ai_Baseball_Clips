@@ -39,4 +39,8 @@ public class Favorite extends BaseEntity {
     public void addMember(Member member) {
         member.getFavorites().add(this);
     }
+
+    public void changeFavoriteStatus() {
+        favorite = !favorite;
+    }
 }
