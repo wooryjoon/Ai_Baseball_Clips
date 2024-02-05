@@ -28,4 +28,17 @@ const overviewPlayData: any = Array.from(Array(8).keys()).map((id) => {
         },
     };
 });
-export { clipData, overviewPlayData };
+const overviewPlayData2: any = Array.from(Array(8).keys()).map((id) => {
+    return {
+        id,
+        player: '선수' + id,
+        position: pos[id],
+        clip: {
+            id,
+            title: '영상',
+            url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
+            poster: 'https://source.unsplash.com/random/?programming',
+        },
+    };
+});
+export { clipData, overviewPlayData, overviewPlayData2 };

@@ -104,7 +104,7 @@
     }
     position: absolute;
     width: 55px;
-    height: 55px;
+    height: 75px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -113,12 +113,16 @@
     background-color: white;
     font-size: 10px;
     font-weight: 700;
-    animation: ani 2s infinite alternate;
+    animation: ani 1s infinite alternate;
+    box-shadow: 4px 4px 5px gray;
+
+    span {
+        margin-top: 5px;
+    }
 }
 .playerCircle {
     width: 45px;
     height: 45px;
-    background-image: url('/src/assets/선수1.png');
     background-repeat: no-repeat;
     background-size: cover;
 }

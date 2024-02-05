@@ -1,14 +1,17 @@
 import VideoModal from '@/components/Content/VideoModal';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import positionLocaiton from '@/utils/positionLocation';
 import openModal from '@/utils/openModal';
 import closeModal from '@/utils/closeModal';
+import usePlayerPositionAnimate from '@/hooks/usePlayerPositionAnimate';
 
 interface PlayerCircle {
     data: any;
+    src: string;
 }
-export default function PlayerCircle({ data }: PlayerCircle) {
+export default function PlayerCircle({ data, src }: PlayerCircle) {
     const videoRef = useRef<HTMLDialogElement>(null);
+    const playerCircleRef = useRef<HTMLDivElement>(null);
     const [isReadyToLoadVideo, setIsReadyToLoadVideo] = useState(false);
     const onClickPlayerCircle = () => {
         if (isReadyToLoadVideo === false) openModal(videoRef);
@@ -16,20 +19,22 @@ export default function PlayerCircle({ data }: PlayerCircle) {
         setIsReadyToLoadVideo(!isReadyToLoadVideo);
     };
     const { position, clip }: any = data;
+    usePlayerPositionAnimate(playerCircleRef, position);
     return (
         <>
             <div
+                ref={playerCircleRef}
                 className="playerCircle-container"
                 style={{
-                    top: positionLocaiton[position].top + '%',
-                    left: positionLocaiton[position].left + '%',
+                    top: '40%',
+                    left: '44%',
                 }}
                 onClick={() => {
                     openModal(videoRef);
                     onClickPlayerCircle();
                 }}
             >
-                <div className="playerCircle"></div>
+                <img className="playerCircle" src={src}></img>
                 <span>이대호</span>
             </div>
             <VideoModal
