@@ -6,10 +6,7 @@ import com.private_lbs.taskmaster.player.domain.Player;
 import com.private_lbs.taskmaster.request.exception.RequestErrorCode;
 import com.private_lbs.taskmaster.request.exception.RequestException;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +14,8 @@ import java.util.Optional;
 
 @Getter
 @Entity
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Request extends BaseEntity {
     @Id
@@ -28,6 +27,7 @@ public class Request extends BaseEntity {
     @JoinColumn(name = "member_id")
     private Member member;
 
+    @Builder.Default
     @OneToMany(mappedBy = "request", fetch = FetchType.LAZY)
     private List<Player> players = new ArrayList<>();
 
@@ -49,13 +49,15 @@ public class Request extends BaseEntity {
 
     public void setUrl(String url) {
         Optional.ofNullable(this.url).ifPresent(value -> {
-            throw new RequestException(RequestErrorCode.ORIGIN_URL_ALREADY_ISSUED);});
+            throw new RequestException(RequestErrorCode.ORIGIN_URL_ALREADY_ISSUED);
+        });
         this.url = url;
     }
 
     public void setPresignedUrl(String presignedUrl) {
         Optional.ofNullable(this.presignedUrl).ifPresent(value -> {
-            throw new RequestException(RequestErrorCode.PRESIGNED_URL_ALREADY_ISSUED);});
+            throw new RequestException(RequestErrorCode.PRESIGNED_URL_ALREADY_ISSUED);
+        });
         this.presignedUrl = presignedUrl;
     }
 }

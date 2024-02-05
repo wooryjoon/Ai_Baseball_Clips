@@ -1,5 +1,6 @@
 package com.private_lbs.taskmaster.member.domain;
 
+import com.private_lbs.taskmaster.favorite.domain.Favorite;
 import com.private_lbs.taskmaster.request.domain.Request;
 import com.private_lbs.taskmaster.global.domain.BaseEntity;
 import jakarta.persistence.*;
@@ -20,6 +21,7 @@ public class Member extends BaseEntity {
     @Column(name = "member_id", nullable = false)
     private Long id;
 
+    @Builder.Default
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
     private List<Request> requests = new ArrayList<>();
 
@@ -29,4 +31,7 @@ public class Member extends BaseEntity {
     @Column(name = "password")
     private String password;
 
+    @Builder.Default
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
+    List<Favorite> favorites = new ArrayList<>();
 }
