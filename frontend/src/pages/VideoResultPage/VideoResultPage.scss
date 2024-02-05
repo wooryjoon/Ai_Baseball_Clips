@@ -1,11 +1,21 @@
 @import '../../styles/style.scss';
-
-//PlayerHighlights
+@keyframes blink-effect {
+    50% {
+        opacity: 50%;
+        text-shadow: 0 0 0;
+        box-shadow: 0 0 0 0;
+    }
+}
+//VideoResultPage
+.highlight-container {
+    width: 100%;
+}
 .videoResult-container {
     width: 100%;
-    height: 100%;
+    // height: 100%;
     background-color: $kbo_lightgray;
 }
+
 .video-navBar {
     width: 100%;
     height: 60px;
@@ -20,14 +30,13 @@
         font-weight: 700;
         color: gray;
     }
-}
-.highlight-container {
-    width: 100%;
-    height: 70%;
-    overflow-y: scroll;
+    position: sticky;
+    top: 50px;
+    z-index: 99;
+    border-bottom: 1px solid #f3f3f3;
 }
 
-// PlayerVideoCard
+//PlayerHighlights
 .player-video-card {
     width: 100%;
     margin: 10px 0;

@@ -13,6 +13,7 @@ export default function Content({ clip }: Content) {
     const [isReadyToLoadVideo, setIsReadyToLoadVideo] = useState(false);
 
     const onClickLoadVideoHandler = () => {
+        console.log(123);
         setIsReadyToLoadVideo(!isReadyToLoadVideo);
     };
     return (

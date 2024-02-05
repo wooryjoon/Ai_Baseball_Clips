@@ -14,4 +14,18 @@ const clipData = Array.from(Array(1000).keys()).map(
         ),
     })
 );
-export { clipData };
+const pos = ['1루수', '2루수', '3루수', '중견수', '좌익수', '우익수', '유격수', '포수'];
+const overviewPlayData: any = Array.from(Array(8).keys()).map((id) => {
+    return {
+        id,
+        player: '선수' + id,
+        position: pos[id],
+        clip: {
+            id,
+            title: '영상',
+            url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
+            poster: 'https://source.unsplash.com/random/?programming',
+        },
+    };
+});
+export { clipData, overviewPlayData };
