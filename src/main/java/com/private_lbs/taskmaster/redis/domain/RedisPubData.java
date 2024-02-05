@@ -1,7 +1,10 @@
-package com.private_lbs.taskmaster.Redis.domain;
+package com.private_lbs.taskmaster.redis.domain;
 
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter

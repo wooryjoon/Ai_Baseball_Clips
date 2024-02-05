@@ -1,7 +1,7 @@
-package com.private_lbs.taskmaster.Redis;
+package com.private_lbs.taskmaster.redis;
 
-import com.private_lbs.taskmaster.Redis.domain.RedisPubData;
-import com.private_lbs.taskmaster.Redis.service.RedisSubServiceTest;
+import com.private_lbs.taskmaster.redis.domain.RedisPubData;
+import com.private_lbs.taskmaster.redis.service.RedisSubService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -35,7 +35,7 @@ public class RedisConfig {
     // Redis 메시지 리스너 어댑터 설정
     @Bean
     MessageListenerAdapter messageListenerAdapter() {
-        return new MessageListenerAdapter(new RedisSubServiceTest());
+        return new MessageListenerAdapter(new RedisSubService());
     }
 
     // Redis 메시지 리스너 컨테이너 설정
