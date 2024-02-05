@@ -1,8 +1,9 @@
 package com.private_lbs.taskmaster.favorite.service;
 
 import com.private_lbs.taskmaster.favorite.data.dto.request.FavoriteRequest;
-import com.private_lbs.taskmaster.favorite.data.dto.response.ProcessedVideoFavorite;
+import com.private_lbs.taskmaster.favorite.data.dto.response.FavoriteProcessedVideo;
 import com.private_lbs.taskmaster.favorite.domain.Favorite;
+import com.private_lbs.taskmaster.favorite.domain.repository.FavoriteQueryRepository;
 import com.private_lbs.taskmaster.favorite.domain.repository.FavoriteRepository;
 import com.private_lbs.taskmaster.member.domain.Member;
 import com.private_lbs.taskmaster.member.service.MemberService;
@@ -14,7 +15,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -24,6 +24,7 @@ public class FavoriteService {
     private final MemberService memberService;
     private final FavoriteRepository favoriteRepository;
     private final ProcessedVideoRepository processedVideoRepository;
+    private final FavoriteQueryRepository favoriteQueryRepository;
 
     @Transactional
     public void updateFavoriteStatus(FavoriteRequest favoriteRequest) {
@@ -43,22 +44,9 @@ public class FavoriteService {
         }
     }
 
-    public List<ProcessedVideoFavorite> getLikeList() {
-
-        List<ProcessedVideoFavorite> processedVideoLikelist = new ArrayList<>();
-
+    public List<FavoriteProcessedVideo> getLikeList() {
         Member member = memberService.getCurrentMember();
-
-        List<Favorite> favorites = member.getFavorites();
-        for (Favorite favorite : favorites) {
-            ProcessedVideo processedVideo = favorite.getProcessedVideo();
-            processedVideoLikelist.add(ProcessedVideoFavorite.builder()
-                    .processedVideoUrl(processedVideo.getProcessedVideoUrl())
-                    .playerName(processedVideo.getPlayer().getName())
-                    .isLike(true)
-                    .build());
-        }
-        return processedVideoLikelist;
+        return favoriteQueryRepository.findVideoLinkAndPlayerNameAndFavoriteByUserId(member.getId());
     }
 
     public boolean isLike(Member member, ProcessedVideo processedVideo) {

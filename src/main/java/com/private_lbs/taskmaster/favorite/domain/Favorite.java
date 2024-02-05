@@ -27,9 +27,9 @@ public class Favorite extends BaseEntity {
     @JoinColumn(name = "processed_video_id")
     private ProcessedVideo processedVideo;
 
-    @Column(name = "favorite")
+    @Column(name = "is_favorite")
     @ColumnDefault("false")
-    private boolean favorite;
+    private boolean isFavorite;
 
     public Favorite(Member member, ProcessedVideo processedVideo) {
         addMember(member);
@@ -37,10 +37,11 @@ public class Favorite extends BaseEntity {
     }
 
     public void addMember(Member member) {
+        this.member = member;
         member.getFavorites().add(this);
     }
 
     public void changeFavoriteStatus() {
-        favorite = !favorite;
+        isFavorite = !isFavorite;
     }
 }

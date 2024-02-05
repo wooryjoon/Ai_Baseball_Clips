@@ -1,12 +1,12 @@
 package com.private_lbs.taskmaster.favorite.data.dto.response;
 
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-@Builder
 @Getter
-public class ProcessedVideoFavorite {
+@AllArgsConstructor
+public class FavoriteProcessedVideo {
     private String processedVideoUrl;
     private String playerName;
-    private boolean isLike;
+    private boolean favorite;
 }

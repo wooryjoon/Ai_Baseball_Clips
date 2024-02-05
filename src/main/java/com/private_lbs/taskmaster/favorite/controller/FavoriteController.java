@@ -1,7 +1,7 @@
 package com.private_lbs.taskmaster.favorite.controller;
 
 import com.private_lbs.taskmaster.favorite.data.dto.request.FavoriteRequest;
-import com.private_lbs.taskmaster.favorite.data.dto.response.ProcessedVideoFavorite;
+import com.private_lbs.taskmaster.favorite.data.dto.response.FavoriteProcessedVideo;
 import com.private_lbs.taskmaster.favorite.service.FavoriteService;
 import com.private_lbs.taskmaster.global.auth.Auth;
 import jakarta.validation.Valid;
@@ -29,7 +29,7 @@ public class FavoriteController {
 
     @Auth
     @GetMapping("/list")
-    public ResponseEntity<List<ProcessedVideoFavorite>> getLikeList() {
+    public ResponseEntity<List<FavoriteProcessedVideo>> getLikeList() {
         return ResponseEntity.ok().body(favoriteService.getLikeList());
     }
 
