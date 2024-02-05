@@ -11,6 +11,7 @@ import initMockAPI from './mock';
 import MyPage from './pages/MyPage';
 import MainPage from './pages/MainPage';
 import PrivateRoute from './route/PrivateRoute';
+import VideoResultOverview from './pages/VideoResultPage/VideoResultOverview/VideoResultOverview';
 
 initMockAPI();
 
@@ -31,7 +32,7 @@ function App() {
                             <Route path="/makingvideo" element={<MakingVideo />}></Route>
                             <Route path="/mypage" element={<MyPage />} />
                             <Route path="/result" element={<VideoResultPage />}>
-                                <Route index element={<PlayerHighlights />} />
+                                <Route index element={<VideoResultOverview />} />
                                 <Route path="players" element={<PlayerHighlights />} />
                                 <Route path="innings" element={<InningsHighlights />} />
                                 <Route path="teams" element={null} />

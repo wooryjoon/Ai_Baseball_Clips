@@ -1,12 +1,8 @@
-form {
-    position: absolute;
-    top: 3px;
-    right: 10px;
-}
 dialog {
     width: 90%;
     max-width: 360px;
-    height: 50%;
+    max-height: 500px;
+    // height: 300px;
     position: fixed;
     top: 0;
     bottom: 0;
