@@ -1,0 +1,36 @@
+@import '../../styles/style.scss';
+
+.myProfile {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid black;
+    display: flex;
+    .profile-img-container {
+        border: 1px solid black;
+        padding: 10px;
+        border-radius: 15px;
+        background-color: $kbo_darkblue;
+        margin-right: 15px;
+        .user {
+            font-size: 50px;
+            color: white;
+        }
+    }
+    .profile-name {
+        font-weight: 700;
+        font-size: 25px;
+    }
+    .profile-email {
+        color: gray;
+    }
+}
+.bookmarkList {
+    margin-top: 25px;
+    border: 1px solid black;
+    .bookmark-title {
+        font-weight: 500;
+        font-size: 20px;
+        padding: 10px;
+        border-bottom: 2px solid #f3f3f3;
+    }
+}
