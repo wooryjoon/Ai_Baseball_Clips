@@ -1,9 +1,16 @@
-import { useCallback, useRef, useEffect } from 'react';
+import { useCallback, useRef, useEffect, CSSProperties } from 'react';
+import { ScrollRestoration } from 'react-router-dom';
 
-const useScrollFadeIn = (direction = 'up', duration = 1, delay = 0) => {
-    const dom = useRef();
+interface ScrollFadeInProps {
+    direction?: 'up' | 'down' | 'left' | 'right';
+    duration?: number;
+    delay?: number;
+}
 
-    const handleDirection = (name: string) => {
+const useScrollFadeIn = ({ direction = 'up', duration = 1, delay = 0 }: ScrollFadeInProps = {}) => {
+    const dom = useRef<HTMLDivElement>(null);
+
+    const handleDirection = (name: string): string => {
         switch (name) {
             case 'up':
                 return 'translated3d(0, 50%, 0)';
@@ -14,12 +21,12 @@ const useScrollFadeIn = (direction = 'up', duration = 1, delay = 0) => {
             case 'right':
                 return 'translated3d(-50%, 0, 0)';
             default:
-                return;
+                return '';
         }
     };
 
     const handleScroll = useCallback(
-        ([entry]: any) => {
+        ([entry]: IntersectionObserverEntry[]) => {
             const { current } = dom;
 
             if (current && entry.isIntersecting) {
@@ -27,7 +34,7 @@ const useScrollFadeIn = (direction = 'up', duration = 1, delay = 0) => {
                 current.style.transitionDuration = `${duration}s`;
                 current.style.transitionTimingFunction = 'cubic-bezier(0, 0, 0.2, 1)';
                 current.style.transitionDelay = `${delay}s`;
-                current.style.opacity = 1;
+                current.style.opacity = '1';
                 current.style.transform = 'translated3d(0, 0, 0)';
             }
         },
@@ -35,7 +42,7 @@ const useScrollFadeIn = (direction = 'up', duration = 1, delay = 0) => {
     );
 
     useEffect(() => {
-        let observer: any;
+        let observer: IntersectionObserver;
         const { current } = dom;
 
         if (current) {
@@ -50,7 +57,7 @@ const useScrollFadeIn = (direction = 'up', duration = 1, delay = 0) => {
         style: {
             opacity: 0,
             transform: handleDirection(direction),
-        },
+        } as CSSProperties,
     };
 };
 
