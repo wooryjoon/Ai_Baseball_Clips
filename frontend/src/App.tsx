@@ -34,7 +34,7 @@ function App() {
                             <Route path="/makingvideo" element={<MakingVideo />}></Route>
                             <Route path="/mypage" element={<MyPage />} />
                             <Route path="/result" element={<VideoResultPage />}>
-                                <Route index element={<PlayerHighlights />} />
+                                <Route index element={<VideoResultOverview />} />
                                 <Route path="players" element={<PlayerHighlights />} />
                                 <Route path="innings" element={<InningsHighlights />} />
                                 <Route path="teams" element={null} />

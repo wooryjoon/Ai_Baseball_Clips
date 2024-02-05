@@ -3,6 +3,7 @@ import { useRef, useState } from 'react';
 import VideoModal from './VideoModal';
 import openModal from '@/utils/openModal';
 import { Clip } from '@/pages/VideoResultPage/type';
+import closeModal from '@/utils/closeModal';
 
 type Content = {
     clip: Clip;
@@ -13,6 +14,8 @@ export default function Content({ clip }: Content) {
     const [isReadyToLoadVideo, setIsReadyToLoadVideo] = useState(false);
 
     const onClickLoadVideoHandler = () => {
+        if (isReadyToLoadVideo === false) openModal(videoDialogRef);
+        else closeModal(videoDialogRef);
         setIsReadyToLoadVideo(!isReadyToLoadVideo);
     };
     return (

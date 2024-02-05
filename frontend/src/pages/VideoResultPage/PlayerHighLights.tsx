@@ -32,16 +32,14 @@ export default function PlayerHighlights() {
         };
         // 컴포넌트 마운트 시 맨 처음 페칭
         setFetching(true);
-        const container: Element | null = document.querySelector('.highlight-container');
         // 스크롤 이벤트에 따라 fetching하는 이벤트 등록
-        if (container) container.addEventListener('scroll', handleScroll);
+        if (window) window.addEventListener('scroll', handleScroll);
         // 언마운트 될 때 이벤트리스너 삭제
         return () => {
-            if (container) container.removeEventListener('scroll', handleScroll);
+            if (window) window.removeEventListener('scroll', handleScroll);
         };
     }, []);
     useEffect(() => {
-        console.log('2', clips);
         if (isFetching && hasNextPage) fetchClips();
         else if (!hasNextPage) setFetching(false);
     }, [isFetching]);

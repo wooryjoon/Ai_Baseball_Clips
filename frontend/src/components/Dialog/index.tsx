@@ -9,14 +9,7 @@ const Dialog = forwardRef<HTMLDialogElement, Dialog>(function Dialog(
     { onClick, children }: Dialog,
     ref
 ) {
-    return (
-        <dialog ref={ref}>
-            <form method="dialog">
-                <button onClick={onClick}>닫기</button>
-            </form>
-            {children}
-        </dialog>
-    );
+    return <dialog ref={ref}>{children}</dialog>;
 });
 
 export default Dialog;
