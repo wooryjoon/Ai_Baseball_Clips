@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@RestController("/favorite")
 @RequiredArgsConstructor
 public class FavoriteController {
 
