@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import positionLocaiton from '@/utils/positionLocation';
 import openModal from '@/utils/openModal';
 import closeModal from '@/utils/closeModal';
+import usePlayerPositionAnimate from '@/hooks/usePlayerPositionAnimate';
 
 interface PlayerCircle {
     data: any;
@@ -18,30 +19,7 @@ export default function PlayerCircle({ data, src }: PlayerCircle) {
         setIsReadyToLoadVideo(!isReadyToLoadVideo);
     };
     const { position, clip }: any = data;
-    //TODO : 포지션에 따라 top,left 위치 조정
-    useEffect(() => {
-        let keyframes = [
-            {
-                top: '40%',
-                left: '44%',
-            },
-            {
-                top: positionLocaiton[position].top + '%',
-                left: positionLocaiton[position].left + '%',
-            },
-        ];
-        let options: KeyframeAnimationOptions = {
-            duration: 1000,
-            easing: 'ease-out',
-            fill: 'forwards',
-        };
-
-        const tick: number = setTimeout(() => {
-            if (playerCircleRef.current) playerCircleRef.current.animate(keyframes, options);
-        }, 500);
-
-        return () => clearTimeout(tick);
-    }, []);
+    usePlayerPositionAnimate(playerCircleRef, position);
     return (
         <>
             <div
