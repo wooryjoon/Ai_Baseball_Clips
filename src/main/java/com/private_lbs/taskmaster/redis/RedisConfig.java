@@ -2,6 +2,7 @@ package com.private_lbs.taskmaster.redis;
 
 import com.private_lbs.taskmaster.redis.domain.RedisPubData;
 import com.private_lbs.taskmaster.redis.service.RedisSubService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -16,10 +17,16 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 @Configuration
 public class RedisConfig {
 
+    @Value("${spring.data.redis.host}")
+    private String host;
+
+    @Value("${spring.data.redis.port}")
+    private int port;
+
     // Redis 연결 설정을 위한 ConnectionFactory 빈 생성
     @Bean
     public RedisConnectionFactory redisConnectionFactory() {
-        return new LettuceConnectionFactory();
+        return new LettuceConnectionFactory(host, port);
     }
 
     // Redis 작업을 위한 RedisTemplate 설정
