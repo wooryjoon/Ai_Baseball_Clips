@@ -1,12 +1,12 @@
 @import '../../styles/style.scss';
 
 .myProfile {
+    position: relative;
     width: 100%;
     padding: 15px;
-    border: 1px solid black;
+    border-bottom: 1px solid lightgray;
     display: flex;
     .profile-img-container {
-        border: 1px solid black;
         padding: 10px;
         border-radius: 15px;
         background-color: $kbo_darkblue;
@@ -23,14 +23,57 @@
     .profile-email {
         color: gray;
     }
+    .button.modify {
+        position: absolute;
+        padding: 5px;
+        right: 10px;
+        bottom: 3px;
+        font-size: 13px;
+        border-radius: 5px;
+        background-color: $kbo_darkblue;
+        color: white;
+    }
 }
 .bookmarkList {
     margin-top: 25px;
-    border: 1px solid black;
+
     .bookmark-title {
         font-weight: 500;
         font-size: 20px;
         padding: 10px;
         border-bottom: 2px solid #f3f3f3;
+        display: flex;
+
+        align-items: center;
+    }
+    img {
+        width: 25px;
+        height: 25px;
+        margin-left: 10px;
+    }
+}
+
+//myContent
+.myContent {
+    position: relative;
+    margin: 5px;
+    display: flex;
+    border-bottom: 1px solid #f3f3f3;
+    .myContent-info {
+        color: black;
+        margin: 10px;
+        display: flex;
+        flex-direction: column;
+        font-weight: 500;
+        font-size: 15px;
+    }
+    .button.myContent {
+        color: $kbo_darkblue;
+        position: absolute;
+        top: 0;
+        right: 0;
+        font-size: 14px;
+        // background-color: green;
+        padding: 0;
     }
 }

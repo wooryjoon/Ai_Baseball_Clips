@@ -1,5 +1,0 @@
-// overView 페이지에서 필요한 데이터
-const overViewData = {
-    team1: [],
-    team2: [],
-};
