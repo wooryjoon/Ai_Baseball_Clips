@@ -1,16 +1,18 @@
 package com.private_lbs.taskmaster.favorite.domain;
 
+import com.private_lbs.taskmaster.global.domain.BaseEntity;
 import com.private_lbs.taskmaster.member.domain.Member;
 import com.private_lbs.taskmaster.processed_video.domain.ProcessedVideo;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Getter
 @Entity
 @Builder
-public class Favorite {
+public class Favorite extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,9 +23,13 @@ public class Favorite {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "processed_video_id")
     private ProcessedVideo processedVideo;
+
+    @Column(name = "favorite")
+    @ColumnDefault("false")
+    private boolean favorite;
 
     public Favorite(Member member, ProcessedVideo processedVideo) {
         addMember(member);
