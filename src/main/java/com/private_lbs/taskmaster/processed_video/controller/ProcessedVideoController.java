@@ -20,8 +20,8 @@ public class ProcessedVideoController {
     private final ProcessedVideoService processedVideoService;
 
     @Auth
-    @GetMapping("/{request}")
-    public ResponseEntity<List<ProcessedVideoFromPlayer>> getProcessedVideos(@PathVariable Long request) {
+    @GetMapping("/{request_id}")
+    public ResponseEntity<List<ProcessedVideoFromPlayer>> getProcessedVideos(@PathVariable("request_id") Long request) {
         return ResponseEntity.ok().body(processedVideoService.getPlayerProcessedVideo(request));
     }
 }
