@@ -11,7 +11,7 @@ import initMockAPI from './mock';
 import MyPage from './pages/MyPage';
 import MainPage from './pages/MainPage';
 import PrivateRoute from './route/PrivateRoute';
-import Test from './pages/MainPage/test';
+import Welcome from './pages/MainPage/Welcome';
 
 initMockAPI();
 
@@ -29,7 +29,7 @@ function App() {
                         {/* 로그인 상태에서만 진입 가능한 페이지는 따로 라우팅 */}
                         <Route element={<PrivateRoute />}>
                             <Route path="/main" element={<MainPage />} />
-                            {/* <Route path="/main" element={<Test />} /> */}
+                            {/* <Route path="/main" element={<Welcome />} /> */}
                             <Route path="/makingvideo" element={<MakingVideo />}></Route>
                             <Route path="/mypage" element={<MyPage />} />
                             <Route path="/result" element={<VideoResultPage />}>

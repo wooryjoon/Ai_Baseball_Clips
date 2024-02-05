@@ -4,7 +4,7 @@ import ProfileBox from './ProfileBox';
 import { Link } from 'react-router-dom';
 import './MainPage.scss';
 
-export default function Test() {
+export default function Welcome() {
     return (
         <div id="main">
             <Header />
