@@ -1,5 +1,5 @@
 import VideoModal from '@/components/Content/VideoModal';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import openModal from '@/utils/openModal';
 import closeModal from '@/utils/closeModal';
 import usePlayerPositionAnimate from '@/hooks/usePlayerPositionAnimate';
@@ -12,12 +12,14 @@ export default function PlayerCircle({ data, src }: PlayerCircle) {
     const videoRef = useRef<HTMLDialogElement>(null);
     const playerCircleRef = useRef<HTMLDivElement>(null);
     const [isReadyToLoadVideo, setIsReadyToLoadVideo] = useState(false);
+    const { position, clip }: any = data;
+
     const onClickPlayerCircle = () => {
         if (isReadyToLoadVideo === false) openModal(videoRef);
         else closeModal(videoRef);
         setIsReadyToLoadVideo(!isReadyToLoadVideo);
     };
-    const { position, clip }: any = data;
+
     usePlayerPositionAnimate(playerCircleRef, position);
     return (
         <>
