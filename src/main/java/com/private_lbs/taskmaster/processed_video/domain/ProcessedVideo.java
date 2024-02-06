@@ -24,7 +24,6 @@ public class ProcessedVideo extends BaseEntity {
     @Size(max = 255)
     @NotNull
     private String processedVideoUrl;
-
     public ProcessedVideo(Player player, String processedVideoUrl) {
         addRelatedPlayer(player);
         this.processedVideoUrl = processedVideoUrl;
@@ -34,5 +33,4 @@ public class ProcessedVideo extends BaseEntity {
         this.player = player;
         player.getProcessedVideos().add(this);
     }
-
 }

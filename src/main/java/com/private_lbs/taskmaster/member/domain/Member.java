@@ -1,5 +1,6 @@
 package com.private_lbs.taskmaster.member.domain;
 
+import com.private_lbs.taskmaster.favorite.domain.Favorite;
 import com.private_lbs.taskmaster.request.domain.Request;
 import com.private_lbs.taskmaster.global.domain.BaseEntity;
 import jakarta.persistence.*;
@@ -9,10 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Builder
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Builder
 @AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member extends BaseEntity {
 
     @Id
@@ -29,4 +30,6 @@ public class Member extends BaseEntity {
     @Column(name = "password")
     private String password;
 
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
+    List<Favorite> favorites = new ArrayList<>();
 }
