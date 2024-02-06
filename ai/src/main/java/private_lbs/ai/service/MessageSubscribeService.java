@@ -39,7 +39,7 @@ public class MessageSubscribeService {
             // s3에 업로드.
             S3FileService.uploadFile(fileKey,new File(originalVideoLocalPath,fileName));
             // DB에 저장
-
+            System.out.println("들어옴");
 
 
             fileKeys.add(fileKey);
@@ -52,8 +52,8 @@ public class MessageSubscribeService {
     public void processOriginalVideoUrl(OriginalVideoUrl OriginalVideoUrl) throws IOException {
 
         String fileKey=OriginalVideoUrl.getFileKey();
-        String bucketName=OriginalVideoUrl.getBucketName();
-
+        String bucketName=OriginalVideoUrl.getBucket();
+        System.out.println("들어왔나??");
         // TODO : 우선은 내 로컬 경로지만 추 후 수정 필요.
         String localPath="C:\\Users\\SSAFY\\Desktop\\TestFolder";
 
@@ -64,12 +64,13 @@ public class MessageSubscribeService {
 
 
         String filePath=createDirectoryPath+File.separator+paths[2];
-
+        System.out.println("로컬경로 = "+filePath+"  파일키 = "+fileKey);
         // 원본 영상 저장 폴더 생성.
-        LocalS3FileService.createDirectory(createDirectoryPath);
+        LocalS3FileService.createDirectory(filePath);
         // 생성한 폴더에 영상 저장
         S3FileService.downloadFile(bucketName,fileKey,filePath);
         // Redis ch3으로 pub
-        MessagePublishService.publishEvent3(new OriginalVideoLocalPath(createDirectoryPath));
+        MessagePublishService.publishEvent3(new OriginalVideoLocalPath(filePath));
     }
 }
+
