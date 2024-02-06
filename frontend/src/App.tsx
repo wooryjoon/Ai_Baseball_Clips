@@ -14,7 +14,7 @@ import PrivateRoute from './route/PrivateRoute';
 import Welcome from './pages/MainPage/Welcome';
 import VideoResultOverview from './pages/VideoResultPage/VideoResultOverview/VideoResultOverview';
 
-initMockAPI();
+// initMockAPI();
 
 function App() {
     let vh = window.innerHeight * 0.01;
