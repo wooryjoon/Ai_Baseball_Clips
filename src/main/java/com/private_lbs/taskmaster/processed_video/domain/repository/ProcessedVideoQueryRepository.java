@@ -11,7 +11,7 @@ import java.util.List;
 public interface ProcessedVideoQueryRepository extends JpaRepository<ProcessedVideo, Long> {
     @Query("SELECT new com.private_lbs.taskmaster.processed_video.data.dto.response." +
             "ProcessedVideoResponse(pv.processedVideoUrl,pv.id ,COALESCE(f.isFavorite, false)) " +
-            "FROM Player p INNER JOIN p.processedVideos pv LEFT JOIN pv.favorite f " +
+            "FROM Player p INNER JOIN p.processedVideos pv LEFT JOIN Favorite f ON pv = f.processedVideo " +
             "WHERE p.id = :playerId " +
             "ORDER BY p.createDateTime")
     List<ProcessedVideoResponse> findVideosAndFavoritesByPlayerOrderByCreateDateTime(@Param("playerId") Long playerId);
