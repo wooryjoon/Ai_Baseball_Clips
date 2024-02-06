@@ -36,20 +36,17 @@ public class FavoriteService {
 
         Favorite favorite = new Favorite(member, processedVideo);
 
-        if (isLike(favorite.getMember(), favorite.getProcessedVideo())) {
-            favorite.changeFavoriteStatus();
-        } else {
-            favorite.changeFavoriteStatus();
-            favoriteRepository.save(favorite);
-        }
+        favoriteRepository
+                .findLikeByMemberAndProcessedVideo(favorite.getMember(), favorite.getProcessedVideo())
+                .ifPresentOrElse(Favorite::changeFavoriteStatus,
+                        () -> {
+                            favorite.changeFavoriteStatus();
+                            favoriteRepository.save(favorite);
+                        });
     }
 
     public List<FavoriteProcessedVideo> getLikeList() {
         Member member = memberService.getCurrentMember();
         return favoriteQueryRepository.findVideoLinkAndPlayerNameAndFavoriteByUserId(member.getId());
-    }
-
-    public boolean isLike(Member member, ProcessedVideo processedVideo) {
-        return favoriteRepository.findLikeByMemberAndProcessedVideo(member, processedVideo).isPresent();
     }
 }
