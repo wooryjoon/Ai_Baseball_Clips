@@ -1,14 +1,9 @@
 package com.private_lbs.taskmaster.processed_video.service;
 
-import com.private_lbs.taskmaster.favorite.service.FavoriteService;
-import com.private_lbs.taskmaster.member.domain.Member;
-import com.private_lbs.taskmaster.member.service.MemberService;
 import com.private_lbs.taskmaster.player.domain.Player;
 import com.private_lbs.taskmaster.player.domain.service.PlayerService;
 import com.private_lbs.taskmaster.processed_video.data.dto.response.ProcessedVideoFromPlayer;
-import com.private_lbs.taskmaster.processed_video.data.dto.response.ProcessedVideoResponse;
-import com.private_lbs.taskmaster.processed_video.domain.ProcessedVideo;
-import com.private_lbs.taskmaster.processed_video.domain.repository.ProcessedVideoRepository;
+import com.private_lbs.taskmaster.processed_video.domain.repository.ProcessedVideoQueryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,27 +15,22 @@ import java.util.List;
 public class ProcessedVideoService {
 
     private final PlayerService playerService;
-    private final MemberService memberService;
-    private final FavoriteService favoriteService;
-    private final ProcessedVideoRepository processedVideoRepository;
+    private final ProcessedVideoQueryRepository processedVideoQueryRepository;
 
     public List<ProcessedVideoFromPlayer> getPlayerProcessedVideo(Long request) {
-        Member member = memberService.getCurrentMember();
+        // 요청에 따른 선수들 list
         List<Player> players = playerService.getPlayerFromRequest(request);
-        List<ProcessedVideoFromPlayer> processedVideoFromPlayers = new ArrayList<>();
+        // 선수 별 영상들을 담는 dto
+        List<ProcessedVideoFromPlayer> processedVideosFromPlayers = new ArrayList<>();
+        // 선수별 for 문
         for (Player player : players) {
-            List<ProcessedVideo> processedVideoListByPlayers
-                    = processedVideoRepository.findProcessedVideoListByPlayer(player);
-
-            processedVideoFromPlayers.add(ProcessedVideoFromPlayer.builder()
+            processedVideosFromPlayers.add(ProcessedVideoFromPlayer
+                    .builder()
                     .playerName(player.getName())
-                    .processedVideoResponses(processedVideoListByPlayers.stream()
-                            .map(processedVideo ->
-                                    new ProcessedVideoResponse(processedVideo.getProcessedVideoUrl(), processedVideo.getId()
-                                            , favoriteService.isLike(member, processedVideo)))
-                            .toList())
+                    .processedVideoResponses(processedVideoQueryRepository.
+                            findVideosAndFavoritesByPlayerOrderByCreateDateTime(player.getId()))
                     .build());
         }
-        return processedVideoFromPlayers;
+        return processedVideosFromPlayers;
     }
 }
