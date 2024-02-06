@@ -1,5 +1,6 @@
 package com.private_lbs.taskmaster.processed_video.domain;
 
+import com.private_lbs.taskmaster.favorite.domain.Favorite;
 import com.private_lbs.taskmaster.global.domain.BaseEntity;
 import com.private_lbs.taskmaster.player.domain.Player;
 import jakarta.persistence.*;
@@ -24,6 +25,9 @@ public class ProcessedVideo extends BaseEntity {
     @Size(max = 255)
     @NotNull
     private String processedVideoUrl;
+
+    @OneToOne(mappedBy = "processedVideo")
+    private Favorite favorite;
 
     public ProcessedVideo(Player player, String processedVideoUrl) {
         addRelatedPlayer(player);
