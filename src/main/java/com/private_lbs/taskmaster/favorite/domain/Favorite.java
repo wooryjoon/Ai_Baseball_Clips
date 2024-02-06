@@ -33,12 +33,17 @@ public class Favorite extends BaseEntity {
 
     public Favorite(Member member, ProcessedVideo processedVideo) {
         addMember(member);
-        this.processedVideo = processedVideo;
+        addProcessedVideo(processedVideo);
     }
 
     public void addMember(Member member) {
         this.member = member;
         member.getFavorites().add(this);
+    }
+
+    public void addProcessedVideo(ProcessedVideo processedVideo) {
+        this.processedVideo = processedVideo;
+        processedVideo.addFavorite(this);
     }
 
     public void changeFavoriteStatus() {

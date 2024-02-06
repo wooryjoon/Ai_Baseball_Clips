@@ -39,4 +39,8 @@ public class ProcessedVideo extends BaseEntity {
         player.getProcessedVideos().add(this);
     }
 
+    public void addFavorite(Favorite favorite) {
+        this.favorite = favorite;
+    }
+
 }
