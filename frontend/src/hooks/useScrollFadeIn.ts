@@ -1,25 +1,19 @@
+import { ScrollFadeInProps } from '@/pages/MainPage/type';
 import { useCallback, useRef, useEffect, CSSProperties } from 'react';
-import { ScrollRestoration } from 'react-router-dom';
 
-interface ScrollFadeInProps {
-    direction?: 'up' | 'down' | 'left' | 'right';
-    duration?: number;
-    delay?: number;
-}
-
-const useScrollFadeIn = ({ direction = 'up', duration = 1, delay = 0 }: ScrollFadeInProps = {}) => {
+const useScrollFadeIn = ({
+    direction = 'down',
+    duration = 1,
+    delay = 0,
+}: ScrollFadeInProps = {}) => {
     const dom = useRef<HTMLDivElement>(null);
 
-    const handleDirection = (name: string): string => {
-        switch (name) {
+    const handleDirection = (direction: string): string => {
+        switch (direction) {
             case 'up':
                 return 'translated3d(0, 50%, 0)';
             case 'down':
                 return 'translated3d(0, -50%, 0)';
-            case 'left':
-                return 'translated3d(50%, 0, 0)';
-            case 'right':
-                return 'translated3d(-50%, 0, 0)';
             default:
                 return '';
         }
@@ -27,7 +21,7 @@ const useScrollFadeIn = ({ direction = 'up', duration = 1, delay = 0 }: ScrollFa
 
     const handleScroll = useCallback(
         ([entry]: IntersectionObserverEntry[]) => {
-            const { current } = dom;
+            const { current }: any = dom;
 
             if (current && entry.isIntersecting) {
                 current.style.transitionProperty = 'all';
@@ -46,7 +40,7 @@ const useScrollFadeIn = ({ direction = 'up', duration = 1, delay = 0 }: ScrollFa
         const { current } = dom;
 
         if (current) {
-            observer = new IntersectionObserver(handleScroll, { threshold: 0.7 });
+            observer = new IntersectionObserver(handleScroll, { threshold: 0.4 });
             observer.observe(current);
         }
         return () => observer && observer.disconnect();
