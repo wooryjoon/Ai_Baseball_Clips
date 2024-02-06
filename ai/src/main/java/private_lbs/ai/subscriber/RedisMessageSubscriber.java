@@ -26,8 +26,8 @@ public class RedisMessageSubscriber implements MessageListener {
         String messageBody = new String(message.getBody());
         try {
             Map<String, Object> messageMap = mapper.readValue(messageBody, new TypeReference<Map<String, Object>>() {});
-                // OriginalVideoUrl 형태인지 확인. 요청처리서버에서 ch1로 pub 한 data
-            if (messageMap.containsKey("fileKey") && messageMap.containsKey("bucketName")) {
+            // OriginalVideoUrl 형태인지 확인. 요청처리서버에서 ch1로 pub 한 data
+            if (messageMap.containsKey("fileKey") && messageMap.containsKey("bucket")) {
 
                 // OriginalVideoUrl 형태로 처리
                 OriginalVideoUrl OriginalVideoUrl = mapper.convertValue(messageMap, OriginalVideoUrl.class);
