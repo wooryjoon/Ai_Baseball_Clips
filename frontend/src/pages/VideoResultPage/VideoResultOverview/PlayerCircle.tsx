@@ -1,6 +1,5 @@
 import VideoModal from '@/components/Content/VideoModal';
 import { useEffect, useRef, useState } from 'react';
-import positionLocaiton from '@/utils/positionLocation';
 import openModal from '@/utils/openModal';
 import closeModal from '@/utils/closeModal';
 import usePlayerPositionAnimate from '@/hooks/usePlayerPositionAnimate';
@@ -34,6 +33,7 @@ export default function PlayerCircle({ data, src }: PlayerCircle) {
                     onClickPlayerCircle();
                 }}
             >
+                <div className="player-position">CF</div>
                 <img className="playerCircle" src={src}></img>
                 <span>이대호</span>
             </div>

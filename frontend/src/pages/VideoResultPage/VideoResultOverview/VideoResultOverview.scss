@@ -1,8 +1,5 @@
 @import '../../../styles/style.scss';
 
-.canvas {
-    // background-color: blue;
-}
 //VideoResultOverview
 .RGB {
     display: flex;
@@ -27,7 +24,7 @@
         box-shadow: 0 0 10px transparentize(red, 0.5);
     }
 }
-.team-select {
+.scoreboard-container {
     margin: 0 auto;
     width: 100%;
     height: 60px;
@@ -36,17 +33,58 @@
     justify-content: space-between;
     background-color: #2f2f2f;
     position: relative;
-    .team-select-title {
+    .scoreboard-container-title {
         animation: blink-effect 2s step-end infinite;
         font-family: 'LED1';
         position: absolute;
         left: 50%;
-        top: 18px;
+        top: 14px;
         font-size: 15px;
         font-weight: bold;
         color: #00ff00;
         transform: translate(-50%, -50%);
         text-shadow: 0 0 10px transparentize(#00ff00, 0.5);
+    }
+    .scoreboard-container-inning {
+        position: absolute;
+        left: 50%;
+        bottom: 0px;
+        font-size: 20px;
+        transform: translate(-50%, 0);
+        color: white;
+        font-weight: 700;
+        .scoreboard-inning {
+            font-size: 27px;
+        }
+    }
+    .dropdown {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 0;
+        color: black;
+        padding: 10px;
+        width: 95%;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: white;
+        z-index: 100;
+        border-radius: 15px;
+        border: 1px solid #f3f3f3;
+        animation: 0.5s ease-out appleEffect forwards;
+        .swiper-slide {
+            text-align: center;
+            justify-content: center;
+            border-radius: 5px;
+            background-color: #f3f3f3;
+        }
+        span {
+            font-weight: 700;
+            color: $kbo_darkblue;
+            text-align: center;
+        }
     }
     .scoreboard {
         width: 90%;
@@ -73,15 +111,21 @@
             }
         }
         .score {
-            margin-top: 23px;
-            // font-family: 'LED1';
+            font-family: 'LED1';
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            width: 50px;
+            width: 250px;
             height: 50px;
-            color: white;
-            font-size: 20px;
+            color: #14f29b;
+            font-size: 30px;
+            font-weight: bold;
+            text-shadow: 0 0 5px transparentize(#14f29b, 0.5);
+            span {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
         }
     }
 }
@@ -109,29 +153,32 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-radius: 15px;
+    border-radius: 10px;
     background-color: white;
     font-size: 10px;
     font-weight: 700;
     animation: ani 1s infinite alternate;
     box-shadow: 4px 4px 5px gray;
-
+    padding: 10px;
+    overflow: hidden;
     span {
         margin-top: 5px;
     }
+    .playerCircle {
+        width: 45px;
+        height: 45px;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    .player-position {
+        width: calc(100% + 20px);
+        background-color: $kbo_darkblue;
+        color: white;
+        display: flex;
+        justify-content: center;
+    }
 }
-.playerCircle {
-    width: 45px;
-    height: 45px;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-#dung {
-    background-color: skyblue;
-    position: absolute;
-    top: 150px;
-    left: 300px;
-}
+
 .stadium-logo {
     position: absolute;
     top: 55%;
