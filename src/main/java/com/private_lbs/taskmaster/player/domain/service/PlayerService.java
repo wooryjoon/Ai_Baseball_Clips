@@ -14,7 +14,7 @@ public class PlayerService {
     private final PlayerRepository playerRepository;
 
     public List<Player> getPlayerFromRequest(long request) {
-        return playerRepository.findPlayer(request);
+        return playerRepository.findPlayerByRequestId(request);
     }
 
 }
