@@ -3,7 +3,7 @@ import { useCallback, useRef, useEffect, CSSProperties } from 'react';
 
 const useScrollFadeIn = ({
     direction = 'down',
-    duration = 1,
+    duration = 2,
     delay = 0,
 }: ScrollFadeInProps = {}) => {
     const dom = useRef<HTMLDivElement>(null);

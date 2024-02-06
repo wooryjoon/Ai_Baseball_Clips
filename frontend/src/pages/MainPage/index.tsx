@@ -13,7 +13,7 @@ export default function MainPage() {
     return (
         <div id="main">
             <Header />
-            <div id="main-components">
+            <div className="main-components">
                 <div className="text-box">
                     <p> 야구 동영상을 넣으면 </p>
                     <p> AI가 하이라이트를 제작해줘요</p>
