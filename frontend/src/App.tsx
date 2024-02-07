@@ -11,10 +11,9 @@ import initMockAPI from './mock';
 import MyPage from './pages/MyPage';
 import MainPage from './pages/MainPage';
 import PrivateRoute from './route/PrivateRoute';
-import Welcome from './pages/MainPage/Welcome';
 import VideoResultOverview from './pages/VideoResultPage/VideoResultOverview/VideoResultOverview';
 
-initMockAPI();
+// initMockAPI();
 
 function App() {
     let vh = window.innerHeight * 0.01;
