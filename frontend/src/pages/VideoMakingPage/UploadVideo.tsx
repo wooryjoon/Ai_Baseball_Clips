@@ -64,7 +64,7 @@ const UploadVideo = () => {
             </div>
             <div className="buttons">
                 {/* axios 요청하면서 단계별로 -> useNavigate 로 페이지 넘기기, Link 지우고 */}
-                <Link to="/result" onClick={nextHandler}>
+                <Link to="/main" onClick={nextHandler}>
                     <Button styleType="uploadvideo" onClick={inputFile && uploadFile}>
                         결과페이지로 이동
                     </Button>
