@@ -3,9 +3,9 @@ import imutils
 from imutils.object_detection import non_max_suppression
 import numpy as np
 
-from app.src.image_process import img_trim
-from app.src.ocr import *
-from app.src.text_process import *
+from .image_process import img_trim
+from .ocr import *
+from .text_process import *
 
 # main method !
 
@@ -33,7 +33,7 @@ def process_video(video_path):
 
     # load the pre-trained EAST text detector
     print("[INFO] loading EAST text detector...")
-    net = cv2.dnn.readNet("src/frozen_east_text_detection.pb")
+    net = cv2.dnn.readNet("app/resources/deeplearning_model/frozen_east_text_detection.pb")
  
     vs = cv2.VideoCapture(video_path) # video_stream
     fps = int(vs.get(cv2.CAP_PROP_FPS)) # 원본 영상의 fps

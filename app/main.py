@@ -5,8 +5,8 @@ import aioredis
 import json
 import os
 
-from app.src.video_process import process_video
-from app.src.clip_process import *
+from src.video_process import process_video
+from src.clip_process import *
 # from pytube import YouTube
 
 app = FastAPI()
@@ -19,8 +19,8 @@ def root():
 @app.on_event("startup")
 async def set_redis():
     # connect
-    redis = aioredis
-    r = await aioredis.create_redis_pool("redis://i10a305.p.ssafy.io:6379", password="a305#@!")
+    # r = await aioredis.create_redis_pool("redis://i10a305.p.ssafy.io:6379", password="a305#@!")
+    r = await aioredis.create_redis_pool("redis://localhost")
     # sub
     ch, = await r.subscribe("ch2")
     assert isinstance(ch, aioredis.Channel)
