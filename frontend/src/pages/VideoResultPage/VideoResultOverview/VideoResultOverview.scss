@@ -141,14 +141,6 @@
 }
 
 .playerCircle-container {
-    @keyframes ani {
-        0% {
-            transform: translate(0, 0);
-        }
-        100% {
-            transform: translate(0, 5px);
-        }
-    }
     position: absolute;
     width: 55px;
     height: 75px;
