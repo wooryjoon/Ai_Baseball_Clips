@@ -110,6 +110,9 @@
                 border-radius: 30%;
             }
         }
+        .team-card.currentTeam {
+            color: blue;
+        }
         .score {
             font-family: 'LED1';
             display: flex;
