@@ -54,5 +54,5 @@ def main(dic_path):
     process_result(video_path, result)
     
     # 원본영상 삭제
-    # if os.path.isfile(video_path):
-    #     os.remove(video_path)
+    if os.path.isfile(video_path):
+        os.remove(video_path)
