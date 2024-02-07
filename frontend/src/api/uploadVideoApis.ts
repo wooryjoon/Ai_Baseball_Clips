@@ -19,11 +19,10 @@ export function requestPresignedUrl(uploadFile: File) {
 }
 
 function UploadFiletoS3(presignedUrl: string, uploadFile: File) {
-    // console.log(uploadFile);
     axios
         .put(presignedUrl, uploadFile, {
             headers: {
-                'Content-Type': 'video/mp4',
+                'Content-Type': uploadFile.type,
             },
         })
         .then((response) => console.log(response))
