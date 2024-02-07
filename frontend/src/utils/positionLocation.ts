@@ -39,5 +39,10 @@ const positionLocation: { [key: string]: { name: string; top: number; left: numb
         top: 35,
         left: 62,
     },
+    지명타자: {
+        name: '지명타자',
+        top: 80,
+        left: 5,
+    },
 };
 export default positionLocation;

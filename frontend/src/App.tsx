@@ -12,8 +12,9 @@ import MyPage from './pages/MyPage';
 import MainPage from './pages/MainPage';
 import PrivateRoute from './route/PrivateRoute';
 import VideoResultOverview from './pages/VideoResultPage/VideoResultOverview/VideoResultOverview';
+import VideoReport from './pages/VideoResultPage/VideoReport';
 
-// initMockAPI();
+initMockAPI();
 
 function App() {
     let vh = window.innerHeight * 0.01;
@@ -34,9 +35,9 @@ function App() {
                             <Route path="/makingvideo" element={<MakingVideo />}></Route>
                             <Route path="/mypage" element={<MyPage />} />
                             <Route path="/result" element={<VideoResultPage />}>
-                                <Route index element={<VideoResultOverview />} />
+                                <Route index element={<VideoReport />} />
                                 <Route path="players" element={<PlayerHighlights />} />
-                                <Route path="innings" element={<InningsHighlights />} />
+                                <Route path="innings" element={<VideoResultOverview />} />
                                 <Route path="teams" element={null} />
                             </Route>
                         </Route>
