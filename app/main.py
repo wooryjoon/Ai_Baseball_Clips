@@ -33,7 +33,12 @@ async def set_redis():
             path_obj = json.loads(message.decode("utf-8"))
             # 디렉토리 주소
             dic_path = path_obj["localPath"]
-            main(dic_path)
+            try:
+                main(dic_path)
+                await r.publish("ch1", json.dumps({"localPath" : dic_path}))
+            except Exception as e:
+                # 에러 처리 코드 작성
+                print(e)
             # pub
             await r.publish("ch1", json.dumps({"localPath" : dic_path}))
                 
