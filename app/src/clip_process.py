@@ -1,4 +1,4 @@
-from resources.data import players2023 # resources/data/players의 선수명단 가져오기
+from app.resources.data import players2023 # resources/data/players의 선수명단 가져오기
 from moviepy.editor import VideoFileClip
 import os
 # clip 생성 methods
