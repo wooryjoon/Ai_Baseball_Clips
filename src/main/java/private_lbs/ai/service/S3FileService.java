@@ -39,7 +39,7 @@ public class S3FileService {
     }
 
     public String buildFileKey(String basePath, String[] parts) {
-        String[] paths=basePath.split("\\\\");
+        String[] paths=basePath.split("/");
         StringBuilder fileKeyBuilder = new StringBuilder();
         fileKeyBuilder.append(paths[paths.length-2]).append("/").append(paths[paths.length-1]);
         for (String part : parts) {
