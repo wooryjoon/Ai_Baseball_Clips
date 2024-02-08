@@ -61,7 +61,7 @@ public class MessageSubscribeService {
 
         log.info("S3 잘 저장됐고 Redis에서 메시지 잘 넘어왔나? (요청 -> AI)");
         // TODO : 우선은 내 로컬 경로지만 추 후 수정 필요.
-        String localPath="/home/video";
+        String localPath="/home/video/";
 
         String[] paths= fileKey.split("/");
 
