@@ -29,7 +29,7 @@ export default function addAxiosInterceptor(instance: Axios) {
                         .then((response) => {
                             const newAccessToken = response.data.accessToken();
                             sessionStorage.addItem('accessToken', newAccessToken);
-                            error.config.headers['Authorization'] = `${newAccessToken}`;
+                            error.config.headers.Authorization = `Bearer ${newAccessToken}`;
                             return instance.request(error.config);
                         })
                         .catch(() => {});
