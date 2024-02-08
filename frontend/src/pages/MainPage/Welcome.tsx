@@ -1,6 +1,6 @@
 import Button from '@/components/Button';
 import Header from '@/components/Header';
-import ProfileBox from './ProfileBox';
+// import ProfileBox from './ProfileBox';
 import { Link } from 'react-router-dom';
 import './MainPage.scss';
 
@@ -9,7 +9,7 @@ export default function Welcome() {
         <div id="main">
             <Header />
             <div id="main-components">
-                <ProfileBox />
+                {/* <ProfileBox /> */}
                 <div className="likedVideo">
                     <p>nickname 님의 동영상</p>
                     <div className="videoBox">

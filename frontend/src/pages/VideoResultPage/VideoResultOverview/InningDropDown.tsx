@@ -5,7 +5,7 @@ type InningDropDown = {
     onClick?: () => void;
 };
 
-export default function InningDropDown({ onClick }: InningDropDown) {
+export default function InningDropDown({}: InningDropDown) {
     const mockData = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     const [isShow, setIsShow] = useState<boolean>(false);
     const onClickShowHandler = () => {

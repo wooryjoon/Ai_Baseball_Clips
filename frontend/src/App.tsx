@@ -5,7 +5,6 @@ import LandingPage from './pages/LandingPage';
 import MakingVideo from './pages/VideoMakingPage';
 import Login from './pages/Login';
 import VideoResultPage from './pages/VideoResultPage';
-import InningsHighlights from './pages/VideoResultPage/InningsHighlights';
 import PlayerHighlights from './pages/VideoResultPage/PlayerHighLights';
 import initMockAPI from './mock';
 import MyPage from './pages/MyPage';

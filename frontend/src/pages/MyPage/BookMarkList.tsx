@@ -1,4 +1,3 @@
-import React from 'react';
 import MyContent from './MyContent';
 
 type Props = {};

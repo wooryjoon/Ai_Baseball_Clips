@@ -1,6 +1,6 @@
 import Button from '@/components/Button';
 import Header from '@/components/Header';
-import { useState } from 'react';
+// import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 export default function LoadingAI() {

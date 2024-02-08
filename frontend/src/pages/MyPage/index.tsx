@@ -3,7 +3,6 @@ import './MyPage.scss';
 import ProfileMyPage from './ProfileMyPage';
 import BookMarkList from './BookMarkList';
 export default function MyPage() {
-    const onClickModifyHandler = () => {};
     return (
         <>
             <Header />
