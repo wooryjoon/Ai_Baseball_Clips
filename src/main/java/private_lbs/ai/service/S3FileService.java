@@ -5,6 +5,7 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class S3FileService {
@@ -22,6 +24,7 @@ public class S3FileService {
     private String bucketName;
 
     public void downloadFile(String bucketName,String fileKey,String localFilePath) throws IOException {
+        log.info("영상 저장하는 중, 저장 경로 : ");
         S3Object s3Object = amazonS3Client.getObject(bucketName, fileKey);
         S3ObjectInputStream inputStream = s3Object.getObjectContent();
         Files.copy(inputStream, Paths.get(localFilePath), StandardCopyOption.REPLACE_EXISTING);
