@@ -1,4 +1,4 @@
-from app.resources.data import players2023 # resources/data/players의 선수명단 가져오기
+from resources.data import players2023 # resources/data/players의 선수명단 가져오기
 from jamo import h2j, j2hcj
 from difflib import SequenceMatcher 
 
