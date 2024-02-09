@@ -3,6 +3,7 @@ import { clipData } from './dummydata';
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
 const signUpUrl = baseUrl + import.meta.env.VITE_API_SIGNUP_URL;
 const loginUrl = baseUrl + import.meta.env.VITE_API_LOGIN_URL;
+console.log(loginUrl);
 const emailUrl = baseUrl + import.meta.env.VITE_API_EMAIL_CHECK_URL;
 const clipUrl = baseUrl + import.meta.env.VITE_API_CLIP_URL;
 
