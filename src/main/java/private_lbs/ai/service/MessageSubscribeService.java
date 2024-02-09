@@ -70,12 +70,13 @@ public class MessageSubscribeService {
 
         String filePath=createDirectoryPath+File.separator+paths[2];
         log.info("로컬경로 = "+filePath+"  파일키 = "+fileKey);
+        log.info("createDirectoryPath : " + createDirectoryPath);
         // 원본 영상 저장 폴더 생성.
         LocalS3FileService.createDirectory(filePath);
         // 생성한 폴더에 영상 저장
         S3FileService.downloadFile(bucketName,fileKey,filePath);
         // Redis ch3으로 pub
-        MessagePublishService.publishEvent3(new OriginalVideoLocalPath(filePath));
+        MessagePublishService.publishEvent3(new OriginalVideoLocalPath(createDirectoryPath));
     }
 }
 
