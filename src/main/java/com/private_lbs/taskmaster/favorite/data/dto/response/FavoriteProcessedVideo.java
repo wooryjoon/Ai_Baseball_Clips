@@ -7,6 +7,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class FavoriteProcessedVideo {
     private String processedVideoUrl;
-    private String playerName;
+    private String hitterName;
+    private String pitcherName;
     private boolean favorite;
 }
