@@ -14,7 +14,7 @@ public class Hitter extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "pitcher_id", nullable = false)
+    @Column(name = "hitter_id", nullable = false)
     private long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
