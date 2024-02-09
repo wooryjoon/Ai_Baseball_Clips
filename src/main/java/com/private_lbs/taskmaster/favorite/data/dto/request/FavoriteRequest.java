@@ -9,6 +9,6 @@ import lombok.Getter;
 public class FavoriteRequest {
 
     @NotNull
-    private long processedVideoId;
+    private long batId;
 
 }
