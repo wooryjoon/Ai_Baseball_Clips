@@ -2,7 +2,7 @@ package com.private_lbs.taskmaster.request.domain;
 
 import com.private_lbs.taskmaster.global.domain.BaseEntity;
 import com.private_lbs.taskmaster.member.domain.Member;
-import com.private_lbs.taskmaster.player.domain.Player;
+import com.private_lbs.taskmaster.bat.domain.Bat;
 import com.private_lbs.taskmaster.request.exception.RequestErrorCode;
 import com.private_lbs.taskmaster.request.exception.RequestException;
 import jakarta.persistence.*;
@@ -26,7 +26,7 @@ public class Request extends BaseEntity {
     private Member member;
 
     @OneToMany(mappedBy = "request", fetch = FetchType.LAZY)
-    private List<Player> players = new ArrayList<>();
+    private List<Bat> bats = new ArrayList<>();
 
     private String url;
 

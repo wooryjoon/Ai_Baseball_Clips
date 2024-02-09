@@ -21,6 +21,7 @@ public class Member extends BaseEntity {
     @Column(name = "member_id", nullable = false)
     private Long id;
 
+    @Builder.Default
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
     private List<Request> requests = new ArrayList<>();
 
@@ -30,6 +31,7 @@ public class Member extends BaseEntity {
     @Column(name = "password")
     private String password;
 
+    @Builder.Default
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
-    List<Favorite> favorites = new ArrayList<>();
+    private List<Favorite> favorites = new ArrayList<>();
 }
