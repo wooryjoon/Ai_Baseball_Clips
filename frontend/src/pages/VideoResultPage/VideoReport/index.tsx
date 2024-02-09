@@ -1,7 +1,8 @@
+import PositionMap from './PositionMap';
+import TimeLine from './TimeLine';
+
 import './VideoReport.scss';
 import VideoReportScoreBoard from './VideoReportScoreBoard';
-
-import PositionMap from './PositionMap';
 export default function VideoReport() {
     return (
         <div className="videoReport-container">
@@ -22,6 +23,10 @@ export default function VideoReport() {
                     <span>LG트윈스</span>
                     <PositionMap />
                 </div>
+            </div>
+            <h1 className="title">타임라인</h1>
+            <div className="videoReport-timeline-container">
+                <TimeLine />
             </div>
         </div>
     );

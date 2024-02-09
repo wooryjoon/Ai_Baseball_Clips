@@ -73,6 +73,7 @@
     justify-content: space-around;
     background-color: white;
     align-items: center;
+    margin-bottom: 25px;
     .videoReport-positionMap-container {
         display: flex;
         flex-direction: column;
@@ -108,5 +109,70 @@
     flex-direction: column;
     span {
         text-align: center;
+    }
+}
+.videoReport-timeline-container {
+    background-color: white;
+    .timeline-item.left {
+        .dot {
+            background-color: $kbo_darkblue;
+        }
+        .content {
+            margin-top: 10px;
+            background-color: #f3f3f3;
+            border-radius: 5px;
+            font-family: 'KBO';
+            .timeline-item-title {
+                font-weight: 700;
+            }
+            .timeline-item-player {
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                img {
+                    width: 30px;
+                    height: 30px;
+                }
+                span {
+                    font-size: 12px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin: 0 5px;
+                }
+            }
+        }
+    }
+    .timeline-item.right {
+        .dot {
+            background-color: $kbo_skyblue;
+        }
+        .content {
+            margin-top: 10px;
+            background-color: #f3f3f3;
+            border-radius: 5px;
+            font-family: 'KBO';
+            .timeline-item-title {
+                font-weight: 700;
+            }
+            .timeline-item-player {
+                display: flex;
+                flex-direction: row-reverse;
+                align-items: center;
+                justify-content: flex-end;
+
+                img {
+                    width: 30px;
+                    height: 30px;
+                }
+                span {
+                    font-size: 12px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin: 0 5px;
+                }
+            }
+        }
     }
 }
