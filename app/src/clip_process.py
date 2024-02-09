@@ -40,6 +40,9 @@ def make_clip(video_path, st_time, ed_time, title):
 
 # result 처리
 def process_result(video_path, result):
+    if result is None:
+        return
+    print("start making clip")
     players = list(result.keys())
     length = len(players)
     for i in range(length):

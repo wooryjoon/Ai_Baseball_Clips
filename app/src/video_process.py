@@ -44,6 +44,8 @@ def process_video(video_path):
     part_cnt = [0, 0, 0, 0]
     
     cnt, sec = 0, 0 # 프레임 수, 동영상 시간
+    
+    print("start reading video")
     while True:
         # grab the current frame, then handle 
         frame = vs.read()
@@ -58,7 +60,10 @@ def process_video(video_path):
         if cnt % fps == 0:
             sec += 1
             # print("{}초".format(sec))
-            
+        
+        if sec % 60 == 0:
+            print("1분 지났습니다.")
+        
         # 배속
         global times
         if cnt % times != 0:
@@ -194,5 +199,7 @@ def process_video(video_path):
     # close all windows
     cv2.destroyAllWindows()
 
-    print(result)
+    if len(result) == 0:
+        print("failed reading text")
+        return None
     return result

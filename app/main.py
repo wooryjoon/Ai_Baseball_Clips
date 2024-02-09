@@ -1,4 +1,4 @@
-from fastapi import FastAPI, UploadFile
+from fastapi import FastAPI
 import uvicorn
 import asyncio
 import aioredis
@@ -39,6 +39,7 @@ async def set_redis():
                 await r.publish("ch1", json.dumps({"localPath" : dic_path}))
             except Exception:
                 # 비디오 편집 과정에서 에러 발생시 text 파일에 기록하여 전달
+                print("error 발생하여 error text 파일")
                 e = str(traceback.format_exc())
                 localPath = dic_path + "\\\\error_desc_1.txt"
                 f = open(localPath, "w")
@@ -61,5 +62,5 @@ def main(dic_path):
     process_result(video_path, result)
     
     # 원본영상 삭제
-    # if os.path.isfile(video_path):
-    #     os.remove(video_path)
+    if os.path.isfile(video_path):
+        os.remove(video_path)
