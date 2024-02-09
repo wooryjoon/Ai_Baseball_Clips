@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import Button from '@/components/Button';
-import { requestPresignedUrl } from '@/api/uploadVideoApis';
+import { upload } from '@/api/uploadVideoApis';
 import { FileInfoType } from './type';
 import { Link } from 'react-router-dom';
 import fileExtensionValid, { ALLOW_FILE_EXTENTION } from '@/utils/fileExtensionValid';
 
 const UploadVideo = () => {
-    const [inputFile, setInputFile] = useState<FileInfoType>();
+    const [inputFile, setInputFile] = useState<FileInfoType | null>(null);
+    const [isComplete, setIsComplete] = useState<boolean>(false);
 
-    // Input Form 안의 값이 바뀔 때 일어나는 이벤트
+    // Input 안의 값이 바뀔 때 일어나는 이벤트
     const onChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
         const target = e.currentTarget;
@@ -36,9 +37,14 @@ const UploadVideo = () => {
     };
 
     // 완료 버튼 누르면 S3 에 저장하기 위해
-    // Back 에게 PresignedURL 발급 요청 -> 응답 -> presignedURL 설정하여 S3 에 데이터 전송
-    const uploadFile = () => {
-        if (inputFile) requestPresignedUrl(inputFile.file);
+    // Back 에게 UploadId, PresignedURL 발급 요청 -> 응답 -> presignedURL 설정하여 S3 에 데이터 전송
+    // 성공적으로 완료가 되면 true 반환
+    const uploadFile = async () => {
+        if (inputFile) {
+            const status = await upload(inputFile.file);
+
+            if (status) setIsComplete(true);
+        }
     };
 
     const nextHandler = (e: any) => {
@@ -63,9 +69,11 @@ const UploadVideo = () => {
                 ></input>
             </div>
             <div className="buttons">
-                {/* axios 요청하면서 단계별로 -> useNavigate 로 페이지 넘기기, Link 지우고 */}
-                <Link to="" onClick={nextHandler}>
-                    <Button styleType="uploadvideo" onClick={inputFile && uploadFile}>
+                <Button styleType="uploadvideo" onClick={inputFile && uploadFile}>
+                    영상 업로드
+                </Button>
+                <Link to="/main" onClick={nextHandler}>
+                    <Button styleType="gonext" onClick={''} disabled={!isComplete}>
                         결과페이지로 이동
                     </Button>
                 </Link>
