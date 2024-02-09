@@ -3,23 +3,34 @@ import axios from 'axios';
 
 export const upload = async (uploadFile: File) => {
     try {
-        const partSize = 5 * 1024 * 1024; // 5MB
+        // console.log(uploadFile.name);
+        // console.log(uploadFile.size);
+
+        const partSize = 10 * 1024 * 1024; // 10MB
         const parts: any[] = [];
 
-        const getResponse = await instance.get('S3/generate-url', {
+        const getResponse = await instance.get('S3/generate-multiparturl', {
             params: { filename: uploadFile.name, filesize: uploadFile.size },
             headers: {
                 'ngrok-skip-browser-warning': '69420',
             },
         });
 
+        console.log('getResponse: ');
+        console.log(getResponse);
+
         const presignedUrls = getResponse.data.presignedUrls;
         const uploadId = getResponse.data.uploadId;
+
+        // console.log('presignedUrls : ' + presignedUrls);
+        // console.log('uploadId : ' + uploadId);
 
         for (let i = 0; i < Math.ceil(uploadFile.size / partSize); i++) {
             let start = i * partSize,
                 end = Math.min(start + partSize, uploadFile.size),
                 part = uploadFile.slice(start, end);
+
+            await new Promise((resolve) => setTimeout(resolve, 500)); // 0.5초 대기
 
             const uploadResponse = await axios.put(presignedUrls[i], part, {
                 headers: {
@@ -27,10 +38,16 @@ export const upload = async (uploadFile: File) => {
                 },
             });
 
-            parts.push({ ETag: uploadResponse.headers.etag, PartNumber: i + 1 });
+            console.log(uploadResponse.headers);
+
+            parts.push({ etag: uploadResponse.headers.etag, partNumber: i + 1 });
         }
 
-        await instance.post('/complete-upload', { parts: parts, uploadId: uploadId });
+        console.log('Ok');
+
+        await instance.post('S3/complete-upload', { parts: parts, uploadId: uploadId });
+
+        console.log('영상 업로드 완료!');
 
         return true;
     } catch (error) {
