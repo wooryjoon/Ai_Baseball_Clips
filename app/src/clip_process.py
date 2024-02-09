@@ -1,4 +1,4 @@
-from app.resources.data import players2023 # resources/data/players의 선수명단 가져오기
+from resources.data import players2023 # resources/data/players의 선수명단 가져오기
 from moviepy.editor import VideoFileClip
 import os
 # clip 생성 methods
@@ -40,9 +40,6 @@ def make_clip(video_path, st_time, ed_time, title):
 
 # result 처리
 def process_result(video_path, result):
-    if result is None:
-        return
-    print("start making clip")
     players = list(result.keys())
     length = len(players)
     for i in range(length):

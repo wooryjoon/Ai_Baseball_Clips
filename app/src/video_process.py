@@ -61,7 +61,7 @@ def process_video(video_path):
             sec += 1
             # print("{}초".format(sec))
         
-        if sec % 60 == 0:
+        if sec != 0 and sec % 60 == 0:
             print("1분 지났습니다.")
         
         # 배속

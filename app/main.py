@@ -3,12 +3,9 @@ import uvicorn
 import asyncio
 import aioredis
 import json
-import os
 import traceback
 
-from src.video_process import process_video
-from src.clip_process import *
-# from pytube import YouTube
+from src.main_process import main
 
 app = FastAPI()
 
@@ -20,8 +17,8 @@ def root():
 @app.on_event("startup")
 async def set_redis():
     # connect
-    r = await aioredis.create_redis_pool("redis://i10a305.p.ssafy.io:6379", password="a305#@!")
-    # r = await aioredis.create_redis_pool("redis://localhost")
+    # r = await aioredis.create_redis_pool("redis://i10a305.p.ssafy.io:6379", password="a305#@!")
+    r = await aioredis.create_redis_pool("redis://localhost")
     # sub
     ch, = await r.subscribe("ch2")
     assert isinstance(ch, aioredis.Channel)
@@ -53,14 +50,3 @@ async def set_redis():
 if __name__ == "__main__":
     asyncio.run(set_redis())
     uvicorn.run("main:app", reload=True)
-
-def main(dic_path):
-    file_list = os.listdir(dic_path)
-    video_path = dic_path + "\\" + file_list[0]
-    
-    result = process_video(video_path)
-    process_result(video_path, result)
-    
-    # 원본영상 삭제
-    if os.path.isfile(video_path):
-        os.remove(video_path)
