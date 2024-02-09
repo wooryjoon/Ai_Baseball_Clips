@@ -18,6 +18,7 @@ export default function MyContent() {
                 <span>2024.01.02</span>
                 <span>고우석 vs 이대호</span>
                 <span>타석 1</span>
+                <span className="teams">KT vs LG</span>
             </div>
             <Button styleType="myContent" onClick={onClickMyContentHandler}>
                 제거

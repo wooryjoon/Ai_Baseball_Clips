@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import './Landing.scss';
 import Header from '@/components/Header';
 import Button from '@/components/Button';
-import { useSelector } from 'react-redux';
 
 export default function LandingPage() {
     return (
