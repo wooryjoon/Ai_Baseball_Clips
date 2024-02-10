@@ -36,6 +36,7 @@ def process_video(video_path):
     net = cv2.dnn.readNet("app/resources/deeplearning_model/frozen_east_text_detection.pb")
  
     vs = cv2.VideoCapture(video_path) # video_stream
+    print("동영상의 총 프레임수 : ", int(vs.get(cv2.CAP_PROP_FRAME_COUNT)))
     fps = int(vs.get(cv2.CAP_PROP_FPS)) # 원본 영상의 fps
     width = int(vs.get(cv2.CAP_PROP_FRAME_WIDTH)) # 원본 영상의 가로 길이
     height = int(vs.get(cv2.CAP_PROP_FRAME_HEIGHT)) # 원본 영상의 세로 길이
