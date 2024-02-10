@@ -1,9 +1,9 @@
 package com.private_lbs.taskmaster.bat.controller;
 
-import com.private_lbs.taskmaster.bat.data.dto.response.ProcessedVideoByHitter;
-import com.private_lbs.taskmaster.bat.data.dto.response.HitterInfoWithInningInfo;
+import com.private_lbs.taskmaster.bat.data.dto.response.*;
 import com.private_lbs.taskmaster.bat.service.BatService;
 import com.private_lbs.taskmaster.global.auth.Auth;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,16 +20,37 @@ public class BatController {
     private final BatService batService;
 
     @Auth
-    @GetMapping("/{request}/bat/hitters/processed-videos")
-    public ResponseEntity<Map<String, List<ProcessedVideoByHitter>>> getProcessedVideosByHitters(@PathVariable("request") long requestId) {
+    @GetMapping("/{requestId}/bat/team")
+    public ResponseEntity<TeamInfo> getTeamInfo(@Valid @PathVariable("requestId") long requestId) {
+        return ResponseEntity.ok().body(batService.getTeamInfo(requestId));
+    }
+
+    @Auth
+    @GetMapping("/{requestId}/bat/hitters/processed-videos")
+    public ResponseEntity<Map<String, List<ProcessedVideoByHitter>>> getProcessedVideosByHitters(
+            @Valid @PathVariable("requestId") long requestId) {
         return ResponseEntity.ok().body(batService.getProcessedVideoByHitters(requestId));
     }
 
     @Auth
-    @GetMapping("/{request}/bat/{inning}/processed-videos")
-    public ResponseEntity<List<HitterInfoWithInningInfo>> getProcessedVideoByTeamAndInning
-            (@PathVariable("request") long request,
-             @PathVariable("inning") int inning) {
-        return ResponseEntity.ok().body(batService.getProcessedVideoByTeamAndInning(request, inning));
+    @GetMapping("/{requestId}/bat/{inning}/processed-videos")
+    public ResponseEntity<List<LineUpWithInningProcessedVideo>> getProcessedVideoByTeamAndInning
+            (@Valid @PathVariable("requestId") long requestId,
+             @Valid @PathVariable("inning") int inning) {
+        return ResponseEntity.ok().body(batService.getProcessedVideoByInning(requestId, inning));
+    }
+
+    // 스타트 라인업
+    @Auth
+    @GetMapping("/{requestId}/bat/line-up")
+    public ResponseEntity<LineUp> getLineUp(@Valid @PathVariable("requestId") long requestId) {
+        return ResponseEntity.ok().body(batService.getTeamStartLineUp(requestId));
+    }
+
+    @Auth
+    @GetMapping("/{requestId}/bat/time-line")
+    public ResponseEntity<Map<Integer, List<HitterNameAndImage>>> getTimeLine(
+            @Valid @PathVariable("requestId") long requestId) {
+        return ResponseEntity.ok().body(batService.getTimeLine(requestId));
     }
 }
