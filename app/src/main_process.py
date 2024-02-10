@@ -1,7 +1,18 @@
 import os
 
+from sql.database import connect_to_mysql
+from sql.crud import select_all_hitter, select_all_pitcher
 from .video_process import process_video
 from .clip_process import process_result
+
+conn = connect_to_mysql()
+curs = conn.cursor()
+pitchers = select_all_pitcher(curs)
+hitters = select_all_hitter(curs)
+curs.close()
+conn.close()
+
+players = {}
 
 def main(dic_path):
     file_list = os.listdir(dic_path)
