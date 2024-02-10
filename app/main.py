@@ -46,9 +46,9 @@ async def set_redis():
                 await r.publish("ch1", json.dumps({"localPath" : dic_path}))
             except Exception:
                 # 비디오 편집 과정에서 에러 발생시 text 파일에 기록하여 전달
-                print("error 발생하여 error text 파일")
+                print("error 발생하여 error text 파일 생성")
                 e = str(traceback.format_exc())
-                localPath = dic_path + "\\\\error_desc_1.txt"
+                localPath = dic_path + "//error_desc_1.txt"
                 f = open(localPath, "w")
                 f.write(e)
                 f.close()
