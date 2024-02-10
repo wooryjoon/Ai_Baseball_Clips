@@ -37,8 +37,9 @@ export const upload = async (uploadFile: File) => {
                     'Content-Type': part.type,
                 },
             });
-
+            console.log(uploadResponse.status);
             console.log(uploadResponse.headers);
+            console.log('ETag:', uploadResponse.headers.etag);
 
             parts.push({ etag: uploadResponse.headers.etag, partNumber: i + 1 });
         }
