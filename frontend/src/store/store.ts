@@ -1,10 +1,23 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { combineReducers, configureStore, createStore } from '@reduxjs/toolkit';
 import authReducer from './slice/authSlice';
 
-const store = configureStore({
-    reducer: {
-        auth: authReducer,
-    },
+import { persistStore, persistReducer } from 'redux-persist';
+import sessionStorage from 'redux-persist/es/storage/session';
+
+const persistConfig = {
+    key: 'root',
+    storage: sessionStorage,
+};
+
+const rootReducer = combineReducers({
+    auth: authReducer,
 });
 
-export default store;
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+const store = configureStore({
+    reducer: persistedReducer,
+});
+const persistor = persistStore(store);
+
+export { store, persistor };
