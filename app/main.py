@@ -6,8 +6,8 @@ import json
 import os
 import traceback
 
-from src.video_process import process_video
-from src.clip_process import *
+from app.src.video_process import process_video
+from app.src.clip_process import *
 # from pytube import YouTube
 
 app = FastAPI()
