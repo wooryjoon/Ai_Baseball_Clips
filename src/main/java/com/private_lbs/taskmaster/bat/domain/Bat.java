@@ -2,7 +2,7 @@ package com.private_lbs.taskmaster.bat.domain;
 
 import com.private_lbs.taskmaster.global.domain.BaseEntity;
 import com.private_lbs.taskmaster.hitter.domain.Hitter;
-import com.private_lbs.taskmaster.pitcher.Pitcher;
+import com.private_lbs.taskmaster.pitcher.domain.Pitcher;
 import com.private_lbs.taskmaster.request.domain.Request;
 import jakarta.persistence.*;
 import lombok.AccessLevel;

@@ -1,4 +1,4 @@
-package com.private_lbs.taskmaster.pitcher;
+package com.private_lbs.taskmaster.pitcher.domain;
 
 import com.private_lbs.taskmaster.global.domain.BaseEntity;
 import com.private_lbs.taskmaster.team.domain.Team;

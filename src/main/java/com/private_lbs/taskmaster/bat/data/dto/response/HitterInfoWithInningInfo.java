@@ -12,6 +12,7 @@ public class HitterInfoWithInningInfo {
     private long hitterId;
     private String name;
     private String position;
+    private boolean favorite;
     private boolean isHit;
     private String processedVideoUrl;
 
