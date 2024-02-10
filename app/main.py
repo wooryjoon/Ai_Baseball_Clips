@@ -41,7 +41,7 @@ async def set_redis():
                 # 비디오 편집 과정에서 에러 발생시 text 파일에 기록하여 전달
                 print("error 발생하여 error text 파일")
                 e = str(traceback.format_exc())
-                localPath = dic_path + "\\\\error_desc_1.txt"
+                localPath = dic_path + "/error_desc_1.txt"
                 f = open(localPath, "w")
                 f.write(e)
                 f.close()
@@ -56,7 +56,7 @@ if __name__ == "__main__":
 
 def main(dic_path):
     file_list = os.listdir(dic_path)
-    video_path = dic_path + "\\" + file_list[0]
+    video_path = dic_path + "/" + file_list[0]
     print("video 경로 : ", video_path)
     
     result = process_video(video_path)
