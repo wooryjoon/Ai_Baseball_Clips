@@ -74,7 +74,7 @@ def read_text(image):
 	config = ('-l kor --oem 3 --psm 11')
 	# tesseract 읽지 못하는 에러방지 위해 tesseract 직접 설치 후
 	# pytesseract 메서드 사용전에 설치 경로 입력해줌
-	pytesseract.pytesseract.tesseract_cmd = 'app/resources/Tesseract-OCR/tesseract.exe'
+	# pytesseract.pytesseract.tesseract_cmd = 'app/resources/Tesseract-OCR/tesseract.exe'
 	# text OCR'd by Tesseract
 	text = pytesseract.image_to_string(image, config=config)
 	# print("TEXT : {}\n".format(text))

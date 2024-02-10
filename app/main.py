@@ -56,7 +56,7 @@ if __name__ == "__main__":
 
 def main(dic_path):
     file_list = os.listdir(dic_path)
-    video_path = dic_path + "\\" + file_list[0]
+    video_path = dic_path + "/" + file_list[0]
     print("video 경로 : ", video_path)
     
     result = process_video(video_path)
