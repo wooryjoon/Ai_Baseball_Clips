@@ -11,7 +11,17 @@ app = FastAPI()
 
 @app.get("/")
 def root():
-    return {"message": "Hello World"}
+    from sql.database import connect_to_mysql
+    from sql.crud import select_all_hitter, select_all_pitcher
+    conn = connect_to_mysql()
+    curs = conn.cursor()
+    pitchers = select_all_pitcher(curs)
+    hitters = select_all_hitter(curs)
+    curs.close()
+    conn.close()
+    players = {}
+    return {"pitchers": pitchers,
+            "hitters" : hitters}
 
 # 서버 로딩되면 redis 자동연결 및 채널구독
 @app.on_event("startup")
