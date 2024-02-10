@@ -17,6 +17,7 @@ players = {}
 def main(dic_path):
     file_list = os.listdir(dic_path)
     video_path = dic_path + "\\" + file_list[0]
+    print(video_path)
     
     result = process_video(video_path)
     process_result(video_path, result)
