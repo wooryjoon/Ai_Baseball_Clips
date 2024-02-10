@@ -43,7 +43,6 @@ const UploadVideo = () => {
     const uploadFile = async () => {
         if (inputFile) {
             const status = await upload(inputFile.file);
-
             if (status) setIsComplete(true);
         }
     };

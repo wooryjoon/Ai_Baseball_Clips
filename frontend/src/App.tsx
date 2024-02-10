@@ -13,7 +13,7 @@ import PrivateRoute from './route/PrivateRoute';
 import VideoResultOverview from './pages/VideoResultPage/VideoResultOverview/VideoResultOverview';
 import VideoReport from './pages/VideoResultPage/VideoReport';
 
-initMockAPI();
+// initMockAPI();
 
 function App() {
     let vh = window.innerHeight * 0.01;
