@@ -7,6 +7,7 @@ import sessionStorage from 'redux-persist/es/storage/session';
 const persistConfig = {
     key: 'root',
     storage: sessionStorage,
+    whitelist: ['auth'],
 };
 
 const rootReducer = combineReducers({
@@ -17,6 +18,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
     reducer: persistedReducer,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false }),
 });
 const persistor = persistStore(store);
 
