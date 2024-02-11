@@ -9,24 +9,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class MemberRepository {
-    @PersistenceContext
-    EntityManager em;
-    // 회원가입
-    public void save(Member member) {
-        em.persist(member);
-    }
-
-    public Optional<Member> findByEmail(String email) {
-        String jpql = "SELECT m From Member m WHERE m.email = :email";
-        List<Member> members = em.createQuery(jpql, Member.class)
-                .setParameter("email", email)
-                .getResultList();
-        return members.stream().findAny();
-    }
-
-    public Optional<Member> findById(Long id) {
-        return Optional.ofNullable(em.find(Member.class, id));
-    }
-
+public interface MemberRepository extends JpaRepository<Member, Long> {
+    Optional<Member> findByEmail(String email);
 }
