@@ -5,79 +5,36 @@ import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineDot from '@mui/lab/TimelineDot';
 import TimeLinePlayer from './TimeLinePlayer';
+import { TeamTimeLine } from '@/api/type';
+import calculateInning from '@/utils/calculateInning';
 
-export default function TimeLine() {
+type TimeLine = {
+    timeLine: TeamTimeLine;
+};
+
+export default function TimeLine({ timeLine }: TimeLine) {
+    const timeLineEntries = Object.entries(timeLine);
+    console.log(timeLineEntries);
     return (
         <Timeline position="alternate-reverse">
-            <TimelineItem className="timeline-item left">
-                <TimelineSeparator>
-                    <TimelineDot className="dot" />
-                    <TimelineConnector className="connector" />
-                </TimelineSeparator>
-                <TimelineContent className="content">
-                    <h1 className="timeline-item-title">1회초</h1>
-                    <TimeLinePlayer />
-                    <TimeLinePlayer />
-                    <TimeLinePlayer />
-                </TimelineContent>
-            </TimelineItem>
-            <TimelineItem className="timeline-item right">
-                <TimelineSeparator>
-                    <TimelineDot className="dot" />
-                </TimelineSeparator>
-                <TimelineContent className="content">
-                    <h1 className="timeline-item-title">1회초</h1>
-                    <TimeLinePlayer />
-                    <TimeLinePlayer />
-                    <TimeLinePlayer />
-                </TimelineContent>
-            </TimelineItem>
-            <TimelineItem className="timeline-item left">
-                <TimelineSeparator>
-                    <TimelineDot className="dot" />
-                    <TimelineConnector className="connector" />
-                </TimelineSeparator>
-                <TimelineContent className="content">
-                    <h1 className="timeline-item-title">1회초</h1>
-                    <TimeLinePlayer />
-                    <TimeLinePlayer />
-                    <TimeLinePlayer />
-                </TimelineContent>
-            </TimelineItem>
-            <TimelineItem className="timeline-item right">
-                <TimelineSeparator>
-                    <TimelineDot className="dot" />
-                </TimelineSeparator>
-                <TimelineContent className="content">
-                    <h1 className="timeline-item-title">1회초</h1>
-                    <TimeLinePlayer />
-                    <TimeLinePlayer />
-                    <TimeLinePlayer />
-                </TimelineContent>
-            </TimelineItem>
-            <TimelineItem className="timeline-item left">
-                <TimelineSeparator>
-                    <TimelineDot className="dot" />
-                    <TimelineConnector className="connector" />
-                </TimelineSeparator>
-                <TimelineContent className="content">
-                    <h1 className="timeline-item-title">1회초</h1>
-                    <TimeLinePlayer />
-                    <TimeLinePlayer />
-                    <TimeLinePlayer />
-                </TimelineContent>
-            </TimelineItem>
-            <TimelineItem className="timeline-item right">
-                <TimelineSeparator>
-                    <TimelineDot className="dot" />
-                </TimelineSeparator>
-                <TimelineContent className="content">
-                    <h1 className="timeline-item-title">1회초</h1>
-                    <TimeLinePlayer />
-                    <TimeLinePlayer />
-                    <TimeLinePlayer />
-                </TimelineContent>
-            </TimelineItem>
+            {timeLineEntries.map(([key, data]) => {
+                const [inning, type] = calculateInning(key);
+                const dir = type === '초' ? 'left' : 'right';
+                return (
+                    <TimelineItem className={`timeline-item ${dir}`}>
+                        <TimelineSeparator>
+                            <TimelineDot className="dot" />
+                            <TimelineConnector className="connector" />
+                        </TimelineSeparator>
+                        <TimelineContent className="content">
+                            <h1 className="timeline-item-title">{inning}</h1>
+                            <TimeLinePlayer />
+                            <TimeLinePlayer />
+                            <TimeLinePlayer />
+                        </TimelineContent>
+                    </TimelineItem>
+                );
+            })}
         </Timeline>
     );
 }

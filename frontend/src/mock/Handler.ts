@@ -1,5 +1,8 @@
 import { HttpResponse, http, delay } from 'msw';
 import { clipData } from './dummydata';
+import KT_logo from '@/assets/BaseBallTeam/KT.png';
+import LG_logo from '@/assets/BaseBallTeam/LG.png';
+import player from '@/assets/선수1.png';
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
 const signUpUrl = baseUrl + import.meta.env.VITE_API_SIGNUP_URL;
 const loginUrl = baseUrl + import.meta.env.VITE_API_LOGIN_URL;
@@ -49,5 +52,86 @@ export const handlers = [
             },
             { status: 200 }
         );
+    }),
+    // 팀 정보 fetch 모킹
+    http.get(baseUrl + '/id/bat/name', async ({ request }) => {
+        await delay(1000);
+        const response = {
+            firstTeamName: 'KT',
+            firstTeamImageUrl: KT_logo,
+            secondTeamName: 'LG',
+            secondTeamImageUrl: LG_logo,
+        };
+        return HttpResponse.json(response, { status: 200 });
+    }),
+    // 팀 라인업 fetch 모킹
+    http.get(baseUrl + '/id/bat/line-up', async ({ request }) => {
+        await delay(1000);
+        const response = {
+            firstTeam: [
+                {
+                    hitterId: 1,
+                    name: '배정대',
+                    position: '1B',
+                    playerImage: player,
+                },
+                {
+                    hitterId: 2,
+                    name: '김상수',
+                    position: '2B',
+                    playerImage: player,
+                },
+            ],
+            secondTeam: [
+                {
+                    hitterId: 1,
+                    name: '배정대',
+                    position: '1B',
+                    playerImage: player,
+                },
+                {
+                    hitterId: 2,
+                    name: '김상수',
+                    position: '2B',
+                    playerImage: player,
+                },
+            ],
+        };
+        return HttpResponse.json(response, { status: 200 });
+    }),
+    // 팀 타임라인 fetch 모킹
+    http.get(baseUrl + '/id/bat/time-line', async ({ request }) => {
+        await delay(1000);
+        const response = {
+            '1': [
+                {
+                    name: '배정대',
+                    imageUrl: player,
+                },
+                {
+                    name: '김상수',
+                    imageUrl: player,
+                },
+                {
+                    name: '황재균',
+                    imageUrl: player,
+                },
+            ],
+            '2': [
+                {
+                    name: '박해민',
+                    imageUrl: player,
+                },
+                {
+                    name: '김현수',
+                    imageUrl: player,
+                },
+                {
+                    name: '오스틴',
+                    imageUrl: player,
+                },
+            ],
+        };
+        return HttpResponse.json(response, { status: 200 });
     }),
 ];

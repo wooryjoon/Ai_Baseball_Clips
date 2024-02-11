@@ -12,8 +12,8 @@ import MainPage from './pages/MainPage';
 import PrivateRoute from './route/PrivateRoute';
 import VideoResultOverview from './pages/VideoResultPage/VideoResultOverview/VideoResultOverview';
 import VideoReport from './pages/VideoResultPage/VideoReport';
-
-// initMockAPI();
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+initMockAPI();
 
 function App() {
     let vh = window.innerHeight * 0.01;
@@ -43,6 +43,7 @@ function App() {
                     </Routes>
                 </BrowserRouter>
             </section>
+            <ReactQueryDevtools initialIsOpen={false} />
         </>
     );
 }
