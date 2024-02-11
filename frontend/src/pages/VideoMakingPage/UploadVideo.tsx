@@ -73,7 +73,7 @@ const UploadVideo = () => {
                 <Button styleType="uploadvideo" onClick={inputFile && uploadFile}>
                     영상 업로드
                 </Button>
-                <Link to="/main" onClick={nextHandler}>
+                <Link to="/result" onClick={nextHandler}>
                     <Button styleType="gonext" disabled={!isComplete}>
                         결과페이지로 이동
                     </Button>
