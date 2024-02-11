@@ -42,8 +42,9 @@ const UploadVideo = () => {
     // 성공적으로 완료가 되면 true 반환
     const uploadFile = async () => {
         if (inputFile) {
-            const status = await upload(inputFile.file);
-            if (status) setIsComplete(true);
+            upload(inputFile.file).then((status) => {
+                if (status) setIsComplete(true);
+            });
         }
     };
 
