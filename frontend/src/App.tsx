@@ -12,6 +12,7 @@ import MainPage from './pages/MainPage';
 import PrivateRoute from './route/PrivateRoute';
 import VideoResultOverview from './pages/VideoResultPage/VideoResultOverview/VideoResultOverview';
 import VideoReport from './pages/VideoResultPage/VideoReport';
+import LoadingAI from './pages/VideoMakingPage/LoadingAI';
 
 // initMockAPI();
 
@@ -32,6 +33,7 @@ function App() {
                             <Route path="/main" element={<MainPage />} />
                             {/* <Route path="/main" element={<Welcome />} /> */}
                             <Route path="/makingvideo" element={<MakingVideo />}></Route>
+                            <Route path="/loadingAI" element={<LoadingAI />} />
                             <Route path="/mypage" element={<MyPage />} />
                             <Route path="/result" element={<VideoResultPage />}>
                                 <Route index element={<VideoReport />} />
