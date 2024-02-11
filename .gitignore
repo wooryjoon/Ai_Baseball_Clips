@@ -280,3 +280,4 @@ dist-ssr
 
 ### application-secret
 application-secret.yml
+*.p12
