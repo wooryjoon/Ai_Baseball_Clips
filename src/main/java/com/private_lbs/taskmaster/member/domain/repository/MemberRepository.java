@@ -10,7 +10,6 @@ import java.util.Optional;
 
 @Repository
 public class MemberRepository {
-
     @PersistenceContext
     EntityManager em;
     // 회원가입
