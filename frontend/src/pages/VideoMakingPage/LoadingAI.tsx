@@ -1,5 +1,6 @@
 import Header from '@/components/Header';
 import { useState, useEffect } from 'react';
+// import { eventSourcePolyfill, NativeEventSource } from 'event-source-polyfill';
 
 export default function LoadingAI() {
     const baseURL = import.meta.env.VITE_API_BASE_URL;
@@ -7,6 +8,21 @@ export default function LoadingAI() {
     // console.log(baseURL + '/S3/subscribe');
 
     useEffect(() => {
+        const jwtToken = sessionStorage.getItem('accessToken');
+
+        // const eventSourceInitDict = {
+        //     headers: {
+        //         Authorization: `Bearer ${jwtToken}`,
+        //     },
+        // };
+
+        // {
+        //     headers: {
+        //         Authorization: `Bearer ${jwtToken}`,
+        //         Accept: 'text/event-stream',
+        //     },
+        // }
+
         const eventSource = new EventSource(url);
 
         eventSource.onopen = (event: Event) => {
