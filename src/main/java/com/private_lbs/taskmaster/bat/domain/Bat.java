@@ -1,5 +1,6 @@
 package com.private_lbs.taskmaster.bat.domain;
 
+import com.private_lbs.taskmaster.favorite.domain.Favorite;
 import com.private_lbs.taskmaster.global.domain.BaseEntity;
 import com.private_lbs.taskmaster.hitter.domain.Hitter;
 import com.private_lbs.taskmaster.pitcher.domain.Pitcher;
@@ -31,6 +32,9 @@ public class Bat extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pitcher_id")
     private Pitcher pitcher;
+
+    @OneToOne(mappedBy = "bat", fetch =  FetchType.LAZY)
+    private Favorite favorite;
 
     private int inning;
 

@@ -1,11 +1,15 @@
 package com.private_lbs.taskmaster.hitter.domain;
 
+import com.private_lbs.taskmaster.bat.domain.Bat;
 import com.private_lbs.taskmaster.global.domain.BaseEntity;
 import com.private_lbs.taskmaster.team.domain.Team;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Entity
@@ -21,9 +25,14 @@ public class Hitter extends BaseEntity {
     @JoinColumn(name = "team_id")
     private Team team;
 
+    @OneToMany(mappedBy = "hitter", fetch = FetchType.LAZY)
+    private List<Bat> bat = new ArrayList<>();
+
     private String name;
 
     private String position;
+
+//    private String imageUrl;
 
     public Hitter(Team team, String name, String position) {
         this.team = team;
