@@ -32,13 +32,6 @@ public class BatController {
         return ResponseEntity.ok().body(batService.getProcessedVideoByHitters(requestId));
     }
 
-    // 스타트 라인업
-    @Auth
-    @GetMapping("/{requestId}/bat/line-up")
-    public ResponseEntity<LineUp> getLineUp(@Valid @PathVariable("requestId") long requestId) {
-        return ResponseEntity.ok().body(batService.getTeamStartLineUp(requestId));
-    }
-
     @Auth
     @GetMapping("/{requestId}/bat/time-line")
     public ResponseEntity<Map<Integer, List<HitterNameAndImage>>> getTimeLine(

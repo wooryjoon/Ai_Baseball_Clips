@@ -33,15 +33,4 @@ public class BatService {
                 .collect(Collectors
                         .groupingBy(HitterNameAndImage::getInning));
     }
-
-    public LineUp getTeamStartLineUp(long requestId) {
-
-        List<Hitter> firstTeam = getTeamLineUp(requestId, 1);
-        List<Hitter> secondTeam = getTeamLineUp(requestId, 0);
-
-        return LineUp.builder()
-                .firstTeam(firstTeam.subList(0, 9))
-                .secondTeam(secondTeam.subList(0, 9))
-                .build();
-    }
 }
