@@ -1,9 +1,9 @@
 import os
 
-from app.sql.database import DB
-from app.sql.config import host, user, passwd, database
-from app.sql.crud import Cursor
-from app.sql.models import Hitter, Pitcher
+from sql.database import DB
+from sql.config import host, user, passwd, database
+from sql.crud import Cursor
+from sql.models import Hitter, Pitcher
 from .video_process import process_video
 from .clip_process import process_result
 

@@ -1,7 +1,7 @@
 from moviepy.editor import VideoFileClip
 import os
 
-from app.sql.models import Hitter, Pitcher
+from sql.models import Hitter, Pitcher
 # clip 생성 methods
 
 # 타석별로 나누기

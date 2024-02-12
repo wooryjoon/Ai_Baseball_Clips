@@ -5,7 +5,7 @@ import aioredis
 import json
 import traceback
 
-from app.src.main_process import main
+from src.main_process import main
 
 app = FastAPI()
 
