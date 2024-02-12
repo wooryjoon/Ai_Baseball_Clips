@@ -32,6 +32,21 @@ public class HitterService {
     }
 
 
+    public TotalHittersResponse getHittersWithProcessedVideos(long requestId) {
+
+        return TotalHittersResponse.builder()
+                .firstTeam(generateTeamHitters(requestId, 1))
+                .secondTeam(generateTeamHitters(requestId, 0))
+                .build();
+    }
+
+    private List<HitterInfoWithInningProcessedVideo> generateTeamHitters(long requestId, int teamOrder) {
+        return hitterRepository.getHittersInOrder(requestId, teamOrder).stream()
+                .map(HitterInfoWithInningProcessedVideo::new)
+                .toList();
+    }
+
+
     private List<HitterInfoWithInningProcessedVideo> generateTeamHitters(long requestId, int teamOrder, int inning) {
         return hitterRepository.getHittersInOrder(requestId, teamOrder).stream()
                 .map(h -> new HitterInfoWithInningProcessedVideo(h, inning))
@@ -44,4 +59,5 @@ public class HitterService {
                 .map(HitterInfo::new)
                 .toList();
     }
+
 }

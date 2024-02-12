@@ -14,6 +14,15 @@ public class HitterInfoWithInningProcessedVideo {
     private String position;
     List<ProcessedVideoByInning> processedVideoByInnings;
 
+    public HitterInfoWithInningProcessedVideo(Hitter hitter) {
+        name = hitter.getName();
+        imageUrl = "이미지";
+        position = hitter.getPosition();
+        processedVideoByInnings = hitter.getBat().stream()
+                .map(ProcessedVideoByInning::new)
+                .collect(Collectors.toList());
+    }
+
     public HitterInfoWithInningProcessedVideo(Hitter hitter, int inning) {
         name = hitter.getName();
         imageUrl = "이미지";

@@ -11,11 +11,13 @@ public class ProcessedVideoByInning {
 
     private String processedVideoUrl;
     private String pitcherName;
+    private String inning;
     private boolean favorite;
 
     public ProcessedVideoByInning(Bat bat) {
         processedVideoUrl = bat.getProcessedVideo();
         pitcherName = bat.getPitcher().getName();
+        inning = getInning(bat.getInning());
         favorite = isFavorite(bat.getFavorite());
     }
 
@@ -23,4 +25,11 @@ public class ProcessedVideoByInning {
         return favorite != null;
     }
 
+    private String getInning(int inning) {
+        if (inning % 2 == 1) {
+            return inning / 2 + 1 + "회 초";
+        } else {
+            return inning / 2 + "회 말";
+        }
+    }
 }

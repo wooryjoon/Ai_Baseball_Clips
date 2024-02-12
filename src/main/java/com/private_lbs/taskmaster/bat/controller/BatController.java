@@ -26,13 +26,6 @@ public class BatController {
     }
 
     @Auth
-    @GetMapping("/{requestId}/bat/hitters/processed-videos")
-    public ResponseEntity<?> getProcessedVideosByHitters(
-            @Valid @PathVariable("requestId") long requestId) {
-        return ResponseEntity.ok().build();
-    }
-
-    @Auth
     @GetMapping("/{requestId}/bat/time-line")
     public ResponseEntity<Map<Integer, List<HitterNameAndImage>>> getTimeLine(
             @Valid @PathVariable("requestId") long requestId) {
