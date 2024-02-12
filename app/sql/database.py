@@ -1,6 +1,5 @@
 import pymysql
 
-# 데이터베이스 연결
 class DB:
     def __init__(self, host, user, passwd, database):
         self.host = host
@@ -8,7 +7,7 @@ class DB:
         self.passwd = passwd
         self.database = database
         
-    def connect(self):
+    def connect(self): # 데이터베이스 연결
         self.conn = pymysql.connect(
             host = self.host,
             user = self.user,
