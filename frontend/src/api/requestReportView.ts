@@ -29,4 +29,5 @@ const overviewPageQuery = () => {
     return { data, isLoading, isError };
 };
 
+export { requestTeamInfo, requestStartLineUp, requestTimeLine };
 export default overviewPageQuery;

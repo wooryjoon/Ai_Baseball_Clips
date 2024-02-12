@@ -1,4 +1,4 @@
-//
+// 로그인
 interface LoginResponseData {
     id: number;
     email: string;
@@ -30,6 +30,7 @@ interface TeamLineUp {
     firstTeam: PlayerLineUp[];
     secondTeam: PlayerLineUp[];
 }
+
 // 출전 선수 타임라인 response
 interface PlayerTimeLine {
     name: string;
@@ -47,4 +48,32 @@ interface TeamTimeLine {
     '9'?: PlayerTimeLine[];
 }
 
-export type { LoginResponseData, FailResponse, TeamInfo, TeamLineUp, TeamTimeLine, PlayerLineUp };
+// 야구장 포지션 선수 response
+interface TeamInfoFilteredByInnings {
+    firstTeam: PlayerInfoFilteredByInnings[];
+    secondTeam: PlayerInfoFilteredByInnings[];
+}
+interface PlayerInfoFilteredByInnings {
+    name: string;
+    position: string;
+    imageUrl: string;
+    processedVideoByInnings: ProcessedVideoByInnings[];
+}
+interface ProcessedVideoByInnings {
+    processedVideoUrl: string;
+    pitcherName: string;
+    isFavorite: boolean;
+}
+
+export type {
+    LoginResponseData,
+    FailResponse,
+    TeamInfo,
+    TeamLineUp,
+    TeamTimeLine,
+    PlayerLineUp,
+    PlayerTimeLine,
+    TeamInfoFilteredByInnings,
+    PlayerInfoFilteredByInnings,
+    ProcessedVideoByInnings,
+};

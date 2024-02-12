@@ -2,7 +2,6 @@ interface Clip {
     poster: string;
     src: string;
     source_type: string;
-    title: string;
 }
 
 export default function Video({ poster, src, source_type }: Clip) {

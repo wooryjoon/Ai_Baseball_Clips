@@ -3,6 +3,8 @@ import { clipData } from './dummydata';
 import KT_logo from '@/assets/BaseBallTeam/KT.png';
 import LG_logo from '@/assets/BaseBallTeam/LG.png';
 import player from '@/assets/선수1.png';
+import player2 from '@/assets/선수2.png';
+
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
 const signUpUrl = baseUrl + import.meta.env.VITE_API_SIGNUP_URL;
 const loginUrl = baseUrl + import.meta.env.VITE_API_LOGIN_URL;
@@ -129,6 +131,147 @@ export const handlers = [
                 {
                     name: '오스틴',
                     imageUrl: player,
+                },
+            ],
+        };
+        return HttpResponse.json(response, { status: 200 });
+    }),
+    // 이닝에 따른 야구장 선수 데이터 fetch 모킹
+    http.get(baseUrl + '/id/hitter/list/1/processed-video', async ({ request }) => {
+        await delay(1000);
+        const response = {
+            firstTeam: [
+                {
+                    name: '배정대',
+                    position: 'CF',
+                    imageUrl: player,
+                    processedVideoByInnings: [
+                        {
+                            processedVideoUrl: '가공된 영상',
+                            pitcherName: '켈리',
+                            isFavorite: false,
+                        },
+                    ],
+                },
+                {
+                    name: '김상수',
+                    position: 'SS',
+                    imageUrl: player,
+                    processedVideoByInnings: [
+                        {
+                            processedVideoUrl: '가공된 영상',
+                            pitcherName: '켈리',
+                            isFavorite: false,
+                        },
+                    ],
+                },
+                {
+                    name: '박병호',
+                    position: '1B',
+                    imageUrl: player,
+                    processedVideoByInnings: [],
+                },
+            ],
+            secondTeam: [
+                {
+                    name: '고수호',
+                    position: 'CF',
+                    imageUrl: player2,
+                    processedVideoByInnings: [
+                        {
+                            processedVideoUrl: '가공된 영상',
+                            pitcherName: '켈리',
+                            isFavorite: false,
+                        },
+                    ],
+                },
+                {
+                    name: '우창잔',
+                    position: 'SS',
+                    imageUrl: player2,
+                    processedVideoByInnings: [
+                        {
+                            processedVideoUrl: '가공된 영상',
+                            pitcherName: '켈리',
+                            isFavorite: false,
+                        },
+                    ],
+                },
+                {
+                    name: '잔민장',
+                    position: '1B',
+                    imageUrl: player2,
+                    processedVideoByInnings: [],
+                },
+            ],
+        };
+        return HttpResponse.json(response, { status: 200 });
+    }),
+    http.get(baseUrl + '/id/hitter/list/3/processed-video', async ({ request }) => {
+        await delay(1000);
+        const response = {
+            firstTeam: [
+                {
+                    name: '2이닝',
+                    position: 'CF',
+                    imageUrl: player,
+                    processedVideoByInnings: [
+                        {
+                            processedVideoUrl: '가공된 영상',
+                            pitcherName: '켈리',
+                            isFavorite: false,
+                        },
+                    ],
+                },
+                {
+                    name: '2이닝',
+                    position: 'SS',
+                    imageUrl: player,
+                    processedVideoByInnings: [
+                        {
+                            processedVideoUrl: '가공된 영상',
+                            pitcherName: '켈리',
+                            isFavorite: false,
+                        },
+                    ],
+                },
+                {
+                    name: '2이닝',
+                    position: '1B',
+                    imageUrl: player,
+                    processedVideoByInnings: [],
+                },
+            ],
+            secondTeam: [
+                {
+                    name: '2이닝',
+                    position: 'CF',
+                    imageUrl: player2,
+                    processedVideoByInnings: [
+                        {
+                            processedVideoUrl: '가공된 영상',
+                            pitcherName: '켈리',
+                            isFavorite: false,
+                        },
+                    ],
+                },
+                {
+                    name: '2이닝',
+                    position: 'SS',
+                    imageUrl: player2,
+                    processedVideoByInnings: [
+                        {
+                            processedVideoUrl: '가공된 영상',
+                            pitcherName: '켈리',
+                            isFavorite: false,
+                        },
+                    ],
+                },
+                {
+                    name: '2이닝',
+                    position: '1B',
+                    imageUrl: player2,
+                    processedVideoByInnings: [],
                 },
             ],
         };

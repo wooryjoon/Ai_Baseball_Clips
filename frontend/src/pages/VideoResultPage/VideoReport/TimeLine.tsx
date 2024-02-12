@@ -5,7 +5,7 @@ import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineDot from '@mui/lab/TimelineDot';
 import TimeLinePlayer from './TimeLinePlayer';
-import { TeamTimeLine } from '@/api/type';
+import { PlayerTimeLine, TeamTimeLine } from '@/api/type';
 import calculateInning from '@/utils/calculateInning';
 
 type TimeLine = {
@@ -14,7 +14,6 @@ type TimeLine = {
 
 export default function TimeLine({ timeLine }: TimeLine) {
     const timeLineEntries = Object.entries(timeLine);
-    console.log(timeLineEntries);
     return (
         <Timeline position="alternate-reverse">
             {timeLineEntries.map(([key, data]) => {
@@ -28,9 +27,9 @@ export default function TimeLine({ timeLine }: TimeLine) {
                         </TimelineSeparator>
                         <TimelineContent className="content">
                             <h1 className="timeline-item-title">{inning}</h1>
-                            <TimeLinePlayer />
-                            <TimeLinePlayer />
-                            <TimeLinePlayer />
+                            {data.map((player: PlayerTimeLine, i: number) => {
+                                return <TimeLinePlayer key={i} player={player} />;
+                            })}
                         </TimelineContent>
                     </TimelineItem>
                 );

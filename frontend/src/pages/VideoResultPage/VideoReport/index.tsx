@@ -4,10 +4,9 @@ import TimeLine from './TimeLine';
 import './VideoReport.scss';
 import VideoReportScoreBoard from './VideoReportScoreBoard';
 
-import { useQuery } from '@tanstack/react-query';
-
 export default function VideoReport() {
     const { data, isLoading, isError } = overviewPageQuery();
+
     if (isLoading) return <div>loading</div>;
     if (isError) return <div>error</div>;
     if (data.teamInfo && data.lineUp && data.timeLine) {

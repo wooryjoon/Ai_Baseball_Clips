@@ -12,7 +12,7 @@ export default function useCalculateWidthHeight(ref: RefObject<HTMLElement>) {
             }
         };
         setClientWidthHeight();
-    }, []);
+    });
 
     return { width, height };
 }

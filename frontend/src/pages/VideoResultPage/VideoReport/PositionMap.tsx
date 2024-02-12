@@ -9,7 +9,6 @@ type PositionMap = {
 };
 
 export default function PositionMap({ lineUp }: PositionMap) {
-    console.log(lineUp);
     const positionMapRef = useRef(null);
     const { width, height } = useCalculateWidthHeight(positionMapRef);
     const canvasRef = useRef(null);
