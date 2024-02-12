@@ -1,7 +1,10 @@
 import { instance } from '.';
 import axios from 'axios';
+import { openSSE } from './sse';
 
 export function upload(uploadFile: File) {
+    openSSE();
+
     return instance
         .get('S3/generate-url', {
             params: { filename: uploadFile.name },
@@ -22,7 +25,7 @@ export function upload(uploadFile: File) {
         });
 }
 
-export function UploadFiletoS3(presignedUrl: string, uploadFile: File) {
+function UploadFiletoS3(presignedUrl: string, uploadFile: File) {
     axios
         .put(presignedUrl, uploadFile, {
             headers: {

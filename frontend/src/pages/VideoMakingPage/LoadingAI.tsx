@@ -1,40 +1,32 @@
 import Header from '@/components/Header';
 import { useState, useEffect } from 'react';
-// import { eventSourcePolyfill, NativeEventSource } from 'event-source-polyfill';
+import { EventSourcePolyfill, NativeEventSource } from 'event-source-polyfill';
+import { eventSource } from '@/api/sse';
 
 export default function LoadingAI() {
-    const baseURL = import.meta.env.VITE_API_BASE_URL;
-    const url = baseURL + '/S3/subscribe';
-    // console.log(baseURL + '/S3/subscribe');
-
     useEffect(() => {
-        const jwtToken = sessionStorage.getItem('accessToken');
+        // const EventSource = EventSourcePolyfill || NativeEventSource;
+        // const jwtToken = sessionStorage.getItem('accessToken');
 
-        // const eventSourceInitDict = {
-        //     headers: {
-        //         Authorization: `Bearer ${jwtToken}`,
-        //     },
-        // };
-
-        // {
+        // const SSE = new EventSource(url, {
         //     headers: {
         //         Authorization: `Bearer ${jwtToken}`,
         //         Accept: 'text/event-stream',
         //     },
-        // }
+        // });
 
-        const eventSource = new EventSource(url);
+        // eventSource.addEventListener('connect', (event) => {
+        //     const { data: message } = event;
+        //     console.log('connect event data: ', message);
+        // });
 
-        eventSource.onopen = (event: Event) => {
-            console.log('Event 창구가 열렸습니다.');
-        };
-
-        eventSource.onmessage = (event: MessageEvent) => {
-            const message = event.data;
-            console.log(message);
+        eventSource.onmessage = (message: MessageEvent) => {
+            const data = message.data;
+            console.log(data);
         };
 
         eventSource.onerror = function (error) {
+            alert('EventSource failed');
             console.log(error);
         };
 
