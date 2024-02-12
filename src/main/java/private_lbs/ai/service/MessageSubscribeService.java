@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import private_lbs.ai.domain.AIProcessedVideoUrl;
+import private_lbs.ai.domain.Bat;
 import private_lbs.ai.domain.OriginalVideoLocalPath;
 import private_lbs.ai.domain.OriginalVideoUrl;
 
@@ -27,12 +28,13 @@ public class MessageSubscribeService {
         // 로컬 경로에 접근해 파일명 저장
         List<String> FileNames=LocalS3FileService.getFileNames(originalVideoLocalPath);
 
-        List<String> fileKeys=new ArrayList<>();
+
 
         log.info("AI Model 에서 가공 완료된 영상 위치 " + OriginalVideoLocalPath.getLocalPath());
         for(String fileName:FileNames){
+
             // 파일 이름 "_" 단위로 쪼개기
-            String[] parts=fileName.split("_");
+            String[] parts=fileName.split("__");
             log.info(fileName);
 
             //원본 영상은 걸러내기
@@ -41,13 +43,31 @@ public class MessageSubscribeService {
             }
 
             String fileKey=S3FileService.buildFileKey(originalVideoLocalPath,parts);
+
+            String[] splits=fileKey.split("/");
+
             // s3에 업로드.
             S3FileService.uploadFile(fileKey,new File(originalVideoLocalPath,fileName));
-            // DB에 저장
 
+            Bat bat=new Bat();
+            // 파일키 설정.
+            bat.setFileKey(fileKey);
+            // 몇번 타자인지
+            bat.setBattingOrder(Integer.parseInt(splits[splits.length-1]));
+            // 타석번호
+            bat.setAtBatOrder(Integer.parseInt(splits[splits.length-2]));
+            // 타자 아이디
+            bat.setHitterId(Integer.parseInt(splits[splits.length-3]));
+            // 투수 아이디
+            bat.setPitcherId(Integer.parseInt(splits[splits.length-4]));
+            // requestId
+            bat.setRequestId(Integer.parseInt(splits[splits.length-6]));
 
+            // DB에 저장 로직.
 
-            fileKeys.add(fileKey);
+            // Dto requestId, 투수 아이디. 타자아이디. 이닝, filekey, 타석번호,
+            // 투수아이디_타자아이디_타석번호_몇번타자인지
+
         }
         //로컬 폴더 삭제
         //LocalS3FileService.deleteDirectory(originalVideoLocalPath);
