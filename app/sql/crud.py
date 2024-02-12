@@ -101,7 +101,7 @@ class Cursor:
 
     def select_hitters(self):
         sql = '''
-        SELECT h.name, h.position, t.name as team_name
+        SELECT h.hitter_id as id, h.name, h.position, t.name as team_name
         FROM hitter h LEFT OUTER JOIN team t
         on h.team_id = t.team_id
         '''
@@ -111,7 +111,7 @@ class Cursor:
 
     def select_pitchers(self):
         sql = '''
-        SELECT p.name, p.position, t.name as team_name
+        SELECT p.pitcher_id as id, p.name, p.position, t.name as team_name
         FROM pitcher p LEFT OUTER JOIN team t
         on p.team_id = t.team_id
         '''

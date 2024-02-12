@@ -43,7 +43,7 @@ def process_video(video_path, players):
     score_board = -1 # 4분할 된 프레임 중 스코어보드가 있는 영역을 찾았는지
     part_cnt = [0, 0, 0, 0]
     
-    cnt, sec, min = 0, 0, 0 # 프레임 수, 동영상 시간
+    cnt, sec = 0, 0 # 프레임 수, 동영상 시간
     
     print("start reading video")
     while True:
@@ -68,8 +68,7 @@ def process_video(video_path, players):
         # print("{}번째 프레임\n".format(cnt))
         
         if sec != 0 and sec % 60 == 0:
-            min += 1
-            print("{}분 지났습니다.".format(min))
+            print("{}초 지났습니다.".format(sec))
         
         # print(part_cnt)
         # print(score_board)
@@ -208,5 +207,5 @@ def process_video(video_path, players):
         print("failed reading text")
         return None
     
-    print(result)
+    # print(result)
     return result

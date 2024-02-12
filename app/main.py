@@ -11,8 +11,8 @@ app = FastAPI()
 
 @app.get("/")
 def root():
-    return
-    
+    return 
+
 # 서버 로딩되면 redis 자동연결 및 채널구독
 @app.on_event("startup")
 async def set_redis():
@@ -37,7 +37,7 @@ async def set_redis():
                 # 비디오 편집 과정에서 에러 발생시 text 파일에 기록하여 전달
                 print("error 발생하여 error text 파일 생성")
                 e = str(traceback.format_exc())
-                localPath = dic_path + "//error_desc_1.txt"
+                localPath = dic_path + "/error_desc_1.txt"
                 f = open(localPath, "w")
                 f.write(e)
                 f.close()

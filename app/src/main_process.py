@@ -10,7 +10,7 @@ from .clip_process import process_result
 def main(dic_path):
     # 파일 경로 구하기
     file_list = os.listdir(dic_path)
-    video_path = dic_path + "\\" + file_list[0]
+    video_path = dic_path + "/" + file_list[0]
     print(video_path)
     
     # 선수 데이터 가져오기
@@ -29,7 +29,9 @@ def main(dic_path):
         curs.close()
         myDB.close()
     
+    # 영상 텍스트 추출
     result = process_video(video_path, players)
+    # 텍스트 결과 바탕으로 클립 생성
     process_result(video_path, result)
     
     # 원본영상 삭제
