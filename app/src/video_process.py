@@ -12,7 +12,7 @@ from .text_process import *
 times = 15
 result = {} # result dictionary
 
-def process_video(video_path):
+def process_video(video_path, players):
     global result
     
     # initialize the original frame dimensions, new frame dimensions,
@@ -43,7 +43,7 @@ def process_video(video_path):
     score_board = -1 # 4분할 된 프레임 중 스코어보드가 있는 영역을 찾았는지
     part_cnt = [0, 0, 0, 0]
     
-    cnt, sec = 0, 0 # 프레임 수, 동영상 시간
+    cnt, sec, min = 0, 0, 0 # 프레임 수, 동영상 시간
     
     print("start reading video")
     while True:
@@ -61,14 +61,15 @@ def process_video(video_path):
             sec += 1
             # print("{}초".format(sec))
         
-        if sec != 0 and sec % 60 == 0:
-            print("1분 지났습니다.")
-        
         # 배속
         global times
         if cnt % times != 0:
             continue
         # print("{}번째 프레임\n".format(cnt))
+        
+        if sec != 0 and sec % 60 == 0:
+            min += 1
+            print("{}분 지났습니다.".format(min))
         
         # print(part_cnt)
         # print(score_board)
@@ -135,13 +136,16 @@ def process_video(video_path):
                     
                     text = read_text(all_frame[i][1][startY:endY, startX:endX])
                     
-                    if does_text_in_players(text) == True:
-                        process_text(text, result, sec)
+                    # result를 변수로 들고 있는 text_driver 만들기 !
+                    
+                    player_obj = does_text_in_players(text, players)
+                    if player_obj is not None:
+                        process_text(player_obj, result, sec)
                         part_cnt[i] += 1
                     else:
-                        text = convert_text(text)
-                        if text is not None:
-                            process_text(text, result, sec)
+                        player_obj = convert_text(text, players)
+                        if player_obj is not None:
+                            process_text(player_obj, result, sec)
                             part_cnt[i] += 1
                             
                     # draw the bounding box on the frame
@@ -174,13 +178,14 @@ def process_video(video_path):
                 
                 text = read_text(all_frame[score_board][1][startY:endY, startX:endX])
                 
-                if does_text_in_players(text) == True:
-                    process_text(text, result, sec)
+                player_obj = does_text_in_players(text, players)
+                if player_obj is not None:
+                    process_text(player_obj, result, sec)
                     part_cnt[i] += 1
                 else:
-                    text = convert_text(text)
-                    if text is not None:
-                        process_text(text, result, sec)
+                    player_obj = convert_text(text, players)
+                    if player_obj is not None:
+                        process_text(player_obj, result, sec)
                         part_cnt[i] += 1
                         
             #     cv2.rectangle(all_frame[score_board][1], (startX, startY), (endX, endY), (0, 255, 0), 2)
@@ -202,4 +207,6 @@ def process_video(video_path):
     if len(result) == 0:
         print("failed reading text")
         return None
+    
+    print(result)
     return result

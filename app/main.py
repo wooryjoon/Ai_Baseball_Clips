@@ -5,31 +5,21 @@ import aioredis
 import json
 import traceback
 
-from src.main_process import main
+from app.src.main_process import main
 
 app = FastAPI()
 
 @app.get("/")
 def root():
-    from sql.database import connect_to_mysql
-    from sql.crud import select_all_hitter, select_all_pitcher
-    conn = connect_to_mysql()
-    curs = conn.cursor()
-    pitchers = select_all_pitcher(curs)
-    hitters = select_all_hitter(curs)
-    curs.close()
-    conn.close()
-    players = {}
-    return {"pitchers": pitchers,
-            "hitters" : hitters}
-
+    return
+    
 # 서버 로딩되면 redis 자동연결 및 채널구독
 @app.on_event("startup")
 async def set_redis():
-    # connect
-    # r = await aioredis.create_redis_pool("redis://i10a305.p.ssafy.io:6379", password="a305#@!")
-    r = await aioredis.create_redis_pool("redis://localhost")
-    # sub
+    # redis connect
+    r = await aioredis.create_redis_pool("redis://i10a305.p.ssafy.io:6379", password="a305#@!")
+    # r = await aioredis.create_redis_pool("redis://localhost")
+    # redis sub
     ch, = await r.subscribe("ch2")
     assert isinstance(ch, aioredis.Channel)
     
@@ -43,7 +33,6 @@ async def set_redis():
             dic_path = path_obj["localPath"]
             try:
                 main(dic_path)
-                await r.publish("ch1", json.dumps({"localPath" : dic_path}))
             except Exception:
                 # 비디오 편집 과정에서 에러 발생시 text 파일에 기록하여 전달
                 print("error 발생하여 error text 파일 생성")
@@ -52,8 +41,9 @@ async def set_redis():
                 f = open(localPath, "w")
                 f.write(e)
                 f.close()
-            # pub
-            await r.publish("ch1", json.dumps({"localPath" : dic_path}))
+            finally:
+                # redis pub
+                await r.publish("ch1", json.dumps({"localPath" : dic_path}))
                 
     asyncio.get_running_loop().create_task(read(ch))
 

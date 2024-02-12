@@ -1,6 +1,7 @@
-from resources.data import players2023 # resources/data/players의 선수명단 가져오기
 from moviepy.editor import VideoFileClip
 import os
+
+from app.sql.models import Hitter, Pitcher
 # clip 생성 methods
 
 # 타석별로 나누기
@@ -30,7 +31,8 @@ def split_time(time_set1, time_set2):
     return boxes
     
 # clip 만들기
-def make_clip(video_path, st_time, ed_time, title):
+def make_clip(video_path, time, title):
+    st_time = time[0], ed_time = time[1]
     if st_time == ed_time or st_time > ed_time:
         return
     print("making clip : {} to {}".format(st_time, ed_time))
@@ -40,25 +42,29 @@ def make_clip(video_path, st_time, ed_time, title):
 
 # result 처리
 def process_result(video_path, result):
-    players = list(result.keys())
-    length = len(players)
+    clips = []
+    hashs = list(result.keys())
+    length = len(hashs)
     for i in range(length):
         for j in range(length):
             if i >= j:
                 continue
-            player1 = players[i]
-            player2 = players[j]
-            if players2023.players[player1]["pos"] == "투수":
-                pitcher = player1
-                hitter = player2
+            player1 = result[hashs[i]][0]
+            player2 = result[hashs[j]][0]
+            if isinstance(player1, Pitcher): 
+                pitcher = player1.id
+                hitter = player2.id
             else:
-                pitcher = player2
-                hitter = player1
+                pitcher = player2.id
+                hitter = player1.id
             
-            boxes = split_time(result[pitcher], result[hitter])
+            boxes = split_time(result[hashs[i]][1], result[hashs[j]][1])
             for k in range(len(boxes)):
-                # title = "{team1}_{pitcher}_{team2}_{hitter}{}.mp4".format(
-                # players2023.players[pitcher]["team"], pitcher, players2023.players[hitter]["team"], hitter ,k + 1)
-                title = "/{}_{}_{}.mp4".format(
-                players2023.players[player2]["team"], player2, k + 1)
-                make_clip(video_path, boxes[k][0] - 1, boxes[k][1] + 1, title)
+                title = "/{}_{}_{}".format(
+                pitcher, hitter, k + 1)
+                clips.append({"title" : title, "time" : boxes[k]})
+    
+    clips = sorted(clips, key=lambda clip: clip["time"][0]) # 클립 시작 시간 기준 정렬
+    print(clips)
+    for i in range(len(clips)):
+        make_clip(video_path, clips[i]["time"], title + "_{}.mp4".format(i + 1))
