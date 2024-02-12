@@ -7,7 +7,7 @@ const SSEurl = import.meta.env.VITE_API_BASE_URL + '/S3/subscribe';
 export const eventSource = new EventSource(SSEurl);
 // const [isSSESet, setIsSSESet] = useState<boolean>(false);
 
-export function openSSE() {
+function openSSE() {
     // 이벤트 창구가 열렸을 때 동작 정의
     return (eventSource.onopen = () =>
         // event: Event

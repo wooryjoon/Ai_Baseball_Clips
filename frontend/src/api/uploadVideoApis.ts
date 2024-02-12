@@ -1,9 +1,15 @@
 import { instance } from '.';
 import axios from 'axios';
-import { openSSE } from './sse';
+import { eventSource } from './sse';
 
 export async function upload(uploadFile: File) {
-    openSSE();
+    const es = eventSource;
+    es.onopen = () =>
+        // event: Event
+        {
+            // setIsSSESet(true);
+            console.log('Event 창구가 열렸습니다.');
+        };
 
     return await instance
         .get('S3/generate-url', {

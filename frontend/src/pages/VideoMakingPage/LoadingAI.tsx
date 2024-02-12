@@ -1,5 +1,5 @@
 import Header from '@/components/Header';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { eventSource } from '@/api/sse';
 
 export default function LoadingAI() {
@@ -19,11 +19,10 @@ export default function LoadingAI() {
                     console.log('Connection was closed. Reconnecting...');
                     // Reconnect after a delay
                     setTimeout(connect, 1000);
-                    return es.close();
                 }
             };
         };
-        return connect;
+        return connect();
     }, []);
 
     return (
