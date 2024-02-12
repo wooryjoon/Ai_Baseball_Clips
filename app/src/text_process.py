@@ -1,4 +1,3 @@
-from app.resources.data import players2023 # resources/data/players의 선수명단 가져오기
 from jamo import h2j, j2hcj
 from difflib import SequenceMatcher 
 
@@ -6,35 +5,37 @@ from difflib import SequenceMatcher
 
 # 검출한 텍스트가 선수명단에 있는지 검사
 # player_names는 리스트
-def does_text_in_players(text):
+def does_text_in_players(text, players):
 	if text == '' or text is None:
-		return
-	if players2023.players.get(text) is None:
-		return False
-	return True
+		return None
+	for i in range(len(players)):
+		if players[i].name == text:
+			return players[i]
+	return None
 
-# 검출한 텍스트를 result dic에 등록
-def process_text(text, dict, time):
-	if text == '' or text is None:
+# 검출한 선수 객체를 result dic에 등록
+def process_text(obj, dict, time):
+	if obj == '' or obj is None:
 		return
-	value = dict.get(text)
+	value = dict.get(hash(obj))
 	if value is None:
 		# print("new text")
-		dict[text] = set()
-		dict[text].add(time)
+		dict[hash(obj)] = [obj, set()]
+		dict[hash(obj)][1].add(time)
 	else:
-		dict[text].add(time)
+		value[1].add(time)
 
 # 선수명단의 각각의 선수이름과 유사도 검사하여 변환
-def convert_text(text):
+def convert_text(text, players):
 	if text == '' or text is None:
 		return
-	for name in list(players2023.players):
+	for i in range(len(players)):
+		name = players[i].name
 		name_tmp = jamo_split(name)
 		text = jamo_split(text)
 		ratio = SequenceMatcher(None, name_tmp, text).ratio() # 유사도 검사
 		if ratio >= 0.75:
-			return name
+			return players[i]
 	return None
 
 def jamo_split(word):

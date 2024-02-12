@@ -4,7 +4,6 @@ import re
 
 from .image_process import get_grayscale
 
-
 # text detection + text recognition methods
 
 min_confidence = 0.5 # minimum probability required to inspect a region
