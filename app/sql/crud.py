@@ -1,9 +1,8 @@
 import pymysql
 
 # cursor : 커서 객체
-# 데이터베이스를 control 할 수 있는 cursor 객체 연결
 class Cursor:
-    def __init__(self, conn):
+    def __init__(self, conn): # 데이터베이스를 control 할 수 있는 cursor 객체 연결
         self.curs = conn.cursor(pymysql.cursors.DictCursor) # 딕셔너리 형태로 반환하는 cursor
         
     def close(self): # cursor 연결 종료

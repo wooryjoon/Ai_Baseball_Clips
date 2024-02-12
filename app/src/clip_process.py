@@ -32,8 +32,8 @@ def split_time(time_set1, time_set2):
     
 # clip 만들기
 def make_clip(video_path, time, title):
-    st_time = time[0] - 1
-    ed_time = time[1] + 1
+    st_time = time[0] - 2
+    ed_time = time[1] + 2
     if st_time == ed_time or st_time > ed_time:
         return
     print("making clip : {} to {}".format(st_time, ed_time))
@@ -52,20 +52,24 @@ def process_result(video_path, result):
                 continue
             player1 = result[hashs[i]][0]
             player2 = result[hashs[j]][0]
-            if isinstance(player1, Pitcher) and isinstance(player2, Hitter): 
+            pitcher, hitter = -1, -1
+            if isinstance(player1, Pitcher) and isinstance(player2, Hitter):
                 pitcher = player1.id
                 hitter = player2.id
-            if isinstance(player1, Hitter) and isinstance(player2, Pitcher):
+            elif isinstance(player1, Hitter) and isinstance(player2, Pitcher):
                 pitcher = player2.id
                 hitter = player1.id
+            else:
+                continue
             
             boxes = split_time(result[hashs[i]][1], result[hashs[j]][1])
             for k in range(len(boxes)):
-                title = "/{}_{}_{}".format(
+                title = "/{}__{}__{}".format(
                 pitcher, hitter, k + 1)
                 clips.append({"title" : title, "time" : boxes[k]})
     
     clips = sorted(clips, key=lambda clip: clip["time"][0]) # 클립 시작 시간 기준 정렬
+    
     # print(clips)
     for i in range(len(clips)):
-        make_clip(video_path, clips[i]["time"], title + "_{}.mp4".format(i + 1))
+        make_clip(video_path, clips[i]["time"], clips[i]["title"] + "__{}.mp4".format(i + 1))
