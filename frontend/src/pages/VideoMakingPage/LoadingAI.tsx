@@ -4,40 +4,26 @@ import { eventSource } from '@/api/sse';
 
 export default function LoadingAI() {
     useEffect(() => {
-        // function connectEventSource() {
-        //     const es = eventSource;
+        const connect = () => {
+            const es = eventSource;
 
-        //     es.onmessage = (message: MessageEvent) => {
-        //         const data = message.data;
-        //         console.log(data);
-        //     };
+            es.onmessage = (message: MessageEvent) => {
+                const data = message.data;
+                console.log(data);
+            };
 
-        //     es.onerror = function (error) {
-        //         alert('EventSource failed');
-        //         console.log(error);
-        //     };
-
-        //     return es;
-        // }
-
-        const es = eventSource;
-
-        es.onmessage = (message: MessageEvent) => {
-            const data = message.data;
-            console.log(data);
+            es.onerror = function (error) {
+                alert('EventSource failed');
+                console.log(error);
+                if (eventSource.readyState == EventSource.CLOSED) {
+                    console.log('Connection was closed. Reconnecting...');
+                    // Reconnect after a delay
+                    setTimeout(connect, 1000);
+                    return es.close();
+                }
+            };
         };
-
-        es.onerror = function (error) {
-            alert('EventSource failed');
-            console.log(error);
-        };
-
-        // const es = connectEventSource();
-
-        // 컴포넌트가 언마운트될 때 EventSource 연결을 닫습니다.
-        // return () => {
-        //     es.close();
-        // };
+        return connect;
     }, []);
 
     return (

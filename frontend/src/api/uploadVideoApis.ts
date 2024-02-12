@@ -5,7 +5,6 @@ import { openSSE } from './sse';
 export async function upload(uploadFile: File) {
     openSSE();
 
-    // requestId 받아오기
     return await instance
         .get('S3/generate-url', {
             params: { filename: uploadFile.name },
