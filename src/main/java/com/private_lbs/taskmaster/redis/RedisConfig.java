@@ -2,6 +2,8 @@ package com.private_lbs.taskmaster.redis;
 
 import com.private_lbs.taskmaster.redis.domain.RedisPubData;
 import com.private_lbs.taskmaster.redis.service.RedisSubService;
+import com.private_lbs.taskmaster.redis.service.SseEmitters;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +18,7 @@ import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 @Configuration
+@RequiredArgsConstructor
 public class RedisConfig {
 
     @Value("${spring.data.redis.host}")
@@ -26,7 +29,7 @@ public class RedisConfig {
 
     @Value("${spring.data.redis.password}")
     private String password;
-
+    private final SseEmitters sseEmitters;
     // Redis 연결 설정을 위한 ConnectionFactory 빈 생성
     @Bean
     public RedisConnectionFactory redisConnectionFactory() {
@@ -51,7 +54,7 @@ public class RedisConfig {
     // Redis 메시지 리스너 어댑터 설정
     @Bean
     MessageListenerAdapter messageListenerAdapter() {
-        return new MessageListenerAdapter(new RedisSubService());
+        return new MessageListenerAdapter(new RedisSubService(sseEmitters));
     }
 
     // Redis 메시지 리스너 컨테이너 설정
@@ -59,7 +62,7 @@ public class RedisConfig {
     RedisMessageListenerContainer redisContainer() {
         RedisMessageListenerContainer container = new RedisMessageListenerContainer();
         container.setConnectionFactory(redisConnectionFactory());
-        container.addMessageListener(messageListenerAdapter(), Topic1());
+        container.addMessageListener(messageListenerAdapter(), Topic3());
         return container;
     }
 
@@ -70,7 +73,9 @@ public class RedisConfig {
     }
 
     @Bean
-    ChannelTopic Topic2() {
-        return new ChannelTopic("ch2");
+    ChannelTopic Topic3() {
+        return new ChannelTopic("ch3");
     }
+
+
 }
