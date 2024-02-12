@@ -1,13 +1,14 @@
 package com.private_lbs.taskmaster.bat.service;
 
-import com.private_lbs.taskmaster.bat.data.dto.response.*;
-import com.private_lbs.taskmaster.bat.domain.repository.BatQueryRepository;
+import com.private_lbs.taskmaster.bat.data.dto.response.HitterNameAndImage;
+import com.private_lbs.taskmaster.bat.data.dto.response.TeamInfo;
+import com.private_lbs.taskmaster.bat.domain.repository.query.BatQueryRepository;
 import com.private_lbs.taskmaster.hitter.domain.Hitter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
-import java.util.function.Function;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service

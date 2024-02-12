@@ -27,9 +27,9 @@ public class BatController {
 
     @Auth
     @GetMapping("/{requestId}/bat/hitters/processed-videos")
-    public ResponseEntity<Map<String, List<ProcessedVideoByHitter>>> getProcessedVideosByHitters(
+    public ResponseEntity<?> getProcessedVideosByHitters(
             @Valid @PathVariable("requestId") long requestId) {
-        return ResponseEntity.ok().body(batService.getProcessedVideoByHitters(requestId));
+        return ResponseEntity.ok().build();
     }
 
     @Auth
