@@ -14,7 +14,7 @@ const requestTimeLine = () => {
     return instance.get<TeamTimeLine>(import.meta.env.VITE_API_BASE_URL + '/id/bat/time-line');
 };
 
-const overviewPageQuery = () => {
+const reportPageQuery = () => {
     const teamInfo = useQuery({ queryFn: requestTeamInfo, queryKey: ['parallel-teamInfo'] });
     const lineUp = useQuery({ queryFn: requestStartLineUp, queryKey: ['parallel-startLineUp'] });
     const timeLine = useQuery({ queryFn: requestTimeLine, queryKey: ['parallel-timeLine'] });
@@ -30,4 +30,4 @@ const overviewPageQuery = () => {
 };
 
 export { requestTeamInfo, requestStartLineUp, requestTimeLine };
-export default overviewPageQuery;
+export default reportPageQuery;

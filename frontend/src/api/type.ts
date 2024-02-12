@@ -60,9 +60,11 @@ interface PlayerInfoFilteredByInnings {
     processedVideoByInnings: ProcessedVideoByInnings[];
 }
 interface ProcessedVideoByInnings {
+    batId: number;
+    inning: string;
     processedVideoUrl: string;
     pitcherName: string;
-    isFavorite: boolean;
+    favorite: boolean;
 }
 
 export type {

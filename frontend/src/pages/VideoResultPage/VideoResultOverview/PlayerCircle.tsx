@@ -4,6 +4,8 @@ import openModal from '@/utils/openModal';
 import closeModal from '@/utils/closeModal';
 import usePlayerPositionAnimate from '@/hooks/usePlayerPositionAnimate';
 import { PlayerInfoFilteredByInnings } from '@/api/type';
+import Lottie from 'lottie-react';
+import FireAnimation from '@/assets/Lottie/fire.json';
 
 interface PlayerCircle {
     playerInfo: PlayerInfoFilteredByInnings;
@@ -37,6 +39,9 @@ export default function PlayerCircle({ playerInfo }: PlayerCircle) {
                 <div className="player-position">{position}</div>
                 <img className="playerCircle" src={imageUrl}></img>
                 <span>{name}</span>
+                {processedVideoByInnings.length !== 0 && (
+                    <Lottie animationData={FireAnimation} loop={true} className="fireLottie" />
+                )}
             </div>
             <VideoModal
                 ref={videoRef}

@@ -1,11 +1,11 @@
-import overviewPageQuery from '@/api/requestReportView';
+import reportPageQuery from '@/api/requestReportView';
 import PositionMap from './PositionMap';
 import TimeLine from './TimeLine';
 import './VideoReport.scss';
 import VideoReportScoreBoard from './VideoReportScoreBoard';
 
 export default function VideoReport() {
-    const { data, isLoading, isError } = overviewPageQuery();
+    const { data, isLoading, isError } = reportPageQuery();
 
     if (isLoading) return <div>loading</div>;
     if (isError) return <div>error</div>;

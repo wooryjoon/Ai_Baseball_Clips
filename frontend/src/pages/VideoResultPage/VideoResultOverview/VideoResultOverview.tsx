@@ -1,14 +1,17 @@
 import { useRef, useState } from 'react';
 import React from 'react';
 import '../VideoResultPage.scss';
+import './VideoResultOverview.scss';
 import ScoreBoard from './ScoreBoard';
 import BaseBallStadium from './BaseBallStadium';
+import { requestTeamInfo } from '@/api/requestReportView';
+import { useQuery } from '@tanstack/react-query';
 
 export type SelectedTeam = 'firstTeam' | 'secondTeam';
 export default function VideoResultOverview() {
-    //TODO 회별로 API 잘 가는지 테스트
+    //TODO 쿼리 한번에 받자..
 
-    const [currentTeam, setcurrentTeam] = useState<SelectedTeam>('firstTeam');
+    const [currentTeam, setCurrentTeam] = useState<SelectedTeam>('firstTeam');
     const [currentInning, setCurrentInning] = useState<number>(1);
     const onClickChangeTeam = (e: React.MouseEvent<HTMLDivElement>) => {
         if (e.currentTarget instanceof HTMLElement) {
@@ -19,7 +22,7 @@ export default function VideoResultOverview() {
                 e.currentTarget.classList.contains('secondTeam')
             )
                 return;
-            setcurrentTeam((prev: SelectedTeam) => {
+            setCurrentTeam((prev: SelectedTeam) => {
                 if (prev === 'firstTeam') return 'secondTeam';
                 else return 'firstTeam';
             });
@@ -29,15 +32,28 @@ export default function VideoResultOverview() {
         setCurrentInning(inning);
     };
 
-    return (
-        <>
-            <ScoreBoard
-                onClickInning={onClickChangeInning}
-                onClickTeam={onClickChangeTeam}
-                currentTeam={currentTeam}
-                currentInning={currentInning}
-            />
-            <BaseBallStadium currentTeam={currentTeam} currentInning={currentInning} />
-        </>
-    );
+    const {
+        data: teamData,
+        isLoading,
+        isError,
+    } = useQuery({ queryFn: requestTeamInfo, queryKey: ['teamInfo'] });
+
+    if (isLoading) return <div>isLoading</div>;
+    if (teamData)
+        return (
+            <>
+                <ScoreBoard
+                    onClickInning={onClickChangeInning}
+                    onClickTeam={onClickChangeTeam}
+                    currentTeam={currentTeam}
+                    currentInning={currentInning}
+                    teamData={teamData.data}
+                />
+                <BaseBallStadium
+                    currentTeam={currentTeam}
+                    currentInning={currentInning}
+                    teamData={teamData.data}
+                />
+            </>
+        );
 }

@@ -1,5 +1,13 @@
 @import '../../../styles/style.scss';
 
+.fireLottie {
+    width: 17px;
+    height: 17px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    animation: hideSplashScreenIcon 1.9s ease-in-out infinite;
+}
 //VideoResultOverview
 .RGB {
     display: flex;
@@ -7,8 +15,8 @@
     justify-content: space-evenly;
     animation: blink-effect 2s step-end infinite;
     div {
-        width: 12px;
-        height: 12px;
+        width: 8px;
+        height: 8px;
         border-radius: 50%;
     }
     :first-child {
@@ -67,6 +75,7 @@
         width: 95%;
         height: 40px;
         display: flex;
+        flex-direction: row;
         align-items: center;
         justify-content: center;
         background-color: white;
@@ -74,6 +83,10 @@
         border-radius: 15px;
         border: 1px solid #f3f3f3;
         animation: 1s ease-out appleEffect forwards;
+        // .swiper-wrapper {
+        //     width: 100%;
+        //     display: flex;
+        // }
         .swiper-slide {
             text-align: center;
             justify-content: center;
@@ -111,7 +124,7 @@
             }
         }
         .team-card.currentTeam {
-            color: blue;
+            color: $kbo_skyblue;
         }
         .score {
             font-family: 'LED1';
@@ -156,6 +169,7 @@
     box-shadow: 4px 4px 5px gray;
     padding: 10px;
     overflow: hidden;
+    z-index: 99;
     span {
         margin-top: 5px;
     }
@@ -184,4 +198,12 @@
     font-size: 10px;
     background-color: $kbo_darkblue;
     color: white;
+}
+.stadium-teamLogo {
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -0%);
 }

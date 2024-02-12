@@ -1,6 +1,7 @@
 import { RefObject, useEffect, useRef } from 'react';
 import './VideoResultOverview.scss';
 import createStadium from '@/utils/createStadium';
+import { TeamInfo } from '@/api/type';
 interface Stadium {
     canvasWidth: number;
     canvasHeight: number;

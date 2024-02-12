@@ -4,14 +4,15 @@ import Stadium from './Stadium';
 import { useQuery } from '@tanstack/react-query';
 import { requestTeamDataByInnings } from '@/api/requestOverview';
 import PlayerCircle from './PlayerCircle';
-import { PlayerInfoFilteredByInnings } from '@/api/type';
+import { PlayerInfoFilteredByInnings, TeamInfo } from '@/api/type';
 
 type Props = {
     currentTeam: 'firstTeam' | 'secondTeam';
     currentInning: number;
+    teamData: TeamInfo;
 };
 
-export default function BaseBallStadium({ currentTeam, currentInning }: Props) {
+export default function BaseBallStadium({ currentTeam, currentInning, teamData }: Props) {
     const stadiumContainerRef = useRef<HTMLDivElement>(null);
     const { width, height } = useCalculateWidthHeight(stadiumContainerRef);
     const { data, isLoading, isError } = useQuery({
@@ -26,6 +27,14 @@ export default function BaseBallStadium({ currentTeam, currentInning }: Props) {
                 {data.data[currentTeam].map((playerInfo: PlayerInfoFilteredByInnings) => {
                     return <PlayerCircle playerInfo={playerInfo} />;
                 })}
+                <img
+                    src={
+                        currentTeam === 'firstTeam'
+                            ? teamData.firstTeamImageUrl
+                            : teamData.secondTeamImageUrl
+                    }
+                    className="stadium-teamLogo"
+                ></img>
 
                 <Stadium canvasWidth={width} canvasHeight={height} />
             </div>

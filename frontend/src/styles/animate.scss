@@ -55,8 +55,8 @@
     }
 
     100% {
-        // font-size: 15px;
-        // width: 95%;
+        font-size: 15px;
+        width: 95%;
         bottom: -50px;
     }
 }
@@ -79,5 +79,17 @@
     }
     100% {
         transform: translate(0, 3px);
+    }
+}
+
+@keyframes hideSplashScreenIcon {
+    0% {
+        transform: none;
+    }
+    50% {
+        transform: scale(1.5);
+    }
+    100% {
+        transform: none;
     }
 }
