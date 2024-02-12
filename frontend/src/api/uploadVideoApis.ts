@@ -2,10 +2,11 @@ import { instance } from '.';
 import axios from 'axios';
 import { openSSE } from './sse';
 
-export function upload(uploadFile: File) {
+export async function upload(uploadFile: File) {
     openSSE();
 
-    return instance
+    // requestId 받아오기
+    return await instance
         .get('S3/generate-url', {
             params: { filename: uploadFile.name },
             headers: {
