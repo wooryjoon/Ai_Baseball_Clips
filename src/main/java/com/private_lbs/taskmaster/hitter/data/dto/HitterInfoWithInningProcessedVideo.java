@@ -7,14 +7,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Getter
-public class TeamHitters {
+public class HitterInfoWithInningProcessedVideo {
 
     private String name;
     private String imageUrl;
     private String position;
     List<ProcessedVideoByInning> processedVideoByInnings;
 
-    public TeamHitters(Hitter hitter, int inning) {
+    public HitterInfoWithInningProcessedVideo(Hitter hitter, int inning) {
         name = hitter.getName();
         imageUrl = "이미지";
         position = hitter.getPosition();

@@ -16,4 +16,12 @@ public interface HitterRepository extends JpaRepository<Hitter, Long> {
             "WHERE b.request.id = :requestId and MOD(b.inning,2) = :inning " +
             "ORDER BY b.createDateTime")
     List<Hitter> getHittersInOrder(@Param("requestId") Long requestId, @Param("inning") int inning);
+
+    @Query("SELECT distinct h " +
+            "FROM Hitter h " +
+            "JOIN FETCH h.team t " +
+            "JOIN FETCH h.bat b " +
+            "WHERE b.request.id = :requestId and MOD(b.inning,2) = :inning " +
+            "ORDER BY b.createDateTime")
+    List<Hitter> getHittersStartLineUpInOrder(@Param("requestId") Long requestId, @Param("inning") int inning);
 }

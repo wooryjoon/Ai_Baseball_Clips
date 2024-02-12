@@ -18,7 +18,11 @@ public class HitterController {
     public ResponseEntity<TotalHittersResponse> getHittersWithProcessedVideoByInning(
             @PathVariable("requestId") long requestId,
             @PathVariable("inning") int inning) {
-
         return ResponseEntity.ok(hitterService.getHittersWithProcessedVideoByInning(requestId, inning));
+    }
+
+    @GetMapping("/{requestId}/hitter/list/line-up")
+    public ResponseEntity<?> getHittersStartLineUp(@PathVariable("requestId") long requestId) {
+        return ResponseEntity.ok().body(hitterService.getHittersStartLineUp(requestId));
     }
 }
