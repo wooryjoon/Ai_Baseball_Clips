@@ -1,5 +1,6 @@
 package com.private_lbs.taskmaster.hitter.controller;
 
+import com.private_lbs.taskmaster.global.auth.Auth;
 import com.private_lbs.taskmaster.hitter.data.dto.TotalHittersResponse;
 import com.private_lbs.taskmaster.hitter.service.HitterService;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +15,15 @@ public class HitterController {
 
     private final HitterService hitterService;
 
+    @Auth
+    @GetMapping("/{requestId}/hitters/list/processed-videos")
+    public ResponseEntity<TotalHittersResponse> getHittersWithProcessedVideo(
+            @PathVariable("requestId") long requestId) {
+
+        return ResponseEntity.ok().body(hitterService.getHittersWithProcessedVideos(requestId));
+    }
+
+    @Auth
     @GetMapping("/{requestId}/hitter/list/{inning}/processed-video")
     public ResponseEntity<TotalHittersResponse> getHittersWithProcessedVideoByInning(
             @PathVariable("requestId") long requestId,
@@ -21,8 +31,9 @@ public class HitterController {
         return ResponseEntity.ok(hitterService.getHittersWithProcessedVideoByInning(requestId, inning));
     }
 
+    @Auth
     @GetMapping("/{requestId}/hitter/list/line-up")
-    public ResponseEntity<?> getHittersStartLineUp(@PathVariable("requestId") long requestId) {
+    public ResponseEntity<TotalHittersResponse> getHittersStartLineUp(@PathVariable("requestId") long requestId) {
         return ResponseEntity.ok().body(hitterService.getHittersStartLineUp(requestId));
     }
 }
