@@ -1,4 +1,4 @@
-package com.private_lbs.taskmaster.bat.domain.repository;
+package com.private_lbs.taskmaster.bat.domain.repository.query;
 
 import com.private_lbs.taskmaster.bat.data.dto.response.HitterNameAndImage;
 import com.private_lbs.taskmaster.bat.data.dto.response.ProcessedVideoByInningHitters;
