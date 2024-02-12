@@ -1,22 +1,13 @@
 import { instance } from '.';
 import axios from 'axios';
-import { eventSource } from './sse';
 
 export async function upload(uploadFile: File) {
-    const es = eventSource;
-    es.onopen = () =>
-        // event: Event
-        {
-            // setIsSSESet(true);
-            console.log('Event 창구가 열렸습니다.');
-        };
-
     return await instance
         .get('S3/generate-url', {
             params: { filename: uploadFile.name },
-            headers: {
-                'ngrok-skip-browser-warning': '69420',
-            },
+            // headers: {
+            //     'ngrok-skip-browser-warning': '69420',
+            // },
         })
         .then((response) => {
             const presignedUrl = response.data;
