@@ -3,8 +3,8 @@ import { instance } from '.';
 import { isAxiosError } from 'axios';
 import { FailResponse } from './type';
 
-const requestSignUp = (userData: SignUpFormValues) => {
-    return instance.post(import.meta.env.VITE_API_SIGNUP_URL, userData);
+const requestSignUp = async (userData: SignUpFormValues) => {
+    return await instance.post(import.meta.env.VITE_API_SIGNUP_URL, userData);
 };
 const requestEmailCheck = async (email: string) => {
     try {
