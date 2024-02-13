@@ -71,7 +71,9 @@ public class S3Controller {
     public ResponseEntity<Void> receiveFileUrl(@RequestBody EventNotification notification){
         System.out.println("endPoint 들어옴");
         for (EventRecord record : notification.getRecords()) {
-            redisPubService.sendMessage(OriginUrl.makeUrlFromEventRecord(record));
+            OriginUrl originUrl=OriginUrl.makeUrlFromEventRecord(record);
+            if(originUrl.getFileKey().split("/").length>3) continue;
+            redisPubService.sendMessage(originUrl);
             redisPubService.sendMessage("s3에 영상 업로드 완료!");
         }
         return ResponseEntity.status(HttpStatus.CREATED).build();
