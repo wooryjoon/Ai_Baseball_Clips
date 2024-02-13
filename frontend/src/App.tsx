@@ -12,14 +12,10 @@ import MainPage from './pages/MainPage';
 import PrivateRoute from './route/PrivateRoute';
 import VideoResultOverview from './pages/VideoResultPage/VideoResultOverview/VideoResultOverview';
 import VideoReport from './pages/VideoResultPage/VideoReport';
-<<<<<<< HEAD
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-initMockAPI();
-=======
 import LoadingAI from './pages/VideoMakingPage/LoadingAI';
 
-// initMockAPI();
->>>>>>> 506059d6e40ea46da6d1a634437b8923d6ef5e37
+initMockAPI();
 
 function App() {
     let vh = window.innerHeight * 0.01;
