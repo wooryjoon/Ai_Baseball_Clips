@@ -10,6 +10,7 @@ import com.private_lbs.taskmaster.member.data.dto.request.LoginRequest;
 import com.private_lbs.taskmaster.member.data.dto.request.MemberLogoutRequest;
 import com.private_lbs.taskmaster.member.data.dto.request.TokenRefreshRequest;
 import com.private_lbs.taskmaster.member.data.dto.response.MemberLoginResponse;
+import com.private_lbs.taskmaster.member.data.dto.response.MemberResponse;
 import com.private_lbs.taskmaster.member.data.dto.response.TokenRefreshResponse;
 import com.private_lbs.taskmaster.member.domain.Member;
 import com.private_lbs.taskmaster.member.domain.repository.MemberRepository;
@@ -109,5 +110,9 @@ public class MemberService {
         Authentication authentication = AuthenticationContextHolder.getAuthentication();
         long userId = authentication.getUserId();
         return getMember(userId);
+    }
+
+    public MemberResponse getMemberInfo() {
+        return MemberResponse.toResponse(getCurrentMember());
     }
 }

@@ -33,7 +33,7 @@ public class Bat extends BaseEntity {
     @JoinColumn(name = "pitcher_id")
     private Pitcher pitcher;
 
-    @OneToOne(mappedBy = "bat", fetch =  FetchType.LAZY)
+    @OneToOne(mappedBy = "bat", fetch = FetchType.LAZY)
     private Favorite favorite;
 
     private int inning;
@@ -49,6 +49,10 @@ public class Bat extends BaseEntity {
     private void addRelatedRequest(Request request) {
         this.request = request;
         request.getBats().add(this);
+    }
+
+    public void makeFavorite(Favorite favorite) {
+        this.favorite = favorite;
     }
 
 }

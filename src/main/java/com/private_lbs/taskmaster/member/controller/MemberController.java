@@ -6,6 +6,7 @@ import com.private_lbs.taskmaster.member.data.dto.request.LoginRequest;
 import com.private_lbs.taskmaster.member.data.dto.request.MemberLogoutRequest;
 import com.private_lbs.taskmaster.member.data.dto.request.TokenRefreshRequest;
 import com.private_lbs.taskmaster.member.data.dto.response.MemberLoginResponse;
+import com.private_lbs.taskmaster.member.data.dto.response.MemberResponse;
 import com.private_lbs.taskmaster.member.data.dto.response.TokenRefreshResponse;
 import com.private_lbs.taskmaster.member.domain.Role;
 import com.private_lbs.taskmaster.member.service.MemberService;
@@ -52,4 +53,11 @@ public class MemberController {
     public ResponseEntity<TokenRefreshResponse> refresh(@RequestBody TokenRefreshRequest request) {
         return ResponseEntity.ok().body(memberService.refresh(request));
     }
+
+    @Auth
+    @GetMapping("/info")
+    public ResponseEntity<MemberResponse> getMemberInfo() {
+        return ResponseEntity.ok().body(memberService.getMemberInfo());
+    }
+
 }
