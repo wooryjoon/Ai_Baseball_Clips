@@ -1,36 +1,58 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useEffect, useState } from 'react';
+import { eventSource } from '@/api/sse';
+import { connect } from 'react-redux';
 
-interface Test {
-    width: number;
-}
-
-const ProgressBar = styled.div`
-    width: 100%;
-    height: 30px;
-    background-color: #dedede;
-    border-radius: 12px;
-    font-weight: 600;
-    font-size: 0.8rem;
-    margin-top: 20px;
-    overflow: hidden;
-`;
-
-const Progress = styled.div<Test>`
-    width: ${(props: Test) => props.width}%;
-    height: 30px;
-    padding: 0;
-    text-align: center;
-    background-color: skyblue;
-    color: #111;
-`;
+// interface ProgressData {
+//     status: number;
+//     // target: number;
+//     // totalUpload: number;
+//     // errorCount: number;
+// }
 
 export default function Loading() {
-    const maxItem = 5;
-    let availableItem = 2;
+    const [progressData, setProgressData] = useState<number>(0);
+
+    useEffect(() => {
+        const es = eventSource;
+
+        const progressListner = (event: MessageEvent) => {
+            const result = event.data;
+            setProgressData(result);
+            console.log(progressData);
+        };
+
+        es.addEventListener('Progress', progressListner);
+
+        es.onerror = function (error) {
+            alert('EventSource failed');
+            console.log(error);
+            if (eventSource.readyState == EventSource.CLOSED) {
+                console.log('Connection was closed. Reconnecting...');
+                // Reconnect after a delay
+                setTimeout(connect, 1000);
+            }
+        };
+        return () => {
+            es.removeEventListener('Progress', progressListner);
+        };
+    }, []);
+
     return (
-        <ProgressBar>
-            <Progress width={100 - (availableItem * 100) / maxItem} />
-        </ProgressBar>
+        <div>
+            {progressData && (
+                <div>
+                    <div className="progressbar" style={{ display: 'block' }}>
+                        <div className="progress-move" style={{ width: `${progressData}%` }}></div>
+                    </div>
+                    <div className="progress-status">
+                        <span>{progressData}%</span>
+                        {/* <span>
+                            {progressData.target}/{progressData.totalUpload}
+                        </span> */}
+                    </div>
+                    {/* <span className="errorCount">{progressData.errorCount}</span> */}
+                </div>
+            )}
+        </div>
     );
 }

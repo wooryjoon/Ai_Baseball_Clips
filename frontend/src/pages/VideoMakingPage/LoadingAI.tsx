@@ -4,29 +4,6 @@ import { eventSource } from '@/api/sse';
 import ProgressBar from './ProgressBar';
 
 export default function LoadingAI() {
-    useEffect(() => {
-        const connect = () => {
-            const es = eventSource;
-
-            es.onmessage = (message: MessageEvent) => {
-                const data = message.data;
-                const parsedData = JSON.parse(data);
-                console.log(parsedData);
-            };
-
-            es.onerror = function (error) {
-                alert('EventSource failed');
-                console.log(error);
-                if (eventSource.readyState == EventSource.CLOSED) {
-                    console.log('Connection was closed. Reconnecting...');
-                    // Reconnect after a delay
-                    setTimeout(connect, 1000);
-                }
-            };
-        };
-        return connect();
-    }, []);
-
     return (
         <div>
             <Header />
