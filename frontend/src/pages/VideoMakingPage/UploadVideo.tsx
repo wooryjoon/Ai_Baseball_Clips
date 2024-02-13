@@ -11,7 +11,6 @@ import Lottie from 'lottie-react';
 
 const UploadVideo = () => {
     const [inputFile, setInputFile] = useState<FileInfoType | null>(null);
-    const [isUploaded, setIsUploaded] = useState<boolean>(false);
     const [isComplete, setIsComplete] = useState<boolean>(false);
 
     useEffect(() => {
@@ -19,6 +18,7 @@ const UploadVideo = () => {
         setIsComplete(uploadResponse());
     }, []);
 
+    console.log(isComplete);
     // Input 안의 값이 바뀔 때 일어나는 이벤트
     const onChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
@@ -56,7 +56,7 @@ const UploadVideo = () => {
     };
 
     const nextHandler = (e: any) => {
-        if (isComplete) e.preventDefault();
+        if (!isComplete) e.preventDefault();
     };
 
     return (
@@ -108,13 +108,6 @@ const UploadVideo = () => {
                         영상 업로드
                     </Button>
                 </div>
-            </div>
-            <div className="next">
-                <Link to="/loadingAI" onClick={nextHandler}>
-                    <Button styleType="gonext" disabled={!isComplete}>
-                        결과페이지로 이동
-                    </Button>
-                </Link>
             </div>
         </div>
     );
