@@ -20,7 +20,8 @@ const UploadVideo = () => {
         if (isComplete) navigate('/loadingAI');
     }, [isComplete, navigate]);
 
-    console.log(isComplete);
+    // console.log(isComplete);
+
     // Input 안의 값이 바뀔 때 일어나는 이벤트
     const onChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
