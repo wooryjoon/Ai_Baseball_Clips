@@ -5,10 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 @NotNull
 @Setter
 @Getter
+@Slf4j
 @AllArgsConstructor
 @NoArgsConstructor
 public class BatInfoFromFileName implements Comparable<BatInfoFromFileName> {
@@ -27,10 +29,16 @@ public class BatInfoFromFileName implements Comparable<BatInfoFromFileName> {
 
     public BatInfoFromFileName(String fileKey, String[] splits) {
         this.fileKey = fileKey;
-        this.requestId = Integer.parseInt(splits[splits.length - 6]);
+        this.requestId = Integer.parseInt(splits[splits.length - 5]);
         this.pitcherId = Integer.parseInt(splits[splits.length - 4]);
         this.hitterId = Integer.parseInt(splits[splits.length - 3]);
         this.atBatOrder = Integer.parseInt(splits[splits.length - 2]);
+
+        log.info("fileKey : {}", fileKey);
+        log.info("requestId : {}", requestId);
+        log.info("pitcherID : {} ", pitcherId);
+        log.info("hitterId: {}", hitterId);
+        log.info("atBatOrder: {} ", atBatOrder);
     }
 
     @Override

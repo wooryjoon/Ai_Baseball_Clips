@@ -42,7 +42,7 @@ public class MessageSubscribeService {
 
 
         log.info("AI Model 에서 가공 완료된 영상 위치 " + OriginalVideoLocalPath.getLocalPath());
-        String requestId=OriginalVideoLocalPath.getLocalPath().split("/")[1];
+        String requestId=OriginalVideoLocalPath.getLocalPath().split("/")[4];
         for (String fileName : FileNames) {
 
             // 파일 이름 "_" 단위로 쪼개기
@@ -55,7 +55,7 @@ public class MessageSubscribeService {
             }
 
             String fileKey = S3FileService.buildFileKey(originalVideoLocalPath, parts);
-
+            System.out.println("fileKey : "+fileKey);
             String[] splits = fileKey.split("/");
 
             // s3에 업로드.
