@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { eventSource } from '@/api/sse';
 import { connect } from 'react-redux';
 

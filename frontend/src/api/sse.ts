@@ -6,15 +6,13 @@ export const eventSource = new EventSource(SSEurl);
 
 export function openSSE() {
     // 이벤트 창구가 열렸을 때 동작 정의
-    return (eventSource.onopen = () => {
+    eventSource.onopen = () => {
         console.log('Event 창구가 열렸습니다.');
-    });
-}
-
-// SSE 통신으로 전달받은 reauestId 를 할당.
-export const getRequestId = () => {
-    eventSource.onmessage = (event: any) => {
-        const requestId = event.data;
-        return requestId;
     };
-};
+
+    // eventSource.addEventListener('getRequestId', (event) => {
+    //     const requestId = Number(event.data);
+    //     dispatch(setRequestId(requestId));
+    // });
+    return;
+}

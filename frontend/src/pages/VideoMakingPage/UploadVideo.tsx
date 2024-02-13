@@ -1,17 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '@/components/Button';
 import { upload } from '@/api/uploadVideoApis';
 import { FileInfoType } from './type';
 import { Link } from 'react-router-dom';
 import fileExtensionValid, { ALLOW_FILE_EXTENTION } from '@/utils/fileExtensionValid';
 import { openSSE } from '@/api/sse';
+import { useDispatch } from 'react-redux';
 
 const UploadVideo = () => {
     const [inputFile, setInputFile] = useState<FileInfoType | null>(null);
     const [isComplete, setIsComplete] = useState<boolean>(false);
-    // const [uploadProgress, setUploadProgress] = useState<number>(0);
+    const dispatch = useDispatch();
 
+    // useEffect(() => {
     openSSE();
+    // }, [dispatch]);
 
     // Input 안의 값이 바뀔 때 일어나는 이벤트
     const onChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
