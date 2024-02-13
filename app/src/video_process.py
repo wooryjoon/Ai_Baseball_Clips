@@ -33,7 +33,7 @@ def process_video(video_path, players):
 
     # load the pre-trained EAST text detector
     print("[INFO] loading EAST text detector...")
-    net = cv2.dnn.readNet("app/resources/deeplearning_model/frozen_east_text_detection.pb")
+    net = cv2.dnn.readNet("resources/deeplearning_model/frozen_east_text_detection.pb")
  
     vs = cv2.VideoCapture(video_path) # video_stream
     print("동영상의 총 프레임수 : ", int(vs.get(cv2.CAP_PROP_FRAME_COUNT)))
