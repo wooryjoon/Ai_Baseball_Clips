@@ -1,10 +1,11 @@
-import { forwardRef } from 'react';
+import { forwardRef, useState } from 'react';
 import Video from './Video';
 import Dialog from '../Dialog';
 import { Clip } from '@/pages/VideoResultPage/type';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBookmark } from '@fortawesome/free-solid-svg-icons';
 import { ProcessedVideoByInnings } from '@/api/type';
+import { requestFavorite } from '@/api/requestFavorite';
 
 type VideoModal = {
     processedVideo: ProcessedVideoByInnings[];
@@ -14,7 +15,8 @@ type VideoModal = {
 
 const VideoModal = forwardRef<HTMLDialogElement, VideoModal>(
     ({ processedVideo, isReadyToLoadVideo, onClick }: VideoModal, ref) => {
-        if (processedVideo[0])
+        if (processedVideo[0]) {
+            const [isFavorite, setIsFavorite] = useState(processedVideo[0].favorite);
             return (
                 <Dialog onClick={onClick} ref={ref}>
                     {isReadyToLoadVideo && (
@@ -22,11 +24,14 @@ const VideoModal = forwardRef<HTMLDialogElement, VideoModal>(
                             <div className="videoModal-title">
                                 <FontAwesomeIcon
                                     icon={faBookmark}
-                                    className={
-                                        processedVideo[0].favorite
-                                            ? 'bookmark favorite'
-                                            : 'bookmark'
-                                    }
+                                    className={isFavorite ? 'bookmark favorite' : 'bookmark'}
+                                    onClick={() => {
+                                        requestFavorite({ batId: processedVideo[0].batId }).then(
+                                            () => {
+                                                setIsFavorite(!isFavorite);
+                                            }
+                                        );
+                                    }}
                                 />
                                 <span>VS {[processedVideo[0].pitcherName]}</span>
 
@@ -42,6 +47,7 @@ const VideoModal = forwardRef<HTMLDialogElement, VideoModal>(
                     )}
                 </Dialog>
             );
+        }
     }
 );
 

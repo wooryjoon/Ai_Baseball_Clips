@@ -484,4 +484,9 @@ export const handlers = [
         };
         return HttpResponse.json(response, { status: 200 });
     }),
+    // 좋아요 기능 데이터 post
+    http.post(baseUrl + '/favorite/updateStatus', async () => {
+        await delay(1000);
+        return HttpResponse.json(null, { status: 200 });
+    }),
 ];

@@ -1,9 +1,10 @@
-import { forwardRef } from 'react';
+import { forwardRef, useState } from 'react';
 import Video from './Video';
 import Dialog from '../Dialog';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBookmark } from '@fortawesome/free-solid-svg-icons';
 import { ProcessedVideoByInnings } from '@/api/type';
+import { requestFavorite } from '@/api/requestFavorite';
 
 type SingleVideoModal = {
     isReadyToLoadVideo: boolean;
@@ -13,6 +14,8 @@ type SingleVideoModal = {
 
 const SingleVideoModal = forwardRef<HTMLDialogElement, SingleVideoModal>(
     ({ processedVideo, isReadyToLoadVideo, onClick }: SingleVideoModal, ref) => {
+        const [isFavorite, setIsFavorite] = useState(processedVideo.favorite);
+
         return (
             <Dialog onClick={onClick} ref={ref}>
                 {isReadyToLoadVideo && (
@@ -20,9 +23,12 @@ const SingleVideoModal = forwardRef<HTMLDialogElement, SingleVideoModal>(
                         <div className="videoModal-title">
                             <FontAwesomeIcon
                                 icon={faBookmark}
-                                className={
-                                    processedVideo.favorite ? 'bookmark favorite' : 'bookmark'
-                                }
+                                className={isFavorite ? 'bookmark favorite' : 'bookmark'}
+                                onClick={() => {
+                                    requestFavorite({ batId: processedVideo.batId }).then(() => {
+                                        setIsFavorite(!isFavorite);
+                                    });
+                                }}
                             />
                             <span>VS {[processedVideo.pitcherName]}</span>
 
