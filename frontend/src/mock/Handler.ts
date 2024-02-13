@@ -56,7 +56,7 @@ export const handlers = [
         );
     }),
     // 팀 정보 fetch 모킹
-    http.get(baseUrl + '/id/bat/name', async ({ request }) => {
+    http.get(baseUrl + '/id/bat/team', async ({ request }) => {
         await delay(1000);
         const response = {
             firstTeamName: 'KT',
@@ -482,6 +482,56 @@ export const handlers = [
                 },
             ],
         };
+        return HttpResponse.json(response, { status: 200 });
+    }),
+    // 회원 정보 데이터 fetch 모킹
+    http.get(baseUrl + '/member/info', async ({ request }) => {
+        await delay(1000);
+        const response = {
+            id: 1,
+            email: 'head0618@naver.com',
+        };
+        return HttpResponse.json(response, { status: 200 });
+    }),
+    // 찜하기
+    http.post(baseUrl + '/favorite/updateStatus', async () => {
+        await delay(1000);
+        return HttpResponse.json(null, { status: 200 });
+    }),
+
+    // 회원이 찜한 데이터 모킹
+    http.get(baseUrl + '/favorite/list', async () => {
+        await delay(1000);
+        const response = [
+            {
+                processedVideoUrl: 'asdf',
+                createDateTime: '2024-02-13',
+                batId: 9,
+                favorite: true,
+                hitterInfo: {
+                    name: '배정대',
+                    teamName: 'KT위즈',
+                },
+                pitcherInfo: {
+                    name: '고영표',
+                    teamName: 'KT위즈',
+                },
+            },
+            {
+                processedVideoUrl: 'asdf',
+                createDateTime: '2024-02-13',
+                batId: 9,
+                favorite: true,
+                hitterInfo: {
+                    name: '배정대',
+                    teamName: 'KT위즈',
+                },
+                pitcherInfo: {
+                    name: '고영표',
+                    teamName: 'KT위즈',
+                },
+            },
+        ];
         return HttpResponse.json(response, { status: 200 });
     }),
 ];

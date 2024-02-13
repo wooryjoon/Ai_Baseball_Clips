@@ -7,9 +7,11 @@ import BaseBallStadium from './BaseBallStadium';
 import { requestTeamInfo } from '@/api/requestReportView';
 import { useQuery } from '@tanstack/react-query';
 import Loading from '@/components/Loading';
+import useGetRequestId from '@/hooks/useGetRequestId';
 
 export type SelectedTeam = 'firstTeam' | 'secondTeam';
 export default function VideoResultOverview() {
+    const reqId = useGetRequestId();
     const [currentTeam, setCurrentTeam] = useState<SelectedTeam>('firstTeam');
     const [currentInning, setCurrentInning] = useState<number>(1);
     const onClickChangeTeam = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -35,7 +37,7 @@ export default function VideoResultOverview() {
         data: teamData,
         isLoading,
         isError,
-    } = useQuery({ queryFn: requestTeamInfo, queryKey: ['teamInfo'] });
+    } = useQuery({ queryFn: () => requestTeamInfo(reqId), queryKey: ['teamInfo', reqId] });
 
     if (isLoading) return <Loading />;
     if (teamData)

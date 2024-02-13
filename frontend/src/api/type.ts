@@ -53,20 +53,42 @@ interface TeamInfoFilteredByInnings {
     firstTeam: PlayerInfoFilteredByInnings[];
     secondTeam: PlayerInfoFilteredByInnings[];
 }
+
 interface PlayerInfoFilteredByInnings {
     name: string;
     position: string;
     imageUrl: string;
     processedVideoByInnings: ProcessedVideoByInnings[];
 }
-interface ProcessedVideoByInnings {
-    batId: number;
+
+interface ProcessedVideoByInnings extends ProcessedVideo {
     inning: string;
+}
+
+interface ProcessedVideo {
+    batId: number;
     processedVideoUrl: string;
     pitcherName: string;
     favorite: boolean;
 }
-
+interface UserInfo {
+    id: number;
+    email: string;
+}
+interface FavoriteVideo {
+    processedVideoUrl: string;
+    createDateTime: string;
+    batId: number;
+    favorite: boolean;
+    hitterInfo: {
+        name: string;
+        teamName: string;
+    };
+    pitcherInfo: {
+        name: string;
+        teamName: string;
+    };
+}
 export type {
     LoginResponseData,
     FailResponse,
@@ -78,4 +100,7 @@ export type {
     TeamInfoFilteredByInnings,
     PlayerInfoFilteredByInnings,
     ProcessedVideoByInnings,
+    UserInfo,
+    FavoriteVideo,
+    ProcessedVideo,
 };
