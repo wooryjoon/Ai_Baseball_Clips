@@ -5,9 +5,6 @@ export async function upload(uploadFile: File) {
     return await instance
         .get('S3/generate-url', {
             params: { filename: uploadFile.name },
-            // headers: {
-            //     'ngrok-skip-browser-warning': '69420',
-            // },
         })
         .then((response) => {
             const presignedUrl = response.data;

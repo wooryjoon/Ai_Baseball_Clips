@@ -4,17 +4,20 @@ import { upload } from '@/api/uploadVideoApis';
 import { FileInfoType } from './type';
 import { Link } from 'react-router-dom';
 import fileExtensionValid, { ALLOW_FILE_EXTENTION } from '@/utils/fileExtensionValid';
-import { openSSE } from '@/api/sse';
-import { useDispatch } from 'react-redux';
+import { openSSE, uploadResponse } from '@/api/sse';
+
+import uploadVideo from '@/assets/Lottie/videoUpload.json';
+import Lottie from 'lottie-react';
 
 const UploadVideo = () => {
     const [inputFile, setInputFile] = useState<FileInfoType | null>(null);
+    const [isUploaded, setIsUploaded] = useState<boolean>(false);
     const [isComplete, setIsComplete] = useState<boolean>(false);
-    const dispatch = useDispatch();
 
-    // useEffect(() => {
-    openSSE();
-    // }, [dispatch]);
+    useEffect(() => {
+        openSSE();
+        setIsComplete(uploadResponse());
+    }, []);
 
     // Input 안의 값이 바뀔 때 일어나는 이벤트
     const onChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,37 +51,65 @@ const UploadVideo = () => {
     // 성공적으로 완료가 되면 true 반환
     const uploadFile = async () => {
         if (inputFile) {
-            upload(inputFile.file).then((status) => {
-                if (status) setIsComplete(true);
-            });
+            upload(inputFile.file);
         }
     };
 
     const nextHandler = (e: any) => {
-        if (!inputFile) e.preventDefault();
+        if (isComplete) e.preventDefault();
     };
 
     return (
-        <div id="upload-video">
-            <p className="description"> 편집을 원하는 동영상을 첨부해주세요. </p>
-            <div id="input-video-box">
-                {inputFile && <video src={inputFile?.url} controls width="350px" />}
+        <div>
+            <div id="upload-video">
+                {!inputFile && (
+                    <div className="animation-box">
+                        <Lottie animationData={uploadVideo} />
+                    </div>
+                )}
+                {!inputFile ? (
+                    <div>
+                        <p className="description"> 편집을 원하는 동영상을 선택해주세요 </p>
+                    </div>
+                ) : (
+                    <div className="description-box">
+                        <p className="description">영상 업로드 버튼을 눌러</p>
+                        <p className="description">영상을 전송해주세요</p>
+                    </div>
+                )}
+                <div id="input-video-box">
+                    {inputFile && <video src={inputFile?.url} controls width="350px" />}
+                </div>
+                <div className="buttons">
+                    {!inputFile ? (
+                        <div className="input-tag-label">
+                            <label className="text" htmlFor="input-tag">
+                                동영상 선택
+                            </label>
+                        </div>
+                    ) : (
+                        <div className="input-tag-label">
+                            <label className="text" htmlFor="input-tag">
+                                동영상 변경
+                            </label>
+                        </div>
+                    )}
+                    <input
+                        id="input-tag"
+                        type="file"
+                        onChange={onChangeFile}
+                        style={{ display: 'none' }}
+                    ></input>
+                    <Button
+                        styleType="uploadvideo"
+                        onClick={inputFile && uploadFile}
+                        disabled={!inputFile}
+                    >
+                        영상 업로드
+                    </Button>
+                </div>
             </div>
-            <div>
-                <label className="input-tag-label" htmlFor="input-tag">
-                    파일 선택
-                </label>
-                <input
-                    id="input-tag"
-                    type="file"
-                    onChange={onChangeFile}
-                    style={{ display: 'none' }}
-                ></input>
-            </div>
-            <div className="buttons">
-                <Button styleType="uploadvideo" onClick={inputFile && uploadFile}>
-                    영상 업로드
-                </Button>
+            <div className="next">
                 <Link to="/loadingAI" onClick={nextHandler}>
                     <Button styleType="gonext" disabled={!isComplete}>
                         결과페이지로 이동
