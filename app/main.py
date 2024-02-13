@@ -17,8 +17,9 @@ def root():
 @app.on_event("startup")
 async def set_redis():
     # redis connect
-    r = await aioredis.create_redis_pool("redis://i10a305.p.ssafy.io:6379", password="a305#@!")
-    # r = await aioredis.create_redis_pool("redis://localhost")
+    global r
+    # r = await aioredis.create_redis_pool("redis://i10a305.p.ssafy.io:6379", password="a305#@!")
+    r = await aioredis.create_redis_pool("redis://localhost")
     # redis sub
     ch, = await r.subscribe("ch2")
     assert isinstance(ch, aioredis.Channel)
@@ -32,7 +33,10 @@ async def set_redis():
             # 디렉토리 주소
             dic_path = path_obj["localPath"]
             try:
+                # loading 페이지에 정보를 날려주는 pub
+                await r.publish("ch3", "10")
                 main(dic_path)
+                await r.publish("ch3", "100")
             except Exception:
                 # 비디오 편집 과정에서 에러 발생시 text 파일에 기록하여 전달
                 print("error 발생하여 error text 파일 생성")
