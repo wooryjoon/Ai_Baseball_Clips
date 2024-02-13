@@ -26,7 +26,13 @@
     "@types/react-router-dom": "^5.3.3",
     "aws-sdk": "^2.1546.0",
     "axios": "^1.6.5",
+<<<<<<< HEAD
     "lottie-react": "^2.4.0",
+=======
+    "axios-retry": "^4.0.0",
+    "event-source-polyfill": "^1.0.31",
+    "eventsource": "^2.0.2",
+>>>>>>> 506059d6e40ea46da6d1a634437b8923d6ef5e37
     "node-sass": "^9.0.0",
     "npm": "^3.0.0",
     "react": "^18.2.0",
@@ -35,10 +41,12 @@
     "react-redux": "^9.1.0",
     "react-router-dom": "^6.21.3",
     "redux-persist": "^6.0.0",
+    "styled-components": "^6.1.8",
     "swiper": "^11.0.5",
     "v6": "^0.0.0"
   },
   "devDependencies": {
+    "@types/event-source-polyfill": "^1.0.5",
     "@types/react": "^18.2.48",
     "@types/react-dom": "^18.2.18",
     "@typescript-eslint/eslint-plugin": "^6.19.0",
