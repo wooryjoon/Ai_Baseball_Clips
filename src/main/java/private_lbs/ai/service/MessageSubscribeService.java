@@ -42,6 +42,7 @@ public class MessageSubscribeService {
 
 
         log.info("AI Model 에서 가공 완료된 영상 위치 " + OriginalVideoLocalPath.getLocalPath());
+        String requestId=OriginalVideoLocalPath.getLocalPath().split("/")[1];
         for (String fileName : FileNames) {
 
             // 파일 이름 "_" 단위로 쪼개기
@@ -65,6 +66,8 @@ public class MessageSubscribeService {
         Collections.sort(batInfoFromFileNames);
         saveBat(batInfoFromFileNames);
 
+        MessagePublishService.publishEvent2("100");
+        MessagePublishService.publishEvent2(requestId);
         //로컬 폴더 삭제
         //LocalS3FileService.deleteDirectory(originalVideoLocalPath);
         //MessagePublishService.publishEvent2(new AIProcessedVideoUrl(bucketName,fileKeys));
@@ -91,6 +94,7 @@ public class MessageSubscribeService {
         LocalS3FileService.createDirectory(filePath);
         // 생성한 폴더에 영상 저장
         S3FileService.downloadFile(bucketName, fileKey, filePath);
+
         // Redis ch3으로 pub
         MessagePublishService.publishEvent3(new OriginalVideoLocalPath(createDirectoryPath));
     }
