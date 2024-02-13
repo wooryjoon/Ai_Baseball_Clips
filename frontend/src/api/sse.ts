@@ -13,3 +13,12 @@ export function openSSE() {
         console.log('Event 창구가 열렸습니다.');
     });
 }
+
+export const uploadResponse = () => {
+    let message;
+    eventSource.addEventListener('uplaodMessage', (event: MessageEvent) => {
+        message = event.data;
+        console.log(message);
+    });
+    return message === 'Upload completed';
+};

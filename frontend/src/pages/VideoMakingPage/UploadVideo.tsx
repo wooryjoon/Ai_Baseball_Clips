@@ -4,18 +4,20 @@ import { upload } from '@/api/uploadVideoApis';
 import { FileInfoType } from './type';
 import { Link } from 'react-router-dom';
 import fileExtensionValid, { ALLOW_FILE_EXTENTION } from '@/utils/fileExtensionValid';
-import { openSSE } from '@/api/sse';
-import { useDispatch } from 'react-redux';
+import { openSSE, uploadResponse } from '@/api/sse';
+
 import uploadVideo from '@/assets/Lottie/videoUpload.json';
 import Lottie from 'lottie-react';
 
 const UploadVideo = () => {
     const [inputFile, setInputFile] = useState<FileInfoType | null>(null);
+    const [isUploaded, setIsUploaded] = useState<boolean>(false);
     const [isComplete, setIsComplete] = useState<boolean>(false);
 
     useEffect(() => {
         openSSE();
-    });
+        setIsComplete(uploadResponse());
+    }, []);
 
     // Input 안의 값이 바뀔 때 일어나는 이벤트
     const onChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -49,14 +51,12 @@ const UploadVideo = () => {
     // 성공적으로 완료가 되면 true 반환
     const uploadFile = async () => {
         if (inputFile) {
-            upload(inputFile.file).then((status) => {
-                if (status) setIsComplete(true);
-            });
+            upload(inputFile.file);
         }
     };
 
     const nextHandler = (e: any) => {
-        if (!inputFile) e.preventDefault();
+        if (isComplete) e.preventDefault();
     };
 
     return (
