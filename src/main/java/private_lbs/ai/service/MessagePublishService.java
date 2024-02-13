@@ -25,8 +25,8 @@ public class MessagePublishService {
     }
 
     // AI 모델에서 가공완료된 영상 조각들 요청 처리 서버로 pub
-    public void publishEvent2(AIProcessedVideoUrl AIProcessedVideoUrl) {
-        this.redisTemplate.convertAndSend("ch1", AIProcessedVideoUrl);
+    public void publishEvent2(String message) {
+        this.redisTemplate.convertAndSend("ch3", message);
     }
 
     // 요청 처리 서버에서 원본 영상 url 정보 전송 Test
