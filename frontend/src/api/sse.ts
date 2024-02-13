@@ -16,9 +16,9 @@ export function openSSE() {
 
 export const uploadResponse = () => {
     let message;
-    eventSource.addEventListener('uplaodMessage', (event: MessageEvent) => {
+    eventSource.addEventListener('uploadResponse', (event: MessageEvent) => {
         message = event.data;
         console.log(message);
     });
-    return message === 'Upload completed';
+    return message === 's3에 영상 업로드 완료!';
 };
