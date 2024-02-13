@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { eventSource } from '@/api/sse';
 import { connect, useDispatch } from 'react-redux';
-import './MakingVideo.scss';
+import './ProgressBar.scss';
 import { setRequestId } from '@/store/slice/requestIdSlice';
 import { AppDispatch } from '@/store/store';
 
@@ -64,13 +64,11 @@ export default function Loading() {
 
     return (
         <div>
-            <div>
-                <div className="progressbar" style={{ display: 'block' }}>
-                    <div className="progress-move" style={{ width: `${progressData}%` }}></div>
-                </div>
-                <div className="progress-status">
-                    <span>{progressData}%</span>
-                </div>
+            <div className="progressbar" style={{ display: 'block' }}>
+                <div className="progress-move" style={{ width: `${progressData}%` }}></div>
+            </div>
+            <div className="progress-status">
+                <span>{progressData}%</span>
             </div>
         </div>
     );
