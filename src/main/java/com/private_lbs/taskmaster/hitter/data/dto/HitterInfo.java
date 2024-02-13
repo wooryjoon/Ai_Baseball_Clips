@@ -9,10 +9,12 @@ public class HitterInfo {
     private long hitterId;
     private String name;
     private String position;
+    private String teamName;
 
     public HitterInfo(Hitter hitter) {
-        this.hitterId = hitter.getId();
-        this.name = hitter.getName();
-        this.position = hitter.getPosition();
+        hitterId = hitter.getId();
+        name = hitter.getName();
+        position = hitter.getPosition();
+        teamName = hitter.getTeam().getName();
     }
 }

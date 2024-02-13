@@ -33,12 +33,17 @@ public class Favorite extends BaseEntity {
 
     public Favorite(Member member, Bat bat) {
         addMember(member);
-        this.bat = bat;
+        addFavorite(bat);
     }
 
     public void addMember(Member member) {
         this.member = member;
         member.getFavorites().add(this);
+    }
+
+    public void addFavorite(Bat bat) {
+        this.bat = bat;
+        bat.makeFavorite(this);
     }
 
     public void changeFavoriteStatus() {

@@ -32,12 +32,11 @@ public class FavoriteService {
         Bat bat = batRepository.findById(favoriteRequest.getBatId())
                 .orElseThrow();
 
-        Favorite favorite = new Favorite(member, bat);
-
         favoriteRepository
-                .findLikeByMemberAndBat(favorite.getMember(), favorite.getBat())
+                .findLikeByMemberAndBat(member, bat)
                 .ifPresentOrElse(Favorite::changeFavoriteStatus,
                         () -> {
+                            Favorite favorite = new Favorite(member, bat);
                             favorite.changeFavoriteStatus();
                             favoriteRepository.save(favorite);
                         });
@@ -45,6 +44,8 @@ public class FavoriteService {
 
     public List<FavoriteProcessedVideo> getLikeList() {
         Member member = memberService.getCurrentMember();
-        return favoriteQueryRepository.findVideoLinkAndPlayerNameAndFavoriteByUserId(member.getId());
+        return favoriteQueryRepository.getFavoriteProcessedVideo(member.getId()).stream()
+                .map(FavoriteProcessedVideo::new)
+                .toList();
     }
 }

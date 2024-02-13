@@ -69,7 +69,7 @@ public class JWTUtil {
     public String getPayload(String token) {
         try {
             return Jwts.parser()
-                    .setSigningKey(salt)
+                    .setSigningKey(generateKey())
                     .parseClaimsJws(token)
                     .getBody()
                     .getSubject();
