@@ -86,3 +86,13 @@
 .player-highlight {
     animation: 1s ease-in-out loadEffect2 forwards;
 }
+.contentArticle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    // background-color: blue;
+}
+.contentArticle-title {
+    text-align: center;
+}
