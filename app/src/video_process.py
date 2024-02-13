@@ -3,6 +3,7 @@ import imutils
 from imutils.object_detection import non_max_suppression
 import numpy as np
 
+
 from .image_process import img_trim
 from .ocr import *
 from .text_process import *
@@ -10,10 +11,9 @@ from .text_process import *
 # main method !
 
 times = 15
-result = {} # result dictionary
 
 def process_video(video_path, players):
-    global result
+    result = {} # result dictionary
     
     # initialize the original frame dimensions, new frame dimensions,
     # and ratio between the dimensions
@@ -36,7 +36,8 @@ def process_video(video_path, players):
     net = cv2.dnn.readNet("resources/deeplearning_model/frozen_east_text_detection.pb")
  
     vs = cv2.VideoCapture(video_path) # video_stream
-    print("동영상의 총 프레임수 : ", int(vs.get(cv2.CAP_PROP_FRAME_COUNT)))
+    total = int(vs.get(cv2.CAP_PROP_FRAME_COUNT))
+    print("동영상의 총 프레임수 : ", total)
     fps = int(vs.get(cv2.CAP_PROP_FPS)) # 원본 영상의 fps
     width = int(vs.get(cv2.CAP_PROP_FRAME_WIDTH)) # 원본 영상의 가로 길이
     height = int(vs.get(cv2.CAP_PROP_FRAME_HEIGHT)) # 원본 영상의 세로 길이
@@ -44,7 +45,8 @@ def process_video(video_path, players):
     score_board = -1 # 4분할 된 프레임 중 스코어보드가 있는 영역을 찾았는지
     part_cnt = [0, 0, 0, 0]
     
-    cnt, sec, min = 0, 0, 0 # 프레임 수, 동영상 시간
+    cnt, sec = 0, 0 # 프레임 수, 동영상 시간
+    per = 1 # 로딩 퍼센트
     
     print("start reading video")
     while True:
@@ -191,13 +193,20 @@ def process_video(video_path, players):
             #     cv2.rectangle(all_frame[score_board][1], (startX, startY), (endX, endY), (0, 255, 0), 2)
             # cv2.imshow("Text Detection", all_frame[score_board][1])
         
+        import sys
+        sys.path.append("..")
+        from main import r
+        data = 80 * (cnt / total)
+        if data > per:
+            msg = "{}".format(10 + per)
+            r.publish("ch3", msg)
+            per += 1
+        
         key = cv2.waitKey(1) & 0xFF
         # if the `q` key was pressed, break from the loop
         if key == ord("q"):
             break
-    
         
-    
     # otherwise, release the file pointer
     vs.release()
 

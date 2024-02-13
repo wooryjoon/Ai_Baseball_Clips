@@ -40,6 +40,7 @@ def make_clip(video_path, time, title):
     clip = VideoFileClip(video_path).subclip(st_time, ed_time)
     output_path = os.path.dirname(video_path)
     clip.write_videofile(output_path + title)
+    return True
 
 # result 처리
 def process_result(video_path, result):
@@ -71,5 +72,7 @@ def process_result(video_path, result):
     clips = sorted(clips, key=lambda clip: clip["time"][0]) # 클립 시작 시간 기준 정렬
     
     # print(clips)
+    k = 1
     for i in range(len(clips)):
-        make_clip(video_path, clips[i]["time"], clips[i]["title"] + "__{}.mp4".format(i + 1))
+        if make_clip(video_path, clips[i]["time"], clips[i]["title"] + "__{}.mp4".format(k)) == True:
+            k += 1
