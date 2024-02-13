@@ -16,7 +16,7 @@ export default function Loading() {
         const es = eventSource;
 
         const progressListner = (event: MessageEvent) => {
-            const result = event.data;
+            const result = Number(event.data);
             setProgressData(result);
             console.log(progressData);
         };
