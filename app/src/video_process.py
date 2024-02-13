@@ -46,6 +46,7 @@ def process_video(video_path, players):
     part_cnt = [0, 0, 0, 0]
     
     cnt, sec = 0, 0 # 프레임 수, 동영상 시간
+    per = 1 # 로딩 퍼센트
     
     print("start reading video")
     while True:
@@ -192,15 +193,14 @@ def process_video(video_path, players):
             #     cv2.rectangle(all_frame[score_board][1], (startX, startY), (endX, endY), (0, 255, 0), 2)
             # cv2.imshow("Text Detection", all_frame[score_board][1])
         
-        import os
         import sys
         sys.path.append("..")
         from main import r
-        data = 10 + 40 * (cnt / total)
-        print(data)
-        if data % 1 == 0:
-            r.publish("ch3", data)    
-        
+        data = 80 * (cnt / total)
+        if data > per:
+            msg = "{}".format(10 + per)
+            r.publish("ch3", msg)
+            per += 1
         
         key = cv2.waitKey(1) & 0xFF
         # if the `q` key was pressed, break from the loop

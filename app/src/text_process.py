@@ -1,5 +1,5 @@
 from jamo import h2j, j2hcj
-from difflib import SequenceMatcher 
+from difflib import SequenceMatcher
 
 # recognition한 text 처리 methods
 
