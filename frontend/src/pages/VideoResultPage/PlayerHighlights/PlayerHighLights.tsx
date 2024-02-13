@@ -5,11 +5,14 @@ import { useQuery } from '@tanstack/react-query';
 import { requestTeamInfo } from '@/api/requestReportView';
 import { SelectedTeam } from '../VideoResultOverview/VideoResultOverview';
 import Loading from '@/components/Loading';
+import { useSelector } from 'react-redux';
+import useGetRequestId from '@/hooks/useGetRequestId';
 
 export default function PlayerHighLights() {
+    const reqId = useGetRequestId();
     const { data, isLoading, isError } = useQuery({
-        queryFn: requestTeamInfo,
-        queryKey: ['teamInfo'],
+        queryFn: () => requestTeamInfo(reqId),
+        queryKey: ['teamInfo', reqId],
     });
     const [currentTeam, setCurrentTeam] = useState<SelectedTeam>('firstTeam');
     const onClickChangeTeam = (e: React.MouseEvent<HTMLDivElement>) => {

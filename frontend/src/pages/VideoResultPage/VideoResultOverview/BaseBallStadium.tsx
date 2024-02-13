@@ -6,6 +6,7 @@ import { requestTeamDataByInnings } from '@/api/requestOverview';
 import PlayerCircle from './PlayerCircle';
 import { PlayerInfoFilteredByInnings, TeamInfo } from '@/api/type';
 import Loading from '@/components/Loading';
+import useGetRequestId from '@/hooks/useGetRequestId';
 
 type Props = {
     currentTeam: 'firstTeam' | 'secondTeam';
@@ -14,11 +15,12 @@ type Props = {
 };
 
 export default function BaseBallStadium({ currentTeam, currentInning, teamData }: Props) {
+    const reqId = useGetRequestId();
     const stadiumContainerRef = useRef<HTMLDivElement>(null);
     const { width, height } = useCalculateWidthHeight(stadiumContainerRef);
     const { data, isLoading, isError } = useQuery({
-        queryFn: requestTeamDataByInnings,
-        queryKey: ['teamInfoByInnings', currentInning * 2 - 1],
+        queryFn: () => requestTeamDataByInnings(reqId),
+        queryKey: ['teamInfoByInnings', currentInning * 2 - 1, reqId],
     });
     if (isLoading) return <Loading />;
     if (isError) return <div>Error</div>;

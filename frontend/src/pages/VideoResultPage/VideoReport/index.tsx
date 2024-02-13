@@ -4,9 +4,11 @@ import TimeLine from './TimeLine';
 import './VideoReport.scss';
 import VideoReportScoreBoard from './VideoReportScoreBoard';
 import Loading from '@/components/Loading';
+import useGetRequestId from '@/hooks/useGetRequestId';
 
 export default function VideoReport() {
-    const { data, isLoading, isError } = reportPageQuery();
+    const reqId = useGetRequestId();
+    const { data, isLoading, isError } = reportPageQuery(reqId);
 
     if (isLoading) return <Loading />;
     if (isError) return <div>error</div>;

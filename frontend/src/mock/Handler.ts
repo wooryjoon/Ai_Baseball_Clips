@@ -493,6 +493,12 @@ export const handlers = [
         };
         return HttpResponse.json(response, { status: 200 });
     }),
+    // 찜하기
+    http.post(baseUrl + '/favorite/updateStatus', async () => {
+        await delay(1000);
+        return HttpResponse.json(null, { status: 200 });
+    }),
+
     // 회원이 찜한 데이터 모킹
     http.get(baseUrl + '/favorite/list', async () => {
         await delay(1000);

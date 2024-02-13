@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBookmark } from '@fortawesome/free-solid-svg-icons';
 import { ProcessedVideoByInnings } from '@/api/type';
 import { requestFavorite } from '@/api/requestFavorite';
+import { useMutation } from '@tanstack/react-query';
 
 type VideoModal = {
     processedVideo: ProcessedVideoByInnings[];
@@ -15,6 +16,9 @@ type VideoModal = {
 
 const VideoModal = forwardRef<HTMLDialogElement, VideoModal>(
     ({ processedVideo, isReadyToLoadVideo, onClick }: VideoModal, ref) => {
+        const { mutate: deleteFavoriteVideo } = useMutation({
+            mutationFn: (batId: number) => requestFavorite({ batId }),
+        });
         if (processedVideo[0]) {
             const [isFavorite, setIsFavorite] = useState(processedVideo[0].favorite);
             return (
@@ -26,11 +30,8 @@ const VideoModal = forwardRef<HTMLDialogElement, VideoModal>(
                                     icon={faBookmark}
                                     className={isFavorite ? 'bookmark favorite' : 'bookmark'}
                                     onClick={() => {
-                                        requestFavorite({ batId: processedVideo[0].batId }).then(
-                                            () => {
-                                                setIsFavorite(!isFavorite);
-                                            }
-                                        );
+                                        deleteFavoriteVideo(processedVideo[0].batId);
+                                        setIsFavorite(!isFavorite);
                                     }}
                                 />
                                 <span>VS {[processedVideo[0].pitcherName]}</span>

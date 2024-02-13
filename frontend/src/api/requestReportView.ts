@@ -2,22 +2,36 @@ import { useQuery } from '@tanstack/react-query';
 import { instance } from '.';
 import { TeamInfo, TeamLineUp, TeamTimeLine } from './type';
 
-const requestTeamInfo = () => {
-    return instance.get<TeamInfo>(import.meta.env.VITE_API_BASE_URL + '/id/bat/team');
+const requestTeamInfo = async (reqId: number) => {
+    console.log(reqId);
+    return await instance.get<TeamInfo>(import.meta.env.VITE_API_BASE_URL + `/${reqId}/bat/team`);
 };
 
-const requestStartLineUp = () => {
-    return instance.get<TeamLineUp>(import.meta.env.VITE_API_BASE_URL + '/id/bat/line-up');
+const requestStartLineUp = async (reqId: number) => {
+    return await instance.get<TeamLineUp>(
+        import.meta.env.VITE_API_BASE_URL + `/${reqId}/bat/line-up`
+    );
 };
 
-const requestTimeLine = () => {
-    return instance.get<TeamTimeLine>(import.meta.env.VITE_API_BASE_URL + '/id/bat/time-line');
+const requestTimeLine = async (reqId: number) => {
+    return await instance.get<TeamTimeLine>(
+        import.meta.env.VITE_API_BASE_URL + `/${reqId}/bat/time-line`
+    );
 };
 
-const reportPageQuery = () => {
-    const teamInfo = useQuery({ queryFn: requestTeamInfo, queryKey: ['parallel-teamInfo'] });
-    const lineUp = useQuery({ queryFn: requestStartLineUp, queryKey: ['parallel-startLineUp'] });
-    const timeLine = useQuery({ queryFn: requestTimeLine, queryKey: ['parallel-timeLine'] });
+const reportPageQuery = (reqId: number) => {
+    const teamInfo = useQuery({
+        queryFn: () => requestTeamInfo(reqId),
+        queryKey: ['parallel-teamInfo', reqId],
+    });
+    const lineUp = useQuery({
+        queryFn: () => requestStartLineUp(reqId),
+        queryKey: ['parallel-startLineUp', reqId],
+    });
+    const timeLine = useQuery({
+        queryFn: () => requestTimeLine(reqId),
+        queryKey: ['parallel-timeLine', reqId],
+    });
 
     const isLoading = teamInfo.isLoading && lineUp.isLoading && timeLine.isLoading;
     const isError = teamInfo.isError && lineUp.isError && timeLine.isError;
