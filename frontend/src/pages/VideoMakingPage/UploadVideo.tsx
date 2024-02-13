@@ -1,13 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '@/components/Button';
 import { upload } from '@/api/uploadVideoApis';
 import { FileInfoType } from './type';
 import { Link } from 'react-router-dom';
 import fileExtensionValid, { ALLOW_FILE_EXTENTION } from '@/utils/fileExtensionValid';
+import { openSSE } from '@/api/sse';
+import { useDispatch } from 'react-redux';
 
 const UploadVideo = () => {
     const [inputFile, setInputFile] = useState<FileInfoType | null>(null);
     const [isComplete, setIsComplete] = useState<boolean>(false);
+    const dispatch = useDispatch();
+
+    // useEffect(() => {
+    openSSE();
+    // }, [dispatch]);
 
     // Input 안의 값이 바뀔 때 일어나는 이벤트
     const onChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,9 +48,9 @@ const UploadVideo = () => {
     // 성공적으로 완료가 되면 true 반환
     const uploadFile = async () => {
         if (inputFile) {
-            const status = await upload(inputFile.file);
-
-            if (status) setIsComplete(true);
+            upload(inputFile.file).then((status) => {
+                if (status) setIsComplete(true);
+            });
         }
     };
 
@@ -72,8 +79,8 @@ const UploadVideo = () => {
                 <Button styleType="uploadvideo" onClick={inputFile && uploadFile}>
                     영상 업로드
                 </Button>
-                <Link to="/main" onClick={nextHandler}>
-                    <Button styleType="gonext" onClick={''} disabled={!isComplete}>
+                <Link to="/loadingAI" onClick={nextHandler}>
+                    <Button styleType="gonext" disabled={!isComplete}>
                         결과페이지로 이동
                     </Button>
                 </Link>
