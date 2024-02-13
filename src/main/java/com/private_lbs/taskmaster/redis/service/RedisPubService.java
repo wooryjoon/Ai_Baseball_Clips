@@ -25,4 +25,10 @@ public class RedisPubService {
         redisTemplate.convertAndSend("ch1", originUrl);
         log.info(originUrl.toString());
     }
+
+    public void sendMessage(String message){
+        //TODO: url은 차후, 설정한 프로토콜에 맞춰 메시지로 수정해야 함
+        redisTemplate.convertAndSend("ch3", message);
+        log.info(message);
+    }
 }

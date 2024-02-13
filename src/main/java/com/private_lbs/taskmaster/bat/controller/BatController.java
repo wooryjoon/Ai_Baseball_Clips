@@ -26,28 +26,6 @@ public class BatController {
     }
 
     @Auth
-    @GetMapping("/{requestId}/bat/hitters/processed-videos")
-    public ResponseEntity<Map<String, List<ProcessedVideoByHitter>>> getProcessedVideosByHitters(
-            @Valid @PathVariable("requestId") long requestId) {
-        return ResponseEntity.ok().body(batService.getProcessedVideoByHitters(requestId));
-    }
-
-    @Auth
-    @GetMapping("/{requestId}/bat/{inning}/processed-videos")
-    public ResponseEntity<List<LineUpWithInningProcessedVideo>> getProcessedVideoByTeamAndInning
-            (@Valid @PathVariable("requestId") long requestId,
-             @Valid @PathVariable("inning") int inning) {
-        return ResponseEntity.ok().body(batService.getProcessedVideoByInning(requestId, inning));
-    }
-
-    // 스타트 라인업
-    @Auth
-    @GetMapping("/{requestId}/bat/line-up")
-    public ResponseEntity<LineUp> getLineUp(@Valid @PathVariable("requestId") long requestId) {
-        return ResponseEntity.ok().body(batService.getTeamStartLineUp(requestId));
-    }
-
-    @Auth
     @GetMapping("/{requestId}/bat/time-line")
     public ResponseEntity<Map<Integer, List<HitterNameAndImage>>> getTimeLine(
             @Valid @PathVariable("requestId") long requestId) {

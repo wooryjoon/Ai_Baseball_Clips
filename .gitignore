@@ -263,7 +263,7 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
-dist
+dist1
 dist-ssr
 *.local
 
@@ -280,3 +280,4 @@ dist-ssr
 
 ### application-secret
 application-secret.yml
+*.p12

@@ -2,26 +2,26 @@ package com.private_lbs.taskmaster.S3.service;
 
 import com.amazonaws.HttpMethod;
 import com.amazonaws.services.s3.AmazonS3Client;
-import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
-import com.private_lbs.taskmaster.redis.service.RedisPubService;
+import com.amazonaws.services.s3.model.*;
 import com.private_lbs.taskmaster.S3.data.dto.EventRecord;
+import com.private_lbs.taskmaster.S3.data.dto.UserData;
 import com.private_lbs.taskmaster.S3.data.vo.OriginUrl;
+import com.private_lbs.taskmaster.redis.service.RedisPubService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.net.URL;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
 public class S3Service {
 
-    private RedisPubService redisPubService;
+    private final RedisPubService redisPubService;
     private final AmazonS3Client amazonS3Client;
 
-
+   private  final UserDataStorage userDataStorage;
     // AWS S3 버킷 정보와 리전을 설정
     @Value("${cloud.aws.s3.bucket}")
     private String bucket;
@@ -39,6 +39,33 @@ public class S3Service {
         return amazonS3Client.generatePresignedUrl(request);
     }
 
+    public Map<String, Object> createMultipartUploadUrls(String filename, Long fileSize, Long memberId, Long requestId) {
+
+        OriginUrl originUrl = makeOriginUrl(filename, memberId, requestId);
+        String uploadId = initiateMultipartUpload(originUrl.getFileKey());
+        userDataStorage.addUserData(uploadId, new UserData(originUrl.getFileKey(),memberId,requestId));
+
+
+        long partSize = 10 * 1024 * 1024;
+        int partCount = (int) Math.ceil((double) fileSize / partSize);
+        List<String> presignedUrls = new ArrayList<>();
+        long durationMillis=100000 * 60;
+        for (int partNumber = 1; partNumber <= partCount; partNumber++) {
+            URL url=generatePresignedUrl(originUrl.getFileKey(),durationMillis);
+            presignedUrls.add(url.toString());
+        }
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("presignedUrls", presignedUrls);
+        response.put("uploadId", uploadId);
+        return response;
+    }
+    private String initiateMultipartUpload(String fileKey) {
+        InitiateMultipartUploadRequest request = new InitiateMultipartUploadRequest(bucket, fileKey);
+        InitiateMultipartUploadResult result = amazonS3Client.initiateMultipartUpload(request);
+        return result.getUploadId();
+    }
+
 
     public OriginUrl makeOriginUrl(String fileName, long userId, long requestId) {
         String fileKey = userId + "/" + requestId + "/" + fileName;
@@ -50,4 +77,15 @@ public class S3Service {
             redisPubService.sendMessage(OriginUrl.makeUrlFromEventRecord(record));
         }
     }
+
+    public void completeMultipartUpload(String uploadId, List<PartETag> partETags) {
+
+
+        UserData UserData=userDataStorage.getUserData(uploadId);
+        CompleteMultipartUploadRequest compRequest = new CompleteMultipartUploadRequest(bucket, UserData.getFileKey(), uploadId, partETags);
+
+        amazonS3Client.completeMultipartUpload(compRequest);
+    }
+
+
 }
