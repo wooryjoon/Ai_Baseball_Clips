@@ -1,43 +1,58 @@
 import { useRef, useState } from 'react';
 import React from 'react';
 import '../VideoResultPage.scss';
-import Stadium from './Stadium';
-import useCalculateWidthHeight from '@/hooks/useCalculateWidthHeight';
-import PlayerCircle from './PlayerCircle';
-import { overviewPlayData, overviewPlayData2 } from '@/mock/dummydata';
+import './VideoResultOverview.scss';
 import ScoreBoard from './ScoreBoard';
+import BaseBallStadium from './BaseBallStadium';
+import { requestTeamInfo } from '@/api/requestReportView';
+import { useQuery } from '@tanstack/react-query';
+import Loading from '@/components/Loading';
 
-export type SelectedTeam = 'team1' | 'team2';
+export type SelectedTeam = 'firstTeam' | 'secondTeam';
 export default function VideoResultOverview() {
-    //TODO stadium div의 width와 height를 계산해 stadium에 전달
-    const stadiumContainerRef = useRef<HTMLDivElement>(null);
-    const { width, height } = useCalculateWidthHeight(stadiumContainerRef);
-    const [currentTeam, setcurrentTeam] = useState<SelectedTeam>('team1');
-
+    const [currentTeam, setCurrentTeam] = useState<SelectedTeam>('firstTeam');
+    const [currentInning, setCurrentInning] = useState<number>(1);
     const onClickChangeTeam = (e: React.MouseEvent<HTMLDivElement>) => {
         if (e.currentTarget instanceof HTMLElement) {
-            if (currentTeam === 'team1' && e.currentTarget.classList.contains('team1')) return;
-            else if (currentTeam === 'team2' && e.currentTarget.classList.contains('team2')) return;
-            setcurrentTeam((prev: SelectedTeam) => {
-                if (prev === 'team1') return 'team2';
-                else return 'team1';
+            if (currentTeam === 'firstTeam' && e.currentTarget.classList.contains('firstTeam'))
+                return;
+            else if (
+                currentTeam === 'secondTeam' &&
+                e.currentTarget.classList.contains('secondTeam')
+            )
+                return;
+            setCurrentTeam((prev: SelectedTeam) => {
+                if (prev === 'firstTeam') return 'secondTeam';
+                else return 'firstTeam';
             });
         }
     };
-    return (
-        <>
-            <ScoreBoard onClick={onClickChangeTeam} currentTeam={currentTeam} />
-            <div className="stadium" ref={stadiumContainerRef}>
-                {currentTeam === 'team1'
-                    ? overviewPlayData.map((data: any) => (
-                          <PlayerCircle data={data} src="/src/assets/선수1.png" />
-                      ))
-                    : overviewPlayData2.map((data: any) => (
-                          <PlayerCircle data={data} src="/src/assets/선수2.png" />
-                      ))}
-                {/* 야구장 이미지 */}
-                <Stadium canvasWidth={width} canvasHeight={height} />
-            </div>
-        </>
-    );
+    const onClickChangeInning = (inning: number) => {
+        setCurrentInning(inning);
+    };
+
+    const {
+        data: teamData,
+        isLoading,
+        isError,
+    } = useQuery({ queryFn: requestTeamInfo, queryKey: ['teamInfo'] });
+
+    if (isLoading) return <Loading />;
+    if (teamData)
+        return (
+            <>
+                <ScoreBoard
+                    onClickInning={onClickChangeInning}
+                    onClickTeam={onClickChangeTeam}
+                    currentTeam={currentTeam}
+                    currentInning={currentInning}
+                    teamData={teamData.data}
+                />
+                <BaseBallStadium
+                    currentTeam={currentTeam}
+                    currentInning={currentInning}
+                    teamData={teamData.data}
+                />
+            </>
+        );
 }

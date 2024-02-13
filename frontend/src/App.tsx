@@ -5,15 +5,15 @@ import LandingPage from './pages/LandingPage';
 import MakingVideo from './pages/VideoMakingPage';
 import Login from './pages/Login';
 import VideoResultPage from './pages/VideoResultPage';
-import PlayerHighlights from './pages/VideoResultPage/PlayerHighLights';
+import PlayerHighLights from './pages/VideoResultPage/PlayerHighlights/PlayerHighLights';
 import initMockAPI from './mock';
 import MyPage from './pages/MyPage';
 import MainPage from './pages/MainPage';
 import PrivateRoute from './route/PrivateRoute';
 import VideoResultOverview from './pages/VideoResultPage/VideoResultOverview/VideoResultOverview';
 import VideoReport from './pages/VideoResultPage/VideoReport';
-
-// initMockAPI();
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+initMockAPI();
 
 function App() {
     let vh = window.innerHeight * 0.01;
@@ -35,7 +35,7 @@ function App() {
                             <Route path="/mypage" element={<MyPage />} />
                             <Route path="/result" element={<VideoResultPage />}>
                                 <Route index element={<VideoReport />} />
-                                <Route path="players" element={<PlayerHighlights />} />
+                                <Route path="players" element={<PlayerHighLights />} />
                                 <Route path="innings" element={<VideoResultOverview />} />
                                 <Route path="teams" element={null} />
                             </Route>
@@ -43,6 +43,7 @@ function App() {
                     </Routes>
                 </BrowserRouter>
             </section>
+            <ReactQueryDevtools initialIsOpen={false} />
         </>
     );
 }

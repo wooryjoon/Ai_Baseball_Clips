@@ -3,17 +3,18 @@ import { useRef, useState } from 'react';
 import openModal from '@/utils/openModal';
 import closeModal from '@/utils/closeModal';
 import usePlayerPositionAnimate from '@/hooks/usePlayerPositionAnimate';
+import { PlayerInfoFilteredByInnings } from '@/api/type';
+import Lottie from 'lottie-react';
+import FireAnimation from '@/assets/Lottie/fire.json';
 
 interface PlayerCircle {
-    data: any;
-    src: string;
+    playerInfo: PlayerInfoFilteredByInnings;
 }
-export default function PlayerCircle({ data, src }: PlayerCircle) {
+export default function PlayerCircle({ playerInfo }: PlayerCircle) {
     const videoRef = useRef<HTMLDialogElement>(null);
     const playerCircleRef = useRef<HTMLDivElement>(null);
     const [isReadyToLoadVideo, setIsReadyToLoadVideo] = useState(false);
-    const { position, clip }: any = data;
-
+    const { name, position, imageUrl, processedVideoByInnings } = playerInfo;
     const onClickPlayerCircle = () => {
         if (isReadyToLoadVideo === false) openModal(videoRef);
         else closeModal(videoRef);
@@ -35,15 +36,18 @@ export default function PlayerCircle({ data, src }: PlayerCircle) {
                     onClickPlayerCircle();
                 }}
             >
-                <div className="player-position">CF</div>
-                <img className="playerCircle" src={src}></img>
-                <span>이대호</span>
+                <div className="player-position">{position}</div>
+                <img className="playerCircle" src={imageUrl}></img>
+                <span>{name}</span>
+                {processedVideoByInnings.length !== 0 && (
+                    <Lottie animationData={FireAnimation} loop={true} className="fireLottie" />
+                )}
             </div>
             <VideoModal
                 ref={videoRef}
                 onClick={onClickPlayerCircle}
                 isReadyToLoadVideo={isReadyToLoadVideo}
-                clip={clip}
+                processedVideo={processedVideoByInnings}
             />
         </>
     );

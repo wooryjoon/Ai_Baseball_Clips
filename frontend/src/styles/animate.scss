@@ -44,13 +44,18 @@
 //애플 타입 에니메이션 효과
 @keyframes appleEffect {
     0% {
-        width: 0px;
+        width: 0%;
         font-size: 0px;
         bottom: -25px;
     }
+    25% {
+        width: 0%;
+        font-size: 0px;
+        bottom: -50px;
+    }
 
     100% {
-        // font-size: 15px;
+        font-size: 15px;
         width: 95%;
         bottom: -50px;
     }
@@ -74,5 +79,18 @@
     }
     100% {
         transform: translate(0, 3px);
+    }
+}
+
+// 스케일업
+@keyframes hideSplashScreenIcon {
+    0% {
+        transform: none;
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: none;
     }
 }

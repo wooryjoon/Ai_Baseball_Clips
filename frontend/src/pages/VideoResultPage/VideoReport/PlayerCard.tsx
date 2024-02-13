@@ -1,12 +1,13 @@
 import usePlayerCardAnimate from '@/hooks/usePlayerCardAnimate';
 import { useRef } from 'react';
 import positionLocation from '@/utils/positionLocation';
+import { PlayerLineUp } from '@/api/type';
 type Props = {
-    data: any;
+    player: PlayerLineUp;
     timer: number;
 };
 
-export default function PlayerCard({ data, timer }: Props) {
+export default function PlayerCard({ player, timer }: Props) {
     const playerCardRef = useRef(null);
     usePlayerCardAnimate(playerCardRef, timer);
     return (
@@ -14,12 +15,12 @@ export default function PlayerCard({ data, timer }: Props) {
             className="playerCard-container"
             ref={playerCardRef}
             style={{
-                top: positionLocation[data.position].top + '%',
-                left: positionLocation[data.position].left + '%',
+                top: positionLocation[player.position].top + '%',
+                left: positionLocation[player.position].left + '%',
             }}
         >
-            <img src="src/assets/선수1.png" alt="" />
-            <span>이대호</span>
+            <img src={player.playerImage} alt="" />
+            <span>{player.name}</span>
         </div>
     );
 }

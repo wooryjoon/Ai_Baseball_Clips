@@ -2,8 +2,8 @@ type TeamLogo = {
     onClick: (e: React.MouseEvent<HTMLDivElement>) => void;
     children: string;
     img: string;
-    type: string;
-    currentTeam: 'team1' | 'team2';
+    type: 'firstTeam' | 'secondTeam';
+    currentTeam: 'firstTeam' | 'secondTeam';
 };
 
 export default function TeamLogo({ type, onClick, children, img, currentTeam }: TeamLogo) {
