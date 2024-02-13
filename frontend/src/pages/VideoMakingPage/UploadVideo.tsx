@@ -16,7 +16,7 @@ const UploadVideo = () => {
     useEffect(() => {
         openSSE();
         setIsComplete(uploadResponse());
-    }, []);
+    }, [isComplete]);
 
     console.log(isComplete);
     // Input 안의 값이 바뀔 때 일어나는 이벤트
@@ -53,10 +53,6 @@ const UploadVideo = () => {
         if (inputFile) {
             upload(inputFile.file);
         }
-    };
-
-    const nextHandler = (e: any) => {
-        if (!isComplete) e.preventDefault();
     };
 
     return (
