@@ -3,7 +3,7 @@
 .description {
     font-size: large;
     font-weight: 500;
-    margin-bottom: 20px;
+    // margin-bottom: 20px;
 }
 
 #make-video {
@@ -41,27 +41,17 @@
 }
 
 #upload-video {
-    margin: 200px 0px 100px 0px;
+    margin: 0;
     width: 100%;
-    height: 100%;
+    height: 80vh;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
-    .buttons {
-        margin: 100px 20px 5px 20px;
-        display: flex;
-        justify-content: space-between;
-
-        .button.uploadvideo {
-            border-radius: 5px;
-            background-color: $kbo-darkblue;
-            color: $kbo-lightgray;
-        }
-
-        .button.previous {
-            border-radius: 5px;
-            background-color: $gray;
-            color: white;
-        }
+    .animation-box {
+        width: 50%;
     }
 
     #input-video-box {
@@ -72,27 +62,41 @@
         justify-content: center;
     }
 
-    .input-tag-label {
-        padding: 6px 25px;
-        border-radius: 4px;
-        color: $kbo-darkblue;
-        font-size: medium;
-        cursor: pointer;
+    .buttons {
+        margin: 20px;
+        display: flex;
+        justify-content: space-between;
+
+        .input-tag-label {
+            margin-right: 5px;
+            padding: 6px 25px;
+            border: 3px solid $kbo-darkblue;
+            border-radius: 5px;
+            color: $kbo-darkblue;
+            font-size: medium;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .button.uploadvideo {
+            margin-left: 5px;
+            border-radius: 5px;
+            background-color: $kbo-darkblue;
+            color: $kbo-lightgray;
+        }
     }
 }
 
-#percentage {
-    margin-top: 200px;
-    text-align: center;
-
-    .button.goHighlight {
+.next {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+    .button.gonext {
         border-radius: 5px;
-        margin: 30px 5px 5px 5px;
-        background-color: $kbo-darkblue;
-        color: $kbo-lightgray;
+        background-color: $gray;
+        color: white;
     }
 }
-
 .progressbar {
     z-index: 100;
     border-style: solid;
@@ -106,7 +110,6 @@
     .progressbar-move {
         background-color: red;
         width: 0%;
-        /* Adjust with JavaScript */
         height: 1.6rem;
     }
 }
