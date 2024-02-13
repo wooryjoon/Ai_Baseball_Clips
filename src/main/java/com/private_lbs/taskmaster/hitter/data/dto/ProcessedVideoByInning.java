@@ -9,12 +9,14 @@ import lombok.Getter;
 @AllArgsConstructor
 public class ProcessedVideoByInning {
 
+    private long batId;
     private String processedVideoUrl;
     private String pitcherName;
     private String inning;
     private boolean favorite;
 
     public ProcessedVideoByInning(Bat bat) {
+        batId = bat.getId();
         processedVideoUrl = bat.getProcessedVideo();
         pitcherName = bat.getPitcher().getName();
         inning = getInning(bat.getInning());
