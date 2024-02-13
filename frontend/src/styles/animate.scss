@@ -82,12 +82,13 @@
     }
 }
 
+// 스케일업
 @keyframes hideSplashScreenIcon {
     0% {
         transform: none;
     }
     50% {
-        transform: scale(1.5);
+        transform: scale(1.2);
     }
     100% {
         transform: none;

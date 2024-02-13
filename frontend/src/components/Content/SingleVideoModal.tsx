@@ -18,7 +18,12 @@ const SingleVideoModal = forwardRef<HTMLDialogElement, SingleVideoModal>(
                 {isReadyToLoadVideo && (
                     <div className="video-container">
                         <div className="videoModal-title">
-                            <FontAwesomeIcon icon={faBookmark} className="bookmark" />
+                            <FontAwesomeIcon
+                                icon={faBookmark}
+                                className={
+                                    processedVideo.favorite ? 'bookmark favorite' : 'bookmark'
+                                }
+                            />
                             <span>VS {[processedVideo.pitcherName]}</span>
 
                             <button onClick={onClick}>X</button>

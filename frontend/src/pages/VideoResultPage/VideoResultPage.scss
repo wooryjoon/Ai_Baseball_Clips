@@ -42,7 +42,8 @@
     // border: 1px solid black;
     display: flex;
     justify-content: space-around;
-    margin-bottom: 20px;
+    // margin-bottom: 20px;
+    animation: 1s ease-in-out loadEffect2 forwards;
 }
 .teamLogo-container {
     margin: 10px;
@@ -53,6 +54,7 @@
     justify-content: center;
     align-items: center;
     width: 45%;
+    background-color: white;
     // border: 1px solid black;
     img {
         width: 40px;
@@ -80,4 +82,7 @@
 .video-slider {
     width: 100%;
     height: auto;
+}
+.player-highlight {
+    animation: 1s ease-in-out loadEffect2 forwards;
 }

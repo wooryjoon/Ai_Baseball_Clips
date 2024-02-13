@@ -5,6 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import { requestTeamDataByInnings } from '@/api/requestOverview';
 import PlayerCircle from './PlayerCircle';
 import { PlayerInfoFilteredByInnings, TeamInfo } from '@/api/type';
+import Loading from '@/components/Loading';
 
 type Props = {
     currentTeam: 'firstTeam' | 'secondTeam';
@@ -19,14 +20,16 @@ export default function BaseBallStadium({ currentTeam, currentInning, teamData }
         queryFn: requestTeamDataByInnings,
         queryKey: ['teamInfoByInnings', currentInning * 2 - 1],
     });
-    if (isLoading) return <div>loading</div>;
+    if (isLoading) return <Loading />;
     if (isError) return <div>Error</div>;
     if (data?.data) {
         return (
             <div className="stadium" ref={stadiumContainerRef}>
-                {data.data[currentTeam].map((playerInfo: PlayerInfoFilteredByInnings) => {
-                    return <PlayerCircle playerInfo={playerInfo} />;
-                })}
+                {data.data[currentTeam].map(
+                    (playerInfo: PlayerInfoFilteredByInnings, i: number) => {
+                        return <PlayerCircle key={i} playerInfo={playerInfo} />;
+                    }
+                )}
                 <img
                     src={
                         currentTeam === 'firstTeam'

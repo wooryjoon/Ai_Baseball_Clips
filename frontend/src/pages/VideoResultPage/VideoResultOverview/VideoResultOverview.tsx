@@ -6,11 +6,10 @@ import ScoreBoard from './ScoreBoard';
 import BaseBallStadium from './BaseBallStadium';
 import { requestTeamInfo } from '@/api/requestReportView';
 import { useQuery } from '@tanstack/react-query';
+import Loading from '@/components/Loading';
 
 export type SelectedTeam = 'firstTeam' | 'secondTeam';
 export default function VideoResultOverview() {
-    //TODO 쿼리 한번에 받자..
-
     const [currentTeam, setCurrentTeam] = useState<SelectedTeam>('firstTeam');
     const [currentInning, setCurrentInning] = useState<number>(1);
     const onClickChangeTeam = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -38,7 +37,7 @@ export default function VideoResultOverview() {
         isError,
     } = useQuery({ queryFn: requestTeamInfo, queryKey: ['teamInfo'] });
 
-    if (isLoading) return <div>isLoading</div>;
+    if (isLoading) return <Loading />;
     if (teamData)
         return (
             <>

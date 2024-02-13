@@ -18,10 +18,10 @@ export default function HighlightContainer({ team }: HighlightContainer) {
     });
     if (data?.data)
         return (
-            <>
+            <div className="player-highlight">
                 {data.data[team].map((player, i) => {
                     return <PlayerVideoCard key={i} player={player} />;
                 })}
-            </>
+            </div>
         );
 }

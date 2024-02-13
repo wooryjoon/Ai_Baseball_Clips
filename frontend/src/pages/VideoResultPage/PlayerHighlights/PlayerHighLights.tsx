@@ -4,11 +4,9 @@ import HighlightContainer from './HighlightContainer';
 import { useQuery } from '@tanstack/react-query';
 import { requestTeamInfo } from '@/api/requestReportView';
 import { SelectedTeam } from '../VideoResultOverview/VideoResultOverview';
+import Loading from '@/components/Loading';
 
 export default function PlayerHighLights() {
-    // api : 팀 정보는 페이지 레이어에서 받아온다. 선수별 정보는 하이라이트 컴포넌트에서 받아온다.
-    //그리고 전체 페이지 단에서 state로 팀을 관리한다.
-
     const { data, isLoading, isError } = useQuery({
         queryFn: requestTeamInfo,
         queryKey: ['teamInfo'],
@@ -29,15 +27,16 @@ export default function PlayerHighLights() {
             });
         }
     };
+    if (isLoading) return <Loading />;
     if (data?.data)
         return (
-            <>
+            <div className="highLightPage">
                 <TeamSelectBar
                     teamData={data.data}
                     currentTeam={currentTeam}
                     onClick={onClickChangeTeam}
                 />
                 <HighlightContainer team={currentTeam} />
-            </>
+            </div>
         );
 }

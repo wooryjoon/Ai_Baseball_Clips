@@ -32,6 +32,37 @@
         box-shadow: 0 0 10px transparentize(red, 0.5);
     }
 }
+.dropdown {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    color: black;
+    padding: 10px;
+    width: 95%;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    z-index: 999;
+    border-radius: 15px;
+    border: 1px solid #f3f3f3;
+    animation: 1s ease-out appleEffect forwards;
+
+    .swiper-slide {
+        text-align: center;
+        justify-content: center;
+        border-radius: 5px;
+        background-color: #f3f3f3;
+    }
+    span {
+        font-weight: 700;
+        color: $kbo_darkblue;
+        text-align: center;
+    }
+}
 .scoreboard-container {
     margin: 0 auto;
     width: 100%;
@@ -41,6 +72,7 @@
     justify-content: space-between;
     background-color: #2f2f2f;
     position: relative;
+    animation: 1s ease-in-out loadEffect1 backwards;
     .scoreboard-container-title {
         animation: blink-effect 2s step-end infinite;
         font-family: 'LED1';
@@ -65,40 +97,7 @@
             font-size: 27px;
         }
     }
-    .dropdown {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        bottom: 0;
-        color: black;
-        padding: 10px;
-        width: 95%;
-        height: 40px;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        background-color: white;
-        z-index: 100;
-        border-radius: 15px;
-        border: 1px solid #f3f3f3;
-        animation: 1s ease-out appleEffect forwards;
-        // .swiper-wrapper {
-        //     width: 100%;
-        //     display: flex;
-        // }
-        .swiper-slide {
-            text-align: center;
-            justify-content: center;
-            border-radius: 5px;
-            background-color: #f3f3f3;
-        }
-        span {
-            font-weight: 700;
-            color: $kbo_darkblue;
-            text-align: center;
-        }
-    }
+
     .scoreboard {
         width: 90%;
         display: flex;
@@ -151,6 +150,7 @@
     height: calc(100dvh - 200px);
     background-color: #a3c47b;
     position: relative;
+    animation: 1s ease-in-out loadEffect1 forwards;
 }
 
 .playerCircle-container {

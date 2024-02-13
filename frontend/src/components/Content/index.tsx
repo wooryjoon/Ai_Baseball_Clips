@@ -22,13 +22,17 @@ export default function Content({ clip }: Content) {
     };
     return (
         <div className="content-container">
-            <button
+            <img
+                src="https://source.unsplash.com/random/?programming"
                 className="thumbnail"
                 onClick={() => {
                     openModal(videoDialogRef);
                     onClickLoadVideoHandler();
                 }}
-            ></button>
+            ></img>
+            <div className="thumbnail-title">
+                {clip.inning} (vs{clip.pitcherName})
+            </div>
             <SingleVideoModal
                 ref={videoDialogRef}
                 processedVideo={clip}

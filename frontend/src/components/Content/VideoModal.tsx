@@ -14,26 +14,34 @@ type VideoModal = {
 
 const VideoModal = forwardRef<HTMLDialogElement, VideoModal>(
     ({ processedVideo, isReadyToLoadVideo, onClick }: VideoModal, ref) => {
-        return (
-            <Dialog onClick={onClick} ref={ref}>
-                {isReadyToLoadVideo && (
-                    <div className="video-container">
-                        <div className="videoModal-title">
-                            <FontAwesomeIcon icon={faBookmark} className="bookmark" />
-                            <span>VS {[processedVideo[0].pitcherName]}</span>
+        if (processedVideo[0])
+            return (
+                <Dialog onClick={onClick} ref={ref}>
+                    {isReadyToLoadVideo && (
+                        <div className="video-container">
+                            <div className="videoModal-title">
+                                <FontAwesomeIcon
+                                    icon={faBookmark}
+                                    className={
+                                        processedVideo[0].favorite
+                                            ? 'bookmark favorite'
+                                            : 'bookmark'
+                                    }
+                                />
+                                <span>VS {[processedVideo[0].pitcherName]}</span>
 
-                            <button onClick={onClick}>X</button>
+                                <button onClick={onClick}>X</button>
+                            </div>
+
+                            <Video
+                                poster=""
+                                src={processedVideo[0].processedVideoUrl}
+                                source_type="mp4"
+                            />
                         </div>
-
-                        <Video
-                            poster=""
-                            src={processedVideo[0].processedVideoUrl}
-                            source_type="mp4"
-                        />
-                    </div>
-                )}
-            </Dialog>
-        );
+                    )}
+                </Dialog>
+            );
     }
 );
 

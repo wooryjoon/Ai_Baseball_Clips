@@ -3,11 +3,12 @@ import PositionMap from './PositionMap';
 import TimeLine from './TimeLine';
 import './VideoReport.scss';
 import VideoReportScoreBoard from './VideoReportScoreBoard';
+import Loading from '@/components/Loading';
 
 export default function VideoReport() {
     const { data, isLoading, isError } = reportPageQuery();
 
-    if (isLoading) return <div>loading</div>;
+    if (isLoading) return <Loading />;
     if (isError) return <div>error</div>;
     if (data.teamInfo && data.lineUp && data.timeLine) {
         return (
