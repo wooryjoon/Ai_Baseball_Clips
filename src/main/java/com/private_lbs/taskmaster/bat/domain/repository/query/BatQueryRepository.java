@@ -44,7 +44,7 @@ public interface BatQueryRepository extends JpaRepository<Bat, Long> {
     )
     List<Hitter> getHitters(@Param("requestId") long requestId, @Param("inning") int inning);
 
-    @Query("SELECT new com.private_lbs.taskmaster.bat.data.dto.response.HitterNameAndImage (b.inning, h.name) " +
+    @Query("SELECT new com.private_lbs.taskmaster.bat.data.dto.response.HitterNameAndImage (b.inning, h.name, h.imageUrl) " +
             "FROM Bat b JOIN Hitter h ON b.hitter = h " +
             "WHERE b.request.id = :requestId ORDER BY b.inning, b.createDateTime")
     List<HitterNameAndImage> getTimeLine(@Param("requestId") long requestId);

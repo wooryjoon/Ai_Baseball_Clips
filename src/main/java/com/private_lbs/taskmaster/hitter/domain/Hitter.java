@@ -32,7 +32,7 @@ public class Hitter extends BaseEntity {
 
     private String position;
 
-//    private String imageUrl;
+    private String imageUrl;
 
     public Hitter(Team team, String name, String position) {
         this.team = team;

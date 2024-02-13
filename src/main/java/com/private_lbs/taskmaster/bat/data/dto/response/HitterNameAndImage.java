@@ -9,9 +9,9 @@ public class HitterNameAndImage {
     String name;
     String imageUrl;
 
-    public HitterNameAndImage(int inning, String name) {
+    public HitterNameAndImage(int inning, String name, String imageUrl) {
         this.inning = inning;
         this.name = name;
-//        this.imageUrl = imageUrl;
+        this.imageUrl = imageUrl;
     }
 }
