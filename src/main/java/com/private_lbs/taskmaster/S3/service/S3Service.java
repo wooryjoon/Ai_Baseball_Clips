@@ -78,6 +78,10 @@ public class S3Service {
         }
     }
 
+    public String generateS3Url(String fileKey) {
+        return String.format("https://%s.s3.%s.amazonaws.com/%s", bucket, region, fileKey);
+    }
+
     public void completeMultipartUpload(String uploadId, List<PartETag> partETags) {
 
 
