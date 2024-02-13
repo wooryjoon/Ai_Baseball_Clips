@@ -4,11 +4,11 @@ import VideoModal from './VideoModal';
 import openModal from '@/utils/openModal';
 import { Clip } from '@/pages/VideoResultPage/type';
 import closeModal from '@/utils/closeModal';
-import { ProcessedVideoByInnings } from '@/api/type';
+import { ProcessedVideo, ProcessedVideoByInnings } from '@/api/type';
 import SingleVideoModal from './SingleVideoModal';
 
 type Content = {
-    clip: ProcessedVideoByInnings;
+    clip: ProcessedVideo;
 };
 //TODO : dialog tag를 활용해 썸네일 클릭 시 영상 전체 모달창 띄우기
 export default function Content({ clip }: Content) {
@@ -30,9 +30,6 @@ export default function Content({ clip }: Content) {
                     onClickLoadVideoHandler();
                 }}
             ></img>
-            <div className="thumbnail-title">
-                {clip.inning} (vs{clip.pitcherName})
-            </div>
             <SingleVideoModal
                 ref={videoDialogRef}
                 processedVideo={clip}

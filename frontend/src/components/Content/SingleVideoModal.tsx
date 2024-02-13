@@ -3,12 +3,11 @@ import Video from './Video';
 import Dialog from '../Dialog';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBookmark } from '@fortawesome/free-solid-svg-icons';
-import { ProcessedVideoByInnings } from '@/api/type';
-import { requestFavorite } from '@/api/requestFavorite';
+import { ProcessedVideo, ProcessedVideoByInnings } from '@/api/type';
 
 type SingleVideoModal = {
     isReadyToLoadVideo: boolean;
-    processedVideo: ProcessedVideoByInnings;
+    processedVideo: ProcessedVideo;
     onClick: () => void;
 };
 

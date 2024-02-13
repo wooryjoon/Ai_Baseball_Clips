@@ -3,7 +3,7 @@ import { instance } from '.';
 import { TeamInfo, TeamLineUp, TeamTimeLine } from './type';
 
 const requestTeamInfo = () => {
-    return instance.get<TeamInfo>(import.meta.env.VITE_API_BASE_URL + '/id/bat/name');
+    return instance.get<TeamInfo>(import.meta.env.VITE_API_BASE_URL + '/id/bat/team');
 };
 
 const requestStartLineUp = () => {

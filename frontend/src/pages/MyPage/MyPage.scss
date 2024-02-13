@@ -6,6 +6,7 @@
     padding: 15px;
     border-bottom: 1px solid lightgray;
     display: flex;
+    animation: 1s ease-in-out loadEffect2 forwards;
     .profile-img-container {
         padding: 10px;
         border-radius: 15px;
@@ -36,7 +37,7 @@
 }
 .bookmarkList {
     margin-top: 25px;
-
+    animation: 1s ease-in-out loadEffect2 forwards;
     .bookmark-title {
         font-weight: 500;
         font-size: 20px;
@@ -46,7 +47,7 @@
 
         align-items: center;
     }
-    img {
+    .baseball {
         width: 25px;
         height: 25px;
         margin-left: 10px;
