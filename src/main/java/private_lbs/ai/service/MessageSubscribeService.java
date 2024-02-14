@@ -69,7 +69,7 @@ public class MessageSubscribeService {
         MessagePublishService.publishEvent2("100");
         MessagePublishService.publishEvent2("ID/"+requestId);
         //로컬 폴더 삭제
-        //LocalS3FileService.deleteDirectory(originalVideoLocalPath);
+        LocalS3FileService.deleteDirectory(originalVideoLocalPath);
         //MessagePublishService.publishEvent2(new AIProcessedVideoUrl(bucketName,fileKeys));
     }
     // 요청 처리 서버로 부터 S3 url 수신
