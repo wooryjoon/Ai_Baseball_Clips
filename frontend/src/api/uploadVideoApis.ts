@@ -7,6 +7,7 @@ export async function upload(uploadFile: File) {
             params: { filename: uploadFile.name },
         })
         .then((response) => {
+            console.log('get 요청 보냄');
             const presignedUrl = response.data;
             console.log(presignedUrl);
             UploadFiletoS3(presignedUrl, uploadFile);
@@ -18,6 +19,7 @@ export async function upload(uploadFile: File) {
 }
 
 function UploadFiletoS3(presignedUrl: string, uploadFile: File) {
+    console.log('presigned url 로 파일 전송하기 실행');
     axios
         .put(presignedUrl, uploadFile, {
             headers: {

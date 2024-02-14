@@ -1,18 +1,38 @@
 @import '../../styles/style.scss';
 
-.progressbar {
-    z-index: 100;
-    border-style: solid;
-    border-color: black;
-    border-width: 0.2rem;
-    height: 1.5rem;
-    width: 18rem;
-    margin-top: 0.95rem;
-    display: none;
+.progress-component {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    color: $kbo_darkblue;
 
-    .progressbar-move {
-        background-color: red;
-        width: 0%;
-        height: 1.6rem;
+    .animation-box {
+        margin-top: 20px;
+        width: 90%;
+    }
+
+    .progress-data {
+        font-size: 35px;
+        font-weight: 300;
+        color: $kbo_skyblue;
+    }
+
+    .progressbar {
+        margin: 10px 0px 15px 0px;
+        z-index: 100;
+        // border: 3px solid $kbo_skyblue;
+        background-color: $kbo-lightgray;
+        height: 1.5rem;
+        width: 80%;
+        display: none;
+
+        .progressbar-move {
+            background-color: $kbo_skyblue;
+            width: 0%;
+            height: 100%;
+        }
     }
 }

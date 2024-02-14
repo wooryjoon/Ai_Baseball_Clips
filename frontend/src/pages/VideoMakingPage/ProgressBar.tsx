@@ -4,62 +4,84 @@ import { connect, useDispatch } from 'react-redux';
 import './ProgressBar.scss';
 import { setRequestId } from '@/store/slice/requestIdSlice';
 import { AppDispatch } from '@/store/store';
+import Lottie from 'lottie-react';
+import AI from '@/assets/Lottie/AI.json';
+import { useNavigate } from 'react-router-dom';
 
 export default function Loading() {
-    const [progressData, setProgressData] = useState<number>(0);
+    const [progressData, setProgressData] = useState<number>();
+    const [progressText, setProgressText] = useState<string>('');
     const dispatch = useDispatch<AppDispatch>();
+    const navigate = useNavigate();
+
+    const updateProgressText = (result: number) => {
+        if (result < 11) {
+            setProgressText('AI가 영상을 받고 있어요');
+        } else if (result < 89) {
+            setProgressText('AI가 영상을 분석하고 있어요');
+        } else if (result < 99) {
+            setProgressText('AI가 하이라이트를 생성중이에요');
+        } else {
+            setProgressText('AI가 하이라이트를 완성했어요!');
+        }
+    };
 
     useEffect(() => {
         const eventSource = new EventSource(SSEurl);
 
         // progressData 가져오기 위해 선언한 함수
         // 아래의 eventListener에서 호출됨
-        const progressListner = (event: MessageEvent) => {
+        const progressListener = (event: MessageEvent) => {
             const result = Number(event.data);
             setProgressData(result);
-            console.log(progressData);
+            updateProgressText(result);
+            console.log(result);
         };
 
         // "message" 라는 이벤트의 응답을 받는 메서드
         // progressData 를 받기 위해 사용
-        eventSource.addEventListener('message', progressListner);
+        eventSource.addEventListener('message', progressListener);
 
         // requestId 받아오기 위한 함수
         // 아래의 eventListener 에서 호출됨
-        const requestIdListenr = (event: MessageEvent) => {
+        const requestIdListener = (event: MessageEvent) => {
             const requestId = Number(event.data);
             console.log('requestId: ' + requestId);
             dispatch(setRequestId(requestId));
+            if (requestId && progressData === 100) navigate('/result');
         };
 
         // "getRequestId" 라는 이벤트의 응답을 받는 메서드
         // requestId 를 받아 리덕스에 저장하기 위해 사용
-        eventSource.addEventListener('getRequestId', requestIdListenr);
+        eventSource.addEventListener('getRequestId', requestIdListener);
 
         // 에러처리
         eventSource.onerror = function (error) {
-            alert('EventSource failed');
+            alert('하이라이트 제작 중 에러가 발생했습니다.');
             console.log(error);
-            if (eventSource.readyState == EventSource.CLOSED) {
-                console.log('Connection was closed. Reconnecting...');
-                setTimeout(connect, 1000);
+            if (this.readyState == EventSource.CONNECTING) {
+                console.log('Connection is interrupted, connecting ...');
+            } else {
+                console.log('Error, state: ' + this.readyState);
             }
         };
 
         // progressData 받아오는 리스너 함수를 제거(갱신)
         return () => {
-            eventSource.removeEventListener('message', progressListner);
+            eventSource.removeEventListener('message', progressListener);
         };
-    }, [dispatch]);
+    }, []);
 
     return (
-        <div>
+        <div className="progress-component">
+            <div className="animation-box">
+                <Lottie animationData={AI} />
+            </div>
+            <p className="progress-data">{progressData}%</p>
             <div className="progressbar" style={{ display: 'block' }}>
-                <div className="progress-move" style={{ width: `${progressData}%` }}></div>
+                <div className="progressbar-move" style={{ width: `${progressData}%` }}></div>
             </div>
-            <div className="progress-status">
-                <span>{progressData}%</span>
-            </div>
+            <p>{progressText}</p>
         </div>
     );
 }

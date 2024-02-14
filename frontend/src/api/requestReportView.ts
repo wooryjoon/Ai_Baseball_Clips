@@ -9,7 +9,7 @@ const requestTeamInfo = async (reqId: number) => {
 
 const requestStartLineUp = async (reqId: number) => {
     return await instance.get<TeamLineUp>(
-        import.meta.env.VITE_API_BASE_URL + `/${reqId}/bat/line-up`
+        import.meta.env.VITE_API_BASE_URL + `/${reqId}/hitter/list/line-up`
     );
 };
 
