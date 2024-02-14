@@ -97,6 +97,7 @@ public class MessageSubscribeService {
 
         // Redis ch3으로 pub
         MessagePublishService.publishEvent3(new OriginalVideoLocalPath(createDirectoryPath));
+
     }
 
 

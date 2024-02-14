@@ -34,6 +34,7 @@ public class RedisMessageSubscriber implements MessageListener {
 
                 messageSubscribeService.processOriginalVideoUrl(OriginalVideoUrl);
             } else if (messageMap.containsKey("localPath")) {
+
                 // OriginalVideoLocalPath 형태로 처리
                 OriginalVideoLocalPath OriginalVideoLocalPath = mapper.convertValue(messageMap, OriginalVideoLocalPath.class);
 

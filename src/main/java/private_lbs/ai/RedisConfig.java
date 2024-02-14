@@ -59,7 +59,7 @@ public class RedisConfig {
         MessageListenerAdapter messageListenerAdapter = new MessageListenerAdapter(RedisMessageSubscriber, "onMessage");
 
         container.addMessageListener(messageListenerAdapter, Topic1());
-//        container.addMessageListener(messageListenerAdapter, Topic2());
+        container.addMessageListener(messageListenerAdapter, Topic2());
 
         return container;
     }
@@ -70,7 +70,10 @@ public class RedisConfig {
     ChannelTopic Topic1(){
         return new ChannelTopic("ch1");
     };
-
+    @Bean
+    ChannelTopic Topic2(){
+        return new ChannelTopic("ch2");
+    };
 //    @Bean
 //    ChannelTopic Topic2(){
 //        return new ChannelTopic("ch2");
