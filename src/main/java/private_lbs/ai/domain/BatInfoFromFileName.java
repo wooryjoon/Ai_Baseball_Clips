@@ -32,7 +32,7 @@ public class BatInfoFromFileName implements Comparable<BatInfoFromFileName> {
         this.requestId = Integer.parseInt(splits[splits.length - 5]);
         this.pitcherId = Integer.parseInt(splits[splits.length - 4]);
         this.hitterId = Integer.parseInt(splits[splits.length - 3]);
-        this.atBatOrder = Integer.parseInt(splits[splits.length - 2]);
+        this.atBatOrder = Integer.parseInt(splits[splits.length - 1].replace(".mp4",""));
 
         log.info("fileKey : {}", fileKey);
         log.info("requestId : {}", requestId);
