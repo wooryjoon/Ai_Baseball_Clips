@@ -15,7 +15,7 @@ import VideoReport from './pages/VideoResultPage/VideoReport';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import LoadingAI from './pages/VideoMakingPage/LoadingAI';
 
-initMockAPI();
+// initMockAPI();
 
 function App() {
     let vh = window.innerHeight * 0.01;

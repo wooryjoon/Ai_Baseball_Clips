@@ -6,13 +6,15 @@ import fileExtensionValid, { ALLOW_FILE_EXTENTION } from '@/utils/fileExtensionV
 import { openSSE, uploadResponse } from '@/api/sse';
 import uploadVideo from '@/assets/Lottie/videoUpload.json';
 import Lottie from 'lottie-react';
+import { useNavigate } from 'react-router-dom';
 
 const UploadVideo = () => {
     const [inputFile, setInputFile] = useState<FileInfoType | null>(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         openSSE();
-        uploadResponse();
+        uploadResponse(navigate);
     }, []);
 
     // Input 안의 값이 바뀔 때 일어나는 이벤트

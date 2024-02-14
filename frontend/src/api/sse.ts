@@ -14,8 +14,7 @@ export function openSSE() {
     })();
 }
 
-export const uploadResponse = () => {
-    const navigate = useNavigate();
+export const uploadResponse = (navigate: any) => {
     return eventSource.addEventListener('uploadResponse', (event: MessageEvent) => {
         navigate('/loadingAI');
     });
