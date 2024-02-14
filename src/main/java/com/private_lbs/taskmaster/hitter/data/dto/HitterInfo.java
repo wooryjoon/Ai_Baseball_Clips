@@ -7,6 +7,7 @@ import lombok.Data;
 public class HitterInfo {
 
     private long hitterId;
+    private String imageUrl;
     private String name;
     private String position;
     private String teamName;
@@ -16,5 +17,6 @@ public class HitterInfo {
         name = hitter.getName();
         position = hitter.getPosition();
         teamName = hitter.getTeam().getName();
+        imageUrl = hitter.getImageUrl();
     }
 }

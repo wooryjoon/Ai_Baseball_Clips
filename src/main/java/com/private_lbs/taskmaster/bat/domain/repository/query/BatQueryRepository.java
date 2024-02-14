@@ -10,9 +10,12 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface BatQueryRepository extends JpaRepository<Bat, Long> {
-    @Query("SELECT b.hitter " +
-            "FROM Bat b " +
-            "JOIN b.request r " +
+    @Query("SELECT h " +
+            "FROM Hitter h " +
+            "JOIN FETCH h.bat b " +
+            "JOIN FETCH b.request r " +
+            "JOIN FETCH h.team t " +
+            "LEFT JOIN FETCH b.favorite f " +
             "WHERE r.id = :requestId AND MOD(b.inning, 2) = :inning " +
             "ORDER BY b.createDateTime"
     )
