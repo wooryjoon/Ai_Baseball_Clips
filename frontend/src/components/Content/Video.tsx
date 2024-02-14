@@ -1,13 +1,19 @@
+import { memo } from 'react';
+
 interface Clip {
     poster: string;
     src: string;
     source_type: string;
 }
 
-export default function Video({ poster, src, source_type }: Clip) {
+function Video({ poster, src, source_type }: Clip) {
     return (
         <video autoPlay loop playsInline controls poster={poster}>
-            <source src={src} type={`video/${source_type}`} />
+            <source
+                src={'https://a305-project-bucket.s3.ap-northeast-2.amazonaws.com/' + src}
+                type={`video/${source_type}`}
+            />
         </video>
     );
 }
+export default memo(Video);

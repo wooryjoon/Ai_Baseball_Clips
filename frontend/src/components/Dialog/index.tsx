@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, memo } from 'react';
 import './Dialog.scss';
 type Dialog = {
     onClick?: () => void;
@@ -9,4 +9,4 @@ const Dialog = forwardRef<HTMLDialogElement, Dialog>(function Dialog({ children 
     return <dialog ref={ref}>{children}</dialog>;
 });
 
-export default Dialog;
+export default memo(Dialog);

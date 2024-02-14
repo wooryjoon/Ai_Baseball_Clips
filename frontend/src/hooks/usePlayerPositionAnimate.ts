@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import positionLocaiton from '@/utils/positionLocation';
 
 function usePlayerPositionAnimate(

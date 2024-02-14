@@ -56,7 +56,7 @@ export const handlers = [
         );
     }),
     // 팀 정보 fetch 모킹
-    http.get(baseUrl + '/id/bat/team', async ({ request }) => {
+    http.get(baseUrl + '/0/bat/team', async ({ request }) => {
         await delay(1000);
         const response = {
             firstTeamName: 'KT',
@@ -67,7 +67,7 @@ export const handlers = [
         return HttpResponse.json(response, { status: 200 });
     }),
     // 팀 라인업 fetch 모킹
-    http.get(baseUrl + '/id/bat/line-up', async ({ request }) => {
+    http.get(baseUrl + '/0/bat/line-up', async ({ request }) => {
         await delay(1000);
         const response = {
             firstTeam: [
@@ -102,7 +102,7 @@ export const handlers = [
         return HttpResponse.json(response, { status: 200 });
     }),
     // 팀 타임라인 fetch 모킹
-    http.get(baseUrl + '/id/bat/time-line', async ({ request }) => {
+    http.get(baseUrl + '/0/bat/time-line', async ({ request }) => {
         await delay(1000);
         const response = {
             '1': [
@@ -137,7 +137,7 @@ export const handlers = [
         return HttpResponse.json(response, { status: 200 });
     }),
     // 이닝에 따른 야구장 선수 데이터 fetch 모킹
-    http.get(baseUrl + '/id/hitter/list/1/processed-video', async ({ request }) => {
+    http.get(baseUrl + '/0/hitter/list/1/processed-video', async ({ request }) => {
         await delay(1000);
         const response = {
             firstTeam: [
@@ -215,7 +215,7 @@ export const handlers = [
         };
         return HttpResponse.json(response, { status: 200 });
     }),
-    http.get(baseUrl + '/id/hitter/list/3/processed-video', async ({ request }) => {
+    http.get(baseUrl + '/0/hitter/list/3/processed-video', async ({ request }) => {
         await delay(1000);
         const response = {
             firstTeam: [
@@ -294,7 +294,7 @@ export const handlers = [
         return HttpResponse.json(response, { status: 200 });
     }),
     // 선수별 하이라이트 데이터 fetch 모킹
-    http.get(baseUrl + '/id/hitters/list/processed-videos', async ({ request }) => {
+    http.get(baseUrl + '/0/hitters/list/processed-videos', async ({ request }) => {
         await delay(1000);
         const response = {
             firstTeam: [

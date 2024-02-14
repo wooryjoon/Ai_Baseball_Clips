@@ -13,6 +13,7 @@ export default function VideoReport() {
     if (isLoading) return <Loading />;
     if (isError) return <div>error</div>;
     if (data.teamInfo && data.lineUp && data.timeLine) {
+        console.log(data);
         return (
             <div className="videoReport-container">
                 {/* 팀간 스코어 */}

@@ -1,7 +1,7 @@
 import { TeamInfo } from '@/api/type';
 import React from 'react';
 import TeamLogo from './TeamLogo';
-import { SelectedTeam } from '../VideoResultOverview/VideoResultOverview';
+import { SelectedTeam } from '../VideoResultOverview';
 
 type TeamSelectBar = {
     teamData: TeamInfo;

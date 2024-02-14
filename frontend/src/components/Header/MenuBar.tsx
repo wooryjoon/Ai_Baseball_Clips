@@ -1,6 +1,7 @@
+import { memo } from 'react';
 import MyNavLink from '../Link/MyNavLink';
 
-export default function MenuBar() {
+function MenuBar() {
     return (
         <>
             <nav className="menuBar">
@@ -11,3 +12,4 @@ export default function MenuBar() {
         </>
     );
 }
+export default memo(MenuBar);

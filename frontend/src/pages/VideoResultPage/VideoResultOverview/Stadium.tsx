@@ -1,4 +1,4 @@
-import { RefObject, useEffect, useRef } from 'react';
+import { RefObject, memo, useEffect, useRef } from 'react';
 import './VideoResultOverview.scss';
 import createStadium from '@/utils/createStadium';
 import { TeamInfo } from '@/api/type';
@@ -6,7 +6,7 @@ interface Stadium {
     canvasWidth: number;
     canvasHeight: number;
 }
-export default function Stadium({ canvasWidth, canvasHeight }: Stadium) {
+function Stadium({ canvasWidth, canvasHeight }: Stadium) {
     const canvasRef: RefObject<HTMLCanvasElement> = useRef<HTMLCanvasElement>(null);
     useEffect(() => {
         createStadium(canvasRef, canvasWidth, canvasHeight);
@@ -21,3 +21,4 @@ export default function Stadium({ canvasWidth, canvasHeight }: Stadium) {
         ></canvas>
     );
 }
+export default memo(Stadium);

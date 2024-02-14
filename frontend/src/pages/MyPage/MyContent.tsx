@@ -1,13 +1,14 @@
 import Button from '@/components/Button';
 import Content from '@/components/Content';
 import { FavoriteVideo } from '@/api/type';
+import { memo } from 'react';
 
 interface MyContent {
     favoriteVideo: FavoriteVideo;
     onClick: (batId: number) => void;
 }
 
-export default function MyContent({ favoriteVideo, onClick }: MyContent) {
+function MyContent({ favoriteVideo, onClick }: MyContent) {
     return (
         <div className="myContent">
             <Content
@@ -38,3 +39,4 @@ export default function MyContent({ favoriteVideo, onClick }: MyContent) {
         </div>
     );
 }
+export default memo(MyContent);

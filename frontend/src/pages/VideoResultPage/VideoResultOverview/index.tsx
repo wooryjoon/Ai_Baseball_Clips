@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import React from 'react';
 import '../VideoResultPage.scss';
 import './VideoResultOverview.scss';
@@ -12,8 +12,8 @@ import useGetRequestId from '@/hooks/useGetRequestId';
 export type SelectedTeam = 'firstTeam' | 'secondTeam';
 export default function VideoResultOverview() {
     const reqId = useGetRequestId();
-    const [currentTeam, setCurrentTeam] = useState<SelectedTeam>('firstTeam');
     const [currentInning, setCurrentInning] = useState<number>(1);
+    const [currentTeam, setCurrentTeam] = useState<SelectedTeam>('firstTeam');
     const onClickChangeTeam = (e: React.MouseEvent<HTMLDivElement>) => {
         if (e.currentTarget instanceof HTMLElement) {
             if (currentTeam === 'firstTeam' && e.currentTarget.classList.contains('firstTeam'))

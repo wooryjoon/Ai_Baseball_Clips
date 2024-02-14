@@ -3,13 +3,12 @@ import { instance } from '.';
 import { TeamInfo, TeamLineUp, TeamTimeLine } from './type';
 
 const requestTeamInfo = async (reqId: number) => {
-    console.log(reqId);
     return await instance.get<TeamInfo>(import.meta.env.VITE_API_BASE_URL + `/${reqId}/bat/team`);
 };
 
 const requestStartLineUp = async (reqId: number) => {
     return await instance.get<TeamLineUp>(
-        import.meta.env.VITE_API_BASE_URL + `/${reqId}/bat/line-up`
+        import.meta.env.VITE_API_BASE_URL + `/${reqId}/hitter/list/line-up`
     );
 };
 
