@@ -44,9 +44,9 @@ class Clip:
                 
     def make(self, hit_obj, clip_st, clip_ed):
         print(hit_obj.name, clip_st, clip_ed)
-        self.cnt += 1
         if abs(clip_st - clip_ed) <= 1.5 or clip_st > clip_ed:
             return
+        self.cnt += 1
         # 투수 찾기
         pit = self.pit_records[clip_ed]
         if len(pit) == 0: # 타석 종료 이전에 나온 투수 탐색
