@@ -1,0 +1,18 @@
+@import '../../styles/style.scss';
+
+.progressbar {
+    z-index: 100;
+    border-style: solid;
+    border-color: black;
+    border-width: 0.2rem;
+    height: 1.5rem;
+    width: 18rem;
+    margin-top: 0.95rem;
+    display: none;
+
+    .progressbar-move {
+        background-color: red;
+        width: 0%;
+        height: 1.6rem;
+    }
+}
