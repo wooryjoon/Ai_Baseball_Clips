@@ -18,8 +18,8 @@ def root():
 async def set_redis():
     # redis connect
     global r
-    # r = await aioredis.create_redis_pool("redis://i10a305.p.ssafy.io:6379", password="a305#@!")
-    r = await aioredis.create_redis_pool("redis://localhost")
+    r = await aioredis.create_redis_pool("redis://i10a305.p.ssafy.io:6379", password="a305#@!")
+    # r = await aioredis.create_redis_pool("redis://localhost")
     # redis sub
     ch, = await r.subscribe("ch2")
     assert isinstance(ch, aioredis.Channel)
