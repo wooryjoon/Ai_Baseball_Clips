@@ -3,18 +3,15 @@ import imutils
 from imutils.object_detection import non_max_suppression
 import numpy as np
 
-
+from .text import Text_Store
 from .image_process import img_trim
 from .ocr import *
-from .text_process import *
 
 # main method !
 
 times = 15
 
-def process_video(video_path, players):
-    result = {} # result dictionary
-    
+def process_video(video_path):
     # initialize the original frame dimensions, new frame dimensions,
     # and ratio between the dimensions
     (W, H) = (None, None)
@@ -42,7 +39,10 @@ def process_video(video_path, players):
     width = int(vs.get(cv2.CAP_PROP_FRAME_WIDTH)) # 원본 영상의 가로 길이
     height = int(vs.get(cv2.CAP_PROP_FRAME_HEIGHT)) # 원본 영상의 세로 길이
     
-    score_board = -1 # 4분할 된 프레임 중 스코어보드가 있는 영역을 찾았는지
+    ts = Text_Store(total, fps)
+    ts.get_players()
+    
+    score_board = 0 # 4분할 된 프레임 중 스코어보드가 있는 영역을 찾았는지
     part_cnt = [0, 0, 0, 0]
     
     cnt, sec = 0, 0 # 프레임 수, 동영상 시간
@@ -138,17 +138,8 @@ def process_video(video_path, players):
                     
                     text = read_text(all_frame[i][1][startY:endY, startX:endX])
                     
-                    # result를 변수로 들고 있는 text_driver 만들기 !
-                    
-                    player_obj = does_text_in_players(text, players)
-                    if player_obj is not None:
-                        process_text(player_obj, result, sec)
+                    if ts.record(text, sec) == True:
                         part_cnt[i] += 1
-                    else:
-                        player_obj = convert_text(text, players)
-                        if player_obj is not None:
-                            process_text(player_obj, result, sec)
-                            part_cnt[i] += 1
                             
                     # draw the bounding box on the frame
                 #     cv2.rectangle(all_frame[i][1], (startX, startY), (endX, endY), (0, 255, 0), 2)
@@ -180,24 +171,18 @@ def process_video(video_path, players):
                 
                 text = read_text(all_frame[score_board][1][startY:endY, startX:endX])
                 
-                player_obj = does_text_in_players(text, players)
-                if player_obj is not None:
-                    process_text(player_obj, result, sec)
-                    part_cnt[i] += 1
-                else:
-                    player_obj = convert_text(text, players)
-                    if player_obj is not None:
-                        process_text(player_obj, result, sec)
-                        part_cnt[i] += 1
+                if ts.record(text, sec) == True:
+                    # part_cnt[i] += 1
+                    pass
                         
-            #     cv2.rectangle(all_frame[score_board][1], (startX, startY), (endX, endY), (0, 255, 0), 2)
-            # cv2.imshow("Text Detection", all_frame[score_board][1])
+                cv2.rectangle(all_frame[score_board][1], (startX, startY), (endX, endY), (0, 255, 0), 2)
+            cv2.imshow("Text Detection", all_frame[score_board][1])
         
         import sys
         sys.path.append("..")
         from main import r
         data = 80 * (cnt / total)
-        if data > per:
+        if data >= per:
             msg = "{}".format(10 + per)
             r.publish("ch3", msg)
             per += 1
@@ -213,9 +198,4 @@ def process_video(video_path, players):
     # close all windows
     cv2.destroyAllWindows()
 
-    if len(result) == 0:
-        print("failed reading text")
-        return None
-    
-    # print(result)
-    return result
+    return [ts.pit_records, ts.hit_records]
