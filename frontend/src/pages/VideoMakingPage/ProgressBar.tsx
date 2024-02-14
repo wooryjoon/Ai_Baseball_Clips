@@ -7,7 +7,6 @@ import { AppDispatch } from '@/store/store';
 
 export default function Loading() {
     const [progressData, setProgressData] = useState<number>(0);
-    const [isComplete, setIsComplete] = useState<boolean>(false);
     const dispatch = useDispatch<AppDispatch>();
 
     useEffect(() => {
@@ -16,16 +15,9 @@ export default function Loading() {
         // progressData 가져오기 위해 선언한 함수
         // 아래의 eventListener에서 호출됨
         const progressListner = (event: MessageEvent) => {
-            if (!isComplete) {
-                const result = Number(event.data);
-                setProgressData(result);
-                console.log(progressData);
-
-                if (result === 100) {
-                    setIsComplete(true);
-                }
-            }
-            return;
+            const result = Number(event.data);
+            setProgressData(result);
+            console.log(progressData);
         };
 
         // "message" 라는 이벤트의 응답을 받는 메서드
@@ -35,11 +27,9 @@ export default function Loading() {
         // requestId 받아오기 위한 함수
         // 아래의 eventListener 에서 호출됨
         const requestIdListenr = (event: MessageEvent) => {
-            if (isComplete) {
-                const requestId = Number(event.data);
-                console.log('requestId: ' + requestId);
-                dispatch(setRequestId(requestId));
-            }
+            const requestId = Number(event.data);
+            console.log('requestId: ' + requestId);
+            dispatch(setRequestId(requestId));
         };
 
         // "getRequestId" 라는 이벤트의 응답을 받는 메서드
@@ -60,7 +50,7 @@ export default function Loading() {
         return () => {
             es.removeEventListener('message', progressListner);
         };
-    }, [isComplete, dispatch]);
+    }, [dispatch]);
 
     return (
         <div>
