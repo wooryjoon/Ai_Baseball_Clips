@@ -67,7 +67,7 @@ public class MessageSubscribeService {
         saveBat(batInfoFromFileNames);
 
         MessagePublishService.publishEvent2("100");
-        MessagePublishService.publishEvent2(requestId);
+        MessagePublishService.publishEvent2("ID/"+requestId);
         //로컬 폴더 삭제
         //LocalS3FileService.deleteDirectory(originalVideoLocalPath);
         //MessagePublishService.publishEvent2(new AIProcessedVideoUrl(bucketName,fileKeys));

@@ -30,7 +30,5 @@ public class MessagePublishService {
     }
 
     // 요청 처리 서버에서 원본 영상 url 정보 전송 Test
-    public void publishEvent1(OriginalVideoUrl OriginalVideoUrl){
-        redisTemplate.convertAndSend("ch1",OriginalVideoUrl);
-    }
+
 }
