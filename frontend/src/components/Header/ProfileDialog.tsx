@@ -6,8 +6,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './Header.scss';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import openDialog from '@/utils/openDialog';
+import { memo } from 'react';
 
-export default function ProfileDialog({ dialogRef }: Props) {
+function ProfileDialog({ dialogRef }: Props) {
     return (
         <dialog className="profile-dialog" ref={dialogRef}>
             <div className="dialog-topbar">
@@ -32,3 +33,4 @@ export default function ProfileDialog({ dialogRef }: Props) {
         </dialog>
     );
 }
+export default memo(ProfileDialog);

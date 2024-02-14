@@ -1,6 +1,8 @@
+import { memo } from 'react';
+
 type Props = {};
 
-export default function RGB({}: Props) {
+function RGB({}: Props) {
     return (
         <div className="RGB">
             <div></div>
@@ -9,3 +11,4 @@ export default function RGB({}: Props) {
         </div>
     );
 }
+export default memo(RGB);

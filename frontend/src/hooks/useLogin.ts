@@ -1,6 +1,5 @@
 import { instance } from '@/api';
 import { requestLogin } from '@/api/Login';
-import addAxiosInterceptor from '@/api/interceptor';
 import { FailResponse } from '@/api/type';
 import { SignUpFormValues } from '@/pages/SignUp/type';
 import { isAxiosError } from 'axios';

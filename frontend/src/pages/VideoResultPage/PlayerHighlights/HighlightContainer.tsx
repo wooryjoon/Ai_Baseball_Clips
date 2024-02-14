@@ -20,7 +20,8 @@ export default function HighlightContainer({ team }: HighlightContainer) {
         queryKey: ['requestPlayerHighLight', reqId],
     });
     if (isLoading) return <Loading />;
-    if (data?.data)
+
+    if (data?.data) {
         return (
             <div className="player-highlight">
                 {data.data[team].map((player, i) => {
@@ -28,4 +29,5 @@ export default function HighlightContainer({ team }: HighlightContainer) {
                 })}
             </div>
         );
+    }
 }

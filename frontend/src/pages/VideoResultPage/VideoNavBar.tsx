@@ -1,8 +1,9 @@
 import MyNavLink from '@/components/Link/MyNavLink';
+import { memo } from 'react';
 
 type Props = {};
 
-export default function VideoNavBar({}: Props) {
+function VideoNavBar({}: Props) {
     return (
         <nav className="video-navBar">
             <MyNavLink to="./">Result</MyNavLink>
@@ -11,3 +12,4 @@ export default function VideoNavBar({}: Props) {
         </nav>
     );
 }
+export default memo(VideoNavBar);

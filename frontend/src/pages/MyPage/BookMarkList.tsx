@@ -5,10 +5,11 @@ import Loading from '@/components/Loading';
 import baseballImg from '@/assets/ball.png';
 import { FavoriteVideo } from '@/api/type';
 import { requestFavorite } from '@/api/requestFavorite';
+import { memo } from 'react';
 
 type Props = {};
 
-export default function BookMarkList({}: Props) {
+function BookMarkList({}: Props) {
     const { data, isLoading, isError } = useQuery({
         queryFn: requestFavoriteVideoList,
         queryKey: ['FavoriteVideoList'],
@@ -40,3 +41,4 @@ export default function BookMarkList({}: Props) {
         );
     }
 }
+export default memo(BookMarkList);

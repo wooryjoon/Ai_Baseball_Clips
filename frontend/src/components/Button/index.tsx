@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import './Button.scss';
 /**
  * @file <공통 컴포넌트> Button
@@ -8,7 +9,7 @@ import './Button.scss';
  *
  */
 
-export default function Button({ styleType, disabled, onClick, children }: any) {
+function Button({ styleType, disabled, onClick, children }: any) {
     let className = 'button';
     if (styleType) className = className + ` ${styleType}`;
     if (disabled) className = className + ' disabled';
@@ -18,3 +19,4 @@ export default function Button({ styleType, disabled, onClick, children }: any) 
         </button>
     );
 }
+export default memo(Button);

@@ -1,5 +1,5 @@
 import VideoModal from '@/components/Content/VideoModal';
-import { useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import openModal from '@/utils/openModal';
 import closeModal from '@/utils/closeModal';
 import usePlayerPositionAnimate from '@/hooks/usePlayerPositionAnimate';
@@ -15,6 +15,7 @@ export default function PlayerCircle({ playerInfo }: PlayerCircle) {
     const playerCircleRef = useRef<HTMLDivElement>(null);
     const [isReadyToLoadVideo, setIsReadyToLoadVideo] = useState(false);
     const { name, position, imageUrl, processedVideoByInnings } = playerInfo;
+
     const onClickPlayerCircle = () => {
         if (isReadyToLoadVideo === false) openModal(videoRef);
         else closeModal(videoRef);
@@ -43,12 +44,14 @@ export default function PlayerCircle({ playerInfo }: PlayerCircle) {
                     <Lottie animationData={FireAnimation} loop={true} className="fireLottie" />
                 )}
             </div>
-            <VideoModal
-                ref={videoRef}
-                onClick={onClickPlayerCircle}
-                isReadyToLoadVideo={isReadyToLoadVideo}
-                processedVideo={processedVideoByInnings}
-            />
+            {processedVideoByInnings.length !== 0 && (
+                <VideoModal
+                    ref={videoRef}
+                    onClick={onClickPlayerCircle}
+                    isReadyToLoadVideo={isReadyToLoadVideo}
+                    processedVideo={processedVideoByInnings}
+                />
+            )}
         </>
     );
 }

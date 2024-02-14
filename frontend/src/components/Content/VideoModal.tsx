@@ -19,36 +19,34 @@ const VideoModal = forwardRef<HTMLDialogElement, VideoModal>(
         const { mutate: deleteFavoriteVideo } = useMutation({
             mutationFn: (batId: number) => requestFavorite({ batId }),
         });
-        if (processedVideo[0]) {
-            const [isFavorite, setIsFavorite] = useState(processedVideo[0].favorite);
-            return (
-                <Dialog onClick={onClick} ref={ref}>
-                    {isReadyToLoadVideo && (
-                        <div className="video-container">
-                            <div className="videoModal-title">
-                                <FontAwesomeIcon
-                                    icon={faBookmark}
-                                    className={isFavorite ? 'bookmark favorite' : 'bookmark'}
-                                    onClick={() => {
-                                        deleteFavoriteVideo(processedVideo[0].batId);
-                                        setIsFavorite(!isFavorite);
-                                    }}
-                                />
-                                <span>VS {[processedVideo[0].pitcherName]}</span>
-
-                                <button onClick={onClick}>X</button>
-                            </div>
-
-                            <Video
-                                poster=""
-                                src={processedVideo[0].processedVideoUrl}
-                                source_type="mp4"
+        const [isFavorite, setIsFavorite] = useState(processedVideo[0].favorite);
+        return (
+            <Dialog onClick={onClick} ref={ref}>
+                {isReadyToLoadVideo && (
+                    <div className="video-container">
+                        <div className="videoModal-title">
+                            <FontAwesomeIcon
+                                icon={faBookmark}
+                                className={isFavorite ? 'bookmark favorite' : 'bookmark'}
+                                onClick={() => {
+                                    deleteFavoriteVideo(processedVideo[0].batId);
+                                    setIsFavorite(!isFavorite);
+                                }}
                             />
+                            <span>VS {[processedVideo[0].pitcherName]}</span>
+
+                            <button onClick={onClick}>X</button>
                         </div>
-                    )}
-                </Dialog>
-            );
-        }
+
+                        <Video
+                            poster=""
+                            src={processedVideo[0].processedVideoUrl}
+                            source_type="mp4"
+                        />
+                    </div>
+                )}
+            </Dialog>
+        );
     }
 );
 

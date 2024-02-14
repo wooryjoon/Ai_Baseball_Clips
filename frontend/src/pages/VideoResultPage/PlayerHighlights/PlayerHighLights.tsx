@@ -3,7 +3,7 @@ import TeamSelectBar from './TeamSelectBar';
 import HighlightContainer from './HighlightContainer';
 import { useQuery } from '@tanstack/react-query';
 import { requestTeamInfo } from '@/api/requestReportView';
-import { SelectedTeam } from '../VideoResultOverview/VideoResultOverview';
+import { SelectedTeam } from '../VideoResultOverview';
 import Loading from '@/components/Loading';
 import { useSelector } from 'react-redux';
 import useGetRequestId from '@/hooks/useGetRequestId';

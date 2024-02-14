@@ -2,7 +2,7 @@ import InningDropDown from './InningDropDown';
 import RGB from './RGB';
 import TeamLogo from './TeamLogo';
 import Score from './Score';
-import { SelectedTeam } from './VideoResultOverview';
+import { SelectedTeam } from '.';
 import { TeamInfo } from '@/api/type';
 
 type ScoreBoard = {
@@ -36,7 +36,7 @@ export default function ScoreBoard({
                 >
                     {teamData.firstTeamName}
                 </TeamLogo>
-                <Score teamScore1={5} teamScore2={4} />
+                {/* <Score teamScore1={5} teamScore2={4} /> */}
                 <TeamLogo
                     currentTeam={currentTeam}
                     type="secondTeam"

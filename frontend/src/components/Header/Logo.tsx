@@ -1,8 +1,9 @@
+import { memo } from 'react';
 import { Link } from 'react-router-dom';
 
 type Props = {};
 
-export default function Logo({}: Props) {
+function Logo({}: Props) {
     return (
         <Link to={'/main'} className="logo-container">
             <div>
@@ -17,3 +18,4 @@ export default function Logo({}: Props) {
         </Link>
     );
 }
+export default memo(Logo);

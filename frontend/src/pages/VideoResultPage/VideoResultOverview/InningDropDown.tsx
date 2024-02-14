@@ -30,7 +30,7 @@ export default function InningDropDown({ onClick, inning }: InningDropDown) {
                                     onClick={() => {
                                         onClick(inning);
                                         // dropdown창 닫아버리기
-                                        setIsShow(false);
+                                        onClickShowHandler();
                                     }}
                                 >{`${inning}회`}</span>
                             </SwiperSlide>

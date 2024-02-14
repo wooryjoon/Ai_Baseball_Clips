@@ -4,7 +4,7 @@ interface RequestIdState {
     value: number | null;
 }
 
-const initialState: RequestIdState = { value: null };
+const initialState: RequestIdState = { value: 17 };
 
 export const requestIdSlice = createSlice({
     name: 'requestId',

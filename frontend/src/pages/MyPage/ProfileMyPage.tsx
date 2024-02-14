@@ -4,10 +4,11 @@ import Loading from '@/components/Loading';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useQuery } from '@tanstack/react-query';
+import { memo } from 'react';
 
 type Props = {};
 
-export default function ProfileMyPage({}: Props) {
+function ProfileMyPage({}: Props) {
     const { data, isLoading, isError } = useQuery({
         queryFn: requestUserInfo,
         queryKey: ['UserInfo'],
@@ -26,3 +27,4 @@ export default function ProfileMyPage({}: Props) {
             </div>
         );
 }
+export default memo(ProfileMyPage);
