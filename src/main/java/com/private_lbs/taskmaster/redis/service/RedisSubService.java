@@ -25,9 +25,15 @@ public class RedisSubService implements MessageListener {
     @Override
     public void onMessage(Message message, byte[] pattern) {
         try {
-            //TODO: 1. AI 가공이 완료되었다는 메시지가 수신 로직 구현 - SSE 필요
-            //TODO: 2. 각 상태별 메시지가 수신 로직 구현 - SSE 필요
+
             String mes=new String(message.getBody(),"UTF-8");
+            try{
+                Integer msgInt=Integer.parseInt(mes);
+                sseEmitters.sendMessage(msgInt);
+            }catch(Exception e){
+                System.out.println("~~~~~");
+                sseEmitters.sendMessage(mes);
+            }
 //            sseEmitters.addEmitter();
             sseEmitters.sendMessage(mes);
         } catch (RedisException | IOException e) {

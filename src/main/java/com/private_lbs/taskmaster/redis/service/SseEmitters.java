@@ -44,4 +44,42 @@ public class SseEmitters {
             }
         });
     }
+
+    public void sendMessage(Integer message){
+        System.out.println(emitters.size());
+        //리스트에 있는 모든 SSeEmitter에 대해 메시지를 보내기 위해 반복.
+        emitters.forEach(emitter->{
+            try{
+                System.out.println("requestId 보내기 ");
+
+                // 클라이언트에게 "message" 라는 이름의 SSe 이벤트 전송. 이 이벤트에는 전송 데이터 포함.
+                emitter.send(SseEmitter.event()
+                        .name("getRequestId")
+                        .data(message));
+                log.info("requestID send to client:{}",message);
+            } catch (Exception e) {
+                log.error("Error sending SSE: {}", e.getMessage());
+                emitters.remove(emitter);
+            }
+        });
+    }
+    public void sendMessage2(String message){
+        System.out.println("업로드 완료 알림 보내기");
+        System.out.println(emitters.size());
+        //리스트에 있는 모든 SSeEmitter에 대해 메시지를 보내기 위해 반복.
+        emitters.forEach(emitter->{
+            try{
+
+
+                // 클라이언트에게 "message" 라는 이름의 SSe 이벤트 전송. 이 이벤트에는 전송 데이터 포함.
+                emitter.send(SseEmitter.event()
+                        .name("uploadResponse")
+                        .data(message));
+                log.info("uploadComplete send to client:{}",message);
+            } catch (Exception e) {
+                log.error("Error sending SSE: {}", e.getMessage());
+                emitters.remove(emitter);
+            }
+        });
+    }
 }

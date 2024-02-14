@@ -74,7 +74,7 @@ public class S3Controller {
             OriginUrl originUrl=OriginUrl.makeUrlFromEventRecord(record);
             if(originUrl.getFileKey().split("/").length>3) continue;
             redisPubService.sendMessage(originUrl);
-            redisPubService.sendMessage("s3에 영상 업로드 완료!");
+            sseEmitters.sendMessage2("s3 영상 업로드 완료!");
         }
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
