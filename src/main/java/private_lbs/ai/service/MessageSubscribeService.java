@@ -68,7 +68,7 @@ public class MessageSubscribeService {
         Collections.sort(batInfoFromFileNames);
         saveBat(batInfoFromFileNames);
 
-        MessagePublishService.publishEvent2("100");
+//        MessagePublishService.publishEvent2("100");
         MessagePublishService.publishEvent2("ID/"+requestId);
         //로컬 폴더 삭제
         LocalS3FileService.deleteDirectory(originalVideoLocalPath);
@@ -96,7 +96,7 @@ public class MessageSubscribeService {
         LocalS3FileService.createDirectory(filePath);
         // 생성한 폴더에 영상 저장
         S3FileService.downloadFile(bucketName, fileKey, filePath);
-        MessagePublishService.publishEvent2("ID/3");
+//        MessagePublishService.publishEvent2("ID/3");
         // Redis ch3으로 pub
         MessagePublishService.publishEvent3(new OriginalVideoLocalPath(createDirectoryPath));
 
