@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { SSEurl } from '@/api/sse';
-import { connect, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import './ProgressBar.scss';
 import { setRequestId } from '@/store/slice/requestIdSlice';
 import { AppDispatch } from '@/store/store';
@@ -48,10 +48,7 @@ export default function Loading() {
             const requestId = Number(event.data);
             console.log('requestId: ' + requestId);
             dispatch(setRequestId(requestId));
-            if (requestId && progressData === 100) {
-                navigate('/result');
-                eventSource.close();
-            }
+            navigate('/result');
         };
 
         // "getRequestId" 라는 이벤트의 응답을 받는 메서드
