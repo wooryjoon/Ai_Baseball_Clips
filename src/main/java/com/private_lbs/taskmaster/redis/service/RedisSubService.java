@@ -29,13 +29,14 @@ public class RedisSubService implements MessageListener {
             String mes=new String(message.getBody(),"UTF-8");
             try{
                 Integer msgInt=Integer.parseInt(mes);
-                sseEmitters.sendMessage(msgInt);
+                sseEmitters.sendMessage(String.valueOf(msgInt));
             }catch(Exception e){
-                System.out.println("~~~~~");
-                sseEmitters.sendMessage(mes);
+//                System.out.println("~~~~~");
+                Integer requestId=Integer.parseInt(mes.split("/")[1]);
+                sseEmitters.sendMessage(requestId);
             }
 //            sseEmitters.addEmitter();
-            sseEmitters.sendMessage(mes);
+//            sseEmitters.sendMessage(mes);
         } catch (RedisException | IOException e) {
             throw new RedisException(RedisErrorCode.MESSAGE_RECEIVE_FAILED);
         }
