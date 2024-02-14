@@ -71,10 +71,11 @@ public class S3Controller {
     public ResponseEntity<Void> receiveFileUrl(@RequestBody EventNotification notification){
         System.out.println("endPoint 들어옴");
         for (EventRecord record : notification.getRecords()) {
-            OriginUrl originUrl=OriginUrl.makeUrlFromEventRecord(record);
-            if(originUrl.getFileKey().split("/").length>3) continue;
-            redisPubService.sendMessage(originUrl);
-            sseEmitters.sendMessage2("s3 영상 업로드 완료!");
+            OriginUrl originUrl = OriginUrl.makeUrlFromEventRecord(record);
+            if (originUrl.getFileKey().split("/").length == 3 && !originUrl.getFileKey().contains("\\")) {
+                redisPubService.sendMessage(originUrl);
+                sseEmitters.sendMessage2("s3 영상 업로드 완료!");
+            }
         }
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
