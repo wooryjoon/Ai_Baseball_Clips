@@ -24,7 +24,10 @@ public class ProcessedVideoByInning {
     }
 
     private boolean isFavorite(Favorite favorite) {
-        return favorite != null;
+        if(favorite == null){
+            return false;
+        }
+        return favorite.isFavorite();
     }
 
     private String getInning(int inning) {

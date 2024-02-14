@@ -5,7 +5,6 @@ import com.private_lbs.taskmaster.bat.domain.repository.BatRepository;
 import com.private_lbs.taskmaster.favorite.data.dto.request.FavoriteRequest;
 import com.private_lbs.taskmaster.favorite.data.dto.response.FavoriteProcessedVideo;
 import com.private_lbs.taskmaster.favorite.domain.Favorite;
-import com.private_lbs.taskmaster.favorite.domain.repository.FavoriteQueryRepository;
 import com.private_lbs.taskmaster.favorite.domain.repository.FavoriteRepository;
 import com.private_lbs.taskmaster.member.domain.Member;
 import com.private_lbs.taskmaster.member.service.MemberService;
@@ -22,7 +21,7 @@ public class FavoriteService {
     private final MemberService memberService;
     private final FavoriteRepository favoriteRepository;
     private final BatRepository batRepository;
-    private final FavoriteQueryRepository favoriteQueryRepository;
+
 
     @Transactional
     public void updateFavoriteStatus(FavoriteRequest favoriteRequest) {
@@ -44,7 +43,7 @@ public class FavoriteService {
 
     public List<FavoriteProcessedVideo> getLikeList() {
         Member member = memberService.getCurrentMember();
-        return favoriteQueryRepository.getFavoriteProcessedVideo(member.getId()).stream()
+        return favoriteRepository.getFavoriteProcessedVideo(member.getId()).stream()
                 .map(FavoriteProcessedVideo::new)
                 .toList();
     }

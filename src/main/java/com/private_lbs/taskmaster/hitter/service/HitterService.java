@@ -9,6 +9,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static com.private_lbs.taskmaster.hitter.data.dto.Order.FIRST_TEAM;
+import static com.private_lbs.taskmaster.hitter.data.dto.Order.SECOND_TEAM;
+
 @Service
 @RequiredArgsConstructor
 public class HitterService {
@@ -18,16 +21,16 @@ public class HitterService {
     public TotalHittersResponse getHittersWithProcessedVideoByInning(long requestId, int inning) {
 
         return TotalHittersResponse.builder()
-                .firstTeam(generateTeamHitters(requestId, 1, inning))
-                .secondTeam(generateTeamHitters(requestId, 0, inning + 1))
+                .firstTeam(generateTeamHitters(requestId, FIRST_TEAM.getOrder(), inning))
+                .secondTeam(generateTeamHitters(requestId, SECOND_TEAM.getOrder(), inning + 1))
                 .build();
     }
 
     public TotalHittersResponse getHittersStartLineUp(long requestId) {
 
         return TotalHittersResponse.builder()
-                .firstTeam(generateTeamStartLineUp(requestId, 1))
-                .secondTeam(generateTeamStartLineUp(requestId, 0))
+                .firstTeam(generateTeamStartLineUp(requestId, FIRST_TEAM.getOrder()))
+                .secondTeam(generateTeamStartLineUp(requestId, SECOND_TEAM.getOrder()))
                 .build();
     }
 
@@ -35,8 +38,8 @@ public class HitterService {
     public TotalHittersResponse getHittersWithProcessedVideos(long requestId) {
 
         return TotalHittersResponse.builder()
-                .firstTeam(generateTeamHitters(requestId, 1))
-                .secondTeam(generateTeamHitters(requestId, 0))
+                .firstTeam(generateTeamHitters(requestId, FIRST_TEAM.getOrder()))
+                .secondTeam(generateTeamHitters(requestId, SECOND_TEAM.getOrder()))
                 .build();
     }
 
@@ -53,8 +56,8 @@ public class HitterService {
                 .toList();
     }
 
-    private List<HitterInfo> generateTeamStartLineUp(long requestId, int inning) {
-        return hitterRepository.getHittersStartLineUpInOrder(requestId, inning).stream()
+    private List<HitterInfo> generateTeamStartLineUp(long requestId, int teamOrder) {
+        return hitterRepository.getHittersStartLineUpInOrder(requestId, teamOrder).stream()
                 .limit(9)
                 .map(HitterInfo::new)
                 .toList();
