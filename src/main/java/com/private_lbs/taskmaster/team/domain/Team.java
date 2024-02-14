@@ -20,4 +20,7 @@ public class Team extends BaseEntity {
     @Column(length = 50)
     private String name;
 
+    @Column(name = "image_url" ,length = 255)
+    private String imageUrl;
+
 }

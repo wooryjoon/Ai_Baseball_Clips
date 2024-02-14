@@ -8,6 +8,8 @@ import lombok.Getter;
 public class TeamInfo {
 
     private String firstTeamName;
+    private String firstTeamImageUrl;
     private String secondTeamName;
+    private String secondTeamImageUrl;
 
 }
