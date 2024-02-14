@@ -19,7 +19,7 @@ export default function PlayerCard({ player, timer }: Props) {
                 left: positionLocation[player.position].left + '%',
             }}
         >
-            <img src={player.playerImage} alt="" />
+            <img src={player.imageUrl} alt="" />
             <span>{player.name}</span>
         </div>
     );

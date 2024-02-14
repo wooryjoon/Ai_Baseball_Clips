@@ -9,7 +9,9 @@ type MyNavLink = {
 function MyNavLink({ to, children }: MyNavLink) {
     return (
         <span className="navlink-container">
-            <NavLink to={to}>{children}</NavLink>
+            <NavLink end to={to}>
+                {children}
+            </NavLink>
         </span>
     );
 }
