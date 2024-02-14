@@ -31,7 +31,6 @@ class Clip:
             cur_sec = i
             if pre_obj != cur_obj and pre_obj != None:
                 clip_ed = pre_sec
-                self.cnt += 1
                 self.make(pre_obj, clip_st, clip_ed)
                 clip_st = cur_sec
         # 마지막 타석
@@ -45,6 +44,7 @@ class Clip:
                 
     def make(self, hit_obj, clip_st, clip_ed):
         print(hit_obj.name, clip_st, clip_ed)
+        self.cnt += 1
         if abs(clip_st - clip_ed) <= 1.5 or clip_st > clip_ed:
             return
         # 투수 찾기
