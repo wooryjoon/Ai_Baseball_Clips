@@ -25,18 +25,19 @@ public class RedisSubService implements MessageListener {
     @Override
     public void onMessage(Message message, byte[] pattern) {
         try {
-
             String mes=new String(message.getBody(),"UTF-8");
             try{
+
                 Integer msgInt=Integer.parseInt(mes);
                 sseEmitters.sendMessage(String.valueOf(msgInt));
             }catch(Exception e){
-//                System.out.println("~~~~~");
-                Integer requestId=Integer.parseInt(mes.split("/")[1]);
+                System.out.println("requestId  "+mes);
+                String temp=mes.split("/")[1];
+
+                Integer requestId = Integer.parseInt(temp.replace("\"", ""));
                 sseEmitters.sendMessage(requestId);
             }
-//            sseEmitters.addEmitter();
-//            sseEmitters.sendMessage(mes);
+
         } catch (RedisException | IOException e) {
             throw new RedisException(RedisErrorCode.MESSAGE_RECEIVE_FAILED);
         }
