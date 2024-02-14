@@ -1,6 +1,6 @@
 import { requestFavoriteVideoList } from '@/api/requestMyPage';
 import MyContent from './MyContent';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import Loading from '@/components/Loading';
 import baseballImg from '@/assets/ball.png';
 import { FavoriteVideo } from '@/api/type';
@@ -10,12 +10,16 @@ import { memo } from 'react';
 type Props = {};
 
 function BookMarkList({}: Props) {
+    const queryClient = useQueryClient();
     const { data, isLoading, isError } = useQuery({
         queryFn: requestFavoriteVideoList,
         queryKey: ['FavoriteVideoList'],
     });
     const { mutate: deleteFavoriteVideo } = useMutation({
         mutationFn: (batId: number) => requestFavorite({ batId }),
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['FavoriteVideoList'] });
+        },
     });
     const onClickMyContentHandler = (batId: number) => {
         deleteFavoriteVideo(batId);
@@ -29,13 +33,16 @@ function BookMarkList({}: Props) {
                     <img className="baseball" src={baseballImg} alt="" />
                 </div>
                 <ul>
-                    {data.data.map((favoriteVideo: FavoriteVideo, i) => (
-                        <MyContent
-                            key={i}
-                            favoriteVideo={favoriteVideo}
-                            onClick={onClickMyContentHandler}
-                        />
-                    ))}
+                    {data.data.map((favoriteVideo: FavoriteVideo, i) => {
+                        if (favoriteVideo.favorite)
+                            return (
+                                <MyContent
+                                    key={i}
+                                    favoriteVideo={favoriteVideo}
+                                    onClick={onClickMyContentHandler}
+                                />
+                            );
+                    })}
                 </ul>
             </div>
         );

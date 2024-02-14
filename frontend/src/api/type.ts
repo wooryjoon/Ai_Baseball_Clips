@@ -24,7 +24,7 @@ interface PlayerLineUp {
     hitterId: string;
     name: string;
     position: string;
-    playerImage: string;
+    imageUrl: string;
 }
 interface TeamLineUp {
     firstTeam: PlayerLineUp[];
