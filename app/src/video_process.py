@@ -175,8 +175,8 @@ def process_video(video_path):
                     # part_cnt[i] += 1
                     pass
                         
-                cv2.rectangle(all_frame[score_board][1], (startX, startY), (endX, endY), (0, 255, 0), 2)
-            cv2.imshow("Text Detection", all_frame[score_board][1])
+            #     cv2.rectangle(all_frame[score_board][1], (startX, startY), (endX, endY), (0, 255, 0), 2)
+            # cv2.imshow("Text Detection", all_frame[score_board][1])
         
         import sys
         sys.path.append("..")
