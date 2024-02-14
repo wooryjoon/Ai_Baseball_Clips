@@ -48,7 +48,10 @@ export default function Loading() {
             const requestId = Number(event.data);
             console.log('requestId: ' + requestId);
             dispatch(setRequestId(requestId));
-            if (requestId && progressData === 100) navigate('/result');
+            if (requestId && progressData === 100) {
+                navigate('/result');
+                eventSource.close();
+            }
         };
 
         // "getRequestId" 라는 이벤트의 응답을 받는 메서드
