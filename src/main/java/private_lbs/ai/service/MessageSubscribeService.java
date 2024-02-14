@@ -96,7 +96,7 @@ public class MessageSubscribeService {
         LocalS3FileService.createDirectory(filePath);
         // 생성한 폴더에 영상 저장
         S3FileService.downloadFile(bucketName, fileKey, filePath);
-
+        MessagePublishService.publishEvent2("ID/3");
         // Redis ch3으로 pub
         MessagePublishService.publishEvent3(new OriginalVideoLocalPath(createDirectoryPath));
 
