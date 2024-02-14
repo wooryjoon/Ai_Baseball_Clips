@@ -25,7 +25,9 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class MessageSubscribeService {
     @Value("${cloud.aws.s3.bucket}")
-    private String bucketName;
+    private String bucket;
+    @Value("${cloud.aws.s3.region.static}")
+    private String region;
     private final S3FileService S3FileService;
     private final MessagePublishService MessagePublishService;
     private final LocalS3FileService LocalS3FileService;
@@ -61,7 +63,7 @@ public class MessageSubscribeService {
             // s3에 업로드.
             S3FileService.uploadFile(fileKey, new File(originalVideoLocalPath, fileName));
             // 저장
-            batInfoFromFileNames.add(new BatInfoFromFileName(fileKey, splits));
+            batInfoFromFileNames.add(new BatInfoFromFileName(generateS3Url(fileKey), splits));
         }
         Collections.sort(batInfoFromFileNames);
         saveBat(batInfoFromFileNames);
@@ -122,6 +124,10 @@ public class MessageSubscribeService {
             bats.add(new Bat(batInfoFromFileName, inning));
         }
         batService.saveBats(bats);
+    }
+
+    private String generateS3Url(String fileKey) {
+        return String.format("https://%s.s3.%s.amazonaws.com/%s", bucket, region, fileKey);
     }
 }
 
