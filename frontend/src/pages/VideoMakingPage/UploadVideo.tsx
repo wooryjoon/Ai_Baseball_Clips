@@ -6,21 +6,14 @@ import fileExtensionValid, { ALLOW_FILE_EXTENTION } from '@/utils/fileExtensionV
 import { openSSE, uploadResponse } from '@/api/sse';
 import uploadVideo from '@/assets/Lottie/videoUpload.json';
 import Lottie from 'lottie-react';
-import { useNavigate } from 'react-router-dom';
 
 const UploadVideo = () => {
     const [inputFile, setInputFile] = useState<FileInfoType | null>(null);
-    const [isComplete, setIsComplete] = useState<boolean>(false);
-    const navigate = useNavigate();
 
     useEffect(() => {
         openSSE();
-        setIsComplete(uploadResponse());
-
-        if (isComplete) navigate('/loadingAI');
-    }, [isComplete, navigate]);
-
-    // console.log(isComplete);
+        uploadResponse();
+    }, []);
 
     // Input 안의 값이 바뀔 때 일어나는 이벤트
     const onChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -90,7 +83,7 @@ const UploadVideo = () => {
                             </label>
                             <Button
                                 styleType="uploadvideo"
-                                onClick={inputFile && uploadFile}
+                                onClick={uploadFile}
                                 disabled={!inputFile}
                             >
                                 영상 업로드
