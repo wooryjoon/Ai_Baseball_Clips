@@ -16,7 +16,7 @@ public class HitterInfoWithInningProcessedVideo {
 
     public HitterInfoWithInningProcessedVideo(Hitter hitter) {
         name = hitter.getName();
-        imageUrl = "이미지";
+        imageUrl = hitter.getImageUrl();
         position = hitter.getPosition();
         processedVideoByInnings = hitter.getBat().stream()
                 .map(ProcessedVideoByInning::new)
@@ -25,7 +25,7 @@ public class HitterInfoWithInningProcessedVideo {
 
     public HitterInfoWithInningProcessedVideo(Hitter hitter, int inning) {
         name = hitter.getName();
-        imageUrl = "이미지";
+        imageUrl = hitter.getImageUrl();
         position = hitter.getPosition();
         processedVideoByInnings = hitter.getBat().stream()
                 .filter(b -> compareRequestedInning(b.getInning(), inning))

@@ -34,7 +34,7 @@ public class BatService {
                 .build();
     }
 
-    public Map<String, List<HitterNameAndImage>> getTimeLine(long requestId) {
+    public Map<Integer, List<HitterNameAndImage>> getTimeLine(long requestId) {
         return batQueryRepository.getTimeLine(requestId).stream()
                 .collect(Collectors
                         .groupingBy(HitterNameAndImage::getInning));

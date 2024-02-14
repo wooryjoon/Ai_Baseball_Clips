@@ -28,7 +28,7 @@ public class BatController {
 
     @Auth
     @GetMapping("/{requestId}/bat/time-line")
-    public ResponseEntity<Map<String, List<HitterNameAndImage>>> getTimeLine(
+    public ResponseEntity<Map<Integer, List<HitterNameAndImage>>> getTimeLine(
             @Valid @PathVariable("requestId") long requestId) {
         return ResponseEntity.ok().body(batService.getTimeLine(requestId));
     }
