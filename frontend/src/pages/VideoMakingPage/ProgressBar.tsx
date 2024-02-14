@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { eventSource } from '@/api/sse';
+import { SSEurl } from '@/api/sse';
 import { connect, useDispatch } from 'react-redux';
 import './ProgressBar.scss';
 import { setRequestId } from '@/store/slice/requestIdSlice';
@@ -10,7 +10,7 @@ export default function Loading() {
     const dispatch = useDispatch<AppDispatch>();
 
     useEffect(() => {
-        const es = eventSource;
+        const eventSource = new EventSource(SSEurl);
 
         // progressData 가져오기 위해 선언한 함수
         // 아래의 eventListener에서 호출됨
@@ -22,7 +22,7 @@ export default function Loading() {
 
         // "message" 라는 이벤트의 응답을 받는 메서드
         // progressData 를 받기 위해 사용
-        es.addEventListener('message', progressListner);
+        eventSource.addEventListener('message', progressListner);
 
         // requestId 받아오기 위한 함수
         // 아래의 eventListener 에서 호출됨
@@ -34,10 +34,10 @@ export default function Loading() {
 
         // "getRequestId" 라는 이벤트의 응답을 받는 메서드
         // requestId 를 받아 리덕스에 저장하기 위해 사용
-        es.addEventListener('getRequestId', requestIdListenr);
+        eventSource.addEventListener('getRequestId', requestIdListenr);
 
         // 에러처리
-        es.onerror = function (error) {
+        eventSource.onerror = function (error) {
             alert('EventSource failed');
             console.log(error);
             if (eventSource.readyState == EventSource.CLOSED) {
@@ -48,7 +48,7 @@ export default function Loading() {
 
         // progressData 받아오는 리스너 함수를 제거(갱신)
         return () => {
-            es.removeEventListener('message', progressListner);
+            eventSource.removeEventListener('message', progressListner);
         };
     }, [dispatch]);
 
