@@ -6,7 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBookmark } from '@fortawesome/free-solid-svg-icons';
 import { ProcessedVideoByInnings } from '@/api/type';
 import { requestFavorite } from '@/api/requestFavorite';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import useChangeFavorite from '@/hooks/useChangeFavorite';
 
 type VideoModal = {
     processedVideo: ProcessedVideoByInnings[];
@@ -16,9 +17,7 @@ type VideoModal = {
 
 const VideoModal = forwardRef<HTMLDialogElement, VideoModal>(
     ({ processedVideo, isReadyToLoadVideo, onClick }: VideoModal, ref) => {
-        const { mutate: deleteFavoriteVideo } = useMutation({
-            mutationFn: (batId: number) => requestFavorite({ batId }),
-        });
+        const changeFavoriteState = useChangeFavorite();
         const [isFavorite, setIsFavorite] = useState(processedVideo[0].favorite);
         return (
             <Dialog onClick={onClick} ref={ref}>
@@ -27,10 +26,12 @@ const VideoModal = forwardRef<HTMLDialogElement, VideoModal>(
                         <div className="videoModal-title">
                             <FontAwesomeIcon
                                 icon={faBookmark}
-                                className={isFavorite ? 'bookmark favorite' : 'bookmark'}
+                                className={
+                                    processedVideo[0].favorite ? 'bookmark favorite' : 'bookmark'
+                                }
                                 onClick={() => {
-                                    deleteFavoriteVideo(processedVideo[0].batId);
-                                    setIsFavorite(!isFavorite);
+                                    changeFavoriteState(processedVideo[0].batId);
+                                    // setIsFavorite(!isFavorite);
                                 }}
                             />
                             <span>VS {[processedVideo[0].pitcherName]}</span>
