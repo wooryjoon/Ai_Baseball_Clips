@@ -66,6 +66,14 @@
         transform: perspective(500px) rotateX(45deg);
     }
 }
+@keyframes positionMapEffect2 {
+    100% {
+        transform: 0;
+    }
+    0% {
+        transform: perspective(500px) rotateX(-45deg);
+    }
+}
 // VideoReport Position Container
 .videoReport-position-container {
     width: 100%;
