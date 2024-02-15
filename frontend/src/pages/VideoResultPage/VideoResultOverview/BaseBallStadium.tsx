@@ -22,6 +22,7 @@ export default function BaseBallStadium({ currentTeam, currentInning, teamData }
         queryFn: requestTeamDataByInnings,
         queryKey: ['teamInfoByInnings', { currentInning: currentInning * 2 - 1, reqId: reqId }],
     });
+
     if (isLoading) return <Loading />;
     if (isError) return <div>Error</div>;
     if (data?.data) {
@@ -31,7 +32,6 @@ export default function BaseBallStadium({ currentTeam, currentInning, teamData }
                 {data.data[currentTeam]
                     .slice(0, 10)
                     .map((playerInfo: PlayerInfoFilteredByInnings, i: number) => {
-                        // console.log(playerInfo);
                         return <PlayerCircle key={i} playerInfo={playerInfo} />;
                     })}
                 <img

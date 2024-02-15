@@ -1,5 +1,5 @@
 import { memo } from 'react';
-
+import thumbnail from '@/assets/thumbnail.jfif';
 interface Clip {
     poster: string;
     src: string;
@@ -8,7 +8,7 @@ interface Clip {
 
 function Video({ poster, src, source_type }: Clip) {
     return (
-        <video autoPlay loop playsInline controls poster={poster}>
+        <video autoPlay loop playsInline controls poster={thumbnail}>
             <source
                 src={'https://a305-project-bucket.s3.ap-northeast-2.amazonaws.com/' + src}
                 type={`video/${source_type}`}

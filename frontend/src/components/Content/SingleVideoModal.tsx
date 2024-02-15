@@ -34,7 +34,6 @@ const SingleVideoModal = forwardRef<HTMLDialogElement, SingleVideoModal>(
                             <span>VS {[processedVideo.pitcherName]}</span>
                             <button onClick={onClick}>X</button>
                         </div>
-                        <script type="module" src=""></script>
                         <Video poster="" src={processedVideo.processedVideoUrl} source_type="mp4" />
                     </div>
                 )}

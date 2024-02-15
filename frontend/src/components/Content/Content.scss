@@ -34,7 +34,7 @@ form {
         width: 100%;
         height: 40px;
         font-size: 18px;
-        font-weight: 700;
+        font-weight: 500;
         padding: 10px;
         color: white;
         background-color: $kbo_darkblue;
@@ -45,10 +45,10 @@ form {
 }
 // Video
 video {
-    width: 90%;
+    width: 100%;
     height: 200px;
-    padding: 10px 5px;
-    border-radius: 15px;
+    // padding: 10px 5px;
+    // border-radius: 15px;
     object-fit: cover;
 }
 .bookmark {
