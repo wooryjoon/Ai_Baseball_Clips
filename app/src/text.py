@@ -57,12 +57,13 @@ class Text_Store:
 		for i in range(len(self.players)):
 			name = self.players[i].name
 			name_tmp = self.jamo_split(name)
-			text = self.jamo_split(text)
-			ratio = SequenceMatcher(None, name_tmp, text).ratio() # 유사도 검사
+			text_tmp = self.jamo_split(text)
+			ratio = SequenceMatcher(None, name_tmp, text_tmp).ratio() # 유사도 검사
 			if ratio >= 0.75: 
 				self.process_text(self.players[i], sec)
-				# print(text)
+				# print("success", text)
 				return True # 기록가능
+		# print("fail", text)
 		return False
 
 	def process_text(self, obj, sec):
