@@ -25,12 +25,12 @@ function App() {
             <section className="App">
                 <BrowserRouter>
                     <Routes>
-                        <Route path="/" element={<LandingPage />} />
+                        <Route path="/" element={<MainPage />} />
+                        {/* <Route path="/" element={<LandingPage />} /> */}
                         <Route path="/login" element={<Login />} />
                         <Route path="/signup" element={<SignUp />} />
                         {/* 로그인 상태에서만 진입 가능한 페이지는 따로 라우팅 */}
                         <Route element={<PrivateRoute />}>
-                            <Route path="/main" element={<MainPage />} />
                             {/* <Route path="/main" element={<Welcome />} /> */}
                             <Route path="/makingvideo" element={<MakingVideo />}></Route>
                             <Route path="/loadingAI" element={<LoadingAI />} />

@@ -13,7 +13,7 @@ const useLogin = (userData: SignUpFormValues, dispatch: any, navigate: NavigateF
             sessionStorage.setItem('accessToken', response.data.accessToken);
             sessionStorage.setItem('refreshToken', response.data.refreshToken);
             dispatch(authActions.login());
-            navigate('/main');
+            navigate('/');
         })
         .catch((error) => {
             if (isAxiosError<FailResponse>(error)) {
