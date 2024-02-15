@@ -6,6 +6,7 @@ import { Clip } from '@/pages/VideoResultPage/type';
 import closeModal from '@/utils/closeModal';
 import { ProcessedVideo, ProcessedVideoByInnings } from '@/api/type';
 import SingleVideoModal from './SingleVideoModal';
+import thumbnail from '@/assets/thumbnail.jfif';
 
 type Content = {
     clip: ProcessedVideo;
@@ -23,7 +24,7 @@ function Content({ clip }: Content) {
     return (
         <div className="content-container">
             <img
-                src="https://source.unsplash.com/random/?programming"
+                src={thumbnail}
                 className="thumbnail"
                 onClick={() => {
                     openModal(videoDialogRef);

@@ -20,6 +20,7 @@ function usePlayerPositionAnimate(
             duration: 1500,
             easing: 'ease-in-out',
             fill: 'forwards',
+            // fill: 'both',
         };
 
         const tick: number = setTimeout(() => {

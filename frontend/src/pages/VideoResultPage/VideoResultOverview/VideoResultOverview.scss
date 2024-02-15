@@ -156,7 +156,7 @@
 .playerCircle-container {
     position: absolute;
     width: 55px;
-    height: 75px;
+    height: 70px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -182,6 +182,7 @@
     .player-position {
         width: calc(100% + 20px);
         background-color: $kbo_darkblue;
+        // background-color: blue;
         color: white;
         display: flex;
         justify-content: center;
