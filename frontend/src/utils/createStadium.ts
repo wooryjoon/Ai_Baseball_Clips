@@ -21,7 +21,7 @@ export default function createStadium(
             canvasWidth / 2,
             canvasHeight - 20,
             160,
-            1.27 * Math.PI,
+            1.255 * Math.PI,
             1.735 * Math.PI,
             false
         );
