@@ -12,7 +12,7 @@ export default function VideoResultPage() {
     return (
         <>
             <Header />
-            {reqId === 17 ? (
+            {reqId === 19 ? (
                 <section className="videoResult-container">
                     <VideoNavBar />
                     <section className="highlight-container">
