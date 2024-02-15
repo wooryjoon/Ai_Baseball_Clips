@@ -18,6 +18,7 @@ export default function TimeLine({ timeLine }: TimeLine) {
         <Timeline position="alternate-reverse">
             {timeLineEntries.map(([key, data]) => {
                 const [inning, type] = calculateInning(key);
+                console.log(inning);
                 const dir = type === '초' ? 'left' : 'right';
                 return (
                     <TimelineItem className={`timeline-item ${dir}`}>

@@ -24,9 +24,15 @@
     }
 
     .image-box {
+        border-radius: 10px;
+        // overflow: hidden;
         width: 75%;
         margin: 20px;
         // animation: fadein 3s;
+        .frame {
+            border-radius: 10px;
+            filter: blur(1px);
+        }
     }
 
     .buttons {

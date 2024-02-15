@@ -5,7 +5,7 @@ type Props = {};
 
 function Logo({}: Props) {
     return (
-        <Link to={'/main'} className="logo-container">
+        <Link to={'/'} className="logo-container">
             <div>
                 <span className="upper">A</span>i
             </div>

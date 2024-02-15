@@ -25,9 +25,9 @@ function usePlayerPositionAnimate(
 
         const tick: number = setTimeout(() => {
             if (playerCircleRef.current) playerCircleRef.current.animate(keyframes, options);
-        }, 500);
+        });
 
         return () => clearTimeout(tick);
-    }, []);
+    });
 }
 export default usePlayerPositionAnimate;

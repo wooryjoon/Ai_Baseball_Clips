@@ -26,7 +26,8 @@ export default function BaseBallStadium({ currentTeam, currentInning, teamData }
     if (isLoading) return <Loading />;
     if (isError) return <div>Error</div>;
     if (data?.data) {
-        // console.log(data.data);
+        console.log(data.data);
+        console.log(currentInning);
         return (
             <div className="stadium" ref={stadiumContainerRef}>
                 {data.data[currentTeam]

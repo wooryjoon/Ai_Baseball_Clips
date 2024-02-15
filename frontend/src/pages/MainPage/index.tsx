@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Button from '@/components/Button';
 import IMAGES from '@/images/WelcomImages';
 import useScrollFadeIn from '@/hooks/useScrollFadeIn';
-
+import frame2 from '@/assets/gif/frameGIF2.gif';
 export default function MainPage() {
     const animatedImage1 = useScrollFadeIn();
     const animatedImage2 = useScrollFadeIn();
@@ -26,7 +26,7 @@ export default function MainPage() {
                     <p> AI가 경기 영상을 분석해줘요</p>
                 </div>
                 <div className="image-box" {...animatedImage2}>
-                    <img src={IMAGES[2]} alt="저장 이미지"></img>
+                    <img src={frame2} className="frame" alt="저장 이미지"></img>
                 </div>
                 <div className="text-box">
                     <p>나만의 하이라이트를 만들고</p>
