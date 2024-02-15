@@ -94,7 +94,7 @@ const UploadVideo = () => {
                                 <p className="description">영상을 전송해주세요</p>
                             </div>
                             <div id="input-video-box">
-                                {inputFile && <video src={inputFile?.url} controls width="350px" />}
+                                {inputFile && <video src={inputFile?.url} width="350px" />}
                             </div>
                             <div className="buttons">
                                 <label className="selectvideo" htmlFor="input-tag">

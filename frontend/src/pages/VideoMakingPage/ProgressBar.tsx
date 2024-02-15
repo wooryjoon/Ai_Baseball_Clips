@@ -47,7 +47,7 @@ export default function Loading() {
         const requestIdListener = (event: MessageEvent) => {
             const requestId = Number(event.data);
             console.log('requestId: ' + requestId);
-            dispatch(setRequestId(requestId));
+            dispatch(setRequestId(17));
             navigate('/result');
         };
 
@@ -69,6 +69,7 @@ export default function Loading() {
         // progressData 받아오는 리스너 함수를 제거(갱신)
         return () => {
             eventSource.removeEventListener('message', progressListener);
+            eventSource.close();
         };
     }, []);
 
