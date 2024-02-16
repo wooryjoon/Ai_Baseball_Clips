@@ -1,0 +1,81 @@
+/* 
+CSS Reset
+*/
+* {
+    margin: 0;
+    padding: 0;
+    font: inherit;
+    color: inherit;
+}
+*,
+:after,
+:before {
+    box-sizing: border-box;
+}
+:root {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    cursor: default;
+    line-height: 1.5;
+    overflow-wrap: break-word;
+    -moz-tab-size: 4;
+    tab-size: 4;
+}
+html,
+body {
+    height: 100%;
+}
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+}
+button {
+    background: none;
+    border: 0;
+    cursor: pointer;
+}
+a {
+    text-decoration: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* Font */
+
+@font-face {
+    font-family: 'KBO';
+    font-weight: 700;
+    src: url('./assets/KBO_Font/KBO_Bold.woff') format('woff');
+}
+@font-face {
+    font-family: 'KBO';
+    font-weight: 500;
+    src: url('./assets/KBO_Font/KBO_Medium.woff') format('woff');
+}
+@font-face {
+    font-family: 'KBO';
+    font-weight: 300;
+    src: url('./assets/KBO_Font/KBO_Light.woff') format('woff');
+}
+@font-face {
+    font-family: 'Digital Dismay';
+    src: url('./assets/Digital Dismay.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'LED1';
+    src: url('./assets/LED4.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+body {
+    font-family: 'KBO';
+}

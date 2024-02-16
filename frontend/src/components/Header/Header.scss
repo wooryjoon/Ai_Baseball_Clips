@@ -1,0 +1,119 @@
+@import '../../styles/style.scss';
+
+// Header
+header {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    padding: 15px;
+    background-color: $kbo_darkblue;
+    // border-bottom: 1px solid lightgray;
+}
+// Logo
+.logo-container {
+    color: white;
+    font-size: 15px;
+    line-height: 100%;
+}
+.upper {
+    font-weight: 700;
+}
+//ProfileWidget
+.profile-container {
+    width: 50px;
+    height: 50px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .profile-img {
+        width: 70%;
+        height: 70%;
+
+        cursor: pointer;
+    }
+}
+
+// ProfileDialog
+.profile-dialog {
+    width: 150px;
+    height: auto;
+    position: absolute;
+    left: -100px;
+    top: 55px;
+    border-radius: 10px;
+    background-color: #fff;
+    z-index: 999qqq;
+    padding: 15px;
+    border: 1px solid lightgray;
+    color: black;
+
+    .dialog-topbar {
+        display: flex;
+        justify-content: space-between;
+        font-weight: 500;
+        color: $kbo_skyblue;
+    }
+
+    .user-profile-container {
+        width: 100px;
+        height: 130px;
+        margin: auto;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        img {
+            width: 70px;
+            height: 70px;
+            border: 1px solid black;
+            border-radius: 40px;
+        }
+        .name {
+            display: flex;
+            align-items: center;
+            .profile-modify {
+                cursor: pointer;
+                font-size: 14px;
+                color: gray;
+                margin-left: 5px;
+            }
+        }
+    }
+
+    .user-option-container {
+        margin: 0 auto;
+        width: 100px;
+        height: 100px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        font-weight: 300;
+    }
+}
+.profile-xmark {
+    color: gray;
+    cursor: pointer;
+}
+
+//menuBar
+.menuBar {
+    width: 100%;
+    height: 50px;
+    background-color: $kbo_darkblue;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    font-size: 15px;
+    padding: 15px;
+    position: sticky;
+    top: 0;
+    z-index: 9;
+}

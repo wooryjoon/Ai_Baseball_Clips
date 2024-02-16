@@ -1,0 +1,98 @@
+@import '../../styles/style.scss';
+
+@keyframes blink-effect {
+    50% {
+        opacity: 50%;
+        text-shadow: 0 0 0;
+        box-shadow: 0 0 0 0;
+    }
+}
+//VideoResultPage
+.highlight-container {
+    width: 100%;
+}
+.videoResult-container {
+    width: 100%;
+    // height: 100%;
+    background-color: $kbo_lightgray;
+}
+
+.video-navBar {
+    width: 100%;
+    height: 40px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    // margin-top: 120px;
+    justify-content: space-evenly;
+    a {
+        margin: 0 auto;
+        font-weight: 700;
+        color: gray;
+    }
+    position: sticky;
+    top: 50px;
+    z-index: 99;
+    border-bottom: 1px solid #f3f3f3;
+}
+
+.teamSelectBar {
+    width: 100%;
+    // border: 1px solid black;
+    display: flex;
+    justify-content: space-around;
+    // margin-bottom: 20px;
+    animation: 1s ease-in-out loadEffect2 forwards;
+}
+.teamLogo-container {
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    // flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 45%;
+    background-color: white;
+    // border: 1px solid black;
+    img {
+        width: 40px;
+        height: 40px;
+        margin-right: 15px;
+    }
+    span {
+        text-align: center;
+        font-weight: 700;
+    }
+}
+.teamLogo-container.current {
+    background-color: $kbo_skyblue;
+}
+.player-video-card {
+    width: 100%;
+    margin: 10px 0;
+    height: auto;
+    background-color: white;
+    padding: 10px 15px;
+    h1 {
+        font-weight: 700;
+    }
+}
+.video-slider {
+    width: 100%;
+    height: auto;
+}
+.player-highlight {
+    animation: 1s ease-in-out loadEffect2 forwards;
+}
+.contentArticle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    // background-color: blue;
+}
+.contentArticle-title {
+    text-align: center;
+}

@@ -1,0 +1,21 @@
+@import 'style';
+
+body {
+    margin: 0;
+    background-color: #f2f2f2; /* Gray background color for the margin part */
+    /* overflow: hidden; */
+    // overflow-x: hidden;
+}
+.App {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 400px;
+    min-width: 320px;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    // overflow-y: hidden;
+    // height: calc(var(--vh, 1vh) * 100);
+    background-color: white;
+}

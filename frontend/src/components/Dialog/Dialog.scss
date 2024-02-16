@@ -1,0 +1,16 @@
+dialog {
+    width: 90%;
+    max-width: 360px;
+    max-height: 500px;
+    // height: 300px;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    border: none;
+    z-index: 999;
+    border-radius: 10px;
+    background-color: white;
+}

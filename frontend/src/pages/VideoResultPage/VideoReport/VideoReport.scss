@@ -1,0 +1,187 @@
+@import '../../../styles/style.scss';
+.videoReport-container {
+    margin: 0 auto;
+    margin-top: 20px;
+    width: 95%;
+    background-color: #f3f3f3;
+    animation: 1s ease-in-out loadEffect1 forwards;
+    .title {
+        text-align: center;
+        font-weight: 700;
+        font-size: 30px;
+        background-color: $kbo_darkblue;
+        color: white;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+}
+.videoReport-score-container {
+    width: 100%;
+    height: 120px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    overflow: hidden;
+    .videoReport-score-box {
+        position: relative;
+        width: 70%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .score {
+            background-color: black;
+            color: white;
+            font-size: 25px;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        img {
+            width: 70px;
+            height: 70px;
+        }
+    }
+}
+.videoReport-score-container::before {
+    content: '';
+    width: 100%;
+    height: 120px;
+    background-image: url('../../../assets/baseStadium.jfif');
+    background-size: 100% 100%;
+    opacity: 0.7;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+}
+@keyframes positionMapEffect {
+    0% {
+        transform: 0;
+    }
+    100% {
+        transform: perspective(500px) rotateX(45deg);
+    }
+}
+@keyframes positionMapEffect2 {
+    100% {
+        transform: 0;
+    }
+    0% {
+        transform: perspective(500px) rotateX(-45deg);
+    }
+}
+// VideoReport Position Container
+.videoReport-position-container {
+    width: 100%;
+    height: 250px;
+    display: flex;
+    justify-content: space-around;
+    background-color: white;
+    align-items: center;
+    margin-bottom: 25px;
+    .videoReport-positionMap-container {
+        display: flex;
+        flex-direction: column;
+        width: 40%;
+        // background-color: blue;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+    }
+    .videoReport-positionMap {
+        width: 100%;
+        height: 100%;
+        border: 1px solid lightgray;
+        border-radius: 4px;
+        box-shadow: 5px 5px 5px lightgray;
+        background-color: #b3ca96;
+        position: relative;
+        animation: 1.5s ease-out positionMapEffect forwards;
+    }
+}
+
+.playerCard-container {
+    position: absolute;
+    width: 30px;
+    height: 20px;
+    font-size: 8px;
+    opacity: 0;
+    // transform: translate3d(0, -100%, 0);
+    perspective: -500px;
+    transform: rotateX(60deg);
+    display: flex;
+    flex-direction: column;
+    span {
+        text-align: center;
+    }
+}
+.videoReport-timeline-container {
+    background-color: white;
+    .timeline-item.left {
+        .dot {
+            background-color: $kbo_darkblue;
+        }
+        .content {
+            margin-top: 10px;
+            background-color: #f3f3f3;
+            border-radius: 5px;
+            font-family: 'KBO';
+            .timeline-item-title {
+                font-weight: 700;
+            }
+            .timeline-item-player {
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                img {
+                    width: 30px;
+                    height: 30px;
+                }
+                span {
+                    font-size: 12px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin: 0 5px;
+                }
+            }
+        }
+    }
+    .timeline-item.right {
+        .dot {
+            background-color: $kbo_skyblue;
+        }
+        .content {
+            margin-top: 10px;
+            background-color: #f3f3f3;
+            border-radius: 5px;
+            font-family: 'KBO';
+            .timeline-item-title {
+                font-weight: 700;
+            }
+            .timeline-item-player {
+                display: flex;
+                flex-direction: row-reverse;
+                align-items: center;
+                justify-content: flex-end;
+
+                img {
+                    width: 30px;
+                    height: 30px;
+                }
+                span {
+                    font-size: 12px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin: 0 5px;
+                }
+            }
+        }
+    }
+}

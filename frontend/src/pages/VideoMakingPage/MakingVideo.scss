@@ -1,0 +1,70 @@
+@import '../../styles/style.scss';
+
+#uploading-component {
+    margin: 0;
+    width: 100%;
+    height: 80vh;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .description {
+        font-size: small;
+        font-weight: 500;
+    }
+}
+
+#upload-video {
+    margin: 0;
+    width: 100%;
+    height: 80vh;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .animation-box {
+        width: 50%;
+    }
+
+    .description {
+        font-size: large;
+        font-weight: 500;
+        // margin-bottom: 20px;
+    }
+
+    #input-video-box {
+        margin-top: 30px;
+        margin-bottom: 20px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .buttons {
+        margin: 20px;
+        display: flex;
+        justify-content: space-between;
+
+        .selectvideo {
+            margin-right: 5px;
+            padding: 6px 25px;
+            border: 3px solid $kbo-darkblue;
+            border-radius: 5px;
+            color: $kbo-darkblue;
+            font-size: medium;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .button.uploadvideo {
+            margin-left: 5px;
+            border-radius: 5px;
+            background-color: $kbo-darkblue;
+            color: $kbo-lightgray;
+        }
+    }
+}
