@@ -81,7 +81,7 @@
 
 
 ## 🏗️ Architecture
-![ ](https://github.com/BoyCho/JPA/assets/53038672/93456a7c-a5f4-4ac5-aa9f-17c1b5b8b348)
+![ ](https://github.com/BoyCho/JPA/assets/53038672/36373c64-bd66-4628-8c37-39875a59bedd)
 
 <br><br>
 
