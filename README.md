@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-### Taskmaster Branch
-=======
 # ⚾ 야구 경기 자동 분석 : Ai Baseball Clip
 
 >**야구 경기**에서 원하는 선수만 찾아보고 싶으신 적 없으신가요? 🏌️‍♀️ <br>
