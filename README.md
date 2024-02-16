@@ -82,7 +82,7 @@
 
 ## 🏗️ Architecture
 <br>
-<img width="1043" alt="" src="https://github.com/BoyCho/ProblemSolving/assets/53038672/50de11fb-4c61-4d6c-9e61-bcb7f3103f8b">
+![ ](https://github.com/BoyCho/JPA/assets/53038672/8bb79fd5-07c8-4cf5-8562-da357081c4c9)
 
 <br><br>
 
