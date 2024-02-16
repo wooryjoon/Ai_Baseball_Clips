@@ -27,7 +27,7 @@
 <br>
 
 
-## 🧑🏻‍💻 Members
+## 🙆 Members
 <table>
     <tr height="140px">
     <td align="center" width="60px">
