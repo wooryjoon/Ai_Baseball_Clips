@@ -150,7 +150,7 @@
 
 <br>
 
-## Ai Baseball Clip 사용 설명
+## 🔍 Ai Baseball Clip 사용 설명
 ### 1. 동영상 선택
 ![업로드](https://github.com/BoyCho/JPA/assets/53038672/79f2bc2f-5a28-47c8-b7bb-7a7c4768fbc6) <br>
 동영상 선택을 클릭하고 저장하고 있는 동영상을 선택하면, 업로드가 진행됩니다.
