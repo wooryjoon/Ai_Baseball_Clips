@@ -9,10 +9,9 @@ import Lottie from 'lottie-react';
 import { useNavigate } from 'react-router-dom';
 import Loading from '@/components/Loading';
 
-const UploadVideo = () => {
+const UploadVideo = ({setIsComplete}: any) => {
     const [inputFile, setInputFile] = useState<FileInfoType | null>(null);
     const [isUploading, setIsUploading] = useState(false);
-    const navigate = useNavigate();
 
     useEffect(() => {
         const eventSource = new EventSource(SSEurl);
@@ -21,7 +20,10 @@ const UploadVideo = () => {
             console.log('Event 창구가 열렸습니다.');
         };
 
-        uploadResponse(navigate);
+        eventSource.addEventListener('uploadResponse', (event: MessageEvent) => {
+          setIsComplete(true);  
+        });
+        
     }, []);
 
     // Input 안의 값이 바뀔 때 일어나는 이벤트
