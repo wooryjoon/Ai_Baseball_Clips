@@ -6,6 +6,7 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -82,4 +83,24 @@ public class SseEmitters {
             }
         });
     }
+
+    public void sendMessageLog(List<String> messages) {
+        System.out.println("Sending log messages");
+        System.out.println(emitters.size());
+        // 리스트에 있는 모든 SseEmitter에 대해 메시지를 보내기 위해 반복.
+        emitters.forEach(emitter -> {
+            try {
+                emitter.send(SseEmitter.event()
+                        .name("getAllData")
+                        .data(messages));
+                log.info("Log messages sent to client: {}", messages);
+            } catch (Exception e) {
+                log.error("Error sending SSE: {}", e.getMessage());
+                emitters.remove(emitter);
+            }
+        });
+    }
+
+
+
 }
