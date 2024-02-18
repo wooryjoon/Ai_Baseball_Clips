@@ -171,7 +171,8 @@ def process_video(video_path):
                 endY = int(endY * rH)
                 
                 text = read_text(all_frame[score_board][1][startY:endY, startX:endX])
-                logs.append(text)
+                if text is not None and text != "":
+                    logs.append(text)
 
                 if ts.record(text, sec) == True:
                     # part_cnt[i] += 1
@@ -185,9 +186,10 @@ def process_video(video_path):
         sys.path.append("..")
         from main import r
         # 로그 전송
-        # if sec != 0 and sec % 3 == 0:
-        #     r.publish("ch3", logs)
-        #     logs = []
+        if sec != 0 and sec % 3 == 0:
+            log_data = "{}".format(logs)
+            r.publish("ch3", log_data)
+            logs = []
         # 로딩퍼센트 전송
         data = 80 * (cnt / total)
         if data >= per:
