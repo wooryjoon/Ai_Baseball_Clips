@@ -12,13 +12,16 @@ class Clip:
                 
         self.pit_records = pit_records
         self.hit_records = hit_records
-        self.cnt = 0
-        self.cur_pit = None
+        self.splited = [] # 클립들 [시작 시간, 종료 시간] 리스트
+        self.cnt = 0 # 클립 개수
+        self.cur_pit = None # 시간별 현재 투수
     
+    # 원본 비디오 경로 + 만들 클립 저장할 경로 설정
     def set_path(self, video_path):
         self.ori_path = video_path
         self.clip_path = os.path.dirname(video_path)
     
+    # 타석 구분하기
     def split(self):
         clip_st, clip_ed = 0, 0
         pre_obj, cur_obj = None, None
@@ -30,19 +33,51 @@ class Clip:
             cur_obj = list(self.hit_records[i])[0]
             pre_sec = cur_sec
             cur_sec = i
+            # 타자가 바뀌면 타석 종료로 인식하고 클립 생성
             if pre_obj != cur_obj and pre_obj != None:
                 clip_ed = pre_sec
-                self.make(pre_obj, clip_st, clip_ed)
+                if abs(clip_st - clip_ed) > 2 or clip_st < clip_ed:
+                    self.splited.append([pre_obj, clip_st, clip_ed])
+                # self.make(pre_obj, clip_st, clip_ed)
                 clip_st = cur_sec
         # 마지막 타석
         s = clip_st + 1 
         e = len(self.hit_records) - 1
         while s != e :
             if len(self.hit_records[e]) == 1:
-                self.make(list(self.hit_records[clip_st])[0], clip_st, e)
+                self.splited.append([list(self.hit_records[clip_st])[0], clip_st, e])
+                # self.make(list(self.hit_records[clip_st])[0], clip_st, e)
                 break
             e -= 1
-                
+
+    # 같은 타석인데 분할된 경우 다시 합치기
+    def join(self):
+        i = 0
+        pre_obj = None
+        cur_obj, clip_st, clip_ed = self.splited[i][0], self.splited[i][1], self.splited[i][2]
+        i += 1
+        while i < len(self.splited):
+            pre_obj = cur_obj
+            cur_obj = self.splited[i][0]
+            while pre_obj == cur_obj:
+                clip_ed = self.splited[i][2]
+                i += 1
+                # 마지막 클립 시간이 앞의 클립과 합쳐졌을 경우
+                if i == len(self.splited):
+                    self.make(pre_obj, clip_st, clip_ed)
+                    return
+                pre_obj = cur_obj
+                cur_obj = self.splited[i][0]
+            self.make(pre_obj, clip_st, clip_ed)
+            if i == len(self.splited):
+                break
+            clip_st, clip_ed = self.splited[i][1], self.splited[i][2]
+            i += 1
+        # 마지막 타석만 남았을 경우
+        self.make(cur_obj, clip_st, clip_ed)
+
+
+    # 클립 만들기       
     def make(self, hit_obj, clip_st, clip_ed):
         print(hit_obj.name, clip_st, clip_ed)
         if abs(clip_st - clip_ed) <= 2 or clip_st > clip_ed:
@@ -51,6 +86,8 @@ class Clip:
         if clip_st > 2:
             clip_st -= 2
         clip_ed += 2
+        if clip_ed > len(self.hit_records) - 1:
+            clip_ed = len(self.hit_records) - 1
         # 투수 찾기
         pit = self.pit_records[clip_st]
         if len(pit) == 0: # 타석 종료 이전에 나온 투수 탐색

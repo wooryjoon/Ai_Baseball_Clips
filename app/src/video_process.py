@@ -42,10 +42,11 @@ def process_video(video_path):
     ts = Text_Store(total, fps)
     ts.get_players()
     
-    score_board = 0 # 4분할 된 프레임 중 스코어보드가 있는 영역을 찾았는지
+    score_board = 1 # 4분할 된 프레임 중 스코어보드가 있는 영역을 찾았는지
     part_cnt = [0, 0, 0, 0]
     
     cnt, sec = 0, 0 # 프레임 수, 동영상 시간
+    logs = []
     per = 1 # 로딩 퍼센트
     
     print("start reading video")
@@ -170,7 +171,8 @@ def process_video(video_path):
                 endY = int(endY * rH)
                 
                 text = read_text(all_frame[score_board][1][startY:endY, startX:endX])
-                
+                logs.append(text)
+
                 if ts.record(text, sec) == True:
                     # part_cnt[i] += 1
                     pass
@@ -178,9 +180,15 @@ def process_video(video_path):
             #     cv2.rectangle(all_frame[score_board][1], (startX, startY), (endX, endY), (0, 255, 0), 2)
             # cv2.imshow("Text Detection", all_frame[score_board][1])
         
+        # 레디스 pub
         import sys
         sys.path.append("..")
         from main import r
+        # 로그 전송
+        # if sec != 0 and sec % 3 == 0:
+        #     r.publish("ch3", logs)
+        #     logs = []
+        # 로딩퍼센트 전송
         data = 80 * (cnt / total)
         if data >= per:
             msg = "{}".format(10 + per)
