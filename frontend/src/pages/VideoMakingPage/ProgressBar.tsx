@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 export default function Loading({setIsComplete}:any) {
     const [progressData, setProgressData] = useState<number>();
     const [progressText, setProgressText] = useState<string>('');
+    const [listData, setListData] = useState([]);
     const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
 
@@ -41,6 +42,16 @@ export default function Loading({setIsComplete}:any) {
         // "message" 라는 이벤트의 응답을 받는 메서드
         // progressData 를 받기 위해 사용
         eventSource.addEventListener('message', progressListener);
+
+        // AI 서버에서 분석하는 dataLog 를 List 로 받기 위한 메서드
+        const getAllListListener = (event: MessageEvent) => {
+            const serverData = JSON.parse(event.data);
+
+            setListData(serverData);
+        }
+
+        eventSource.addEventListener('getAllData', getAllListListener);
+
 
         // requestId 받아오기 위한 함수
         // 아래의 eventListener 에서 호출됨
@@ -84,6 +95,14 @@ export default function Loading({setIsComplete}:any) {
                 <div className="progressbar-move" style={{ width: `${progressData}%` }}></div>
             </div>
             <p>{progressText}</p>
+
+            <div>
+                {listData.map((item, index) => (
+                    <div key={index}>
+                        {item}
+                    </div>
+                ))}
+            </div>
         </div>
     );
 }
