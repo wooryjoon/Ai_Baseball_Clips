@@ -1,15 +1,18 @@
 import Header from '@/components/Header';
-import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import './MakingVideo.scss';
 import ProgressBar from './ProgressBar';
 import UploadVideo from './UploadVideo';
+import isUploadedSlice, { setIsUploaded } from '@/store/slice/isUploadedSlice';
+import { AppDispatch, RootState } from '@/store/store';
 
 export default function MakingVideo() {
-    const [isComplete, setIsComplete] = useState(false);
+    const isUploaded = useSelector((state: RootState) => state.isUploaded);
+
     return (
         <>
             <Header />
-            {!isComplete ? <UploadVideo setIsComplete ={setIsComplete}/> : <ProgressBar setIsComplete={setIsComplete}/>}
+            { !isUploaded ? <UploadVideo/> : <ProgressBar/> }
         </>
     );
 }

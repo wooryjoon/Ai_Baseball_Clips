@@ -3,15 +3,18 @@ import Button from '@/components/Button';
 import { upload } from '@/api/uploadVideoApis';
 import { FileInfoType } from './type';
 import fileExtensionValid, { ALLOW_FILE_EXTENTION } from '@/utils/fileExtensionValid';
-import { SSEurl, uploadResponse } from '@/api/sse';
+import { SSEurl } from '@/api/sse';
 import uploadVideo from '@/assets/Lottie/videoUpload.json';
 import Lottie from 'lottie-react';
-import { useNavigate } from 'react-router-dom';
 import Loading from '@/components/Loading';
+import { AppDispatch } from '../../store/store';
+import { useDispatch } from 'react-redux';
+import { setIsUploaded } from '@/store/slice/isUploadedSlice';
 
-const UploadVideo = ({setIsComplete}: any) => {
+const UploadVideo = () => {
     const [inputFile, setInputFile] = useState<FileInfoType | null>(null);
     const [isUploading, setIsUploading] = useState(false);
+    const dispatch = useDispatch<AppDispatch>();
 
     useEffect(() => {
         const eventSource = new EventSource(SSEurl);
@@ -21,7 +24,7 @@ const UploadVideo = ({setIsComplete}: any) => {
         };
 
         eventSource.addEventListener('uploadResponse', (event: MessageEvent) => {
-          setIsComplete(true);  
+            dispatch(setIsUploaded(true));  
         });
         
     }, []);

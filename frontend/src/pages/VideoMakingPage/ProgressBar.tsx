@@ -7,8 +7,9 @@ import { AppDispatch } from '@/store/store';
 import Lottie from 'lottie-react';
 import AI from '@/assets/Lottie/AI.json';
 import { useNavigate } from 'react-router-dom';
+import { setIsUploaded } from '@/store/slice/isUploadedSlice';
 
-export default function Loading({setIsComplete}:any) {
+export default function Loading() {
     const [progressData, setProgressData] = useState<number>();
     const [progressText, setProgressText] = useState<string>('');
     const [listData, setListData] = useState([]);
@@ -60,7 +61,7 @@ export default function Loading({setIsComplete}:any) {
             console.log('requestId: ' + requestId);
             dispatch(setRequestId(17));
             navigate('/result');
-            setIsComplete(false);
+            dispatch(setIsUploaded(false));
         };
 
         // "getRequestId" 라는 이벤트의 응답을 받는 메서드

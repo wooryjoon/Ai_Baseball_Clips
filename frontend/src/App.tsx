@@ -13,7 +13,6 @@ import PrivateRoute from './route/PrivateRoute';
 import VideoResultOverview from './pages/VideoResultPage/VideoResultOverview';
 import VideoReport from './pages/VideoResultPage/VideoReport';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import LoadingAI from './pages/VideoMakingPage/LoadingAI';
 
 // initMockAPI();
 
@@ -33,7 +32,6 @@ function App() {
                         <Route element={<PrivateRoute />}>
                             {/* <Route path="/main" element={<Welcome />} /> */}
                             <Route path="/makingvideo" element={<MakingVideo />}></Route>
-                            <Route path="/loadingAI" element={<LoadingAI />} />
                             <Route path="/mypage" element={<MyPage />} />
                             <Route path="/result" element={<VideoResultPage />}>
                                 <Route index element={<VideoReport />} />
