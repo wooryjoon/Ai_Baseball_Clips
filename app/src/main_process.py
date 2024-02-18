@@ -18,5 +18,5 @@ def main(dic_path):
     c.join()
     
     # 원본영상 삭제
-    # if os.path.isfile(video_path):
-    #     os.remove(video_path)
+    if os.path.isfile(video_path):
+        os.remove(video_path)
