@@ -6,7 +6,7 @@ export default function VideoReportScoreBoard({ teamInfo }: VideoReportScoreBoar
     return (
         <div className="videoReport-score-box">
             <img src={teamInfo.firstTeamImageUrl} alt="" />
-            <div className="score">5 : 5</div>
+            <div className="score">0 : 1</div>
             <img src={teamInfo.secondTeamImageUrl} alt="" />
         </div>
     );

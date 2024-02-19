@@ -36,7 +36,7 @@ export default function ScoreBoard({
                 >
                     {teamData.firstTeamName}
                 </TeamLogo>
-                {/* <Score teamScore1={5} teamScore2={4} /> */}
+                <Score teamScore1={0} teamScore2={1} />
                 <TeamLogo
                     currentTeam={currentTeam}
                     type="secondTeam"
