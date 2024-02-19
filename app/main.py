@@ -11,7 +11,7 @@ app = FastAPI()
 
 @app.get("/")
 def root():
-    return 
+    return
 
 # 서버 로딩되면 redis 자동연결 및 채널구독
 @app.on_event("startup")
