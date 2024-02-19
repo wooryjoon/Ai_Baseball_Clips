@@ -48,7 +48,7 @@ class Text_Store:
 		for i in range(len(self.players)):
 			if self.players[i].name == text:
 				self.process_text(self.players[i], sec)
-				# print(text)
+				# print("True", str(sec) +  "초", text + "\n")
 				return True # 기록됨
 		converted = self.convert_text(text, sec)
 		return converted
@@ -61,9 +61,9 @@ class Text_Store:
 			ratio = SequenceMatcher(None, name_tmp, text_tmp).ratio() # 유사도 검사
 			if ratio >= 0.75: 
 				self.process_text(self.players[i], sec)
-				# print("success", text)
+				# print("False", str(sec) + "초", text + "\n")
 				return True # 기록가능
-		# print("fail", text)
+		# print("False", str(sec) + "초", text + "\n")
 		return False
 
 	def process_text(self, obj, sec):
