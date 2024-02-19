@@ -47,7 +47,7 @@ export default function Loading() {
         const requestIdListener = (event: MessageEvent) => {
             const requestId = Number(event.data);
             console.log('requestId: ' + requestId);
-            dispatch(setRequestId(17));
+            dispatch(setRequestId(requestId));
             navigate('/result');
         };
 

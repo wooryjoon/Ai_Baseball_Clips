@@ -14,9 +14,11 @@ const useLogin = (userData: SignUpFormValues, dispatch: any, navigate: NavigateF
             sessionStorage.setItem('accessToken', response.data.accessToken);
             sessionStorage.setItem('refreshToken', response.data.refreshToken);
             dispatch(authActions.login());
-            if (userData.email === 'kt@long.com') dispatch(setRequestId(17));
-            if (userData.email === 'samsung@short.com') dispatch(setRequestId(84));
-            if (userData.email === 'samsung@long.com') dispatch(setRequestId(90));
+            if (userData.email === 'lbsoo1021@naver.com') dispatch(setRequestId(90));
+            else if (userData.email === 'kt@long.com') dispatch(setRequestId(17));
+            else if (userData.email === 'test@test.com') dispatch(setRequestId(17));
+            else if (userData.email === 'samsung@short.com') dispatch(setRequestId(84));
+            else if (userData.email === 'samsung@long.com') dispatch(setRequestId(94));
             navigate('/');
         })
         .catch((error) => {
