@@ -7,8 +7,6 @@ from .text import Text_Store
 from .image_process import img_trim
 from .ocr import *
 
-# main method !
-
 times = 15
 
 def process_video(video_path):
@@ -33,8 +31,7 @@ def process_video(video_path):
     net = cv2.dnn.readNet("resources/deeplearning_model/frozen_east_text_detection.pb")
  
     vs = cv2.VideoCapture(video_path) # video_stream
-    total = int(vs.get(cv2.CAP_PROP_FRAME_COUNT))
-    print("동영상의 총 프레임수 : ", total)
+    total = int(vs.get(cv2.CAP_PROP_FRAME_COUNT)) # 동영상의 총 프레임수
     fps = int(vs.get(cv2.CAP_PROP_FPS)) # 원본 영상의 fps
     width = int(vs.get(cv2.CAP_PROP_FRAME_WIDTH)) # 원본 영상의 가로 길이
     height = int(vs.get(cv2.CAP_PROP_FRAME_HEIGHT)) # 원본 영상의 세로 길이
@@ -42,7 +39,7 @@ def process_video(video_path):
     ts = Text_Store(total, fps)
     ts.get_players()
     
-    score_board = 0 # 4분할 된 프레임 중 스코어보드가 있는 영역을 찾았는지
+    score_board = -1 # 4분할 된 프레임 중 스코어보드가 있는 영역을 찾았는지
     part_cnt = [0, 0, 0, 0]
     
     cnt, sec = 0, 0 # 프레임 수, 동영상 시간
@@ -50,11 +47,10 @@ def process_video(video_path):
     
     print("start reading video")
     while True:
-        # grab the current frame, then handle 
         frame = vs.read()
         frame = frame[1]
         
-        # check to see if we have reached the end of the stream
+        # 비디오스트림이 끝났는지
         if frame is None:
             break
         
@@ -70,11 +66,8 @@ def process_video(video_path):
             continue
         # print("{}번째 프레임\n".format(cnt))
         
-        if sec != 0 and sec % 60 == 0:
-            print("{}초 지났습니다.".format(sec))
-        
-        # print(part_cnt)
-        # print(score_board)
+        # if sec != 0 and sec % 60 == 0:
+        #     print("{}초 지났습니다.".format(sec))
         
         # resize the frame, maintaining the aspect ratio
         # 전체영상 4분할하여 확대
@@ -170,17 +163,19 @@ def process_video(video_path):
                 endY = int(endY * rH)
                 
                 text = read_text(all_frame[score_board][1][startY:endY, startX:endX])
-                
+
                 if ts.record(text, sec) == True:
-                    # part_cnt[i] += 1
+                    part_cnt[i] += 1
                     pass
                         
             #     cv2.rectangle(all_frame[score_board][1], (startX, startY), (endX, endY), (0, 255, 0), 2)
             # cv2.imshow("Text Detection", all_frame[score_board][1])
         
+        # 레디스 pub
         import sys
         sys.path.append("..")
         from main import r
+        # 로딩퍼센트 전송
         data = 80 * (cnt / total)
         if data >= per:
             msg = "{}".format(10 + per)

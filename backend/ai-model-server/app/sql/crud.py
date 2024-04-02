@@ -8,20 +8,6 @@ class Cursor:
     def close(self): # cursor 연결 종료
         self.curs.close()
         
-    # def insert(self, player: Player):
-        # if player.position == "투수":
-        #     Table = "pitcher"
-        # else:
-        #     Table = "hitter"    
-        # sql = '''
-        # INSERT Into {}
-        # VALUES
-        # (now(), 1, 1, '고영표', '투수')
-        # '''.format(Table)
-        # self.cur.execute(sql)
-        # result = self.cur.fetchall()
-        # return result
-    
     def insert(self):
         sql = '''
         '''

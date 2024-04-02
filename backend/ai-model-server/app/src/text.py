@@ -2,7 +2,8 @@ from jamo import h2j, j2hcj
 from difflib import SequenceMatcher
 
 from sql.database import DB
-from sql.config import host, user, passwd, database
+from dotenv import load_dotenv
+import os
 from sql.crud import Cursor
 from sql.models import Hitter, Pitcher
 
@@ -22,7 +23,7 @@ class Text_Store:
 	def get_players(self):
 		# 선수 데이터 가져오기
 		try:
-			myDB = DB(host, user, passwd, database)
+			myDB = DB(os.getenv("db_host"), os.getenv("db_user") , os.getenv("db_passwd"), os.getenv("db_name"))
 			curs = Cursor(myDB.connect())
 			# curs.insert()
 			hitters = curs.select_hitters()
@@ -48,7 +49,7 @@ class Text_Store:
 		for i in range(len(self.players)):
 			if self.players[i].name == text:
 				self.process_text(self.players[i], sec)
-				# print(text)
+				# print("True", str(sec) +  "초", text + "\n")
 				return True # 기록됨
 		converted = self.convert_text(text, sec)
 		return converted
@@ -61,9 +62,9 @@ class Text_Store:
 			ratio = SequenceMatcher(None, name_tmp, text_tmp).ratio() # 유사도 검사
 			if ratio >= 0.75: 
 				self.process_text(self.players[i], sec)
-				# print("success", text)
+				# print("False", str(sec) + "초", text + "\n")
 				return True # 기록가능
-		# print("fail", text)
+		# print("False", str(sec) + "초", text + "\n")
 		return False
 
 	def process_text(self, obj, sec):
