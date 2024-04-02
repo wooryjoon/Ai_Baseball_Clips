@@ -2,7 +2,8 @@ from jamo import h2j, j2hcj
 from difflib import SequenceMatcher
 
 from sql.database import DB
-from sql.config import host, user, passwd, database
+from dotenv import load_dotenv
+import os
 from sql.crud import Cursor
 from sql.models import Hitter, Pitcher
 
@@ -22,7 +23,7 @@ class Text_Store:
 	def get_players(self):
 		# 선수 데이터 가져오기
 		try:
-			myDB = DB(host, user, passwd, database)
+			myDB = DB(os.getenv("db_host"), os.getenv("db_user") , os.getenv("db_passwd"), os.getenv("db_name"))
 			curs = Cursor(myDB.connect())
 			# curs.insert()
 			hitters = curs.select_hitters()
