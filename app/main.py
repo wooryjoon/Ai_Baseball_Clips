@@ -4,6 +4,8 @@ import asyncio
 import aioredis
 import json
 import traceback
+from dotenv import load_dotenv
+import os
 
 from src.main_process import main
 
@@ -18,7 +20,7 @@ def root():
 async def set_redis():
     # redis connect
     global r
-    r = await aioredis.create_redis_pool("redis://i10a305.p.ssafy.io:6379", password="a305#@!")
+    r = await aioredis.create_redis_pool(os.getenv("redis_url"), password=os.getenv("redis_passwd"))
     # r = await aioredis.create_redis_pool("redis://localhost")
     # redis sub
     ch, = await r.subscribe("ch2")
@@ -38,13 +40,8 @@ async def set_redis():
                 main(dic_path)
                 await r.publish("ch3", "100")
             except Exception:
-                # 비디오 편집 과정에서 에러 발생시 text 파일에 기록하여 전달
                 print("error 발생")
                 e = str(traceback.format_exc())
-                # localPath = dic_path + "/error_desc_1.txt"
-                # f = open(localPath, "w")
-                # f.write(e)
-                # f.close()
                 print(e)
             finally:
                 # redis pub

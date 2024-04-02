@@ -76,10 +76,6 @@ def read_text(image):
 	# pytesseract.pytesseract.tesseract_cmd = r'C:\Users\SSAFY\anaconda3\envs\AI_server\Tesseract-OCR\tesseract.exe'
 	# text OCR'd by Tesseract
 	text = pytesseract.image_to_string(image, config=config)
-	# print("TEXT : {}\n".format(text))
- 
-	# strip out non-ASCII text
-	# text = "".join([c if c.isalnum() else "" for c in text]).strip()
  
 	# text OCR'd by Tesseract에서 한글만 추출
 	text = re.sub(r"[^ㄱ-ㅣ가-힣]", "", text)
