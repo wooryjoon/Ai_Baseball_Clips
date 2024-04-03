@@ -79,14 +79,12 @@
 
 <br>
 
-## 개발 환경 및 기술 스택
+## 🌐 개발 환경 및 기술 스택
 
 ### Front-End
 <img src="https://img.shields.io/badge/React-61DAFB?logo=React&logoColor=white">
 <img src="https://img.shields.io/badge/Typescript-3178C6?style=flat-square&logo=Typescript&logoColor=white"/>
 <img src="https://img.shields.io/badge/redux-%23593d88.svg?style=flat-square&logo=redux&logoColor=white">
-<img src="https://img.shields.io/badge/Css-1572B6?logo=css3&logoColor=white">
-<img src="https://img.shields.io/badge/Zustand-0082F0?logoColor=white">
 
 ### Back-End
 <img src="https://img.shields.io/badge/Spring boot-6DB33F?logo=springboot&logoColor=white">
@@ -113,7 +111,7 @@
 
 ### 디자인
 <img src="https://img.shields.io/badge/Figma-F24E1E?logo=figma&logoColor=white">
-<br>
+<br><br>
 
 
 ## 🏗️ Architecture
