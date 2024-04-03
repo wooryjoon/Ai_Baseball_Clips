@@ -83,7 +83,8 @@
 
 ### Front-End
 <img src="https://img.shields.io/badge/React-61DAFB?logo=React&logoColor=white">
-<img src="https://img.shields.io/badge/Styled Components-DB7093?logo=styledcomponents&logoColor=white">
+<img src="https://img.shields.io/badge/Typescript-3178C6?style=flat-square&logo=Typescript&logoColor=white"/>
+<img src="https://img.shields.io/badge/redux-%23593d88.svg?style=flat-square&logo=redux&logoColor=white">
 <img src="https://img.shields.io/badge/Css-1572B6?logo=css3&logoColor=white">
 <img src="https://img.shields.io/badge/Zustand-0082F0?logoColor=white">
 
